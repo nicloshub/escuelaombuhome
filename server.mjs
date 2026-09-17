@@ -24,7 +24,7 @@ const server = http.createServer(async (req, res) => {
     const path = resolve(root, '.' + decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname));
     if (!path.startsWith(root + sep) || path.includes(sep + '.git' + sep)) { res.writeHead(403); return res.end(); }
     const content = await readFile(path);
-    res.writeHead(200, {'Content-Type':types[extname(path)] || 'application/octet-stream'});
+    res.writeHead(200, {'Content-Type':types[extname(path).toLowerCase()] || 'application/octet-stream'});
     res.end(content);
   } catch { res.writeHead(404); res.end('No encontrado'); }
 });
