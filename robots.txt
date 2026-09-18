@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Entorno de pruebas: cada página envía noindex.

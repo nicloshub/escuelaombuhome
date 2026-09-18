@@ -1,51 +1,3 @@
-// Datos de las 4 disciplinas según diseño Figma
-const sportsData = {
-  kitesurf: {
-    title: "KITESURF",
-    desc: "Deslizamiento veloz y sensación de vuelo propulsado por cometa y arnés. Te enseñamos a dominar la ventana de viento en tierra, el control del cuerpo en agua y la navegación autónoma ceñida.",
-    image: "./assets/sport-kitesurf-figma.jpg",
-    curve: "6 a 8 clases (autonomía)",
-    gear: "100% provisto por Ombú",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$45.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Kitesurf."
-  },
-  wingfoil: {
-    title: "WINGFOIL",
-    desc: "Un ala inflable ultraliviana en tus manos y un foil bajo la tabla que te eleva 80 cm sobre el agua. Sensación de vuelo silencioso y suave, sin impacto contra el oleaje del río.",
-    image: "./assets/wingfoil.jpg",
-    curve: "Rápida en vela / Técnica en foil",
-    gear: "Ala, tabla foil, chaleco y casco",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$48.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Wingfoil."
-  },
-  windsurf: {
-    title: "WINDSURF",
-    desc: "La escuela madre de la navegación a vela. Sentí la fuerza pura del viento en tus manos y disfrutá el planeo con tablas anchas modernas diseñadas para aprender desde la primera sesión.",
-    image: "./assets/windsurf.jpg",
-    curve: "Inmediata desde 1ra clase",
-    gear: "Vela liviana y tabla de escuela",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$38.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Windsurf."
-  },
-  sup: {
-    title: "SUP PADDLE",
-    desc: "Remo de pie sobre tabla touring. Sin depender del viento. Perfecto para entrenar el equilibrio, desconectar después del trabajo y disfrutar de travesías grupales guiadas al atardecer.",
-    image: "./assets/sup.jpg",
-    curve: "Sin experiencia previa",
-    gear: "Tabla touring, remo y chaleco",
-    comm: "Guía e instructor en grupo",
-    safety: "Embarcación de apoyo",
-    price: "$25.000",
-    wppMessage: "Hola Ombú! Quiero info sobre salidas y alquiler de SUP Paddle."
-  }
-};
-
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
   return (window.innerWidth <= 1024) ? (85 + index * 16) : 205;
@@ -82,7 +34,13 @@ function initScrollStack() {
   let ticking = false;
 
   function updateStack() {
-    const isDesktop = window.innerWidth > 1024;
+    const isDesktop = window.innerWidth > 1100 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!isDesktop) {
+      stackCards.forEach(card => {card.style.opacity='';card.style.visibility='';card.style.pointerEvents='';const inner=card.querySelector('.sport-card-stage');if(inner){inner.style.transform='';inner.style.filter='';}});
+      if(disciplinasHeader)disciplinasHeader.style.transform='';
+      if(sideRailSticky)sideRailSticky.style.transform='';
+      ticking=false;return;
+    }
 
     stackCards.forEach((card, index) => {
       const inner = card.querySelector('.sport-card-stage');
@@ -146,25 +104,6 @@ function initScrollStack() {
       mobileCounter.textContent = `0${activeIndex + 1} / 04 · ${sportNames[activeIndex] || ''}`;
     }
 
-    // Coordinar salida con la última card para que el título suba al mismo tiempo y nunca pase por detrás
-    if (isDesktop && disciplinasHeader && stackCards.length > 0) {
-      const lastCard = stackCards[stackCards.length - 1];
-      const lastRect = lastCard.getBoundingClientRect();
-      const pinTop = getCardPinTop(stackCards.length - 1);
-      if (lastRect.top < pinTop) {
-        const exitDiff = pinTop - lastRect.top;
-        disciplinasHeader.style.transform = `translateY(-${exitDiff}px)`;
-        if (sideRailSticky) {
-          sideRailSticky.style.transform = `translateY(-${exitDiff}px)`;
-        }
-      } else {
-        disciplinasHeader.style.transform = '';
-        if (sideRailSticky) {
-          sideRailSticky.style.transform = '';
-        }
-      }
-    }
-
     ticking = false;
   }
 
@@ -175,6 +114,8 @@ function initScrollStack() {
     }
   }, { passive: true });
 
+  window.addEventListener('resize', updateStack);
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', updateStack);
   updateStack();
 }
 
@@ -185,9 +126,9 @@ async function fetchLiveWind() {
     if (!res.ok) return;
     const data = await res.json();
     if (data && data.current) {
-      const speedKm = Math.round(data.current.wind_speed_10m || 24);
+      const speedKm = Math.round(data.current.wind_speed_10m ?? 0);
       const knots = Math.round(speedKm / 1.852);
-      const deg = Math.round(data.current.wind_direction_10m || 45);
+      const deg = Math.round(data.current.wind_direction_10m ?? 0);
       const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
       const dirStr = dirs[Math.round(deg / 45) % 8];
 
@@ -211,15 +152,7 @@ async function fetchLiveWind() {
         barEl.style.width = `${percent}%`;
       }
 
-      if (captionEl) {
-        if (speedKm >= 18 && speedKm <= 36) {
-          captionEl.textContent = "Condiciones ideales para Kite y Wing";
-        } else if (speedKm > 36) {
-          captionEl.textContent = "Viento fuerte — solo navegantes avanzados";
-        } else {
-          captionEl.textContent = "Viento calmo — ideal para SUP e iniciación";
-        }
-      }
+      if (captionEl) captionEl.textContent = 'Estimación Open-Meteo. Confirmá las condiciones con la escuela.';
     }
   } catch (err) {
     console.warn("Fallback de telemetría meteorológica:", err);

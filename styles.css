@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
   --paper: #f9f3e9;
   --white: #fff;
   --ink: #1f1f13;
   --orange: #ff5c2d;
-  --deep: #ff5c2d; /* Unificado con el naranja más claro del botón y círculo */
+  --deep: #c4380f; /* Unificado con el naranja más claro del botón y círculo */
   --line: rgba(31, 31, 19, .16);
   --gutter: 32px;
   --page-margin: 160px;
@@ -28,7 +27,7 @@
   --border-light: var(--line);
   --border-subtle: rgba(31, 31, 19, 0.22);
   --border-dark: rgba(255, 255, 255, 0.12);
-  
+
   --font-display: 'Anton', Impact, sans-serif;
   --font-body: 'Inter', Arial, sans-serif;
   --font-mono: 'Inter', Arial, sans-serif;
@@ -1015,10 +1014,10 @@ header.site-header {
   display: inline-block;
 
   /* Capa 1: textura arriba | Capa 2: color sólido abajo */
-  background-image: 
-    url('./assets/mascara1.png'), 
+  background-image:
+    url('/assets/optimized/textura-borde-ombu-1080.webp'),
     linear-gradient(var(--orange), var(--orange));
-  
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1547,7 +1546,7 @@ header.site-header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), url('./assets/IMG_9513.JPG');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), url('/assets/optimized/navegacion-kitesurf-rio-de-la-plata-1920.webp');
   background-size: cover;
   background-position: center bottom;
   background-attachment: fixed;
