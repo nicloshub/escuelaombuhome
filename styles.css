@@ -571,7 +571,7 @@ header.site-header {
    SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
    ========================================================= */
 .section-disciplinas {
-  padding: 50px 0 140px;
+  padding: 40px 0 20px;
   position: relative;
 }
 
@@ -717,7 +717,7 @@ header.site-header {
   will-change: opacity, transform, filter;
 }
 .scroll-stack-card:last-child {
-  margin-bottom: 35vh;
+  margin-bottom: 0;
 }
 
 /* Tarjeta Principal de Deporte */
@@ -848,7 +848,7 @@ header.site-header {
    MOSAICO FOTOGRÁFICO & CITA MANIFIESTO
    ========================================================= */
 .section-mosaic-quote {
-  padding: 90px 0 110px;
+  padding: 60px 0 110px;
   position: relative;
   overflow: hidden;
 }
