@@ -108,83 +108,133 @@ h1, h2, h3, h4, .display-title {
   color: var(--orange);
 }
 
-/* Botones */
-.btn-pill-dark {
-  background-color: var(--ink);
-  color: var(--paper);
+/* =========================================================
+   BOTONES ESTILO UIVERSE (PERFECT-GOAT-80)
+   ========================================================= */
+.btn-pill-dark,
+.btn-pill-orange,
+.btn-pill-white {
   font-family: var(--font-body);
   font-size: 14px;
-  line-height: 1.4;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 14px 24px;
-  border-radius: var(--radius-pill);
-  text-decoration: none;
+  border-radius: 2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border: none;
+  overflow: hidden;
+  position: relative;
+  height: 2.85em;
+  padding-left: 1.4rem;
+  padding-right: 3.3em;
   cursor: pointer;
-  transition: var(--transition);
-}
-.btn-pill-dark:hover {
-  background-color: #000000;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(31, 31, 19, 0.2);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
+/* Contenedor circular del icono */
+.btn-pill-dark .icon,
+.btn-pill-orange .icon,
+.btn-pill-white .icon {
+  position: absolute;
+  right: 0.35em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 2rem;
+  transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s ease;
+  will-change: width, transform;
+}
+
+.btn-pill-dark .icon svg,
+.btn-pill-orange .icon svg,
+.btn-pill-white .icon svg {
+  width: 1.15em;
+  height: 1.15em;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+.btn-pill-dark:hover .icon svg,
+.btn-pill-orange:hover .icon svg,
+.btn-pill-white:hover .icon svg {
+  transform: translateX(0.1em) rotate(-25deg);
+}
+
+.btn-pill-dark:active .icon,
+.btn-pill-orange:active .icon,
+.btn-pill-white:active .icon {
+  transform: scale(0.95);
+}
+
+/* Variante: Botón Naranja (Texto blanco y flecha reactiva) */
 .btn-pill-orange {
   background-color: var(--orange);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 14px 24px;
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: none;
-  cursor: pointer;
-  transition: var(--transition);
+  color: #FFFFFF;
+  border: 1px solid var(--orange);
+}
+.btn-pill-orange .icon {
+  background-color: #FFFFFF;
+  color: var(--orange);
 }
 .btn-pill-orange:hover {
+  background-color: #FFFFFF;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  box-shadow: 0 4px 16px rgba(255, 92, 45, 0.25);
+  transform: translateY(-1px);
+}
+.btn-pill-orange:hover .icon {
   background-color: var(--orange);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(31, 31, 19, 0.2);
+  color: #FFFFFF;
 }
 
+/* Variante: Botón Oscuro */
+.btn-pill-dark {
+  background-color: var(--ink);
+  color: #FFFFFF;
+  border: 1px solid var(--ink);
+}
+.btn-pill-dark .icon {
+  background-color: #FFFFFF;
+  color: var(--ink);
+}
+.btn-pill-dark:hover {
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #000000;
+  box-shadow: 0 4px 16px rgba(31, 31, 19, 0.2);
+  transform: translateY(-1px);
+}
+.btn-pill-dark:hover .icon {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+/* Variante: Botón Blanco */
 .btn-pill-white {
   background-color: #FFFFFF;
   color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.4;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 14px 24px;
-  border-radius: var(--radius-pill);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: 1px solid var(--line);
-  cursor: pointer;
-  transition: var(--transition);
+  border: 1px solid #FFFFFF;
+}
+.btn-pill-white .icon {
+  background-color: var(--ink);
+  color: #FFFFFF;
 }
 .btn-pill-white:hover {
-  background-color: var(--paper);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(31, 31, 19, 0.16);
+  background-color: var(--ink);
+  color: #FFFFFF;
+  border: 1px solid var(--ink);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+.btn-pill-white:hover .icon {
+  background-color: #FFFFFF;
+  color: var(--ink);
 }
 
 /* =========================================================
