@@ -132,7 +132,7 @@
     </section>
 
     <!-- =========================================================
-         SECCIÓN: ELEGÍ TU DISCIPLINA
+         SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
          ========================================================= -->
     <section id="disciplinas" class="section-disciplinas">
       <div class="container">
@@ -142,67 +142,235 @@
             <h2 class="display-title">Elegí tu disciplina</h2>
           </div>
           <p class="disciplinas-subtext">
-            Hacé clic en cada deporte para visualizar el material, la curva de aprendizaje y qué se siente en el agua.
+            Deslizá para recorrer cada deporte o elegí una pestaña para saltar a su ficha técnica.
           </p>
         </div>
 
-        <!-- 4 Píldoras de Navegación -->
-        <div class="sports-nav-pills">
-          <button class="sport-pill-btn active" data-sport="kitesurf" onclick="switchSport('kitesurf')">Kitesurf</button>
-          <button class="sport-pill-btn" data-sport="wingfoil" onclick="switchSport('wingfoil')">Wingfoil</button>
-          <button class="sport-pill-btn" data-sport="windsurf" onclick="switchSport('windsurf')">Windsurf</button>
-          <button class="sport-pill-btn" data-sport="sup" onclick="switchSport('sup')">SUP Paddle</button>
+        <!-- Barra de Pestañas Sticky (4 Pills) -->
+        <div class="sports-sticky-nav">
+          <div class="sports-nav-pills">
+            <button class="sport-pill-btn active" data-sport="kitesurf" onclick="scrollToSport('kitesurf')">Kitesurf</button>
+            <button class="sport-pill-btn" data-sport="wingfoil" onclick="scrollToSport('wingfoil')">Wingfoil</button>
+            <button class="sport-pill-btn" data-sport="windsurf" onclick="scrollToSport('windsurf')">Windsurf</button>
+            <button class="sport-pill-btn" data-sport="sup" onclick="scrollToSport('sup')">SUP Paddle</button>
+          </div>
         </div>
 
-        <!-- Tarjeta de Contenido Activo -->
-        <div class="sport-card-stage" id="sportStageCard">
-          <div class="sport-media-box">
-            <img src="./assets/sport-kitesurf-figma.jpg" alt="Deporte Ombú" id="sportImg">
-          </div>
+        <!-- Contenedor Scroll Stack de las 4 Tarjetas -->
+        <div class="scroll-stack-container">
+          <!-- Tarjeta 1: Kitesurf -->
+          <div class="scroll-stack-card" data-sport="kitesurf" data-index="0" style="--card-index: 0;">
+            <div class="sport-card-stage">
+              <div class="sport-media-box">
+                <img src="./assets/sport-kitesurf-figma.jpg" alt="Kitesurf Ombú">
+              </div>
 
-          <div class="sport-details-box">
-            <div>
-              <h3 class="sport-title-giant" id="sportTitle">Kitesurf</h3>
-              <p class="sport-desc-text" id="sportDesc">
-                Deslizamiento veloz y sensación de vuelo propulsado por cometa y arnés. Te enseñamos a dominar la ventana de viento en tierra, el control del cuerpo en agua y la navegación autónoma ceñida.
-              </p>
+              <div class="sport-details-box">
+                <div>
+                  <div class="sport-tag-pill">01 // DISCIPLINA</div>
+                  <h3 class="sport-title-giant">Kitesurf</h3>
+                  <p class="sport-desc-text">
+                    Deslizamiento veloz y sensación de vuelo propulsado por cometa y arnés. Te enseñamos a dominar la ventana de viento en tierra, el control del cuerpo en agua y la navegación autónoma ceñida.
+                  </p>
 
-              <!-- Grilla 2x2 de Especificaciones -->
-              <div class="sport-specs-grid">
-                <div class="spec-box">
-                  <span class="spec-box-label">Curva de Aprendizaje</span>
-                  <span class="spec-box-val" id="sportCurve">6 a 8 clases (autonomía)</span>
+                  <div class="sport-specs-grid">
+                    <div class="spec-box">
+                      <span class="spec-box-label">Curva de Aprendizaje</span>
+                      <span class="spec-box-val">6 a 8 clases (autonomía)</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Equipamiento Incluido</span>
+                      <span class="spec-box-val">100% provisto por Ombú</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Comunicación</span>
+                      <span class="spec-box-val">Radiocasco VHF en el agua</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Seguridad</span>
+                      <span class="spec-box-val">Lancha de rescate en guardia</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="spec-box">
-                  <span class="spec-box-label">Equipamiento Incluido</span>
-                  <span class="spec-box-val" id="sportGear">100% provisto por Ombú</span>
-                </div>
-                <div class="spec-box">
-                  <span class="spec-box-label">Comunicación</span>
-                  <span class="spec-box-val" id="sportComm">Radiocasco VHF en el agua</span>
-                </div>
-                <div class="spec-box">
-                  <span class="spec-box-label">Seguridad</span>
-                  <span class="spec-box-val" id="sportSafety">Lancha de rescate en guardia</span>
+
+                <div class="sport-cta-row">
+                  <div class="sport-price-wrap">
+                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-val-big">$45.000</span>
+                  </div>
+                  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20disponibilidad%20para%20clases%20de%20Kitesurf." target="_blank" class="btn-pill-orange">
+                    Consultar disponibilidad
+                    <div class="icon">
+                      <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Fila de Arancel y Botón CTA -->
-            <div class="sport-cta-row">
-              <div class="sport-price-wrap">
-                <span class="price-label-tiny">Clase particular desde</span>
-                <span class="price-val-big" id="sportPrice">$45.000</span>
+          <!-- Tarjeta 2: Wingfoil -->
+          <div class="scroll-stack-card" data-sport="wingfoil" data-index="1" style="--card-index: 1;">
+            <div class="sport-card-stage">
+              <div class="sport-media-box">
+                <img src="./assets/wingfoil.jpg" alt="Wingfoil Ombú">
               </div>
-              <a id="sportCtaBtn" href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20disponibilidad%20para%20clases%20de%20Kitesurf." target="_blank" class="btn-pill-orange">
-                Consultar disponibilidad
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
+
+              <div class="sport-details-box">
+                <div>
+                  <div class="sport-tag-pill">02 // DISCIPLINA</div>
+                  <h3 class="sport-title-giant">Wingfoil</h3>
+                  <p class="sport-desc-text">
+                    Un ala inflable ultraliviana en tus manos y un foil bajo la tabla que te eleva 80 cm sobre el agua. Sensación de vuelo silencioso y suave, sin impacto contra el oleaje del río.
+                  </p>
+
+                  <div class="sport-specs-grid">
+                    <div class="spec-box">
+                      <span class="spec-box-label">Curva de Aprendizaje</span>
+                      <span class="spec-box-val">Rápida en vela / Técnica en foil</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Equipamiento Incluido</span>
+                      <span class="spec-box-val">Ala, tabla foil, chaleco y casco</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Comunicación</span>
+                      <span class="spec-box-val">Radiocasco VHF en el agua</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Seguridad</span>
+                      <span class="spec-box-val">Lancha de rescate en guardia</span>
+                    </div>
+                  </div>
                 </div>
-              </a>
+
+                <div class="sport-cta-row">
+                  <div class="sport-price-wrap">
+                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-val-big">$48.000</span>
+                  </div>
+                  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20disponibilidad%20para%20clases%20de%20Wingfoil." target="_blank" class="btn-pill-orange">
+                    Consultar disponibilidad
+                    <div class="icon">
+                      <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3: Windsurf -->
+          <div class="scroll-stack-card" data-sport="windsurf" data-index="2" style="--card-index: 2;">
+            <div class="sport-card-stage">
+              <div class="sport-media-box">
+                <img src="./assets/windsurf.jpg" alt="Windsurf Ombú">
+              </div>
+
+              <div class="sport-details-box">
+                <div>
+                  <div class="sport-tag-pill">03 // DISCIPLINA</div>
+                  <h3 class="sport-title-giant">Windsurf</h3>
+                  <p class="sport-desc-text">
+                    La escuela madre de la navegación a vela. Sentí la fuerza pura del viento en tus manos y disfrutá el planeo con tablas anchas modernas diseñadas para aprender desde la primera sesión.
+                  </p>
+
+                  <div class="sport-specs-grid">
+                    <div class="spec-box">
+                      <span class="spec-box-label">Curva de Aprendizaje</span>
+                      <span class="spec-box-val">Inmediata desde 1ra clase</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Equipamiento Incluido</span>
+                      <span class="spec-box-val">Vela liviana y tabla de escuela</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Comunicación</span>
+                      <span class="spec-box-val">Radiocasco VHF en el agua</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Seguridad</span>
+                      <span class="spec-box-val">Lancha de rescate en guardia</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sport-cta-row">
+                  <div class="sport-price-wrap">
+                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-val-big">$38.000</span>
+                  </div>
+                  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20disponibilidad%20para%20clases%20de%20Windsurf." target="_blank" class="btn-pill-orange">
+                    Consultar disponibilidad
+                    <div class="icon">
+                      <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 4: SUP Paddle -->
+          <div class="scroll-stack-card" data-sport="sup" data-index="3" style="--card-index: 3;">
+            <div class="sport-card-stage">
+              <div class="sport-media-box">
+                <img src="./assets/sup.jpg" alt="SUP Paddle Ombú">
+              </div>
+
+              <div class="sport-details-box">
+                <div>
+                  <div class="sport-tag-pill">04 // DISCIPLINA</div>
+                  <h3 class="sport-title-giant">SUP Paddle</h3>
+                  <p class="sport-desc-text">
+                    Remo de pie sobre tabla touring. Sin depender del viento. Perfecto para entrenar el equilibrio, desconectar después del trabajo y disfrutar de travesías grupales guiadas al atardecer.
+                  </p>
+
+                  <div class="sport-specs-grid">
+                    <div class="spec-box">
+                      <span class="spec-box-label">Curva de Aprendizaje</span>
+                      <span class="spec-box-val">Sin experiencia previa</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Equipamiento Incluido</span>
+                      <span class="spec-box-val">Tabla touring, remo y chaleco</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Comunicación</span>
+                      <span class="spec-box-val">Guía e instructor en grupo</span>
+                    </div>
+                    <div class="spec-box">
+                      <span class="spec-box-label">Seguridad</span>
+                      <span class="spec-box-val">Embarcación de apoyo</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="sport-cta-row">
+                  <div class="sport-price-wrap">
+                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-val-big">$25.000</span>
+                  </div>
+                  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20sobre%20salidas%20y%20alquiler%20de%20SUP%20Paddle." target="_blank" class="btn-pill-orange">
+                    Consultar disponibilidad
+                    <div class="icon">
+                      <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                      </svg>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

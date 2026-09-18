@@ -568,10 +568,11 @@ header.site-header {
 }
 
 /* =========================================================
-   SECCIÓN: ELEGÍ TU DISCIPLINA
+   SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
    ========================================================= */
 .section-disciplinas {
-  padding: 100px 0;
+  padding: 80px 0 140px;
+  position: relative;
 }
 
 .disciplinas-header {
@@ -579,67 +580,107 @@ header.site-header {
   justify-content: space-between;
   align-items: flex-end;
   gap: 32px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 .disciplinas-subtext {
-  max-width: 352px;
+  max-width: 380px;
   font-size: 15px;
   color: var(--ink);
   line-height: 1.5;
   opacity: 0.85;
 }
 
-/* Barra de Pestañas (4 Pills) */
+/* Barra de Pestañas Sticky (4 Pills) */
+.sports-sticky-nav {
+  position: sticky;
+  top: 74px; /* Pegado justo bajo la barra de navegación del sitio */
+  z-index: 60;
+  background: var(--paper);
+  padding: 12px 0 18px;
+  margin-bottom: 32px;
+  transition: all 0.3s ease;
+}
 .sports-nav-pills {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-bottom: 32px;
+  gap: 20px;
 }
 .sport-pill-btn {
   background: #FFFFFF;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 20px 16px;
+  border-radius: 10px;
+  padding: 16px 18px;
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 400;
   line-height: 1.1;
   text-transform: uppercase;
   color: var(--ink);
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.2s ease;
   text-align: left;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(31, 31, 19, 0.04);
 }
 .sport-pill-btn:hover {
   border-color: var(--ink);
+  transform: translateY(-2px);
 }
 .sport-pill-btn.active {
   background: var(--ink);
   color: var(--paper);
   border-color: var(--ink);
-  box-shadow: none;
+  box-shadow: 0 4px 16px rgba(31, 31, 19, 0.15);
+}
+
+/* Contenedor del Stack */
+.scroll-stack-container {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-stack-card {
+  position: sticky;
+  top: calc(156px + var(--card-index, 0) * 20px);
+  margin-bottom: 38vh;
+  width: 100%;
+  transform-origin: top center;
+  z-index: calc(10 + var(--card-index, 0));
+}
+.scroll-stack-card:last-child {
+  margin-bottom: 0;
 }
 
 /* Tarjeta Principal de Deporte */
 .sport-card-stage {
   background: #FFFFFF;
-  border-radius: 12px;
+  border-radius: 20px;
   border: 1px solid var(--line);
-  padding: 40px;
-  box-shadow: none;
+  padding: 36px;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.04), 0 16px 36px rgba(31, 31, 19, 0.1);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 40px;
   align-items: center;
   overflow: hidden;
+  transform-origin: top center;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out, box-shadow 0.2s ease;
+  will-change: transform, filter;
+}
+
+.sport-tag-pill {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--orange);
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
 .sport-media-box {
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  height: 488px;
+  height: 460px;
 }
 .sport-media-box img {
   width: 100%;
@@ -1660,7 +1701,9 @@ header.site-header {
 @media (max-width: 1024px) {
   .hero-middle-cta-box { align-self: flex-start; margin-right: 0; margin-bottom: 24px; }
   .sport-card-stage { grid-template-columns: 1fr; }
+  .sport-media-box { height: 320px; }
   .sports-nav-pills { grid-template-columns: repeat(2, 1fr); }
+  .scroll-stack-card { top: calc(130px + var(--card-index, 0) * 16px); margin-bottom: 25vh; }
   .mosaic-stage-grid { grid-template-columns: 1fr; gap: 40px; }
   .mosaic-column-side { flex-direction: row; justify-content: center; }
   .kayak-card-white { grid-template-columns: 1fr; }
@@ -1677,7 +1720,13 @@ header.site-header {
   .header-inner { min-height: 60px; }
   .header-nav { display: none; }
   .container { padding: 0 20px; }
-  .sports-nav-pills { grid-template-columns: 1fr; }
+  .sports-sticky-nav { top: 60px; padding: 8px 0 12px; }
+  .sports-nav-pills { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .sport-pill-btn { font-size: 18px; padding: 12px 14px; }
+  .scroll-stack-card { top: calc(120px + var(--card-index, 0) * 12px); margin-bottom: 20vh; }
+  .sport-card-stage { padding: 24px; border-radius: 16px; gap: 20px; }
+  .sport-media-box { height: 220px; }
+  .sport-title-giant { font-size: 32px; }
   .instructores-grid { grid-template-columns: 1fr; }
   .reviews-masonry-grid { grid-template-columns: 1fr; }
   .prefooter-flex-row { flex-direction: column; align-items: flex-start; gap: 24px; }

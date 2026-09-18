@@ -46,38 +46,83 @@ const sportsData = {
   }
 };
 
-// Función para cambiar de disciplina
-function switchSport(sportKey) {
-  const sport = sportsData[sportKey];
-  if (!sport) return;
-
-  // Actualizar botones de pestaña
-  document.querySelectorAll('.sport-pill-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.sport === sportKey);
+// Navegación fluida por Scroll Stack
+function scrollToSport(sportKey) {
+  const card = document.querySelector(`.scroll-stack-card[data-sport="${sportKey}"]`);
+  if (!card) return;
+  const index = parseInt(card.dataset.index || '0', 10);
+  const pinTop = 156 + index * 20;
+  const targetY = window.pageYOffset + card.getBoundingClientRect().top - pinTop;
+  window.scrollTo({
+    top: targetY,
+    behavior: 'smooth'
   });
+}
 
-  // Animación suave de cambio
-  const stage = document.getElementById('sportStageCard');
-  if (stage) {
-    stage.style.opacity = '0.7';
-    setTimeout(() => {
-      document.getElementById('sportTitle').textContent = sport.title;
-      document.getElementById('sportDesc').textContent = sport.desc;
-      document.getElementById('sportImg').src = sport.image;
-      document.getElementById('sportCurve').textContent = sport.curve;
-      document.getElementById('sportGear').textContent = sport.gear;
-      document.getElementById('sportComm').textContent = sport.comm;
-      document.getElementById('sportSafety').textContent = sport.safety;
-      document.getElementById('sportPrice').textContent = sport.price;
+function switchSport(sportKey) {
+  scrollToSport(sportKey);
+}
 
-      const wppBtn = document.getElementById('sportCtaBtn');
-      if (wppBtn) {
-        wppBtn.href = `https://wa.me/5491130041100?text=${encodeURIComponent(sport.wppMessage)}`;
+// Inicialización del efecto Scroll Stack (React Bits Style)
+function initScrollStack() {
+  const stackCards = document.querySelectorAll('.scroll-stack-card');
+  const pills = document.querySelectorAll('.sport-pill-btn');
+  if (!stackCards.length) return;
+
+  let ticking = false;
+
+  function updateStack() {
+    stackCards.forEach((card, index) => {
+      const inner = card.querySelector('.sport-card-stage');
+      if (!inner) return;
+
+      let totalOverlap = 0;
+
+      // Calcular el solapamiento de las tarjetas siguientes
+      for (let j = index + 1; j < stackCards.length; j++) {
+        const nextCard = stackCards[j];
+        const nextRect = nextCard.getBoundingClientRect();
+        const nextPinTop = 156 + j * 20;
+        
+        // A medida que la siguiente tarjeta sube hacia su posición fija (en un rango de 380px)
+        const travelDist = 380;
+        const progress = Math.min(1, Math.max(0, (nextPinTop + travelDist - nextRect.top) / travelDist));
+        totalOverlap += progress;
       }
 
-      stage.style.opacity = '1';
-    }, 150);
+      // Reducción progresiva de escala y brillo para crear profundidad 3D
+      const scale = Math.max(0.85, 1 - totalOverlap * 0.035);
+      const brightness = Math.max(0.75, 1 - totalOverlap * 0.06);
+
+      inner.style.transform = `scale(${scale})`;
+      inner.style.filter = `brightness(${brightness})`;
+    });
+
+    // Sincronizar pastilla activa en la barra superior fija
+    let activeIndex = 0;
+    stackCards.forEach((card, index) => {
+      const pinTop = 156 + index * 20;
+      const rect = card.getBoundingClientRect();
+      if (rect.top <= pinTop + 15) {
+        activeIndex = index;
+      }
+    });
+
+    pills.forEach((pill, index) => {
+      pill.classList.toggle('active', index === activeIndex);
+    });
+
+    ticking = false;
   }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateStack);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateStack();
 }
 
 // Telemetría en tiempo real desde Open-Meteo para Acassuso
@@ -130,4 +175,5 @@ async function fetchLiveWind() {
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
+  initScrollStack();
 });
