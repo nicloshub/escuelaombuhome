@@ -15,7 +15,9 @@
 .hero-bg-layer::after { background: rgba(0,0,0,.64); }
 .hero-bottom-bar { flex-wrap: wrap; }
 .hero-social-proof-row { white-space: normal; max-width: 560px; color: white; }
-.hero-bottom-subtext { font-size: 18px; color: white; }
+.hero-bottom-subtext { font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 1.5; text-transform: none; color: white; }
+.btn-pill-orange, .btn-pill-orange:hover, .btn-pill-dark, .btn-pill-dark:hover, .nav-btn-reserve, .nav-btn-reserve:hover { border: 0; }
+.hero-actions-row .hero-sports-outline, .hero-actions-row .hero-sports-outline:hover { background: transparent; color: white; border: 1px solid white; backdrop-filter: none; box-shadow: none; }
 .hero-section { height: auto; min-height: 100svh; }
 .hero-content-wrap { gap: 48px; }
 .disciplinas-header { position: static; flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -32,7 +34,7 @@
 .faq-list p { margin-top: 16px; max-width: 640px; }
 .map-address { padding: 48px; }
 .map-address p { margin-bottom: 24px; }
-.whatsapp-float { position: fixed; right: 24px; bottom: 24px; z-index: 1000; padding: 16px 24px; border-radius: 32px; background: var(--orange); color: var(--ink); font-weight: 700; box-shadow: 0 4px 16px #0003; border: 1px solid var(--ink); }
+.whatsapp-float { position: fixed; right: 24px; bottom: 24px; z-index: 1000; padding: 16px 24px; border-radius: 32px; background: var(--orange); color: var(--ink); font-weight: 700; box-shadow: 0 4px 16px #0003; border: 0; }
 .footer-social-link { font-size: 14px; }
 .service-intro { padding-top: 160px; padding-bottom: 64px; }
 .service-intro nav { margin-bottom: 32px; }
