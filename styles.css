@@ -593,7 +593,7 @@ header.site-header {
 /* Layout con Stack de Tarjetas + Rail Lateral */
 .disciplinas-stack-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 150px;
+  grid-template-columns: minmax(0, 1fr) 165px;
   gap: 40px;
   align-items: stretch;
   position: relative;
@@ -607,7 +607,7 @@ header.site-header {
 
 .side-rail-sticky {
   position: sticky;
-  top: 200px;
+  top: 220px;
   display: flex;
   align-items: stretch;
   gap: 16px;
