@@ -48,7 +48,7 @@ const sportsData = {
 
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
-  return (window.innerWidth <= 1024) ? (85 + index * 16) : (185 + index * 8);
+  return (window.innerWidth <= 1024) ? (85 + index * 16) : 205;
 }
 
 // Navegación fluida por Scroll Stack
@@ -74,12 +74,16 @@ function initScrollStack() {
   const railItems = document.querySelectorAll('.side-rail-item');
   const railThumb = document.getElementById('sideRailThumb');
   const mobileCounter = document.getElementById('mobileStackCounter');
+  const disciplinasHeader = document.querySelector('.disciplinas-header');
+  const sideRailSticky = document.querySelector('.side-rail-sticky');
   if (!stackCards.length) return;
 
   const sportNames = ['KITESURF', 'WINGFOIL', 'WINDSURF', 'SUP PADDLE'];
   let ticking = false;
 
   function updateStack() {
+    const isDesktop = window.innerWidth > 1024;
+
     stackCards.forEach((card, index) => {
       const inner = card.querySelector('.sport-card-stage');
       if (!inner) return;
@@ -92,18 +96,26 @@ function initScrollStack() {
         const nextRect = nextCard.getBoundingClientRect();
         const nextPinTop = getCardPinTop(j);
         
-        // A medida que la siguiente tarjeta sube hacia su posición fija (en un rango de 340px)
-        const travelDist = 340;
+        // Rango de aproximación de la siguiente tarjeta
+        const travelDist = 320;
         const progress = Math.min(1, Math.max(0, (nextPinTop + travelDist - nextRect.top) / travelDist));
         totalOverlap += progress;
       }
 
-      // Reducción progresiva de escala y brillo para crear profundidad 3D
-      const scale = Math.max(0.88, 1 - totalOverlap * 0.03);
-      const brightness = Math.max(0.82, 1 - totalOverlap * 0.05);
+      // Desaparición elegante hacia atrás (escala, brillo y fundido de opacidad)
+      const scale = Math.max(0.90, 1 - totalOverlap * 0.05);
+      const brightness = Math.max(0.75, 1 - totalOverlap * 0.12);
+      const opacity = Math.max(0, 1 - totalOverlap * 1.05);
 
       inner.style.transform = `scale(${scale})`;
       inner.style.filter = `brightness(${brightness})`;
+      if (isDesktop) {
+        card.style.opacity = `${opacity}`;
+        card.style.pointerEvents = totalOverlap >= 0.85 ? 'none' : 'auto';
+      } else {
+        card.style.opacity = '1';
+        card.style.pointerEvents = 'auto';
+      }
     });
 
     // Detectar qué tarjeta está activa al frente
@@ -130,6 +142,25 @@ function initScrollStack() {
     // Actualizar mini contador móvil
     if (mobileCounter) {
       mobileCounter.textContent = `0${activeIndex + 1} / 04 · ${sportNames[activeIndex] || ''}`;
+    }
+
+    // Coordinar salida con la última card para que el título suba al mismo tiempo y nunca pase por detrás
+    if (isDesktop && disciplinasHeader && stackCards.length > 0) {
+      const lastCard = stackCards[stackCards.length - 1];
+      const lastRect = lastCard.getBoundingClientRect();
+      const pinTop = getCardPinTop(stackCards.length - 1);
+      if (lastRect.top < pinTop) {
+        const exitDiff = pinTop - lastRect.top;
+        disciplinasHeader.style.transform = `translateY(-${exitDiff}px)`;
+        if (sideRailSticky) {
+          sideRailSticky.style.transform = `translateY(-${exitDiff}px)`;
+        }
+      } else {
+        disciplinasHeader.style.transform = '';
+        if (sideRailSticky) {
+          sideRailSticky.style.transform = '';
+        }
+      }
     }
 
     ticking = false;

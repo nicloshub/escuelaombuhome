@@ -612,7 +612,7 @@ header.site-header {
 
 .side-rail-sticky {
   position: sticky;
-  top: 215px;
+  top: 220px;
   display: flex;
   align-items: stretch;
   gap: 16px;
@@ -652,18 +652,16 @@ header.site-header {
   border: none;
   padding: 4px 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  display: block;
   text-align: left;
   opacity: 0.35;
   transform: translateX(0);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
 }
 
 .side-rail-item:hover {
   opacity: 0.75;
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 .side-rail-item.active {
@@ -671,32 +669,19 @@ header.site-header {
   transform: translateX(4px);
 }
 
-.side-rail-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ink);
-  opacity: 0.3;
-  transition: all 0.25s ease;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.side-rail-item.active .side-rail-dot {
-  background: var(--orange);
-  box-shadow: 0 0 8px rgba(255, 92, 45, 0.6);
-  opacity: 1;
-  transform: scale(1.15);
-}
-
 .side-rail-name {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 400;
   text-transform: uppercase;
   color: var(--ink);
   letter-spacing: 0.03em;
   line-height: 1;
+  transition: color 0.25s ease;
+}
+
+.side-rail-item.active .side-rail-name {
+  color: var(--orange);
 }
 
 /* Mini indicador flotante para móviles */
@@ -723,11 +708,12 @@ header.site-header {
 
 .scroll-stack-card {
   position: sticky;
-  top: calc(185px + var(--card-index, 0) * 8px);
+  top: 205px;
   margin-bottom: 40vh;
   width: 100%;
   transform-origin: top center;
   z-index: calc(10 + var(--card-index, 0));
+  transition: opacity 0.2s ease-out;
 }
 .scroll-stack-card:last-child {
   margin-bottom: 0;
