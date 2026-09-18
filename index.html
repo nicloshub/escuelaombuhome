@@ -48,80 +48,105 @@
          ========================================================= -->
     <section class="hero-section">
       <div class="hero-bg-layer">
-        <img src="./assets/IMG_0319.JPG" alt="Navegante llevando su tabla amarilla junto al río">
+        <img src="./assets/wingfoil.jpg" alt="Escuela de Viento Ombú - Wingfoil en el Río de la Plata">
       </div>
 
-      <!-- Top Row: Widget Condición del Río (Arriba a la Izquierda) -->
-      <div class="container hero-top-container">
-        <div class="hero-weather-card">
-          <div class="weather-status-row">
-            <span>CONDICIÓN DEL RÍO</span>
-            <div class="live-beacon-pill">
-              <span class="beacon-dot"></span>
-              <span>EN VIVO</span>
-            </div>
-          </div>
-
-          <div class="weather-metric-row">
-            <span class="weather-speed-num" id="heroWindSpeed">24</span>
-            <div class="weather-speed-units">
-              <span class="speed-unit-kmh">KM/H</span>
-              <span class="speed-unit-knots" id="heroWindKnots">13 nudos</span>
-            </div>
-            <span class="weather-dir-badge" id="heroWindDir">
-              <img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon">
-              <span id="heroWindDirText">NE</span>
-            </span>
-          </div>
-
-          <!-- Barra de progreso del viento estilo Figma -->
-          <div class="weather-progress-bar-wrap">
-            <div class="weather-progress-bar-fill" id="heroWindBar" style="width: 65%;"></div>
-          </div>
-
-          <div class="weather-caption" id="heroWindCaption">
-            Condiciones favorables para navegar
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom Row: Info & Botón a la derecha abajo + Título Monumental -->
-      <div class="container hero-bottom-container">
-        <!-- Bloque de Texto y CTA ubicado a la derecha justo arriba del título -->
-        <div class="hero-middle-cta-box">
-          <p class="hero-top-subtext">
-            Escuela de kitesurf, windsurf, wingfoil y<br>
-            SUP a 20 minutos de Capital.
-          </p>
-          <div class="hero-top-actions">
-            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange">
-              RESERVÁ TU CLASE
-              <div class="icon">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                </svg>
+      <div class="container hero-content-wrap">
+        <!-- Top Row: Widget Condición del Río (izq) + Coordenadas de spot (der) -->
+        <div class="hero-top-bar">
+          <div class="hero-top-left-box">
+            <div class="hero-weather-card">
+              <div class="weather-status-row">
+                <span>CONDICIÓN DEL RÍO</span>
+                <div class="live-beacon-pill">
+                  <span class="beacon-dot"></span>
+                  <span>EN VIVO</span>
+                </div>
               </div>
-            </a>
-            <a href="#disciplinas" class="hero-link-sports">
-              Ver los 4 deportes
-            </a>
+
+              <div class="weather-metric-row">
+                <span class="weather-speed-num" id="heroWindSpeed">24</span>
+                <div class="weather-speed-units">
+                  <span class="speed-unit-kmh">KM/H</span>
+                  <span class="speed-unit-knots" id="heroWindKnots">13 nudos</span>
+                </div>
+                <span class="weather-dir-badge" id="heroWindDir">
+                  <img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon">
+                  <span id="heroWindDirText">NE</span>
+                </span>
+              </div>
+
+              <!-- Barra de progreso del viento estilo Figma -->
+              <div class="weather-progress-bar-wrap">
+                <div class="weather-progress-bar-fill" id="heroWindBar" style="width: 65%;"></div>
+              </div>
+
+              <div class="weather-caption" id="heroWindCaption">
+                Condiciones favorables para navegar
+              </div>
+            </div>
+
+            <div class="hero-location-line">
+              <span class="loc-bar"></span>
+              <span>ACASSUSO · SAN ISIDRO — A 20 MIN DE CAPITAL</span>
+            </div>
+          </div>
+
+          <div class="hero-top-right-box">
+            <div class="hero-coords-box">
+              <span class="hero-coord-tag"><span class="accent-orange">(01)</span> ESCUELA DE VIENTO</span>
+              <span class="hero-coord-latlon">34.45° S — 58.51° O</span>
+              <span class="hero-coord-place">RÍO DE LA PLATA, ARGENTINA</span>
+            </div>
           </div>
         </div>
 
-        <!-- Título Monumental Bottom Hero -->
-        <h1 class="hero-giant-heading">
-          Aprendé a dominar los<br>
-          <span class="orange-part">
-            elementos
-            <a href="#disciplinas" class="hero-circle-arrow-btn" aria-label="Ir a las disciplinas">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </a>
-          </span>
-        </h1>
+        <!-- Título Monumental de Ancho Completo -->
+        <div class="hero-headline-stage">
+          <h1 class="hero-giant-heading">
+            <span class="hero-title-solid">ESCUELA DE <span class="accent-orange">VIENTO</span></span>
+            <span class="hero-title-stroke">SOBRE EL RÍO.</span>
+          </h1>
+        </div>
+
+        <!-- Fila Inferior: Texto secundario y botones a la izq + Social proof a la der -->
+        <div class="hero-bottom-bar">
+          <div class="hero-bottom-left-box">
+            <p class="hero-bottom-subtext">
+              Kitesurf, windsurf, wingfoil y SUP con equipo incluido y acompañamiento profesional.
+            </p>
+            <div class="hero-actions-row">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange">
+                RESERVÁ TU CLASE
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+              <a href="#disciplinas" class="btn-pill-dark">
+                VER DEPORTES
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-bottom-right-box">
+            <div class="hero-social-proof-row">
+              <span class="proof-item"><strong>+1.200</strong> ALUMNOS</span>
+              <span class="proof-dot">·</span>
+              <span class="proof-item">EQUIPO INCLUIDO</span>
+              <span class="proof-dot">·</span>
+              <span class="proof-item">LANCHA DE APOYO</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
