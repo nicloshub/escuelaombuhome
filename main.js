@@ -103,17 +103,19 @@ function initScrollStack() {
       }
 
       // Desaparición elegante hacia atrás (escala, brillo y fundido de opacidad)
-      const scale = Math.max(0.90, 1 - totalOverlap * 0.05);
-      const brightness = Math.max(0.75, 1 - totalOverlap * 0.12);
-      const opacity = Math.max(0, 1 - totalOverlap * 1.05);
+      const scale = Math.max(0.88, 1 - totalOverlap * 0.05);
+      const brightness = Math.max(0.70, 1 - totalOverlap * 0.15);
+      const opacity = Math.max(0, 1 - totalOverlap * 1.35);
 
       inner.style.transform = `scale(${scale})`;
       inner.style.filter = `brightness(${brightness})`;
       if (isDesktop) {
         card.style.opacity = `${opacity}`;
-        card.style.pointerEvents = totalOverlap >= 0.85 ? 'none' : 'auto';
+        card.style.visibility = opacity <= 0.01 ? 'hidden' : 'visible';
+        card.style.pointerEvents = totalOverlap >= 0.75 ? 'none' : 'auto';
       } else {
         card.style.opacity = '1';
+        card.style.visibility = 'visible';
         card.style.pointerEvents = 'auto';
       }
     });
