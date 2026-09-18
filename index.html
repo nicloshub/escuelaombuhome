@@ -62,7 +62,6 @@
         <div class="hero-weather-card">
           <div class="weather-status-row">
             <span>CONDICIÓN DEL RÍO</span>
-            <span>•</span>
             <div class="live-beacon-pill">
               <span class="beacon-dot"></span>
               <span>EN VIVO</span>
@@ -75,7 +74,10 @@
               <span class="speed-unit-kmh">KM/H</span>
               <span class="speed-unit-knots" id="heroWindKnots">13 nudos</span>
             </div>
-            <span class="weather-dir-badge" id="heroWindDir">↙ NE</span>
+            <span class="weather-dir-badge" id="heroWindDir">
+              <img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon">
+              <span id="heroWindDirText">NE</span>
+            </span>
           </div>
 
           <!-- Barra de progreso del viento estilo Figma -->

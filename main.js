@@ -100,7 +100,12 @@ async function fetchLiveWind() {
 
       if (speedEl) speedEl.textContent = speedKm;
       if (knotsEl) knotsEl.textContent = `${knots} nudos`;
-      if (dirEl) dirEl.textContent = `↙ ${dirStr}`;
+      const dirTextEl = document.getElementById('heroWindDirText');
+      if (dirTextEl) {
+        dirTextEl.textContent = dirStr;
+      } else if (dirEl) {
+        dirEl.innerHTML = `<img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon"> <span id="heroWindDirText">${dirStr}</span>`;
+      }
 
       const barEl = document.getElementById('heroWindBar');
       if (barEl) {
