@@ -24,5 +24,5 @@ function createServer() {
     }catch{res.writeHead(404);res.end('No encontrado');}
   });
 }
-if(require.main===module)createServer().listen(process.env.PORT||5175,'127.0.0.1',()=>console.log('Escuela Ombú: http://localhost:'+(process.env.PORT||5175)));
+if(require.main===module)createServer().listen(process.env.PORT||5176,'127.0.0.1',()=>console.log('Escuela Ombú: http://localhost:'+(process.env.PORT||5176)));
 module.exports={createServer};
