@@ -307,6 +307,35 @@ header.site-header {
   opacity: 0.5;
 }
 
+/* Botón de reserva del Navbar (limpio, sin círculo/flecha) */
+.nav-btn-reserve {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  background-color: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(31, 31, 19, 0.12);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-btn-reserve:hover {
+  background-color: var(--orange);
+  border-color: var(--orange);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 92, 45, 0.25);
+}
+
 /* =========================================================
    HERO SECTION
    ========================================================= */
