@@ -600,7 +600,7 @@ header.site-header {
    SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
    ========================================================= */
 .section-disciplinas {
-  padding: 40px 0 20px;
+  padding: 40px 0 60px;
   position: relative;
 }
 
@@ -877,7 +877,7 @@ header.site-header {
    MOSAICO FOTOGRÁFICO & CITA MANIFIESTO
    ========================================================= */
 .section-mosaic-quote {
-  padding: 60px 0 110px;
+  padding: 100px 0 150px;
   position: relative;
   overflow: hidden;
 }
