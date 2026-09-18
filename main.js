@@ -51,7 +51,7 @@ function scrollToSport(sportKey) {
   const card = document.querySelector(`.scroll-stack-card[data-sport="${sportKey}"]`);
   if (!card) return;
   const index = parseInt(card.dataset.index || '0', 10);
-  const pinTop = 156 + index * 20;
+  const pinTop = 96 + index * 22;
   const targetY = window.pageYOffset + card.getBoundingClientRect().top - pinTop;
   window.scrollTo({
     top: targetY,
@@ -63,12 +63,15 @@ function switchSport(sportKey) {
   scrollToSport(sportKey);
 }
 
-// Inicialización del efecto Scroll Stack (React Bits Style)
+// Inicialización del efecto Scroll Stack con Rail Lateral Minimalista
 function initScrollStack() {
   const stackCards = document.querySelectorAll('.scroll-stack-card');
-  const pills = document.querySelectorAll('.sport-pill-btn');
+  const railItems = document.querySelectorAll('.side-rail-item');
+  const railThumb = document.getElementById('sideRailThumb');
+  const mobileCounter = document.getElementById('mobileStackCounter');
   if (!stackCards.length) return;
 
+  const sportNames = ['KITESURF', 'WINGFOIL', 'WINDSURF', 'SUP PADDLE'];
   let ticking = false;
 
   function updateStack() {
@@ -82,7 +85,7 @@ function initScrollStack() {
       for (let j = index + 1; j < stackCards.length; j++) {
         const nextCard = stackCards[j];
         const nextRect = nextCard.getBoundingClientRect();
-        const nextPinTop = 156 + j * 20;
+        const nextPinTop = 96 + j * 22;
         
         // A medida que la siguiente tarjeta sube hacia su posición fija (en un rango de 380px)
         const travelDist = 380;
@@ -91,26 +94,38 @@ function initScrollStack() {
       }
 
       // Reducción progresiva de escala y brillo para crear profundidad 3D
-      const scale = Math.max(0.85, 1 - totalOverlap * 0.035);
-      const brightness = Math.max(0.75, 1 - totalOverlap * 0.06);
+      const scale = Math.max(0.86, 1 - totalOverlap * 0.035);
+      const brightness = Math.max(0.78, 1 - totalOverlap * 0.06);
 
       inner.style.transform = `scale(${scale})`;
       inner.style.filter = `brightness(${brightness})`;
     });
 
-    // Sincronizar pastilla activa en la barra superior fija
+    // Detectar qué tarjeta está activa al frente
     let activeIndex = 0;
     stackCards.forEach((card, index) => {
-      const pinTop = 156 + index * 20;
+      const pinTop = 96 + index * 22;
       const rect = card.getBoundingClientRect();
       if (rect.top <= pinTop + 15) {
         activeIndex = index;
       }
     });
 
-    pills.forEach((pill, index) => {
-      pill.classList.toggle('active', index === activeIndex);
+    // Actualizar estados activos en el Rail Lateral
+    railItems.forEach((item, index) => {
+      item.classList.toggle('active', index === activeIndex);
     });
+
+    // Desplazar suavemente el cursor indicador del rail
+    if (railThumb && railItems[activeIndex]) {
+      const itemTop = railItems[activeIndex].offsetTop;
+      railThumb.style.transform = `translateY(${itemTop}px)`;
+    }
+
+    // Actualizar mini contador móvil
+    if (mobileCounter) {
+      mobileCounter.textContent = `0${activeIndex + 1} / 04 · ${sportNames[activeIndex] || ''}`;
+    }
 
     ticking = false;
   }

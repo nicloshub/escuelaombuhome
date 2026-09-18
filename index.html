@@ -146,18 +146,13 @@
           </p>
         </div>
 
-        <!-- Barra de Pestañas Sticky (4 Pills) -->
-        <div class="sports-sticky-nav">
-          <div class="sports-nav-pills">
-            <button class="sport-pill-btn active" data-sport="kitesurf" onclick="scrollToSport('kitesurf')">Kitesurf</button>
-            <button class="sport-pill-btn" data-sport="wingfoil" onclick="scrollToSport('wingfoil')">Wingfoil</button>
-            <button class="sport-pill-btn" data-sport="windsurf" onclick="scrollToSport('windsurf')">Windsurf</button>
-            <button class="sport-pill-btn" data-sport="sup" onclick="scrollToSport('sup')">SUP Paddle</button>
-          </div>
-        </div>
+        <!-- Layout con Stack de Tarjetas + Rail Lateral -->
+        <div class="disciplinas-stack-layout">
+          <!-- Mini indicador flotante para móviles -->
+          <div class="mobile-stack-counter" id="mobileStackCounter">01 / 04 · KITESURF</div>
 
-        <!-- Contenedor Scroll Stack de las 4 Tarjetas -->
-        <div class="scroll-stack-container">
+          <!-- Contenedor Scroll Stack de las 4 Tarjetas -->
+          <div class="scroll-stack-container">
           <!-- Tarjeta 1: Kitesurf -->
           <div class="scroll-stack-card" data-sport="kitesurf" data-index="0" style="--card-index: 0;">
             <div class="sport-card-stage">
@@ -373,6 +368,45 @@
               </div>
             </div>
           </div>
+
+          <!-- Rail Lateral Minimalista de Navegación -->
+          <aside class="disciplinas-side-rail" aria-label="Navegación de disciplinas">
+            <div class="side-rail-sticky">
+              <div class="side-rail-track">
+                <div class="side-rail-thumb" id="sideRailThumb"></div>
+              </div>
+              <div class="side-rail-list">
+                <button class="side-rail-item active" data-sport="kitesurf" onclick="scrollToSport('kitesurf')">
+                  <span class="side-rail-dot"></span>
+                  <div class="side-rail-text">
+                    <span class="side-rail-num">01</span>
+                    <span class="side-rail-name">Kitesurf</span>
+                  </div>
+                </button>
+                <button class="side-rail-item" data-sport="wingfoil" onclick="scrollToSport('wingfoil')">
+                  <span class="side-rail-dot"></span>
+                  <div class="side-rail-text">
+                    <span class="side-rail-num">02</span>
+                    <span class="side-rail-name">Wingfoil</span>
+                  </div>
+                </button>
+                <button class="side-rail-item" data-sport="windsurf" onclick="scrollToSport('windsurf')">
+                  <span class="side-rail-dot"></span>
+                  <div class="side-rail-text">
+                    <span class="side-rail-num">03</span>
+                    <span class="side-rail-name">Windsurf</span>
+                  </div>
+                </button>
+                <button class="side-rail-item" data-sport="sup" onclick="scrollToSport('sup')">
+                  <span class="side-rail-dot"></span>
+                  <div class="side-rail-text">
+                    <span class="side-rail-num">04</span>
+                    <span class="side-rail-name">SUP Paddle</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
