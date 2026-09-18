@@ -571,11 +571,16 @@ header.site-header {
    SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
    ========================================================= */
 .section-disciplinas {
-  padding: 80px 0 140px;
+  padding: 60px 0 140px;
   position: relative;
 }
 
 .disciplinas-header {
+  position: sticky;
+  top: 24px;
+  z-index: 20;
+  background: var(--bg-sand);
+  padding: 6px 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -607,7 +612,7 @@ header.site-header {
 
 .side-rail-sticky {
   position: sticky;
-  top: clamp(340px, 48vh, 480px);
+  top: 320px;
   display: flex;
   align-items: stretch;
   gap: 16px;
@@ -718,8 +723,8 @@ header.site-header {
 
 .scroll-stack-card {
   position: sticky;
-  top: calc(96px + var(--card-index, 0) * 22px);
-  margin-bottom: 38vh;
+  top: calc(160px + var(--card-index, 0) * 12px);
+  margin-bottom: 42vh;
   width: 100%;
   transform-origin: top center;
   z-index: calc(10 + var(--card-index, 0));
@@ -1778,6 +1783,7 @@ header.site-header {
    ========================================================= */
 @media (max-width: 1024px) {
   .hero-middle-cta-box { align-self: flex-start; margin-right: 0; margin-bottom: 24px; }
+  .disciplinas-header { position: static; }
   .disciplinas-stack-layout { grid-template-columns: 1fr; }
   .disciplinas-side-rail { display: none; }
   .mobile-stack-counter { display: inline-flex; }

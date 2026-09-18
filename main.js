@@ -46,12 +46,17 @@ const sportsData = {
   }
 };
 
+// Cálculo dinámico del punto de fijación (desktop vs mobile)
+function getCardPinTop(index) {
+  return (window.innerWidth <= 1024) ? (85 + index * 16) : (160 + index * 12);
+}
+
 // Navegación fluida por Scroll Stack
 function scrollToSport(sportKey) {
   const card = document.querySelector(`.scroll-stack-card[data-sport="${sportKey}"]`);
   if (!card) return;
   const index = parseInt(card.dataset.index || '0', 10);
-  const pinTop = 96 + index * 22;
+  const pinTop = getCardPinTop(index);
   const targetY = window.pageYOffset + card.getBoundingClientRect().top - pinTop;
   window.scrollTo({
     top: targetY,
@@ -85,17 +90,17 @@ function initScrollStack() {
       for (let j = index + 1; j < stackCards.length; j++) {
         const nextCard = stackCards[j];
         const nextRect = nextCard.getBoundingClientRect();
-        const nextPinTop = 96 + j * 22;
+        const nextPinTop = getCardPinTop(j);
         
-        // A medida que la siguiente tarjeta sube hacia su posición fija (en un rango de 380px)
-        const travelDist = 380;
+        // A medida que la siguiente tarjeta sube hacia su posición fija (en un rango de 340px)
+        const travelDist = 340;
         const progress = Math.min(1, Math.max(0, (nextPinTop + travelDist - nextRect.top) / travelDist));
         totalOverlap += progress;
       }
 
       // Reducción progresiva de escala y brillo para crear profundidad 3D
-      const scale = Math.max(0.86, 1 - totalOverlap * 0.035);
-      const brightness = Math.max(0.78, 1 - totalOverlap * 0.06);
+      const scale = Math.max(0.88, 1 - totalOverlap * 0.03);
+      const brightness = Math.max(0.82, 1 - totalOverlap * 0.05);
 
       inner.style.transform = `scale(${scale})`;
       inner.style.filter = `brightness(${brightness})`;
@@ -104,9 +109,9 @@ function initScrollStack() {
     // Detectar qué tarjeta está activa al frente
     let activeIndex = 0;
     stackCards.forEach((card, index) => {
-      const pinTop = 96 + index * 22;
+      const pinTop = getCardPinTop(index);
       const rect = card.getBoundingClientRect();
-      if (rect.top <= pinTop + 15) {
+      if (rect.top <= pinTop + 18) {
         activeIndex = index;
       }
     });
