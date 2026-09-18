@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --paper: #f9f3e9;
+  --white: #fff;
+  --ink: #1f1f13;
+  --orange: #ff5c2d;
+  --deep: #c4380f;
+  --line: rgba(31, 31, 19, .16);
+  --gutter: 32px;
+  --page-margin: 160px;
+  --section-space: 128px;
+  color-scheme: light;
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body { margin: 0; font-size: 16px; line-height: 1.5; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+button, summary, label[for] { cursor: pointer; }
+button { color: inherit; }
+:focus-visible { outline: 2px solid var(--deep); outline-offset: 2px; }
+::selection { background: var(--orange); color: var(--ink); }
+h1, h2, h3, h4, p, blockquote { margin: 0; }
+h1, h2, h3, h4, .display { font-family: 'Anton', Impact, sans-serif; font-weight: 400; text-transform: uppercase; }
+h1 { font-size: 120px; line-height: .9; letter-spacing: -.01em; }
+h2 { font-size: 72px; line-height: .95; letter-spacing: -.005em; }
+h3 { font-size: 40px; line-height: 1.05; }
+h4 { font-size: 28px; line-height: 1.1; }
+.container { width: min(1120px, calc(100% - var(--page-margin) * 2)); margin-inline: auto; }
+.section { padding-block: var(--section-space); }
+.eyebrow { display: block; font-size: 12px; line-height: 1.4; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--deep); margin-bottom: 24px; }
+.accent { color: var(--deep); }
+.button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; min-height: 48px; padding: 14px 24px; border: 0; border-radius: 100px; background: var(--orange); color: var(--ink); font-size: 14px; line-height: 1.4; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; transition: transform .2s, box-shadow .2s; }
+.button:hover { transform: translateY(-2px); box-shadow: 0 4px 16px #1f1f1320; }
+.button-dark { background: var(--ink); color: var(--paper); }
+.text-link { color: var(--deep); font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; transform: translateY(-150%); padding: 12px 24px; background: var(--paper); }
+.skip-link:focus { transform: none; }
+.site-header { position: relative; z-index: 3; background: var(--paper); }
+.header-inner { min-height: 80px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; white-space: nowrap; }
+.brand img { width: 36px; height: 36px; object-fit: contain; }
+.desktop-nav { display: flex; align-items: center; gap: 16px; font-size: 13px; }
+.desktop-nav a:hover { color: var(--deep); }
+.desktop-nav a + a::before { content: '·'; display: inline-block; color: var(--ink); margin-right: 16px; }
+.mobile-menu { display: none; }
+.hero { position: relative; min-height: 768px; overflow: hidden; }
+.hero-photo { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #f9f3e92b 0%, #f9f3e91f 40%, var(--paper) 100%); }
+.hero-inner { position: relative; z-index: 1; min-height: inherit; display: flex; flex-direction: column; justify-content: space-between; padding-block: 64px 72px; }
+.hero-top { display: flex; justify-content: space-between; gap: 48px; }
+.river-status { width: 256px; align-self: flex-start; padding: 24px; border-radius: 12px; color: var(--paper); background: var(--ink); }
+.river-status .eyebrow { color: var(--paper); font-size: 10px; margin-bottom: 8px; }
+.river-status strong { font-size: 40px; line-height: 1; }
+.river-status small { font-size: 11px; }
+.river-status p { margin-top: 16px; padding-top: 16px; border-top: 2px solid var(--orange); font-size: 10px; }
+.river-values { display: flex; align-items: center; gap: 12px; }
+.river-values span { font-size: 11px; }
+.river-direction { padding: 3px 10px; border-radius: 32px; background: var(--orange); color: var(--ink); font-weight: 700; }
+.hero-intro { width: 352px; margin-top: 160px; }
+.hero-intro p { font-size: 18px; line-height: 1.5; }
+.hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 24px; }
+.hero-actions .button { white-space: nowrap; }
+.hero h1 { max-width: 1120px; }
+.hero h1 .accent { display: inline-block; }
+.round-link { display: inline-flex; align-items: center; justify-content: center; width: 96px; height: 96px; margin-left: 24px; border-radius: 50%; background: var(--orange); color: var(--ink); font-family: 'Inter', sans-serif; font-size: 48px; vertical-align: middle; }
+.section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 40px; }
+.section-heading > p { max-width: 352px; flex-shrink: 0; }
+.section-heading h2 { max-width: 768px; }
+.sport-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 32px; }
+.sport-tabs button { text-align: left; padding: 20px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); font: 400 28px/1.1 'Anton', Impact, sans-serif; text-transform: uppercase; }
+.sport-tabs button[aria-selected='true'] { color: var(--paper); background: var(--ink); }
+.sport-panel { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+.sport-panel[hidden] { display: none; }
+.sport-image { width: 100%; height: 100%; min-height: 488px; object-fit: cover; }
+.sport-copy { padding: 40px; }
+.sport-copy > p { margin-top: 16px; max-width: 440px; }
+.sport-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-block: 32px; }
+.sport-facts dt { color: var(--deep); font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.sport-facts dd { margin: 8px 0 0; font-size: 13px; }
+.sport-bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--line); }
+.sport-price small { display: block; color: var(--deep); font-size: 11px; text-transform: uppercase; }
+.sport-price strong { font-size: 24px; }
+.sport-bottom .button { font-size: 11px; }
+.manifesto { position: relative; min-height: 644px; display: grid; align-items: center; padding-block: 128px; }
+.manifesto blockquote { width: min(860px, 70%); margin: auto; position: relative; z-index: 1; font: 400 64px/.95 'Anton', Impact, sans-serif; text-align: center; text-transform: uppercase; color: var(--deep); }
+.memory { position: absolute; width: 240px; height: 184px; object-fit: cover; border-radius: 12px; }
+.memory-one { left: 8%; top: 32px; transform: rotate(7deg); }
+.memory-two { right: 8%; top: 24px; transform: rotate(11deg); }
+.memory-three { left: 7%; bottom: 40px; transform: rotate(-9deg); }
+.memory-four { right: 7%; bottom: 56px; transform: rotate(-8deg); }
+.dark-band { background: #000; padding-block: 128px; position: relative; }
+.split-card { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 12px; background: var(--white); }
+.split-image { width: 100%; height: 100%; min-height: 448px; object-fit: cover; }
+.split-copy { padding: 48px; align-self: center; }
+.split-copy h3 { margin-bottom: 24px; }
+.split-copy .eyebrow { margin-bottom: 16px; }
+.split-copy p { margin-bottom: 24px; }
+.check-list { list-style: none; padding: 0; margin: 24px 0; font-size: 13px; }
+.check-list li + li { margin-top: 8px; }
+.objective { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.objective h2 { max-width: 540px; }
+.objective-copy > p { max-width: 640px; }
+.benefits { margin-top: 32px; }
+.benefit { display: grid; grid-template-columns: 20px 1fr; gap: 16px; padding-block: 20px; border-top: 1px solid var(--line); }
+.benefit img { width: 20px; height: 20px; }
+.benefit strong { font-size: 16px; }
+.benefit p { font-size: 13px; margin-top: 4px; }
+.spot-section { padding-block: 80px 120px; }
+.spot-card { display: grid; grid-template-columns: 1fr 1fr; border-radius: 16px; overflow: hidden; }
+.spot-copy { background: var(--orange); padding: 64px 48px; }
+.spot-copy .eyebrow { color: var(--ink); margin-bottom: 16px; }
+.spot-copy p { margin-block: 16px 24px; }
+.camera { min-height: 340px; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; background: #201f1b; color: var(--paper); }
+.camera-header { display: flex; justify-content: space-between; font-size: 10px; }
+.live-pill { background: var(--deep); padding: 4px 12px; border-radius: 100px; color: white; }
+.camera strong { font-size: 14px; }
+.camera p { font-size: 12px; opacity: .8; }
+.instructors { padding-top: 0; }
+.instructor-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.instructor-card { background: var(--white); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.instructor-card > img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.instructor-card figcaption { padding: 16px; }
+.instructor-card { margin: 0; }
+.instructor-card strong { font-size: 16px; }
+.instructor-card p { font-size: 12px; margin-top: 8px; }
+.instructor-card p span { color: var(--deep); }
+.location .split-image { min-height: 448px; }
+.contact-list { display: grid; gap: 24px; margin: 24px 0 0; }
+.contact-list dt { color: var(--deep); text-transform: uppercase; letter-spacing: .08em; font-size: 10px; font-weight: 700; margin-bottom: 8px; }
+.contact-list dd { margin: 0; font-size: 14px; }
+.contact-list a { text-decoration: underline; text-underline-offset: 4px; }
+.testimonials .section-heading h2 { font-size: 64px; }
+.reviews-grid { display: grid; grid-template-columns: repeat(4, 1fr); align-items: start; gap: 32px; }
+.review-column { display: grid; gap: 16px; }
+.review { background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 20px; font-size: 13px; }
+.review-header { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+.avatar { width: 36px; height: 36px; display: grid; place-items: center; flex-shrink: 0; background: var(--ink); border-radius: 50%; color: white; font-size: 11px; }
+.review-header strong { font-size: 12px; }
+.review-header small { display: block; font-size: 10px; opacity: .7; }
+.review-logo { width: 18px; height: 18px; object-fit: contain; margin-left: auto; }
+.review-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+.review-stars img { width: 14px; height: 14px; }
+.closing { position: relative; min-height: 1296px; padding-top: 32px; display: flex; flex-direction: column; justify-content: space-between; isolation: isolate; }
+.closing-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.closing::before { content: ''; position: absolute; inset: 0; background: linear-gradient(var(--paper), #f9f3e933 22%, transparent 55%); z-index: -1; }
+.closing h2 { font-size: 112px; }
+.closing-cta { display: flex; justify-content: flex-end; margin-top: 96px; }
+.footer { color: var(--paper); background: var(--ink); border-radius: 16px 16px 0 0; padding: 56px 48px 0; overflow: hidden; }
+.footer-columns { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 64px; }
+.footer .eyebrow { color: var(--orange); margin-bottom: 16px; font-size: 10px; }
+.footer p, .footer a { font-size: 12px; }
+.footer nav { display: grid; align-content: start; gap: 8px; }
+.footer-brand img { width: 36px; height: 36px; margin-bottom: 16px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #ffffff20; padding-block: 24px; font-size: 10px; }
+.footer-wordmark { width: 100%; height: auto; margin-top: 32px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+@media (min-width: 1441px) { :root { --page-margin: max(160px, calc((100vw - 1120px) / 2)); } }
+@media (max-width: 1279px) {
+  :root { --page-margin: 64px; --gutter: 24px; }
+  .desktop-nav { gap: 10px; }
+  .desktop-nav a + a::before { margin-right: 10px; }
+  .header-inner { gap: 16px; }
+  .header-inner > .button { padding-inline: 16px; font-size: 12px; }
+  h1 { font-size: clamp(80px, 8.33vw, 120px); }
+  h2 { font-size: 64px; }
+  .sport-tabs, .instructor-grid, .reviews-grid { gap: 24px; }
+  .sport-copy, .split-copy { padding: 32px; }
+  .sport-bottom { flex-wrap: wrap; }
+  .manifesto blockquote { font-size: 56px; }
+  .memory { width: 200px; height: 152px; }
+  .closing h2 { font-size: 88px; }
+}
+@media (max-width: 1023px) {
+  :root { --page-margin: 40px; --section-space: 96px; }
+  .desktop-nav { display: none; }
+  .mobile-menu { display: block; }
+  .mobile-menu summary { font-size: 13px; font-weight: 700; padding: 12px; }
+  .mobile-menu nav { position: absolute; top: 72px; right: 40px; left: 40px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 24px; box-shadow: 0 12px 24px #1f1f131a; display: grid; gap: 16px; }
+  .header-inner > .button { margin-left: auto; }
+  h2 { font-size: 48px; }
+  h3 { font-size: 32px; }
+  .hero { min-height: 720px; }
+  .hero-top { gap: 24px; }
+  .hero-intro { width: 320px; margin-top: 120px; }
+  .hero-actions { align-items: flex-start; flex-direction: column; gap: 16px; }
+  .round-link { width: 72px; height: 72px; font-size: 40px; }
+  .section-heading > p { max-width: 256px; font-size: 14px; }
+  .sport-tabs { gap: 24px; }
+  .sport-tabs button { font-size: 22px; }
+  .sport-copy { padding: 24px; }
+  .sport-facts { gap: 16px; }
+  .sport-image { min-height: 480px; }
+  .manifesto { min-height: 560px; }
+  .manifesto blockquote { font-size: 48px; width: 80%; }
+  .memory { width: 160px; height: 120px; }
+  .objective { gap: 24px; }
+  .spot-copy { padding: 40px 32px; }
+  .instructor-grid, .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-columns { grid-template-columns: repeat(2, 1fr); }
+  .closing h2 { font-size: 72px; }
+}
+@media (max-width: 599px) {
+  :root { --page-margin: 20px; --gutter: 16px; --section-space: 64px; }
+  h1 { font-size: 48px; line-height: .9; }
+  h2, .testimonials .section-heading h2 { font-size: 34px; line-height: .95; }
+  h3 { font-size: 24px; line-height: 1.05; }
+  h4 { font-size: 20px; line-height: 1.1; }
+  .eyebrow { margin-bottom: 16px; }
+  .header-inner { min-height: 72px; gap: 8px; }
+  .brand { font-size: 11px; gap: 8px; }
+  .brand img { width: 32px; height: 32px; }
+  .header-inner > .button { display: none; }
+  .mobile-menu nav { left: 20px; right: 20px; }
+  .hero { min-height: 736px; }
+  .hero-photo { object-position: 55% center; }
+  .hero-inner { padding-block: 24px 48px; }
+  .hero-top { display: contents; }
+  .river-status { width: 196px; padding: 16px; }
+  .river-status strong { font-size: 32px; }
+  .hero-intro { width: 100%; margin: 0; padding-top: 176px; }
+  .hero-intro p { max-width: 288px; font-size: 16px; }
+  .hero-actions { flex-direction: row; align-items: center; gap: 16px; margin-block: 24px 40px; }
+  .hero-actions .button { padding-inline: 16px; font-size: 12px; }
+  .hero-actions .text-link { font-size: 12px; }
+  .round-link { width: 40px; height: 40px; font-size: 24px; margin-left: 8px; }
+  .section-heading { display: block; margin-bottom: 32px; }
+  .section-heading > p { max-width: none; margin-top: 24px; font-size: 16px; }
+  .sport-tabs { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+  .sport-tabs button { padding: 16px; font-size: 20px; }
+  .sport-panel, .split-card, .objective, .spot-card { grid-template-columns: 1fr; }
+  .sport-image { min-height: 0; height: 320px; }
+  .sport-copy { padding: 24px; }
+  .sport-copy > p { font-size: 16px; }
+  .sport-facts { margin-block: 24px; }
+  .sport-bottom { align-items: flex-start; flex-direction: column; }
+  .sport-bottom .button { width: 100%; font-size: 12px; }
+  .manifesto { min-height: 520px; padding-block: 160px; }
+  .manifesto blockquote { font-size: 34px; width: calc(100% - 40px); }
+  .memory { width: 120px; height: 96px; border-radius: 8px; }
+  .memory-one { left: 7%; top: 24px; }
+  .memory-two { right: 7%; top: 32px; }
+  .memory-three { left: 7%; bottom: 32px; }
+  .memory-four { right: 7%; bottom: 32px; }
+  .dark-band { padding-block: 64px; }
+  .split-image, .location .split-image { min-height: 0; height: 280px; }
+  .split-copy { padding: 32px 24px; }
+  .split-copy .button { font-size: 12px; }
+  .objective { gap: 32px; }
+  .objective h2 { max-width: 320px; }
+  .spot-section { padding-block: 0 64px; }
+  .spot-copy { padding: 32px 24px; }
+  .camera { min-height: 260px; padding: 24px; }
+  .instructor-grid { gap: 24px 16px; }
+  .instructor-card figcaption { padding: 12px; }
+  .instructor-card strong { font-size: 13px; }
+  .instructor-card p { font-size: 11px; }
+  .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+  .review { font-size: 14px; }
+  .closing { min-height: 1240px; padding-top: 0; }
+  .closing h2 { font-size: 48px; }
+  .closing-photo { object-position: 48% center; }
+  .closing-cta { margin-top: 48px; justify-content: flex-start; }
+  .footer { padding: 32px 24px 0; }
+  .footer-columns { gap: 32px 24px; padding-bottom: 32px; }
+  .footer-brand, .footer-contact { grid-column: 1 / -1; }
+  .footer-bottom { align-items: flex-start; gap: 16px; flex-direction: column; }
+  .footer-wordmark { margin-top: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
