@@ -1253,10 +1253,11 @@ header.site-header {
 }
 
 /* =========================================================
-   SECCIÓN: ESTAMOS JUNTO AL RÍO (MAPA Y CONTACTO)
+   SECCIÓN: ESTAMOS JUNTO AL RÍO (MAPA Y CONTACTO - BLOQUE OSCURO)
    ========================================================= */
 .section-ubicacion-mapa {
-  padding: 80px 0 120px;
+  background-color: #000000;
+  padding: 128px 0;
 }
 
 .mapa-card-white {
