@@ -48,7 +48,7 @@ const sportsData = {
 
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
-  return (window.innerWidth <= 1024) ? (85 + index * 16) : (160 + index * 12);
+  return (window.innerWidth <= 1024) ? (85 + index * 16) : (90 + index * 12);
 }
 
 // Navegación fluida por Scroll Stack
