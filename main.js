@@ -119,10 +119,10 @@ function initScrollStack() {
   updateStack();
 }
 
-// Telemetría en tiempo real desde Open-Meteo para Acassuso
+// Telemetría en tiempo real desde Open-Meteo para Acassuso (Ombú)
 async function fetchLiveWind() {
   try {
-    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4754&longitude=-58.4906&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh');
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m,wind_gusts_10m&wind_speed_unit=kmh');
     if (!res.ok) return;
     const data = await res.json();
     if (data && data.current) {
@@ -134,32 +134,46 @@ async function fetchLiveWind() {
 
       const speedEl = document.getElementById('heroWindSpeed');
       const knotsEl = document.getElementById('heroWindKnots');
-      const dirEl = document.getElementById('heroWindDir');
+      const dirTextEl = document.getElementById('heroWindDirText');
       const captionEl = document.getElementById('heroWindCaption');
+      const barEl = document.getElementById('heroWindBar');
 
       if (speedEl) speedEl.textContent = speedKm;
       if (knotsEl) knotsEl.textContent = `${knots} nudos`;
-      const dirTextEl = document.getElementById('heroWindDirText');
-      if (dirTextEl) {
-        dirTextEl.textContent = dirStr;
-      } else if (dirEl) {
-        dirEl.innerHTML = `<img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon"> <span id="heroWindDirText">${dirStr}</span>`;
-      }
+      if (dirTextEl) dirTextEl.textContent = dirStr;
 
-      const barEl = document.getElementById('heroWindBar');
       if (barEl) {
+        // Escala normalizada de 0 a 45 km/h
         const percent = Math.min(100, Math.max(12, Math.round((speedKm / 45) * 100)));
         barEl.style.width = `${percent}%`;
       }
 
-      if (captionEl) captionEl.textContent = 'Estimación Open-Meteo. Confirmá las condiciones con la escuela.';
+      if (captionEl) {
+        if (knots >= 14 && knots <= 26) {
+          captionEl.textContent = 'Condiciones óptimas para kitesurf y wingfoil';
+        } else if (knots >= 8 && knots < 14) {
+          captionEl.textContent = 'Viento moderado · Buenas condiciones de escuela';
+        } else if (knots < 8) {
+          captionEl.textContent = 'Viento suave · Ideal iniciación SUP y kayak';
+        } else {
+          captionEl.textContent = 'Viento fuerte · Solo navegantes avanzados';
+        }
+      }
     }
   } catch (err) {
-    console.warn("Fallback de telemetría meteorológica:", err);
+    console.warn("Telemetría meteorológica (modo fallback):", err);
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
   fetchLiveWind();
   initScrollStack();
-});
+  // Auto-actualizar viento en vivo cada 10 minutos
+  setInterval(fetchLiveWind, 10 * 60 * 1000);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}

@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --paper: #f9f3e9;
-  --white: #fff;
-  --ink: #1f1f13;
-  --orange: #ff5c2d;
-  --deep: #c4380f;
-  --line: rgba(31, 31, 19, .16);
+  --primary: #FF5206;
+  --dark: #231F20;
+  --white: #FEFEFE;
+  --light-1: #F6F6F6;
+  --light-2: #A4A5A9;
+  --shade: rgba(255, 82, 6, 0.10);
+
+  --paper: var(--white);
+  --ink: var(--dark);
+  --orange: var(--primary);
+  --deep: var(--primary);
+  --line: rgba(35, 31, 32, 0.12);
   --gutter: 32px;
   --page-margin: 160px;
   --section-space: 128px;
