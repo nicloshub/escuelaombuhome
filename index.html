@@ -24,16 +24,77 @@
 
       <nav id="main-navigation" aria-label="Navegación principal">
         <ul class="header-nav">
-          <li><a href="#disciplinas" onclick="switchSport('kitesurf')">Kitesurf</a></li>
-          <li><a href="#disciplinas" onclick="switchSport('windsurf')">Windsurf</a></li>
-          <li><a href="#disciplinas" onclick="switchSport('wingfoil')">Wingfoil</a></li>
-          <li><a href="#disciplinas" onclick="switchSport('sup')">SUP</a></li>
+          <li><a href="#disciplinas">Aprendizaje</a></li>
+          <li><a href="#kayaks">Alquileres</a></li>
+          <li><a href="#spot">El spot</a></li>
+          <li><a href="#instructores">Nosotros</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+              <span>Deportes</span>
+              <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/kitesurf/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C6.5 2 2 6 2 10c0 3 2.5 5.5 6 6.5L12 22l4-5.5c3.5-1 6-3.5 6-6.5 0-4-4.5-8-10-8z"/>
+                    <path d="M12 2v14.5"/>
+                  </svg>
+                </span>
+                <div class="dropdown-sport-text">
+                  <strong>Kitesurf</strong>
+                  <span>escuelaombu.com.ar/kitesurf</span>
+                </div>
+              </a>
+              <a href="/windsurf/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 21h16"/>
+                    <path d="M6 18L18 3v15H6z"/>
+                    <path d="M6 12h12"/>
+                  </svg>
+                </span>
+                <div class="dropdown-sport-text">
+                  <strong>Windsurf</strong>
+                  <span>escuelaombu.com.ar/windsurf</span>
+                </div>
+              </a>
+              <a href="/wingfoil/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 10c4-4 16-4 20 0-4 3-8 4-10 4s-6-1-10-4z"/>
+                    <path d="M12 14v7m-3 0h6"/>
+                  </svg>
+                </span>
+                <div class="dropdown-sport-text">
+                  <strong>Wingfoil</strong>
+                  <span>escuelaombu.com.ar/wingfoil</span>
+                </div>
+              </a>
+              <a href="/sup/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <ellipse cx="12" cy="12" rx="4" ry="9"/>
+                    <path d="M12 3v18"/>
+                    <path d="M8 21h8"/>
+                  </svg>
+                </span>
+                <div class="dropdown-sport-text">
+                  <strong>SUP Paddle</strong>
+                  <span>escuelaombu.com.ar/sup</span>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </nav>
 
       <div class="header-cta-wrap">
         <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="nav-btn-reserve" rel="noopener noreferrer">
-          Reservá tu clase
+          RESERVÁ TU CLASE
         </a>
       </div>
     </div>
@@ -43,96 +104,84 @@
     <!-- =========================================================
          HERO SECTION
          ========================================================= -->
-    <section class="hero-section">
+    <section class="hero-section" id="inicio">
       <div class="hero-bg-layer">
-        <img src="./assets/IMG_0319.JPG" alt="Escuela de Viento Ombú - Navegante junto al Río de la Plata">
+        <img src="/assets/optimized/escuela-deportes-nauticos-acassuso-960.webp" alt="Escuela de Viento Ombú - Navegante junto al Río de la Plata" width="960" height="640" srcset="/assets/optimized/escuela-deportes-nauticos-acassuso-480.webp 480w, /assets/optimized/escuela-deportes-nauticos-acassuso-960.webp 960w, /assets/optimized/escuela-deportes-nauticos-acassuso-1440.webp 1440w, /assets/optimized/escuela-deportes-nauticos-acassuso-1920.webp 1920w" sizes="100vw" fetchpriority="high" loading="eager" decoding="async">
       </div>
 
       <div class="container hero-content-wrap">
-        <!-- Top Row: Widget Condición del Río (izq) -->
-        <div class="hero-top-bar">
-          <div class="hero-top-left-box">
+        <!-- Parte Superior: Widget de telemetría en vivo (Cols 1-3) -->
+        <div class="hero-top-row">
+          <div class="hero-weather-col">
             <div class="hero-weather-card">
-              <div class="weather-status-row">
-                <span>CONDICIÓN DEL RÍO</span>
-                <div class="live-beacon-pill">
-                  <span class="beacon-dot"></span>
+              <div class="weather-header-stack">
+                <div class="weather-live-tag">
+                  <span class="weather-live-dot"></span>
                   <span>EN VIVO</span>
                 </div>
+                <div class="weather-title-label">CONDICIÓN DEL VIENTO</div>
               </div>
 
               <div class="weather-metric-row">
-                <span class="weather-speed-num" id="heroWindSpeed">24</span>
+                <span class="weather-speed-num" id="heroWindSpeed">17</span>
                 <div class="weather-speed-units">
                   <span class="speed-unit-kmh">KM/H</span>
-                  <span class="speed-unit-knots" id="heroWindKnots">13 nudos</span>
+                  <span class="speed-unit-knots" id="heroWindKnots">9 nudos</span>
                 </div>
                 <span class="weather-dir-badge" id="heroWindDir">
-                  <img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon">
-                  <span id="heroWindDirText">NE</span>
+                  <img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon" width="14" height="12" decoding="async">
+                  <span id="heroWindDirText">N</span>
                 </span>
               </div>
 
               <!-- Barra de progreso del viento estilo Figma -->
               <div class="weather-progress-bar-wrap">
-                <div class="weather-progress-bar-fill" id="heroWindBar" style="width: 65%;"></div>
+                <div class="weather-progress-bar-fill" id="heroWindBar" style="width: 45%;"></div>
               </div>
 
               <div class="weather-caption" id="heroWindCaption">
-                Condiciones favorables para navegar
+                Viento moderado · Buenas condiciones de escuela
               </div>
             </div>
-
-            <div class="hero-location-line">
-              <span>ACASSUSO · SAN ISIDRO</span>
-            </div>
           </div>
         </div>
 
-        <!-- Título Monumental de Ancho Completo -->
-        <div class="hero-headline-stage">
-          <h1 class="hero-giant-heading">
-            <span class="hero-title-solid">ESCUELA DE <span class="accent-orange">VIENTO</span></span>
-            <span class="hero-title-black">SOBRE EL RÍO.</span>
-          </h1>
-        </div>
-
-        <!-- Fila Inferior: Texto secundario y botones a la izq + Social proof a la der -->
-        <div class="hero-bottom-bar">
-          <div class="hero-bottom-left-box">
-            <p class="hero-bottom-subtext">
-              Kitesurf, windsurf, wingfoil y SUP con equipo incluido y acompañamiento profesional.
-            </p>
-            <div class="hero-actions-row">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange">
-                RESERVÁ TU CLASE
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
-              <a href="#disciplinas" class="btn-pill-dark">
-                VER DEPORTES
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
+        <!-- Parte Inferior: Bajada (Cols 9-12) + H1 Monumental -->
+        <div class="hero-bottom-area">
+          <div class="hero-bajada-row">
+            <div class="hero-bajada-col">
+              <span class="hero-bajada-tag">ESCUELA OMBÚ</span>
+              <p class="hero-bajada-text">
+                Clases y alquileres de Kitesurf, Windsurf, Wingfoil y SUP con la seguridad de 15 años de experiencia. Todo el equipamiento incluido para que empieces hoy mismo.
+              </p>
+              <div class="hero-actions-row">
+                <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange" rel="noopener noreferrer">
+                  RESERVÁ TU CLASE
+                  <div class="icon">
+                    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                    </svg>
+                  </div>
+                </a>
+                <a href="#disciplinas" class="hero-cta-sports">VER DEPORTES</a>
+              </div>
             </div>
           </div>
 
-          <div class="hero-bottom-right-box">
-            <div class="hero-social-proof-row">
-              <span class="proof-item"><strong>+1.200</strong> ALUMNOS</span>
-              <span class="proof-dot">·</span>
-              <span class="proof-item">EQUIPO INCLUIDO</span>
-              <span class="proof-dot">·</span>
-              <span class="proof-item">LANCHA DE APOYO</span>
-            </div>
+          <!-- H1 Monumental: Línea 1 (Cols 1-7) y Línea 2 (Cols 3-12) -->
+          <div class="hero-headline-wrap">
+            <h1 class="hero-giant-heading">
+              <span class="hero-title-line-1">
+                TU ESCUELA DE
+                <a href="#disciplinas" class="hero-title-badge" aria-label="Conocé los deportes">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M7 17L17 7M7 7h10v10"/>
+                  </svg>
+                </a>
+              </span>
+              <span class="hero-title-line-2">DEPORTES NAUTICOS</span>
+            </h1>
           </div>
         </div>
       </div>
@@ -144,13 +193,13 @@
     <section id="disciplinas" class="section-disciplinas">
       <div class="container">
         <div class="disciplinas-header">
-          <div>
+          <div class="disciplinas-title-group">
             <span class="section-label">// Deportes</span>
             <h2 class="display-title">Elegí tu disciplina</h2>
+            <p class="disciplinas-subtext">
+              Deslizá para recorrer cada deporte o elegí una pestaña para saltar a su ficha técnica.
+            </p>
           </div>
-          <p class="disciplinas-subtext">
-            Deslizá para recorrer cada deporte o elegí una pestaña para saltar a su ficha técnica.
-          </p>
         </div>
 
         <!-- Mini indicador flotante para móviles -->
@@ -407,7 +456,7 @@
          MOSAICO FOTOGRÁFICO & CITA MANIFIESTO
          ========================================================= -->
     <section class="section-mosaic-quote">
-      <div class="container mosaic-stage-grid">
+      <div class="mosaic-stage-grid">
         <!-- Columna Izquierda (2 fotos) -->
         <div class="mosaic-column-side">
           <div class="mosaic-card-thumb card-tl">
@@ -441,7 +490,7 @@
     <!-- =========================================================
          SECCIÓN: ALQUILER DE KAYAKS (BLOQUE OSCURO)
          ========================================================= -->
-    <section class="section-kayaks-dark">
+    <section class="section-kayaks-dark" id="kayaks">
       <div class="container">
         <div class="kayak-card-white">
           <div class="kayak-media">
@@ -523,61 +572,6 @@
     </section>
 
     <!-- =========================================================
-         BANNER DIVIDIDO: EL SPOT & CÁMARA EN VIVO
-         ========================================================= -->
-    <section id="spot" class="section-spot-split">
-      <div class="container">
-        <div class="spot-split-grid">
-          <!-- Tarjeta Naranja (Izquierda) -->
-          <div class="spot-orange-card">
-            <div>
-              <span class="spot-tag-white">// El Spot</span>
-              <h2 class="spot-card-title">Condición del río 24/7</h2>
-              <p class="spot-card-text">
-                Tenemos una cámara apuntando al río para que puedas elegir el mejor momento antes de venir.
-              </p>
-            </div>
-            <div>
-              <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="btn-pill-white">
-                VER CÁMARA EN VIVO
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <!-- Tarjeta con Foto del Río: Cámara en Vivo (Derecha) -->
-          <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="spot-dark-camera-card" aria-label="Ver cámara en vivo en YouTube">
-            <img src="./assets/fondorio.png" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img">
-            <div class="spot-camera-overlay"></div>
-
-            <div class="camera-header-row">
-              <div class="spot-live-pill">
-                <span class="spot-live-dot"></span>
-                <span>EN VIVO</span>
-              </div>
-              <div class="spot-yt-badge">
-                <svg width="15" height="11" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-                <span>YouTube</span>
-              </div>
-            </div>
-
-            <div class="camera-footer-info">
-              <strong class="camera-footer-title">Cámara del río, en directo</strong>
-              <p class="camera-footer-sub">Mirá vos mismo cómo está el agua antes de venir</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================
          SECCIÓN: LOS INSTRUCTORES
          ========================================================= -->
     <section class="section-instructores" id="instructores">
@@ -635,7 +629,7 @@
     <!-- =========================================================
          SECCIÓN: ESTAMOS JUNTO AL RÍO (MAPA Y CONTACTO)
          ========================================================= -->
-    <section class="section-ubicacion-mapa">
+    <section class="section-ubicacion-mapa" id="spot">
       <div class="container">
         <div class="mapa-card-white">
           <div class="mapa-view-pane">
@@ -687,6 +681,159 @@
                   <a href="https://wa.me/5491130041100" target="_blank" style="color:var(--text-dark); text-decoration:none; font-weight:700; font-size:14px;">
                     Reservá por WhatsApp
                   </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         BANNER DIVIDIDO: CÁMARA EN VIVO
+         ========================================================= -->
+    <section id="camara" class="section-spot-split">
+      <div class="container">
+        <div class="spot-split-grid">
+          <!-- Tarjeta Naranja (Izquierda) -->
+          <div class="spot-orange-card">
+            <div>
+              <span class="spot-tag-white">// El Spot</span>
+              <h2 class="spot-card-title">Condición del río 24/7</h2>
+              <p class="spot-card-text">
+                Tenemos una cámara apuntando al río para que puedas elegir el mejor momento antes de venir.
+              </p>
+            </div>
+            <div>
+              <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="btn-pill-white">
+                VER CÁMARA EN VIVO
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Tarjeta con Foto del Río: Cámara en Vivo (Derecha) -->
+          <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="spot-dark-camera-card" aria-label="Ver cámara en vivo en YouTube">
+            <img src="./assets/fondorio.png" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img">
+            <div class="spot-camera-overlay"></div>
+
+            <div class="camera-header-row">
+              <div class="spot-live-pill">
+                <span class="spot-live-dot"></span>
+                <span>EN VIVO</span>
+              </div>
+              <div class="spot-yt-badge">
+                <svg width="15" height="11" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <span>YouTube</span>
+              </div>
+            </div>
+
+            <div class="camera-footer-info">
+              <strong class="camera-footer-title">Cámara del río, en directo</strong>
+              <p class="camera-footer-sub">Mirá vos mismo cómo está el agua antes de venir</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECCIÓN: PREGUNTAS FRECUENTES (FAQ)
+         ========================================================= -->
+    <section class="section-faq" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="faq-title-wrap">
+          <span class="section-label">// Antes de empezar</span>
+          <h2 class="display-title" id="faq-title">Preguntas frecuentes</h2>
+        </div>
+        <div class="motion-accordion" data-accordion>
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-panel-0" id="faq-trigger-0">
+              <span class="motion-accordion-question">¿Soy muy grande para empezar?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">
+                <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-panel-0" role="region" aria-labelledby="faq-trigger-0">
+              <div class="motion-accordion-content">
+                <div class="motion-accordion-content-inner">
+                  <p>Podés empezar a la edad que tengas. Contanos cómo te sentís y qué deporte te interesa para acompañarte a tu ritmo.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-panel-1" id="faq-trigger-1">
+              <span class="motion-accordion-question">¿Necesito experiencia?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">
+                <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-panel-1" role="region" aria-labelledby="faq-trigger-1">
+              <div class="motion-accordion-content">
+                <div class="motion-accordion-content-inner">
+                  <p>No necesitás experiencia previa. Empezás de cero, con equipo incluido y acompañamiento del instructor.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-trigger-2">
+              <span class="motion-accordion-question">¿Qué llevo a mi primera clase?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">
+                <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-panel-2" role="region" aria-labelledby="faq-trigger-2">
+              <div class="motion-accordion-content">
+                <div class="motion-accordion-content-inner">
+                  <p>Traé ropa para mojarte, una muda seca, toalla, protector solar y agua. Cuando reserves, confirmamos con vos qué llevar según el deporte y las condiciones del día.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-trigger-3">
+              <span class="motion-accordion-question">¿El equipo está incluido?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">
+                <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-panel-3" role="region" aria-labelledby="faq-trigger-3">
+              <div class="motion-accordion-content">
+                <div class="motion-accordion-content-inner">
+                  <p>Sí. El equipo está incluido en las clases. Te explicamos cómo usarlo antes de entrar al agua.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-trigger-4">
+              <span class="motion-accordion-question">¿Cómo reservo y confirmo las condiciones?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">
+                <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-panel-4" role="region" aria-labelledby="faq-trigger-4">
+              <div class="motion-accordion-content">
+                <div class="motion-accordion-content-inner">
+                  <p>Escribinos por WhatsApp al +54 9 11 3004-1100. Coordinamos el deporte y el horario, y confirmamos las condiciones antes de la salida.</p>
                 </div>
               </div>
             </div>

@@ -48,7 +48,7 @@ const sportsData = {
 
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
-  return (window.innerWidth <= 1024) ? (85 + index * 16) : 205;
+  return (window.innerWidth <= 1024) ? (85 + index * 16) : 255;
 }
 
 // Navegación fluida por Scroll Stack
@@ -178,55 +178,104 @@ function initScrollStack() {
   updateStack();
 }
 
-// Telemetría en tiempo real desde Open-Meteo para Acassuso
+// Telemetría en tiempo real desde Open-Meteo para Acassuso (Ombú)
 async function fetchLiveWind() {
   try {
-    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4754&longitude=-58.4906&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh');
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m,wind_gusts_10m&wind_speed_unit=kmh');
     if (!res.ok) return;
     const data = await res.json();
     if (data && data.current) {
-      const speedKm = Math.round(data.current.wind_speed_10m || 24);
+      const speedKm = Math.round(data.current.wind_speed_10m ?? 0);
       const knots = Math.round(speedKm / 1.852);
-      const deg = Math.round(data.current.wind_direction_10m || 45);
+      const deg = Math.round(data.current.wind_direction_10m ?? 0);
       const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
       const dirStr = dirs[Math.round(deg / 45) % 8];
 
       const speedEl = document.getElementById('heroWindSpeed');
       const knotsEl = document.getElementById('heroWindKnots');
-      const dirEl = document.getElementById('heroWindDir');
+      const dirTextEl = document.getElementById('heroWindDirText');
       const captionEl = document.getElementById('heroWindCaption');
+      const barEl = document.getElementById('heroWindBar');
 
       if (speedEl) speedEl.textContent = speedKm;
       if (knotsEl) knotsEl.textContent = `${knots} nudos`;
-      const dirTextEl = document.getElementById('heroWindDirText');
-      if (dirTextEl) {
-        dirTextEl.textContent = dirStr;
-      } else if (dirEl) {
-        dirEl.innerHTML = `<img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon"> <span id="heroWindDirText">${dirStr}</span>`;
-      }
+      if (dirTextEl) dirTextEl.textContent = dirStr;
 
-      const barEl = document.getElementById('heroWindBar');
       if (barEl) {
+        // Escala normalizada de 0 a 45 km/h
         const percent = Math.min(100, Math.max(12, Math.round((speedKm / 45) * 100)));
         barEl.style.width = `${percent}%`;
       }
 
       if (captionEl) {
-        if (speedKm >= 18 && speedKm <= 36) {
-          captionEl.textContent = "Condiciones ideales para Kite y Wing";
-        } else if (speedKm > 36) {
-          captionEl.textContent = "Viento fuerte — solo navegantes avanzados";
+        if (knots >= 14 && knots <= 26) {
+          captionEl.textContent = 'Condiciones óptimas para kitesurf y wingfoil';
+        } else if (knots >= 8 && knots < 14) {
+          captionEl.textContent = 'Viento moderado · Buenas condiciones de escuela';
+        } else if (knots < 8) {
+          captionEl.textContent = 'Viento suave · Ideal iniciación SUP y kayak';
         } else {
-          captionEl.textContent = "Viento calmo — ideal para SUP e iniciación";
+          captionEl.textContent = 'Viento fuerte · Solo navegantes avanzados';
         }
       }
     }
   } catch (err) {
-    console.warn("Fallback de telemetría meteorológica:", err);
+    console.warn("Telemetría meteorológica (modo fallback):", err);
   }
+}
+
+// Acordeón interactivo de Preguntas Frecuentes (FAQ)
+function initAccordion() {
+  document.querySelectorAll('[data-accordion]').forEach(acc => {
+    acc.addEventListener('click', event => {
+      const trigger = event.target.closest('.motion-accordion-trigger');
+      if (!trigger) return;
+      const item = trigger.closest('.motion-accordion-item');
+      if (!item) return;
+      const wasOpen = item.classList.contains('is-open');
+
+      acc.querySelectorAll('.motion-accordion-item').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('is-open');
+          other.querySelector('.motion-accordion-trigger')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (wasOpen) {
+        item.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}
+
+// Menú desplegable accesible para "Deportes" en Navbar
+function initDropdown() {
+  const dropdown = document.querySelector('.nav-dropdown');
+  const trigger = document.querySelector('.nav-dropdown-trigger');
+  if (!dropdown || !trigger) return;
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
+  initAccordion();
+  initDropdown();
+  setInterval(fetchLiveWind, 10 * 60 * 1000);
 });
