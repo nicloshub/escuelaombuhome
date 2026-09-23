@@ -507,6 +507,136 @@ header.site-header {
   box-shadow: 0 4px 16px rgba(35, 31, 32, 0.32);
 }
 
+/* Botón de Menú Móvil */
+.mobile-menu-btn {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--light-1);
+  border: 1px solid rgba(35, 31, 32, 0.12);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0;
+  transition: background-color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+
+.mobile-menu-btn:hover {
+  background: #EFEFEF;
+}
+
+.hamburger-bar {
+  width: 16px;
+  height: 2px;
+  background-color: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s, width 0.2s;
+}
+
+.mobile-menu-btn.is-active .hamburger-bar:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.mobile-menu-btn.is-active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.mobile-menu-btn.is-active .hamburger-bar:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile Nav Drawer */
+.mobile-nav-drawer {
+  display: none;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.3s ease;
+  opacity: 0;
+}
+
+.mobile-nav-drawer.is-open {
+  max-height: 520px;
+  opacity: 1;
+  padding-top: 14px;
+  border-top: 1px solid rgba(35, 31, 32, 0.08);
+  margin-top: 10px;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:active {
+  background-color: var(--light-1);
+  color: var(--orange);
+}
+
+.mobile-nav-divider {
+  height: 1px;
+  background-color: rgba(35, 31, 32, 0.08);
+  margin: 6px 0;
+}
+
+.mobile-nav-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 14px 2px;
+}
+
+.mobile-sports-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 4px 6px;
+}
+
+.mobile-sport-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  background: var(--light-1);
+  border: 1px solid rgba(35, 31, 32, 0.06);
+  border-radius: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.18s, color 0.18s;
+}
+
+.mobile-sport-pill:hover,
+.mobile-sport-pill:active {
+  background: var(--orange);
+  color: #FFFFFF;
+}
+
 /* =========================================================
    HERO SECTION
    ========================================================= */
@@ -2247,21 +2377,56 @@ header.site-header {
 }
 
 /* =========================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN COMPLETO & PULIDO
    ========================================================= */
+
+/* --- TABLETS & PANTALLAS MEDIANAS (max-width: 1024px) --- */
 @media (max-width: 1024px) {
-  .hero-bajada-row { display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
-  .hero-bajada-col { grid-column: auto; max-width: 100%; }
-  .hero-title-line-2 { padding-left: 0; }
+  /* Header & Navegación */
+  .header-nav { display: none; }
+  .mobile-menu-btn { display: inline-flex; }
+  .mobile-nav-drawer { display: block; }
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-cta-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  header.site-header.menu-open {
+    border-radius: 24px;
+    background: rgba(254, 254, 254, 0.98);
+    box-shadow: 0 16px 40px rgba(35, 31, 32, 0.16);
+  }
+
+  /* Hero */
+  .hero-bajada-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .hero-bajada-col {
+    grid-column: auto;
+    max-width: 100%;
+  }
+  .hero-title-line-2 {
+    padding-left: 0;
+  }
+
+  /* Disciplinas */
   .disciplinas-header { position: static; }
   .disciplinas-stack-layout { grid-template-columns: 1fr; }
   .disciplinas-side-rail { display: none; }
   .mobile-stack-counter { display: inline-flex; }
   .sport-card-stage { grid-template-columns: 1fr; }
-  .sport-media-box { height: 320px; }
+  .sport-media-box { height: 300px; }
   .scroll-stack-card { top: calc(85px + var(--card-index, 0) * 16px); margin-bottom: 25vh; }
-  .mosaic-stage-grid { grid-template-columns: 1fr; gap: 40px; }
-  .mosaic-column-side { flex-direction: row; justify-content: center; }
+
+  /* Secciones intermedias */
   .kayak-card-white { grid-template-columns: 1fr; }
   .objetivo-grid { grid-template-columns: 1fr; gap: 40px; }
   .instructores-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2271,45 +2436,378 @@ header.site-header {
   .footer-top-columns { grid-template-columns: 1fr 1fr; }
 }
 
+/* --- MOBILE GENERAL (max-width: 768px) --- */
 @media (max-width: 768px) {
+  /* Contenedor & Header */
+  .container { padding: 0 18px; }
   header.site-header {
-    width: calc(100% - 32px);
-    top: 12px;
-    padding: 6px 14px;
+    width: calc(100% - 24px);
+    top: 10px;
+    padding: 6px 12px;
   }
-  .header-inner { min-height: auto; }
-  .header-nav { display: none; }
-  .container { padding: 0 20px; }
-  .hero-content-wrap { padding-top: 85px; }
+  .nav-btn-reserve {
+    font-size: 11.5px;
+    padding: 9px 16px;
+    letter-spacing: 0.03em;
+  }
+  .mobile-menu-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Hero */
+  .hero-content-wrap {
+    padding-top: 76px;
+    padding-bottom: 20px;
+    min-height: calc(100vh - 40px);
+  }
   .hero-weather-col { max-width: 100%; }
   .hero-weather-card { max-width: 100%; }
-  .hero-giant-heading { font-size: clamp(2.6rem, 11vw, 4.4rem); line-height: 0.92; gap: 6px; }
-  .hero-title-line-1, .hero-title-line-2 { white-space: normal; }
+  .hero-giant-heading {
+    font-size: clamp(2.4rem, 10vw, 4.2rem);
+    line-height: 0.92;
+    gap: 6px;
+  }
+  .hero-title-line-1,
+  .hero-title-line-2 {
+    white-space: normal;
+  }
   .hero-title-line-2 { padding-left: 0; }
-  .hero-actions-row { width: 100%; flex-direction: column; align-items: stretch; }
+  .hero-bajada-col {
+    padding: 20px 18px;
+    border-radius: 18px;
+    gap: 12px;
+  }
+  .hero-actions-row {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
   .hero-actions-row .btn-pill-orange,
-  .hero-actions-row .hero-cta-sports { width: 100%; text-align: center; justify-content: center; }
-  .scroll-stack-card { top: calc(75px + var(--card-index, 0) * 12px); margin-bottom: 20vh; }
-  .sport-card-stage { padding: 20px; border-radius: 16px; gap: 18px; }
-  .sport-media-box { height: 220px; }
-  .sport-title-giant { font-size: 30px; }
-  .instructores-grid { grid-template-columns: 1fr; }
-  .reviews-masonry-grid { grid-template-columns: 1fr; }
-  .prefooter-flex-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .hero-actions-row .hero-cta-sports {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    height: 46px;
+  }
+
+  /* Disciplinas */
+  .section-disciplinas {
+    padding: 30px 0 50px;
+  }
+  .disciplinas-title-group h2 {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+  .scroll-stack-card {
+    top: calc(75px + var(--card-index, 0) * 12px);
+    margin-bottom: 12vh;
+  }
+  .sport-card-stage {
+    padding: 20px 18px;
+    border-radius: 16px;
+    gap: 16px;
+  }
+  .sport-media-box {
+    height: 210px;
+    border-radius: 10px;
+  }
+  .sport-title-giant {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  .sport-desc-text {
+    font-size: 14px;
+    margin-bottom: 16px;
+    line-height: 1.55;
+  }
+  .sport-specs-grid {
+    gap: 14px 16px;
+    margin-block: 16px;
+  }
+  .sport-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding-top: 16px;
+  }
+  .sport-price-wrap {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .sport-cta-row .btn-pill-orange {
+    width: 100%;
+    justify-content: center;
+    height: 44px;
+  }
+
+  /* Kayaks & SUP Alquileres */
+  .section-kayaks-dark {
+    padding: 64px 0;
+  }
+  .kayak-media {
+    min-height: 220px;
+    height: 220px;
+  }
+  .kayak-content {
+    padding: 28px 20px;
+  }
+  .kayak-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .kayak-text {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  .kayak-features {
+    margin-bottom: 24px;
+    gap: 6px;
+  }
+  .kayak-content .btn-pill-orange {
+    width: 100%;
+    justify-content: center;
+    height: 44px;
+  }
+
+  /* Filosofía / Objetivo */
+  .section-objetivo {
+    padding: 64px 0;
+  }
+  .objetivo-grid {
+    gap: 32px;
+  }
+  .objetivo-headline {
+    font-size: clamp(2.2rem, 8.5vw, 3.4rem);
+    line-height: 0.98;
+  }
+  .objetivo-lead-p {
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .benefits {
+    margin-top: 24px;
+  }
+  .benefit {
+    padding-block: 16px;
+    gap: 14px;
+  }
+  .benefit strong {
+    font-size: 15px;
+  }
+  .benefit p {
+    font-size: 13px;
+  }
+
+  /* Instructores */
+  .section-instructores {
+    padding: 0 0 64px;
+  }
+  .instructores-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .instructores-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .instructor-photo {
+    height: 280px;
+  }
+
+  /* Mapa */
+  .section-ubicacion-mapa {
+    padding: 64px 0;
+  }
+  .mapa-view-pane {
+    min-height: 240px;
+    height: 240px;
+  }
+  .mapa-info-pane {
+    padding: 32px 20px;
+  }
+  .mapa-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  .mapa-items-list {
+    gap: 18px;
+  }
+
+  /* Spot Cámara en Vivo */
+  .section-spot-split {
+    padding: 64px 0;
+  }
+  .spot-orange-card {
+    padding: 36px 24px;
+  }
+  .spot-card-title {
+    font-size: clamp(2rem, 7.5vw, 2.6rem);
+    margin-bottom: 14px;
+  }
+  .spot-card-text {
+    font-size: 14.5px;
+    margin-bottom: 28px;
+  }
+  .spot-orange-card .btn-pill-white {
+    width: 100%;
+    justify-content: center;
+  }
+  .spot-dark-camera-card {
+    padding: 24px 20px;
+    min-height: 260px;
+  }
+
+  /* FAQ */
+  .section-faq {
+    padding: 64px 0 72px;
+  }
+  .faq-title-wrap {
+    margin-bottom: 24px;
+  }
+  .faq-title-wrap h2 {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+  .motion-accordion {
+    margin-top: 24px;
+    gap: 10px;
+  }
+  .motion-accordion-trigger {
+    padding: 16px 18px;
+    gap: 12px;
+    border-radius: 18px;
+  }
+  .motion-accordion-question {
+    font-size: 14.5px;
+  }
+  .motion-accordion-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .motion-accordion-content-inner {
+    padding: 0 18px 18px 18px;
+  }
+  .motion-accordion-content-inner p {
+    font-size: 14px;
+  }
+
+  /* Reseñas */
+  .section-alumnos-reviews {
+    padding: 60px 0 40px;
+  }
+  .reviews-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .reviews-masonry-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .review-cell-card {
+    padding: 18px 16px;
+  }
+
+  /* Prefooter CTA */
+  .section-prefooter-banner {
+    padding: 36px 0 48px;
+  }
+  .prefooter-flex-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .prefooter-heading {
+    font-size: clamp(2.2rem, 9.5vw, 3.4rem);
+  }
+  .prefooter-flex-row .btn-pill-orange {
+    width: 100%;
+    justify-content: center;
+    height: 48px;
+  }
+
+  /* Footer */
+  .site-footer-wrapper {
+    padding: 16px 0 36px;
+  }
   .footer-floating-card {
-    padding: 36px 24px 0 24px;
+    padding: 36px 20px 0 20px;
     border-radius: 20px;
   }
-  .footer-top-columns { grid-template-columns: 1fr; gap: 32px; }
+  .footer-top-columns {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+  .footer-brand-p {
+    max-width: 100%;
+  }
   .footer-sub-row {
     flex-direction: column;
-    gap: 18px;
+    gap: 16px;
     text-align: center;
+    padding: 20px 0;
+  }
+  .footer-social-icons {
+    justify-content: center;
   }
   .footer-horizontal-logo-wrap {
     width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: -20px;
+    margin-top: 14px;
+    margin-bottom: -16px;
+  }
+}
+
+/* --- TELÉFONOS CHICOS (max-width: 480px) --- */
+@media (max-width: 480px) {
+  .container { padding: 0 14px; }
+  header.site-header {
+    width: calc(100% - 16px);
+    top: 8px;
+    padding: 5px 10px;
+  }
+  .brand-disc-img {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-btn-reserve {
+    font-size: 10.5px;
+    padding: 7px 12px;
+    letter-spacing: 0.02em;
+  }
+  .mobile-menu-btn {
+    width: 32px;
+    height: 32px;
+  }
+  .hero-giant-heading {
+    font-size: clamp(2.1rem, 10.5vw, 2.7rem);
+  }
+  .hero-bajada-col {
+    padding: 16px 14px;
+  }
+  .hero-bajada-text {
+    font-size: 13px;
+  }
+  .sport-card-stage {
+    padding: 16px 14px;
+  }
+  .sport-media-box {
+    height: 180px;
+  }
+  .sport-title-giant {
+    font-size: 24px;
+  }
+  .kayak-content,
+  .mapa-info-pane,
+  .spot-orange-card,
+  .spot-dark-camera-card {
+    padding: 20px 14px;
+  }
+  .footer-floating-card {
+    padding: 28px 16px 0 16px;
   }
 }

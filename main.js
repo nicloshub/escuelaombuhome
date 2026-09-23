@@ -48,7 +48,12 @@ const sportsData = {
 
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
-  return (window.innerWidth <= 1024) ? (85 + index * 16) : 255;
+  if (window.innerWidth <= 768) {
+    return 75 + index * 12;
+  } else if (window.innerWidth <= 1024) {
+    return 85 + index * 16;
+  }
+  return 255;
 }
 
 // Navegación fluida por Scroll Stack
@@ -272,10 +277,55 @@ function initDropdown() {
   });
 }
 
+// Menú hamburguesa móvil / tablet
+function initMobileMenu() {
+  const btn = document.getElementById('mobileMenuBtn');
+  const drawer = document.getElementById('mobileNavDrawer');
+  const header = document.querySelector('header.site-header');
+  if (!btn || !drawer || !header) return;
+
+  function toggleMenu(forceClose = false) {
+    const shouldOpen = forceClose ? false : !drawer.classList.contains('is-open');
+    drawer.classList.toggle('is-open', shouldOpen);
+    btn.classList.toggle('is-active', shouldOpen);
+    header.classList.toggle('menu-open', shouldOpen);
+    btn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleMenu();
+  });
+
+  // Cerrar al hacer clic en cualquier enlace interno
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggleMenu(true);
+    });
+  });
+
+  // Cerrar al hacer clic afuera
+  document.addEventListener('click', (e) => {
+    if (!header.contains(e.target)) {
+      toggleMenu(true);
+    }
+  });
+
+  // Cerrar con tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+      toggleMenu(true);
+      btn.focus();
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
   initAccordion();
   initDropdown();
+  initMobileMenu();
   setInterval(fetchLiveWind, 10 * 60 * 1000);
 });
