@@ -3,7 +3,7 @@ const sportsData = {
   kitesurf: {
     title: "KITESURF",
     desc: "Deslizamiento veloz y sensación de vuelo propulsado por cometa y arnés. Te enseñamos a dominar la ventana de viento en tierra, el control del cuerpo en agua y la navegación autónoma ceñida.",
-    image: "./assets/sport-kitesurf-figma.jpg",
+    image: "./assets/deporte-kitesurf.jpg",
     curve: "6 a 8 clases (autonomía)",
     gear: "100% provisto por Ombú",
     comm: "Radiocasco VHF en el agua",
@@ -14,7 +14,7 @@ const sportsData = {
   wingfoil: {
     title: "WINGFOIL",
     desc: "Un ala inflable ultraliviana en tus manos y un foil bajo la tabla que te eleva 80 cm sobre el agua. Sensación de vuelo silencioso y suave, sin impacto contra el oleaje del río.",
-    image: "./assets/wingfoil.jpg",
+    image: "./assets/deporte-wingfoil.jpg",
     curve: "Rápida en vela / Técnica en foil",
     gear: "Ala, tabla foil, chaleco y casco",
     comm: "Radiocasco VHF en el agua",
@@ -25,7 +25,7 @@ const sportsData = {
   windsurf: {
     title: "WINDSURF",
     desc: "La escuela madre de la navegación a vela. Sentí la fuerza pura del viento en tus manos y disfrutá el planeo con tablas anchas modernas diseñadas para aprender desde la primera sesión.",
-    image: "./assets/windsurf.jpg",
+    image: "./assets/deporte-windsurf.jpg",
     curve: "Inmediata desde 1ra clase",
     gear: "Vela liviana y tabla de escuela",
     comm: "Radiocasco VHF en el agua",
@@ -36,7 +36,7 @@ const sportsData = {
   sup: {
     title: "SUP PADDLE",
     desc: "Remo de pie sobre tabla touring. Sin depender del viento. Perfecto para entrenar el equilibrio, desconectar después del trabajo y disfrutar de travesías grupales guiadas al atardecer.",
-    image: "./assets/sup.jpg",
+    image: "./assets/deporte-sup.jpg",
     curve: "Sin experiencia previa",
     gear: "Tabla touring, remo y chaleco",
     comm: "Guía e instructor en grupo",
@@ -48,10 +48,12 @@ const sportsData = {
 
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
-  if (window.innerWidth <= 768) {
-    return 75 + index * 12;
+  if (window.innerWidth <= 480) {
+    return 122 + index * 6;
+  } else if (window.innerWidth <= 768) {
+    return 132 + index * 8;
   } else if (window.innerWidth <= 1024) {
-    return 85 + index * 16;
+    return 185 + index * 10;
   }
   return 255;
 }
@@ -151,8 +153,8 @@ function initScrollStack() {
       mobileCounter.textContent = `0${activeIndex + 1} / 04 · ${sportNames[activeIndex] || ''}`;
     }
 
-    // Coordinar salida con la última card para que el título suba al mismo tiempo y nunca pase por detrás
-    if (isDesktop && disciplinasHeader && stackCards.length > 0) {
+    // Coordinar salida con la última card para que el título y el pill suban al mismo tiempo y nunca pasen por detrás
+    if (disciplinasHeader && stackCards.length > 0) {
       const lastCard = stackCards[stackCards.length - 1];
       const lastRect = lastCard.getBoundingClientRect();
       const pinTop = getCardPinTop(stackCards.length - 1);
@@ -174,6 +176,13 @@ function initScrollStack() {
   }
 
   window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateStack);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
     if (!ticking) {
       window.requestAnimationFrame(updateStack);
       ticking = true;
@@ -321,9 +330,118 @@ function initMobileMenu() {
   });
 }
 
+// Slider interactivo de la tarjeta de alquileres (Kayaks, SUP, Windsurf)
+function initKayakSlider() {
+  const slider = document.getElementById('kayakSlider');
+  if (!slider) return;
+
+  const slides = slider.querySelectorAll('.kayak-slide');
+  const dots = slider.querySelectorAll('.kayak-dot');
+  const prevBtn = slider.querySelector('.kayak-slider-arrow.prev');
+  const nextBtn = slider.querySelector('.kayak-slider-arrow.next');
+
+  if (!slides.length || !dots.length) return;
+
+  let currentIndex = 0;
+  let timer = null;
+  const intervalTime = 4200;
+
+  function goToSlide(index) {
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      const isActive = i === currentIndex;
+      slide.classList.toggle('is-active', isActive);
+      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+    });
+
+    dots.forEach((dot, i) => {
+      const isActive = i === currentIndex;
+      dot.classList.toggle('is-active', isActive);
+      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  }
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    timer = setInterval(nextSlide, intervalTime);
+  }
+
+  function stopAutoplay() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  // Clic en los 3 puntitos
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetIndex = parseInt(dot.getAttribute('data-slide'), 10);
+      goToSlide(targetIndex);
+      startAutoplay();
+    });
+  });
+
+  // Flechas de navegación
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      prevSlide();
+      startAutoplay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      nextSlide();
+      startAutoplay();
+    });
+  }
+
+  // Pausar en hover en desktop
+  slider.addEventListener('mouseenter', stopAutoplay);
+  slider.addEventListener('mouseleave', startAutoplay);
+
+  // Soporte táctil / swipe en móviles
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slider.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    stopAutoplay();
+  }, { passive: true });
+
+  slider.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    startAutoplay();
+  }, { passive: true });
+
+  startAutoplay();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
+  initKayakSlider();
   initAccordion();
   initDropdown();
   initMobileMenu();

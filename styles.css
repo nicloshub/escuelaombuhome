@@ -116,60 +116,71 @@ h1, h2, h3, h4, .display-title {
 }
 
 /* =========================================================
-   BOTONES ESTILO UIVERSE (PERFECT-GOAT-80)
+   BOTONES ESTILO UIVERSE (PERFECT-GOAT-80) - 100% CONCÉNTRICOS
    ========================================================= */
 .btn-pill-dark,
 .btn-pill-orange,
 .btn-pill-white {
+  --btn-h: 46px;
+  --btn-icon-size: 34px;
+  --btn-gap: calc((var(--btn-h) - var(--btn-icon-size)) / 2);
+
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  border-radius: 2rem;
+  border-radius: 100px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
-  height: 2.85em;
+  height: var(--btn-h);
+  min-height: var(--btn-h);
   padding-left: 1.4rem;
-  padding-right: 3.3em;
+  padding-right: calc(var(--btn-icon-size) + var(--btn-gap) * 2 + 10px);
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
+  box-sizing: border-box;
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
-/* Contenedor circular del icono */
+/* Contenedor circular del icono: 100% concéntrico con el semicírculo derecho */
 .btn-pill-dark .icon,
 .btn-pill-orange .icon,
 .btn-pill-white .icon {
   position: absolute;
-  right: 0.35em;
+  top: var(--btn-gap);
+  right: var(--btn-gap);
+  width: var(--btn-icon-size);
+  height: var(--btn-icon-size);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.2em;
-  width: 2.2em;
-  border-radius: 2rem;
+  box-sizing: border-box;
   transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s ease;
-  will-change: width, transform;
+  will-change: transform;
 }
 
 .btn-pill-dark .icon svg,
 .btn-pill-orange .icon svg,
 .btn-pill-white .icon svg {
-  width: 1.15em;
-  height: 1.15em;
-  transition: transform 0.3s ease-out;
+  width: calc(var(--btn-icon-size) * 0.50);
+  height: calc(var(--btn-icon-size) * 0.50);
+  display: block;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
 .btn-pill-dark:hover .icon svg,
 .btn-pill-orange:hover .icon svg,
 .btn-pill-white:hover .icon svg {
-  transform: translateX(0.1em) rotate(-25deg);
+  transform: rotate(-35deg);
 }
 
 .btn-pill-dark:active .icon,
@@ -382,7 +393,7 @@ header.site-header {
   top: calc(100% + 14px);
   left: 50%;
   transform: translateX(-50%) translateY(8px);
-  min-width: 250px;
+  min-width: 185px;
   background: #FFFFFF;
   border-radius: 18px;
   border: 1px solid rgba(35, 31, 32, 0.08);
@@ -449,23 +460,17 @@ header.site-header {
   transform: scale(1.06);
 }
 
-.dropdown-sport-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.dropdown-sport-text strong {
-  font-size: 13.5px;
+.dropdown-sport-name {
+  font-family: var(--font-body);
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
   line-height: 1.2;
+  transition: color 0.18s ease;
 }
 
-.dropdown-sport-text span {
-  font-size: 10.5px;
-  color: var(--text-muted);
-  line-height: 1.2;
+.dropdown-sport-item:hover .dropdown-sport-name {
+  color: var(--orange);
 }
 
 .header-cta-wrap,
@@ -662,17 +667,21 @@ header.site-header {
   z-index: 1;
   pointer-events: none;
 }
-.hero-bg-layer img {
+.hero-bg-layer img,
+.hero-bg-layer video,
+.hero-bg-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   filter: saturate(0.96) contrast(1.02);
+  display: block;
 }
 .hero-bg-layer::after {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: linear-gradient(
     180deg,
     rgba(254, 254, 254, 0.05) 0%,
@@ -680,6 +689,7 @@ header.site-header {
     rgba(254, 254, 254, 0.72) 65%,
     #FEFEFE 92%
   );
+  pointer-events: none;
 }
 
 /* Contenedor principal de contenido del Hero */
@@ -714,9 +724,8 @@ header.site-header {
 }
 
 .hero-bajada-row {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: 24px;
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
   margin-bottom: clamp(48px, 6.5vh, 75px);
   position: relative;
@@ -724,28 +733,18 @@ header.site-header {
 }
 
 .hero-bajada-col {
-  grid-column: 9 / span 4;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 460px;
-  background: rgba(254, 254, 254, 0.68);
+  gap: 16px;
+  width: fit-content;
+  max-width: 450px;
+  background: rgba(254, 254, 254, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-radius: 20px;
   padding: 22px 24px;
   border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 12px 32px rgba(35, 31, 32, 0.06);
-}
-
-.hero-bajada-tag {
-  font-family: var(--font-body);
-  font-size: clamp(17px, 1.25vw, 20px);
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: #151213;
-  line-height: 1.15;
 }
 
 .hero-bajada-text {
@@ -765,16 +764,11 @@ header.site-header {
 }
 
 .hero-actions-row .btn-pill-orange {
-  height: 44px;
-  min-height: 44px;
+  --btn-h: 44px;
+  --btn-icon-size: 32px;
   font-size: 13px;
   padding-left: 1.3rem;
-  padding-right: 3.1em;
-  letter-spacing: 0.04em;
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .hero-cta-sports {
@@ -783,22 +777,21 @@ header.site-header {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border-radius: 2rem;
+  border-radius: 100px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 44px;
   min-height: 44px;
-  padding: 0 1.4rem;
-  cursor: pointer;
+  padding: 0 1.5rem;
+  color: var(--ink);
+  background-color: transparent;
+  border: 1.5px solid var(--ink);
   text-decoration: none;
   white-space: nowrap;
-  background-color: transparent;
-  color: var(--ink);
-  border: 1.5px solid var(--ink);
   flex-shrink: 0;
   line-height: 1;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
 
 .hero-cta-sports:hover {
@@ -1016,7 +1009,7 @@ header.site-header {
    SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
    ========================================================= */
 .section-disciplinas {
-  padding: 40px 0 60px;
+  padding: 40px 0 0;
   position: relative;
   scroll-margin-top: 88px;
 }
@@ -1168,14 +1161,14 @@ header.site-header {
 .scroll-stack-card {
   position: sticky;
   top: 255px;
-  margin-bottom: 40vh;
+  margin-bottom: 24vh;
   width: 100%;
   transform-origin: top center;
   z-index: calc(10 + var(--card-index, 0));
   will-change: opacity, transform, filter;
 }
 .scroll-stack-card:last-child {
-  margin-bottom: 0;
+  margin-bottom: 26vh;
 }
 
 /* Tarjeta Principal de Deporte */
@@ -1303,87 +1296,57 @@ header.site-header {
 }
 
 /* =========================================================
-   MOSAICO FOTOGRÁFICO & CITA MANIFIESTO
+   CITA MANIFIESTO & SLIDER FOTOGRÁFICO
    ========================================================= */
 .section-mosaic-quote {
-  padding: 100px 0 150px;
+  padding: 40px 0 80px;
   position: relative;
   overflow: hidden;
   width: 100%;
 }
 
-.mosaic-stage-grid {
-  display: grid;
-  grid-template-columns: 240px 1fr 240px;
-  gap: clamp(20px, 3.5vw, 56px);
+.mosaic-stage-wrap {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  max-width: 1640px;
+  gap: 48px;
+  max-width: 1340px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 3.5vw, 64px);
+  padding: 0 32px;
   width: 100%;
 }
 
-.mosaic-column-side {
-  display: flex;
-  flex-direction: column;
-  gap: 52px;
+.mosaic-center-quote {
+  text-align: center;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.mosaic-slider-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
 }
 
 .mosaic-card-thumb {
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 14px 32px rgba(35, 31, 32, 0.12);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  box-shadow: 0 10px 24px rgba(35, 31, 32, 0.08);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
   will-change: transform;
 }
 
 .mosaic-card-thumb img {
   width: 100%;
-  height: 185px;
+  height: 220px;
   object-fit: cover;
   display: block;
 }
 
-/* Inclinación y desplazamientos orgánicos hacia los costados */
-.mosaic-card-thumb.card-tl {
-  transform: rotate(8deg) translateX(-18px);
-}
-
-.mosaic-card-thumb.card-bl {
-  transform: rotate(-10deg) translate(-28px, 10px);
-}
-
-.mosaic-card-thumb.card-tr {
-  transform: rotate(-5deg) translate(18px, -12px);
-}
-
-.mosaic-card-thumb.card-br {
-  transform: rotate(-8deg) translate(28px, 8px);
-}
-
-/* Efecto hover interactivo */
-.mosaic-card-thumb.card-tl:hover {
-  transform: rotate(3deg) scale(1.06) translateX(-18px);
-  box-shadow: 0 22px 44px rgba(35, 31, 32, 0.20);
-  z-index: 5;
-}
-
-.mosaic-card-thumb.card-bl:hover {
-  transform: rotate(-5deg) scale(1.06) translate(-28px, 6px);
-  box-shadow: 0 22px 44px rgba(35, 31, 32, 0.20);
-  z-index: 5;
-}
-
-.mosaic-card-thumb.card-tr:hover {
-  transform: rotate(-2deg) scale(1.06) translate(18px, -6px);
-  box-shadow: 0 22px 44px rgba(35, 31, 32, 0.20);
-  z-index: 5;
-}
-
-.mosaic-card-thumb.card-br:hover {
-  transform: rotate(-4deg) scale(1.06) translate(28px, 4px);
-  box-shadow: 0 22px 44px rgba(35, 31, 32, 0.20);
-  z-index: 5;
+.mosaic-card-thumb:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(35, 31, 32, 0.16);
 }
 
 .mosaic-center-quote {
@@ -1404,7 +1367,7 @@ header.site-header {
 
   /* Capa 1: textura arriba | Capa 2: color sólido abajo */
   background-image: 
-    url('./assets/mascara1.png'), 
+    url('./assets/mascara-borde.png'), 
     linear-gradient(var(--orange), var(--orange));
   
   background-size: cover;
@@ -1444,14 +1407,124 @@ header.site-header {
 }
 
 .kayak-media {
+  position: relative;
   height: 100%;
   min-height: 448px;
+  overflow: hidden;
+  background-color: #121212;
 }
-.kayak-media img {
+
+.kayak-slider-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.kayak-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+.kayak-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.kayak-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Indicadores: 3 puntitos en el centro abajo */
+.kayak-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  background: rgba(18, 18, 18, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+.kayak-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.kayak-dot:hover {
+  background-color: #FFFFFF;
+}
+
+.kayak-dot.is-active {
+  width: 22px;
+  border-radius: 100px;
+  background-color: var(--orange);
+}
+
+/* Flechas de navegación para desktop */
+.kayak-slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(35, 31, 32, 0.08);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.2s ease, background-color 0.2s, color 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.kayak-slider-arrow.prev {
+  left: 16px;
+}
+
+.kayak-slider-arrow.next {
+  right: 16px;
+}
+
+.kayak-media:hover .kayak-slider-arrow {
+  opacity: 1;
+}
+
+.kayak-slider-arrow:hover {
+  background-color: #FFFFFF;
+  color: var(--orange);
+  transform: translateY(-50%) scale(1.08);
 }
 
 .kayak-content {
@@ -1581,9 +1654,29 @@ header.site-header {
 
 .instructores-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 40px;
+}
+
+.instructores-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 580px;
+}
+
+.instructores-title-group .section-label {
+  margin-bottom: 8px;
+}
+
+.instructores-subtext {
+  max-width: 520px;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.45;
+  opacity: 0.82;
+  margin-top: 8px;
 }
 
 .instructores-grid {
@@ -1937,7 +2030,8 @@ header.site-header {
 }
 
 .motion-accordion {
-  max-width: 880px;
+  width: 100%;
+  max-width: 100%;
   margin-top: 36px;
   display: flex;
   flex-direction: column;
@@ -2080,7 +2174,7 @@ header.site-header {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), url('./assets/optimized/navegacion-kitesurf-rio-de-la-plata-1920.webp');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)), url('./assets/fondo-parallax.webp');
   background-size: cover;
   background-position: center bottom;
   background-attachment: fixed;
@@ -2097,11 +2191,11 @@ header.site-header {
   background: linear-gradient(
     to bottom,
     var(--paper) 0%,
-    var(--paper) 45%,
-    rgba(254, 254, 254, 0.95) 54%,
-    rgba(254, 254, 254, 0.65) 64%,
-    rgba(254, 254, 254, 0.20) 74%,
-    transparent 84%
+    var(--paper) 25%,
+    rgba(254, 254, 254, 0.95) 45%,
+    rgba(254, 254, 254, 0.60) 65%,
+    rgba(254, 254, 254, 0.15) 80%,
+    transparent 94%
   );
 }
 
@@ -2115,14 +2209,34 @@ header.site-header {
    ========================================================= */
 .section-alumnos-reviews {
   padding: 85px 0 50px;
-  background-color: var(--paper);
+  background-color: transparent;
 }
 
 .reviews-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 40px;
+}
+
+.reviews-title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 580px;
+}
+
+.reviews-title-group .section-label {
+  margin-bottom: 8px;
+}
+
+.reviews-subtext {
+  max-width: 520px;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.45;
+  opacity: 0.82;
+  margin-top: 8px;
 }
 
 .reviews-masonry-grid {
@@ -2377,12 +2491,54 @@ header.site-header {
 }
 
 /* =========================================================
+   BOTÓN FLOTANTE CTA WHATSAPP (GLOBAL)
+   ========================================================= */
+.floating-wpp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background-color: var(--orange);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 28px rgba(255, 82, 6, 0.42), 0 2px 8px rgba(0, 0, 0, 0.12);
+  z-index: 1200;
+  text-decoration: none;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, background-color 0.2s ease;
+}
+
+.floating-wpp-btn:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 14px 36px rgba(255, 82, 6, 0.55), 0 4px 12px rgba(0, 0, 0, 0.18);
+  background-color: #E64900;
+  color: #FFFFFF;
+}
+
+.floating-wpp-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.floating-wpp-btn svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+/* =========================================================
    RESPONSIVE DESIGN COMPLETO & PULIDO
    ========================================================= */
 
 /* --- TABLETS & PANTALLAS MEDIANAS (max-width: 1024px) --- */
 @media (max-width: 1024px) {
   /* Header & Navegación */
+  header.site-header {
+    border-radius: 24px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
   .header-nav { display: none; }
   .mobile-menu-btn { display: inline-flex; }
   .mobile-nav-drawer { display: block; }
@@ -2418,13 +2574,20 @@ header.site-header {
   }
 
   /* Disciplinas */
-  .disciplinas-header { position: static; }
+  .disciplinas-header {
+    position: sticky;
+    top: 76px;
+    z-index: 25;
+    pointer-events: auto;
+    margin-bottom: 18px;
+    padding: 0;
+  }
   .disciplinas-stack-layout { grid-template-columns: 1fr; }
   .disciplinas-side-rail { display: none; }
-  .mobile-stack-counter { display: inline-flex; }
   .sport-card-stage { grid-template-columns: 1fr; }
   .sport-media-box { height: 300px; }
-  .scroll-stack-card { top: calc(85px + var(--card-index, 0) * 16px); margin-bottom: 25vh; }
+  .scroll-stack-card { top: calc(185px + var(--card-index, 0) * 10px); margin-bottom: 18vh; }
+  .scroll-stack-card:last-child { margin-bottom: 20vh; }
 
   /* Secciones intermedias */
   .kayak-card-white { grid-template-columns: 1fr; }
@@ -2439,11 +2602,15 @@ header.site-header {
 /* --- MOBILE GENERAL (max-width: 768px) --- */
 @media (max-width: 768px) {
   /* Contenedor & Header */
-  .container { padding: 0 18px; }
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
   header.site-header {
     width: calc(100% - 24px);
     top: 10px;
     padding: 6px 12px;
+    border-radius: 24px;
   }
   .nav-btn-reserve {
     font-size: 11.5px;
@@ -2456,15 +2623,45 @@ header.site-header {
   }
 
   /* Hero */
-  .hero-content-wrap {
-    padding-top: 76px;
-    padding-bottom: 20px;
-    min-height: calc(100vh - 40px);
+  .hero-section {
+    min-height: 100svh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
   }
-  .hero-weather-col { max-width: 100%; }
-  .hero-weather-card { max-width: 100%; }
+  .hero-content-wrap,
+  .container.hero-content-wrap {
+    padding-top: calc(88px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    min-height: 100svh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
+    box-sizing: border-box;
+  }
+  .hero-top-row,
+  .hero-weather-col {
+    display: none !important;
+  }
+  .hero-bottom-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: auto;
+    gap: 14px;
+  }
+  .hero-headline-wrap {
+    order: 1;
+    margin-top: 0;
+    padding-bottom: 0;
+    width: 100%;
+  }
   .hero-giant-heading {
-    font-size: clamp(2.4rem, 10vw, 4.2rem);
+    font-size: clamp(2.3rem, 9.5vw, 3.8rem);
     line-height: 0.92;
     gap: 6px;
   }
@@ -2473,10 +2670,20 @@ header.site-header {
     white-space: normal;
   }
   .hero-title-line-2 { padding-left: 0; }
+  .hero-bajada-row {
+    order: 2;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
   .hero-bajada-col {
     padding: 20px 18px;
     border-radius: 18px;
     gap: 12px;
+    width: 100%;
+    max-width: 100%;
   }
   .hero-actions-row {
     width: 100%;
@@ -2486,6 +2693,8 @@ header.site-header {
   }
   .hero-actions-row .btn-pill-orange,
   .hero-actions-row .hero-cta-sports {
+    --btn-h: 46px;
+    --btn-icon-size: 34px;
     width: 100%;
     text-align: center;
     justify-content: center;
@@ -2494,14 +2703,33 @@ header.site-header {
 
   /* Disciplinas */
   .section-disciplinas {
-    padding: 30px 0 50px;
+    padding: 36px 0 0;
+    scroll-margin-top: 80px;
+  }
+  .disciplinas-header {
+    position: sticky;
+    top: 66px;
+    z-index: 25;
+    pointer-events: auto;
+    margin-bottom: 14px;
+    padding: 0;
+  }
+  .disciplinas-title-group {
+    width: 100%;
   }
   .disciplinas-title-group h2 {
-    font-size: clamp(2.2rem, 8vw, 3.2rem);
+    font-size: clamp(2rem, 7.5vw, 2.8rem);
+    margin-bottom: 0;
+  }
+  .disciplinas-subtext {
+    display: none;
   }
   .scroll-stack-card {
-    top: calc(75px + var(--card-index, 0) * 12px);
+    top: calc(132px + var(--card-index, 0) * 8px);
     margin-bottom: 12vh;
+  }
+  .scroll-stack-card:last-child {
+    margin-bottom: 14vh;
   }
   .sport-card-stage {
     padding: 20px 18px;
@@ -2537,6 +2765,8 @@ header.site-header {
     align-items: baseline;
   }
   .sport-cta-row .btn-pill-orange {
+    --btn-h: 44px;
+    --btn-icon-size: 32px;
     width: 100%;
     justify-content: center;
     height: 44px;
@@ -2547,8 +2777,15 @@ header.site-header {
     padding: 64px 0;
   }
   .kayak-media {
-    min-height: 220px;
-    height: 220px;
+    min-height: 240px;
+    height: 240px;
+  }
+  .kayak-slider-arrow {
+    display: none;
+  }
+  .kayak-dots {
+    bottom: 12px;
+    padding: 5px 10px;
   }
   .kayak-content {
     padding: 28px 20px;
@@ -2566,9 +2803,51 @@ header.site-header {
     gap: 6px;
   }
   .kayak-content .btn-pill-orange {
+    --btn-h: 44px;
+    --btn-icon-size: 32px;
     width: 100%;
     justify-content: center;
     height: 44px;
+  }
+
+  /* Mosaico & Cita Manifiesto */
+  .section-mosaic-quote {
+    padding: 32px 0 48px;
+  }
+  .mosaic-stage-wrap {
+    padding: 0;
+    gap: 28px;
+  }
+  .mosaic-center-quote {
+    padding: 0 18px;
+  }
+  .manifesto-big-quote {
+    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
+    line-height: 0.98;
+  }
+  .mosaic-slider-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    padding: 8px 18px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .mosaic-slider-track::-webkit-scrollbar {
+    display: none;
+  }
+  .mosaic-card-thumb {
+    flex: 0 0 76%;
+    scroll-snap-align: center;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(35, 31, 32, 0.10);
+  }
+  .mosaic-card-thumb img {
+    height: 200px;
+    border-radius: 16px;
   }
 
   /* Filosofía / Objetivo */
@@ -2653,6 +2932,8 @@ header.site-header {
     margin-bottom: 28px;
   }
   .spot-orange-card .btn-pill-white {
+    --btn-h: 46px;
+    --btn-icon-size: 34px;
     width: 100%;
     justify-content: center;
   }
@@ -2725,6 +3006,8 @@ header.site-header {
     font-size: clamp(2.2rem, 9.5vw, 3.4rem);
   }
   .prefooter-flex-row .btn-pill-orange {
+    --btn-h: 48px;
+    --btn-icon-size: 36px;
     width: 100%;
     justify-content: center;
     height: 48px;
@@ -2760,11 +3043,34 @@ header.site-header {
     margin-top: 14px;
     margin-bottom: -16px;
   }
+
+  /* Botón Flotante WhatsApp */
+  .floating-wpp-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+  }
+  .floating-wpp-btn svg {
+    width: 26px;
+    height: 26px;
+  }
 }
 
 /* --- TELÉFONOS CHICOS (max-width: 480px) --- */
 @media (max-width: 480px) {
-  .container { padding: 0 14px; }
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .hero-content-wrap,
+  .container.hero-content-wrap {
+    padding-top: calc(80px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+  .hero-bottom-area {
+    gap: 10px;
+  }
   header.site-header {
     width: calc(100% - 16px);
     top: 8px;
@@ -2791,6 +3097,21 @@ header.site-header {
   }
   .hero-bajada-text {
     font-size: 13px;
+  }
+  .disciplinas-header {
+    top: 60px;
+    margin-bottom: 10px;
+  }
+  .disciplinas-title-group h2 {
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+    margin-bottom: 0;
+  }
+  .disciplinas-subtext {
+    display: none;
+  }
+  .scroll-stack-card {
+    top: calc(122px + var(--card-index, 0) * 6px);
+    margin-bottom: 12vh;
   }
   .sport-card-stage {
     padding: 16px 14px;

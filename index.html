@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Escuela Ombú — Deportes Náuticos en Acassuso</title>
-  <link rel="icon" type="image/png" href="./assets/logoNsB.png">
-  <link rel="apple-touch-icon" href="./assets/logoNsB.png">
+  <link rel="icon" type="image/png" href="./assets/logo-ombu-footer.png">
+  <link rel="apple-touch-icon" href="./assets/logo-ombu-footer.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="header-brand" aria-label="Inicio - Escuela Ombú">
-        <img src="./assets/logoBsN.png" alt="Logo Escuela Ombú" class="brand-disc-img">
+        <img src="./assets/logo-ombu-navbar.png" alt="Logo Escuela Ombú" class="brand-disc-img">
       </a>
 
       <nav id="main-navigation" aria-label="Navegación principal">
@@ -43,10 +43,7 @@
                     <path d="M12 2v14.5"/>
                   </svg>
                 </span>
-                <div class="dropdown-sport-text">
-                  <strong>Kitesurf</strong>
-                  <span>escuelaombu.com.ar/kitesurf</span>
-                </div>
+                <span class="dropdown-sport-name">Kitesurf</span>
               </a>
               <a href="/windsurf/" class="dropdown-sport-item">
                 <span class="dropdown-sport-icon">
@@ -56,10 +53,7 @@
                     <path d="M6 12h12"/>
                   </svg>
                 </span>
-                <div class="dropdown-sport-text">
-                  <strong>Windsurf</strong>
-                  <span>escuelaombu.com.ar/windsurf</span>
-                </div>
+                <span class="dropdown-sport-name">Windsurf</span>
               </a>
               <a href="/wingfoil/" class="dropdown-sport-item">
                 <span class="dropdown-sport-icon">
@@ -68,10 +62,7 @@
                     <path d="M12 14v7m-3 0h6"/>
                   </svg>
                 </span>
-                <div class="dropdown-sport-text">
-                  <strong>Wingfoil</strong>
-                  <span>escuelaombu.com.ar/wingfoil</span>
-                </div>
+                <span class="dropdown-sport-name">Wingfoil</span>
               </a>
               <a href="/sup/" class="dropdown-sport-item">
                 <span class="dropdown-sport-icon">
@@ -81,10 +72,7 @@
                     <path d="M8 21h8"/>
                   </svg>
                 </span>
-                <div class="dropdown-sport-text">
-                  <strong>SUP Paddle</strong>
-                  <span>escuelaombu.com.ar/sup</span>
-                </div>
+                <span class="dropdown-sport-name">SUP Paddle</span>
               </a>
             </div>
           </li>
@@ -107,11 +95,6 @@
     <!-- Mobile Nav Drawer -->
     <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
       <ul class="mobile-nav-list">
-        <li><a href="#disciplinas" class="mobile-nav-link">Aprendizaje</a></li>
-        <li><a href="#kayaks" class="mobile-nav-link">Alquileres</a></li>
-        <li><a href="#spot" class="mobile-nav-link">El spot</a></li>
-        <li><a href="#instructores" class="mobile-nav-link">Nosotros</a></li>
-        <li class="mobile-nav-divider"></li>
         <li class="mobile-nav-label">// Deportes</li>
         <li class="mobile-sports-grid">
           <a href="/kitesurf/" class="mobile-sport-pill">Kitesurf ↗</a>
@@ -119,6 +102,11 @@
           <a href="/wingfoil/" class="mobile-sport-pill">Wingfoil ↗</a>
           <a href="/sup/" class="mobile-sport-pill">SUP Paddle ↗</a>
         </li>
+        <li class="mobile-nav-divider"></li>
+        <li><a href="#disciplinas" class="mobile-nav-link">Aprendizaje</a></li>
+        <li><a href="#kayaks" class="mobile-nav-link">Alquileres</a></li>
+        <li><a href="#spot" class="mobile-nav-link">El spot</a></li>
+        <li><a href="#instructores" class="mobile-nav-link">Nosotros</a></li>
         <li class="mobile-nav-divider"></li>
         <li><a href="#faq" class="mobile-nav-link">Preguntas frecuentes</a></li>
       </ul>
@@ -131,7 +119,10 @@
          ========================================================= -->
     <section class="hero-section" id="inicio">
       <div class="hero-bg-layer">
-        <img src="/assets/optimized/escuela-deportes-nauticos-acassuso-960.webp" alt="Escuela de Viento Ombú - Navegante junto al Río de la Plata" width="960" height="640" srcset="/assets/optimized/escuela-deportes-nauticos-acassuso-480.webp 480w, /assets/optimized/escuela-deportes-nauticos-acassuso-960.webp 960w, /assets/optimized/escuela-deportes-nauticos-acassuso-1440.webp 1440w, /assets/optimized/escuela-deportes-nauticos-acassuso-1920.webp 1920w" sizes="100vw" fetchpriority="high" loading="eager" decoding="async">
+        <video class="hero-bg-video" autoplay loop muted playsinline preload="auto" poster="./assets/hero-poster.webp">
+          <source src="./assets/hero-video.mp4" type="video/mp4">
+          <img src="./assets/hero-poster.webp" alt="Escuela de Viento Ombú - Navegante junto al Río de la Plata" width="960" height="640" fetchpriority="high" loading="eager" decoding="async">
+        </video>
       </div>
 
       <div class="container hero-content-wrap">
@@ -175,7 +166,6 @@
         <div class="hero-bottom-area">
           <div class="hero-bajada-row">
             <div class="hero-bajada-col">
-              <span class="hero-bajada-tag">ESCUELA OMBÚ</span>
               <p class="hero-bajada-text">
                 Clases y alquileres de Kitesurf, Windsurf, Wingfoil y SUP con la seguridad de 15 años de experiencia. Todo el equipamiento incluido para que empieces hoy mismo.
               </p>
@@ -227,9 +217,6 @@
           </div>
         </div>
 
-        <!-- Mini indicador flotante para móviles -->
-        <div class="mobile-stack-counter" id="mobileStackCounter">01 / 04 · KITESURF</div>
-
         <!-- Layout con Stack de Tarjetas + Rail Lateral -->
         <div class="disciplinas-stack-layout">
           <!-- Contenedor Scroll Stack de las 4 Tarjetas -->
@@ -238,7 +225,7 @@
           <div class="scroll-stack-card" data-sport="kitesurf" data-index="0" style="--card-index: 0;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/sport-kitesurf-figma.jpg" alt="Kitesurf Ombú">
+                <img src="./assets/deporte-kitesurf.jpg" alt="Kitesurf Ombú">
               </div>
 
               <div class="sport-details-box">
@@ -292,7 +279,7 @@
           <div class="scroll-stack-card" data-sport="wingfoil" data-index="1" style="--card-index: 1;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/wingfoil.jpg" alt="Wingfoil Ombú">
+                <img src="./assets/deporte-wingfoil.jpg" alt="Wingfoil Ombú">
               </div>
 
               <div class="sport-details-box">
@@ -346,7 +333,7 @@
           <div class="scroll-stack-card" data-sport="windsurf" data-index="2" style="--card-index: 2;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/windsurf.jpg" alt="Windsurf Ombú">
+                <img src="./assets/deporte-windsurf.jpg" alt="Windsurf Ombú">
               </div>
 
               <div class="sport-details-box">
@@ -400,7 +387,7 @@
           <div class="scroll-stack-card" data-sport="sup" data-index="3" style="--card-index: 3;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/sup.jpg" alt="SUP Paddle Ombú">
+                <img src="./assets/deporte-sup.jpg" alt="SUP Paddle Ombú">
               </div>
 
               <div class="sport-details-box">
@@ -478,20 +465,10 @@
     </section>
 
     <!-- =========================================================
-         MOSAICO FOTOGRÁFICO & CITA MANIFIESTO
+         CITA MANIFIESTO & SLIDER FOTOGRÁFICO
          ========================================================= -->
     <section class="section-mosaic-quote">
-      <div class="mosaic-stage-grid">
-        <!-- Columna Izquierda (2 fotos) -->
-        <div class="mosaic-column-side">
-          <div class="mosaic-card-thumb card-tl">
-            <img src="./assets/IMG_20200310_171427.jpg" alt="Kitesurf en Escuela Ombú">
-          </div>
-          <div class="mosaic-card-thumb card-bl">
-            <img src="./assets/fotocu1.jpg" alt="Alumnos navegando en el río">
-          </div>
-        </div>
-
+      <div class="mosaic-stage-wrap">
         <!-- Cita Central en Naranja -->
         <div class="mosaic-center-quote">
           <h2 class="manifesto-big-quote">
@@ -500,13 +477,19 @@
           </h2>
         </div>
 
-        <!-- Columna Derecha (2 fotos) -->
-        <div class="mosaic-column-side">
-          <div class="mosaic-card-thumb card-tr">
-            <img src="./assets/fotocu2.jpg" alt="Tablas de windsurf y SUP">
+        <!-- Slider de Imágenes sin estar chuecas -->
+        <div class="mosaic-slider-track">
+          <div class="mosaic-card-thumb">
+            <img src="./assets/mosaico-kitesurf.jpg" alt="Kitesurf en Escuela Ombú" loading="lazy">
           </div>
-          <div class="mosaic-card-thumb card-br">
-            <img src="./assets/fotocu3.jpg" alt="Clase en el río">
+          <div class="mosaic-card-thumb">
+            <img src="./assets/mosaico-alumnos.jpg" alt="Alumnos navegando en el río" loading="lazy">
+          </div>
+          <div class="mosaic-card-thumb">
+            <img src="./assets/mosaico-tablas.jpg" alt="Tablas de windsurf y SUP" loading="lazy">
+          </div>
+          <div class="mosaic-card-thumb">
+            <img src="./assets/mosaico-clase.jpg" alt="Clase en el río" loading="lazy">
           </div>
         </div>
       </div>
@@ -518,8 +501,33 @@
     <section class="section-kayaks-dark" id="kayaks">
       <div class="container">
         <div class="kayak-card-white">
-          <div class="kayak-media">
-            <img src="./assets/kayaks.jpg" alt="Alquiler de kayaks en Acassuso">
+          <div class="kayak-media" id="kayakSlider" aria-roledescription="carousel" aria-label="Fotos de alquileres">
+            <div class="kayak-slider-track">
+              <div class="kayak-slide is-active" aria-label="1 de 3: Alquiler de kayaks">
+                <img src="./assets/kayaks.jpg" alt="Alquiler de kayaks simples y dobles en Escuela Ombú Acassuso">
+              </div>
+              <div class="kayak-slide" aria-label="2 de 3: Alquiler de tablas SUP">
+                <img src="./assets/alquiler-sup.jpg" alt="Alquiler de tablas de SUP Paddle en el río" loading="lazy">
+              </div>
+              <div class="kayak-slide" aria-label="3 de 3: Alquiler de equipos de windsurf">
+                <img src="./assets/alquiler-windsurf.jpeg" alt="Alquiler de equipos y tablas de Windsurf" loading="lazy">
+              </div>
+            </div>
+
+            <!-- Flechas de navegación rápida -->
+            <button type="button" class="kayak-slider-arrow prev" aria-label="Foto anterior">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="kayak-slider-arrow next" aria-label="Foto siguiente">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+
+            <!-- Indicadores: 3 puntitos en el centro abajo -->
+            <div class="kayak-dots" role="tablist" aria-label="Selector de fotos">
+              <button type="button" class="kayak-dot is-active" data-slide="0" role="tab" aria-selected="true" aria-label="Foto 1"></button>
+              <button type="button" class="kayak-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Foto 2"></button>
+              <button type="button" class="kayak-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Foto 3"></button>
+            </div>
           </div>
           <div class="kayak-content">
             <span class="section-label">// Alquilamos Kayaks</span>
@@ -602,13 +610,13 @@
     <section class="section-instructores" id="instructores">
       <div class="container">
         <div class="instructores-header">
-          <div>
+          <div class="instructores-title-group">
             <span class="section-label">// Instructores</span>
             <h2 class="display-title">Los Instructores</h2>
+            <p class="instructores-subtext">
+              Profesionales que enseñan con claridad, paciencia y conocimiento del lugar.
+            </p>
           </div>
-          <p style="color:var(--text-muted); font-size:14px; max-width:380px;">
-            Profesionales que enseñan con claridad, paciencia y conocimiento del lugar.
-          </p>
         </div>
 
         <div class="instructores-grid">
@@ -744,7 +752,7 @@
 
           <!-- Tarjeta con Foto del Río: Cámara en Vivo (Derecha) -->
           <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="spot-dark-camera-card" aria-label="Ver cámara en vivo en YouTube">
-            <img src="./assets/fondorio.png" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img">
+            <img src="./assets/camara-rio-fondo.png" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img">
             <div class="spot-camera-overlay"></div>
 
             <div class="camera-header-row">
@@ -872,7 +880,7 @@
        EXPERIENCIA INFERIOR: RESEÑAS, CTA & FOOTER CON FONDO PARALLAX
        ========================================================= -->
   <div class="bottom-experience-wrapper">
-    <!-- Capa de fondo con imagen IMG_9513.JPG y efecto Parallax -->
+    <!-- Capa de fondo con imagen fondo-parallax.webp y efecto Parallax -->
     <div class="bottom-parallax-bg" id="bottomParallaxBg"></div>
 
     <!-- Velo degradé cremita que va hacia abajo hasta ser transparente -->
@@ -887,13 +895,13 @@
       <section class="section-alumnos-reviews">
         <div class="container">
         <div class="reviews-header">
-          <div>
+          <div class="reviews-title-group">
             <span class="section-label">// Experiencias Reales</span>
             <h2 class="display-title">Los alumnos dicen</h2>
+            <p class="reviews-subtext">
+              Más de 1.200 personas ya aprendieron a navegar
+            </p>
           </div>
-          <p style="color:var(--text-muted); font-size:14px;">
-            Más de 1.200 personas ya aprendieron a navegar
-          </p>
         </div>
 
         <div class="reviews-masonry-grid">
@@ -1054,7 +1062,7 @@
         </h2>
         <div>
           <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange" style="font-size:16px;">
-            Reservá tu clase
+            RESERVÁ TU CLASE
             <div class="icon">
               <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"></path>
@@ -1076,7 +1084,7 @@
         <div class="footer-top-columns">
           <!-- Columna 1: Marca & Logo Negro sobre Blanco -->
           <div class="footer-brand-info">
-            <img src="./assets/logoNsB.png" alt="Escuela Ombú" class="footer-card-logo">
+            <img src="./assets/logo-ombu-footer.png" alt="Escuela Ombú" class="footer-card-logo">
             <p class="footer-brand-p">
               Escuela de kitesurf, windsurf, wingfoil y SUP en Acassuso, San Isidro. Más de 15 años enseñando a leer el río y el viento.
             </p>
@@ -1086,21 +1094,22 @@
           <div>
             <div class="footer-col-title">Deportes</div>
             <ul class="footer-links-list">
-              <li><a href="#disciplinas" onclick="switchSport('kitesurf')">Kitesurf</a></li>
-              <li><a href="#disciplinas" onclick="switchSport('windsurf')">Windsurf</a></li>
-              <li><a href="#disciplinas" onclick="switchSport('wingfoil')">Wingfoil</a></li>
-              <li><a href="#disciplinas" onclick="switchSport('sup')">SUP</a></li>
+              <li><a href="/kitesurf/">Kitesurf</a></li>
+              <li><a href="/windsurf/">Windsurf</a></li>
+              <li><a href="/wingfoil/">Wingfoil</a></li>
+              <li><a href="/sup/">SUP Paddle</a></li>
             </ul>
           </div>
 
-          <!-- Columna 3: Escuela -->
+          <!-- Columna 3: Navegación -->
           <div>
-            <div class="footer-col-title">Escuela</div>
+            <div class="footer-col-title">Navegación</div>
             <ul class="footer-links-list">
+              <li><a href="#disciplinas">Aprendizaje</a></li>
+              <li><a href="#kayaks">Alquileres</a></li>
               <li><a href="#spot">El spot</a></li>
-              <li><a href="#disciplinas">Instructores</a></li>
-              <li><a href="#disciplinas">Precios</a></li>
-              <li><a href="#alumnos">Blog</a></li>
+              <li><a href="#instructores">Nosotros</a></li>
+              <li><a href="#faq">Preguntas frecuentes</a></li>
             </ul>
           </div>
 
@@ -1110,7 +1119,7 @@
             <ul class="footer-links-list">
               <li><span style="color:var(--text-light-muted);">Sebastián Elcano 994, Acassuso</span></li>
               <li><a href="mailto:ombuescuela@gmail.com">ombuescuela@gmail.com</a></li>
-              <li><a href="https://wa.me/5491130041100" target="_blank">WhatsApp</a></li>
+              <li><a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer">+54 9 11 3004 1100</a></li>
             </ul>
           </div>
         </div>
@@ -1127,21 +1136,28 @@
             <a href="https://youtube.com" target="_blank" aria-label="YouTube" class="footer-social-btn">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
             </a>
-            <a href="https://wa.me/5491130041100" target="_blank" aria-label="WhatsApp" class="footer-social-btn">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="footer-social-btn">
+              <svg width="15" height="15" viewBox="0 0 737.509 740.824" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/></svg>
             </a>
           </div>
         </div>
 
         <!-- Gran Logo Horizontal Ombú Texturado en la Base del Card -->
         <div class="footer-horizontal-logo-wrap">
-          <img src="./assets/Horizontal BsN.png" alt="OMBU'">
+          <img src="./assets/logo-ombu-horizontal.png" alt="OMBU'">
         </div>
       </div>
     </div>
   </footer>
     </div>
   </div>
+
+  <!-- Botón Flotante CTA WhatsApp (todas las pantallas) -->
+  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20hacer%20una%20consulta." target="_blank" rel="noopener noreferrer" class="floating-wpp-btn" aria-label="Contactar por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 737.509 740.824" fill="currentColor">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/>
+    </svg>
+  </a>
 
   <script src="./main.js"></script>
 </body>
