@@ -223,13 +223,13 @@ async function fetchLiveWind() {
 
       if (captionEl) {
         if (knots >= 14 && knots <= 26) {
-          captionEl.textContent = 'Condiciones óptimas para kitesurf y wingfoil';
+          captionEl.textContent = 'Condiciones óptimas!';
         } else if (knots >= 8 && knots < 14) {
-          captionEl.textContent = 'Viento moderado · Buenas condiciones de escuela';
+          captionEl.textContent = 'Viento moderado';
         } else if (knots < 8) {
-          captionEl.textContent = 'Viento suave · Ideal iniciación SUP y kayak';
+          captionEl.textContent = 'Viento suave';
         } else {
-          captionEl.textContent = 'Viento fuerte · Solo navegantes avanzados';
+          captionEl.textContent = 'Viento fuerte';
         }
       }
     }

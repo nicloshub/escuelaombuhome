@@ -1031,7 +1031,12 @@ header.site-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 580px;
+  max-width: 100%;
+}
+
+.disciplinas-title-group h2 {
+  white-space: nowrap;
+  font-size: clamp(2.2rem, 4.4vw, 4.2rem);
 }
 
 .disciplinas-title-group .section-label {
@@ -2718,7 +2723,8 @@ header.site-header {
     width: 100%;
   }
   .disciplinas-title-group h2 {
-    font-size: clamp(2rem, 7.5vw, 2.8rem);
+    font-size: clamp(1.5rem, 6.2vw, 2.5rem);
+    white-space: nowrap;
     margin-bottom: 0;
   }
   .disciplinas-subtext {
@@ -3103,7 +3109,8 @@ header.site-header {
     margin-bottom: 10px;
   }
   .disciplinas-title-group h2 {
-    font-size: clamp(1.85rem, 8vw, 2.4rem);
+    font-size: clamp(1.35rem, 6.6vw, 1.85rem);
+    white-space: nowrap;
     margin-bottom: 0;
   }
   .disciplinas-subtext {
