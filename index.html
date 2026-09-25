@@ -96,43 +96,62 @@
          ========================================================= -->
     <section class="hero-section" id="inicio">
       <div class="hero-bg-layer">
-        <img src="./assets/deporte-wingfoil.jpg" alt="Escuela de Viento Ombú - Navegante junto al Río de la Plata" fetchpriority="high" loading="eager" decoding="async">
+        <img src="./assets/HERO_OP1.png" alt="Escuela de Deportes Náuticos Ombú - Kitesurf en el Río de la Plata" fetchpriority="high" loading="eager" decoding="async">
       </div>
 
       <div class="container hero-content-wrap">
         <!-- Parte Superior: Widget de telemetría en vivo (Cols 1-3) -->
         <div class="hero-top-row">
           <div class="hero-weather-col">
-            <div class="hero-weather-card">
+            <aside class="hero-weather-card" aria-label="Condición del viento en vivo">
               <div class="weather-header-stack">
-                <div class="weather-live-tag">
+                <div class="weather-live-badge">
+                  <span class="weather-radar-ping"></span>
                   <span class="weather-live-dot"></span>
-                  <span>EN VIVO</span>
+                  <span class="weather-live-text">EN VIVO</span>
                 </div>
                 <div class="weather-title-label">CONDICIÓN DEL VIENTO</div>
               </div>
 
-              <div class="weather-metric-row">
-                <span class="weather-speed-num" id="heroWindSpeed">17</span>
-                <div class="weather-speed-units">
-                  <span class="speed-unit-kmh">KM/H</span>
-                  <span class="speed-unit-knots" id="heroWindKnots">9 nudos</span>
+              <div class="weather-main-grid">
+                <div class="weather-metric-primary">
+                  <div class="weather-speed-cluster">
+                    <span class="weather-speed-num" id="heroWindSpeed">--</span>
+                    <div class="weather-speed-units">
+                      <span class="speed-unit-kmh">KM/H</span>
+                      <span class="speed-unit-knots" id="heroWindKnots">-- nudos</span>
+                    </div>
+                  </div>
                 </div>
-                <span class="weather-dir-badge" id="heroWindDir">
-                  <img src="./assets/wind.svg" alt="Viento" class="weather-wind-icon" width="14" height="12" decoding="async">
-                  <span id="heroWindDirText">N</span>
-                </span>
+
+                <!-- Brújula Náutica Dinámica (Español N, E, S, O) -->
+                <div class="weather-compass-box" title="Dirección del viento">
+                  <div class="compass-dial">
+                    <span class="compass-marker n">N</span>
+                    <span class="compass-marker e">E</span>
+                    <span class="compass-marker s">S</span>
+                    <span class="compass-marker o">O</span>
+                    <div class="compass-arrow-wrap" id="heroCompassDial">
+                      <svg class="compass-needle-svg" width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <polygon class="compass-needle-north" points="12,2 16,14 12,11 8,14" fill="#FF5206" />
+                        <polygon class="compass-needle-south" points="12,22 16,14 12,11 8,14" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <!-- Barra de progreso del viento estilo Figma -->
+              <!-- Medidor de Nivel & Barra del Viento 100% Naranja -->
               <div class="weather-progress-bar-wrap">
                 <div class="weather-progress-bar-fill" id="heroWindBar" style="width: 45%;"></div>
               </div>
 
-              <div class="weather-caption" id="heroWindCaption">
-                Viento moderado
+              <!-- Estado y Recomendación de Deportes -->
+              <div class="weather-status-footer">
+                <span class="weather-caption" id="heroWindCaption">Calculando condiciones...</span>
+                <span class="weather-suitability-pill" id="heroSpotSuitability">Spot Activo</span>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
 
@@ -141,7 +160,7 @@
           <div class="hero-bajada-row">
             <div class="hero-bajada-col">
               <p class="hero-bajada-text">
-                Clases y alquileres de Kitesurf, Windsurf, Wingfoil y SUP con la seguridad de 15 años de experiencia. Todo el equipamiento incluido para que empieces hoy mismo.
+                Clases y alquileres de <strong>Kitesurf, Windsurf, Wingfoil y SUP</strong> con la seguridad de 15 años de experiencia. Todo el equipamiento incluido para que empieces hoy mismo.
               </p>
               <div class="hero-actions-row">
                 <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange" rel="noopener noreferrer">
@@ -158,18 +177,18 @@
             </div>
           </div>
 
-          <!-- H1 Monumental: Línea 1 (Izquierda) y Línea 2 (Derecha) -->
+          <!-- H1 Monumental: Alineado a la izquierda (Refe visual) -->
           <div class="hero-headline-wrap">
             <h1 class="hero-giant-heading">
               <span class="hero-title-line-1">
-                ESCUELA NÁUTICA
+                TU ESCUELA DE
                 <a href="#disciplinas" class="hero-title-badge" aria-label="Conocé las actividades">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M7 17L17 7M7 7h10v10"/>
                   </svg>
                 </a>
               </span>
-              <span class="hero-title-line-2">EN BUENOS AIRES</span>
+              <span class="hero-title-line-2">DEPORTES NAUTICOS</span>
             </h1>
           </div>
         </div>
@@ -852,7 +871,7 @@
        EXPERIENCIA INFERIOR: RESEÑAS, CTA & FOOTER CON FONDO PARALLAX
        ========================================================= -->
   <div class="bottom-experience-wrapper">
-    <!-- Capa de fondo con imagen fondo-parallax.webp y efecto Parallax -->
+    <!-- Capa de fondo con imagen FOOTER_OP2.png (Wingfoil) y efecto Parallax -->
     <div class="bottom-parallax-bg" id="bottomParallaxBg"></div>
 
     <!-- Velo degradé cremita que va hacia abajo hasta ser transparente -->
