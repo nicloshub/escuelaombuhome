@@ -451,6 +451,10 @@ header.site-header {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
   transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
@@ -3044,9 +3048,37 @@ header.site-header {
     padding: 18px 16px;
   }
 
+  /* Reseñas en mobile */
+  .section-alumnos-reviews {
+    padding: 56px 0 36px;
+  }
+
+  /* Fondo de la sección inferior en mobile: acotado a la zona inferior (CTA + Footer) para evitar zoom 15x por la altura de las 10 reseñas */
+  .bottom-parallax-bg {
+    top: auto;
+    bottom: 0;
+    height: 1050px;
+    background-attachment: scroll;
+    background-size: cover;
+    background-position: 58% 12%;
+  }
+  .bottom-cream-gradient-overlay {
+    top: auto;
+    bottom: 0;
+    height: 1050px;
+    inset: auto 0 0 0;
+    background: linear-gradient(
+      to bottom,
+      var(--paper) 0%,
+      rgba(254, 254, 254, 0.92) 16%,
+      rgba(254, 254, 254, 0.45) 34%,
+      transparent 58%
+    );
+  }
+
   /* Prefooter CTA */
   .section-prefooter-banner {
-    padding: 36px 0 48px;
+    padding: 44px 0 54px;
   }
   .prefooter-flex-row {
     flex-direction: column;
@@ -3195,5 +3227,11 @@ header.site-header {
   .manifesto-big-quote {
     font-size: clamp(1.15rem, 5.6vw, 1.65rem);
     white-space: nowrap;
+  }
+  .bottom-parallax-bg {
+    background-position: 57% 10%;
+  }
+  .section-prefooter-banner {
+    padding: 38px 0 44px;
   }
 }
