@@ -1002,7 +1002,10 @@ header.site-header {
   display: block;
   white-space: nowrap;
   line-height: 0.9;
-  padding-left: calc((100% + 24px) / 6);
+  align-self: flex-end;
+  margin-left: auto;
+  text-align: right;
+  width: fit-content;
 }
 
 /* =========================================================
@@ -1173,7 +1176,7 @@ header.site-header {
   will-change: opacity, transform, filter;
 }
 .scroll-stack-card:last-child {
-  margin-bottom: 26vh;
+  margin-bottom: 6vh;
 }
 
 /* Tarjeta Principal de Deporte */
@@ -1304,7 +1307,7 @@ header.site-header {
    CITA MANIFIESTO & SLIDER FOTOGRÁFICO
    ========================================================= */
 .section-mosaic-quote {
-  padding: 40px 0 80px;
+  padding: 24px 0 80px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -1314,7 +1317,7 @@ header.site-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: 64px;
   max-width: 1340px;
   margin: 0 auto;
   padding: 0 32px;
@@ -1362,13 +1365,14 @@ header.site-header {
 
 .manifesto-big-quote {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 4.8vw, 5.2rem);
+  font-size: clamp(2.2rem, 3.8vw, 4.4rem);
   font-weight: 400;
   line-height: 0.94;
   text-transform: uppercase;
   letter-spacing: -0.005em;
   display: inline-block;
-  max-width: 920px;
+  max-width: 100%;
+  white-space: nowrap;
 
   /* Capa 1: textura arriba | Capa 2: color sólido abajo */
   background-image: 
@@ -1672,7 +1676,7 @@ header.site-header {
 }
 
 .instructores-title-group .section-label {
-  margin-bottom: 8px;
+  margin-bottom: 18px;
 }
 
 .instructores-subtext {
@@ -1711,7 +1715,12 @@ header.site-header {
   height: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
+  image-orientation: from-image;
   display: block;
+}
+
+.instructor-photo img.photo-align-right {
+  object-position: right center !important;
 }
 .instructor-name {
   font-size: 16px;
@@ -2221,14 +2230,14 @@ header.site-header {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
 .reviews-title-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 580px;
+  max-width: 100%;
 }
 
 .reviews-title-group .section-label {
@@ -2236,34 +2245,36 @@ header.site-header {
 }
 
 .reviews-subtext {
-  max-width: 520px;
-  font-size: 14.5px;
-  color: var(--ink);
-  line-height: 1.45;
-  opacity: 0.82;
-  margin-top: 8px;
+  display: none;
 }
 
 .reviews-masonry-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  align-items: start;
+}
+
+.reviews-masonry-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .review-cell-card {
   background: #FFFFFF;
-  border-radius: 8px;
+  border-radius: 14px;
   border: 1px solid var(--line);
-  padding: 20px;
-  box-shadow: none;
+  padding: 22px 20px;
+  box-shadow: 0 4px 16px rgba(35, 31, 32, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  gap: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .review-cell-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(31, 31, 19, 0.08);
+  box-shadow: 0 10px 28px rgba(35, 31, 32, 0.08);
 }
 
 .review-user-top {
@@ -2274,49 +2285,64 @@ header.site-header {
 .user-avatar-cluster {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 .user-avatar-circle {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: var(--ink);
+  background: #231F20;
   color: #FFFFFF;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 .user-meta-name {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.25;
+  gap: 2px;
 }
 .name-bold {
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--ink);
 }
+.meta-subtext,
 .date-tiny {
-  font-size: 10px;
-  color: var(--ink);
-  opacity: 0.7;
+  font-size: 11.5px;
+  color: #767676;
 }
-.origin-badge-icon {
-  font-size: 14px;
+.review-platform-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
-.stars-rating-yellow {
+.stars-rating-yellow,
+.stars-rating-orange {
   color: var(--orange);
   letter-spacing: 2px;
-  font-size: 12px;
+  font-size: 13.5px;
+  line-height: 1;
 }
 
 .review-paragraph-text {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--ink);
   line-height: 1.5;
+}
+
+.review-date-bottom {
+  font-size: 11.5px;
+  color: #8a8a8a;
+  margin-top: 2px;
 }
 
 /* =========================================================
@@ -2575,7 +2601,9 @@ header.site-header {
     max-width: 100%;
   }
   .hero-title-line-2 {
-    padding-left: 0;
+    align-self: flex-end;
+    margin-left: auto;
+    text-align: right;
   }
 
   /* Disciplinas */
@@ -2592,7 +2620,7 @@ header.site-header {
   .sport-card-stage { grid-template-columns: 1fr; }
   .sport-media-box { height: 300px; }
   .scroll-stack-card { top: calc(185px + var(--card-index, 0) * 10px); margin-bottom: 18vh; }
-  .scroll-stack-card:last-child { margin-bottom: 20vh; }
+  .scroll-stack-card:last-child { margin-bottom: 6vh; }
 
   /* Secciones intermedias */
   .kayak-card-white { grid-template-columns: 1fr; }
@@ -2663,18 +2691,31 @@ header.site-header {
     order: 1;
     margin-top: 0;
     padding-bottom: 0;
-    width: 100%;
+    margin-left: -8px;
+    margin-right: -8px;
+    width: calc(100% + 16px);
   }
   .hero-giant-heading {
-    font-size: clamp(2.3rem, 9.5vw, 3.8rem);
-    line-height: 0.92;
-    gap: 6px;
+    font-size: clamp(2.4rem, 12.2vw, 4.2rem);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    gap: 4px;
   }
-  .hero-title-line-1,
+  .hero-title-line-1 {
+    white-space: nowrap;
+    align-self: flex-start;
+    gap: 0.16em;
+  }
+  .hero-title-line-1 .hero-title-badge {
+    width: 0.65em;
+    height: 0.65em;
+  }
   .hero-title-line-2 {
-    white-space: normal;
+    white-space: nowrap;
+    align-self: flex-end;
+    margin-left: auto;
+    text-align: right;
   }
-  .hero-title-line-2 { padding-left: 0; }
   .hero-bajada-row {
     order: 2;
     margin-top: 0;
@@ -2735,7 +2776,7 @@ header.site-header {
     margin-bottom: 12vh;
   }
   .scroll-stack-card:last-child {
-    margin-bottom: 14vh;
+    margin-bottom: 4vh;
   }
   .sport-card-stage {
     padding: 20px 18px;
@@ -2818,18 +2859,19 @@ header.site-header {
 
   /* Mosaico & Cita Manifiesto */
   .section-mosaic-quote {
-    padding: 32px 0 48px;
+    padding: 18px 0 48px;
   }
   .mosaic-stage-wrap {
     padding: 0;
-    gap: 28px;
+    gap: 38px;
   }
   .mosaic-center-quote {
     padding: 0 18px;
   }
   .manifesto-big-quote {
-    font-size: clamp(2.2rem, 8.5vw, 3.2rem);
+    font-size: clamp(1.4rem, 5.2vw, 2.6rem);
     line-height: 0.98;
+    white-space: nowrap;
   }
   .mosaic-slider-track {
     display: flex;
@@ -2995,6 +3037,9 @@ header.site-header {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+  .reviews-masonry-col {
+    gap: 14px;
+  }
   .review-cell-card {
     padding: 18px 16px;
   }
@@ -3095,8 +3140,14 @@ header.site-header {
     width: 32px;
     height: 32px;
   }
+  .hero-headline-wrap {
+    margin-left: -8px;
+    margin-right: -8px;
+    width: calc(100% + 16px);
+  }
   .hero-giant-heading {
-    font-size: clamp(2.1rem, 10.5vw, 2.7rem);
+    font-size: clamp(2.35rem, 12.4vw, 3.4rem);
+    line-height: 0.86;
   }
   .hero-bajada-col {
     padding: 16px 14px;
@@ -3120,6 +3171,9 @@ header.site-header {
     top: calc(122px + var(--card-index, 0) * 6px);
     margin-bottom: 12vh;
   }
+  .scroll-stack-card:last-child {
+    margin-bottom: 4vh;
+  }
   .sport-card-stage {
     padding: 16px 14px;
   }
@@ -3137,5 +3191,9 @@ header.site-header {
   }
   .footer-floating-card {
     padding: 28px 16px 0 16px;
+  }
+  .manifesto-big-quote {
+    font-size: clamp(1.15rem, 5.6vw, 1.65rem);
+    white-space: nowrap;
   }
 }
