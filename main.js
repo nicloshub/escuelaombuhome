@@ -438,6 +438,126 @@ function initKayakSlider() {
   startAutoplay();
 }
 
+// Mapa interactivo oficial de Escuela Ombú (Google Maps API limpio, nítido y sin UI molesta)
+window.initGoogleMap = function() {
+  const mapElement = document.getElementById('ombuMap');
+  if (!mapElement || typeof google === 'undefined' || !google.maps) return;
+
+  const ombuLocation = { lat: -34.4735386, lng: -58.4901005 };
+
+  // Estilos a medida: Warm Sand & River para Escuela Ombú
+  const ombuMapStyles = [
+    // 1. Ocultar comercios y puntos de interés ajenos para mantener el mapa limpio
+    {
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [{ visibility: "off" }]
+    },
+    {
+      featureType: "poi.business",
+      stylers: [{ visibility: "off" }]
+    },
+    // 2. Río de la Plata: agua suave, limpia y serena en tono pizarra celeste
+    {
+      featureType: "water",
+      elementType: "geometry",
+      stylers: [{ color: "#c2d6e3" }]
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.fill",
+      stylers: [{ color: "#5d7b8c" }]
+    },
+    // 3. Tierra / Manzanas: tono crema/arena a juego con el diseño
+    {
+      featureType: "landscape",
+      elementType: "geometry",
+      stylers: [{ color: "#f7f5f0" }]
+    },
+    // 4. Calles y accesos en blanco puro con borde suave
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [{ color: "#ffffff" }]
+    },
+    {
+      featureType: "road",
+      elementType: "geometry.stroke",
+      stylers: [{ color: "#e5e0d6" }]
+    },
+    {
+      featureType: "road",
+      elementType: "labels.text.fill",
+      stylers: [{ color: "#666666" }]
+    },
+    // 5. Nombres administrativos en gris oscuro legible
+    {
+      featureType: "administrative",
+      elementType: "labels.text.fill",
+      stylers: [{ color: "#3a3a3a" }]
+    }
+  ];
+
+  const map = new google.maps.Map(mapElement, {
+    center: ombuLocation,
+    zoom: 17,
+    styles: ombuMapStyles,
+    disableDefaultUI: true, // Desactiva toda la UI invasiva por default
+    zoomControl: true,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.RIGHT_BOTTOM
+    },
+    gestureHandling: "cooperative"
+  });
+
+  // Asegurar renderizado perfecto al terminar de cargar estilos
+  google.maps.event.addListenerOnce(map, 'idle', () => {
+    google.maps.event.trigger(map, 'resize');
+    map.setCenter(ombuLocation);
+  });
+
+  // Marcador oficial en Naranja Ombú (#FF5500)
+  const markerIcon = {
+    path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+    fillColor: "#FF5500",
+    fillOpacity: 1,
+    strokeColor: "#FFFFFF",
+    strokeWeight: 2,
+    scale: 2,
+    anchor: new google.maps.Point(12, 22)
+  };
+
+  const marker = new google.maps.Marker({
+    position: ombuLocation,
+    map: map,
+    title: "Escuela Náutica Ombú",
+    icon: markerIcon,
+    animation: google.maps.Animation.DROP
+  });
+
+  // Ventana flotante interactiva
+  const infoWindowContent = `
+    <div class="ombu-infowindow-body">
+      <strong class="ombu-iw-title">ESCUELA OMBÚ</strong>
+      <span class="ombu-iw-sub">Sebastián Elcano 994, Acassuso</span>
+      <a href="https://maps.app.goo.gl/duhdkxUzUEPQsZHx5" target="_blank" rel="noopener noreferrer" class="ombu-iw-btn">
+        Cómo llegar ↗
+      </a>
+    </div>
+  `;
+
+  const infoWindow = new google.maps.InfoWindow({
+    content: infoWindowContent
+  });
+
+  // Mostrar el cartelito flotante abierto por defecto
+  infoWindow.open(map, marker);
+
+  marker.addListener("click", () => {
+    infoWindow.open(map, marker);
+  });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
