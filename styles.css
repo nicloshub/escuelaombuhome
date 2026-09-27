@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
+  /* Regla Áurea: Factor de proporción áurea */
+  --phi: 1.618;
+
   --primary: #FF5206;
   --dark: #231F20;
   --white: #FEFEFE;
@@ -9,20 +12,28 @@
   --shade: rgba(255, 82, 6, 0.10);
 
   /* Variables base adaptadas a la nueva paleta */
-  --paper: var(--white); /* Fondo general de la página: #FEFEFE */
+  --paper: var(--white); /* Fondo general: #FEFEFE */
   --ink: var(--dark);    /* Tipografía y elementos oscuros: #231F20 */
   --orange: var(--primary); /* Botones y acentos: #FF5206 */
   --deep: var(--primary);
   --line: rgba(35, 31, 32, 0.10);
+  
+  /* Grilla Figma 12 Columnas */
   --gutter: 32px;
   --page-margin: 160px;
-  --section-space: 128px;
+  --grid-margin: 160px;
+  --grid-gutter: 32px;
+  --grid-cols: 12;
+
+  /* Espaciado de Secciones (Ritmo Áureo) */
+  --section-padding-y: clamp(88px, 7.5vw, 120px);
+  --section-header-mb: clamp(36px, 3.5vw, 48px);
 
   /* Aliases para compatibilidad */
   --bg-sand: var(--paper); /* #FEFEFE */
   --bg-sand-light: var(--white);
   --bg-sand-tint: var(--light-1); /* #F6F6F6 */
-  --bg-card: var(--light-1); /* Tarjetas de deportes, contenedores y fondos de componentes: #F6F6F6 */
+  --bg-card: var(--light-1); /* Tarjetas de deportes, contenedores y fondos: #F6F6F6 */
   --bg-dark: var(--ink);
   --bg-darker: #151213;
   --text-dark: var(--ink);
@@ -37,16 +48,24 @@
   --border-dark: rgba(254, 254, 254, 0.15);
 
   --font-display: 'Anton', Impact, sans-serif;
-  --font-body: 'Inter', Arial, sans-serif;
-  --font-mono: 'Inter', Arial, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Inter', system-ui, sans-serif;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-pill: 100px;
+  /* =========================================================
+     SISTEMA UNIFICADO DE RADIOS DE CARDS (ARMONÍA Y CONCENTRICIDAD)
+     ========================================================= */
+  --radius-card: 24px;   /* Radio único estándar para TODAS las cards principales */
+  --radius-inner: 16px;  /* Para elementos interiores (badges flotantes, fotos) */
+  --radius-sm: 10px;     /* Para chips, tags pequeños y spec-boxes */
+  --radius-pill: 9999px; /* Para botones y badges píldora */
 
-  --shadow-card: 0 4px 16px rgba(35, 31, 32, 0.08);
-  --shadow-lg: 0 16px 36px rgba(35, 31, 32, 0.12);
+  /* Aliases retrocompatibles */
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Sombras calibradas con offset natural y blur suave */
+  --shadow-card: 0 4px 16px rgba(35, 31, 32, 0.05);
+  --shadow-lg: 0 16px 36px rgba(35, 31, 32, 0.09);
   --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -68,7 +87,8 @@ body {
   background-color: var(--bg-sand);
   color: var(--text-dark);
   font-family: var(--font-body);
-  line-height: 1.5;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -83,10 +103,10 @@ body {
 }
 
 .section-padding {
-  padding: 96px 0;
+  padding: var(--section-padding-y, 100px) 0;
 }
 
-/* Tipografías Display */
+/* Tipografías Display con Proporciones Áureas */
 h1, h2, h3, h4, .display-title {
   font-family: var(--font-display);
   font-weight: 400;
@@ -94,20 +114,20 @@ h1, h2, h3, h4, .display-title {
 }
 
 .display-title {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  line-height: 0.95;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
 }
 
 .section-label, .eyebrow {
   font-family: var(--font-body);
-  font-size: 12px;
+  font-size: 11.5px;
   line-height: 1.4;
   font-weight: 700;
   color: var(--orange);
-  letter-spacing: .08em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   display: block;
 }
 
@@ -718,21 +738,157 @@ header.site-header:hover {
   justify-content: space-between;
   min-height: calc(100vh - 74px);
   padding-top: 100px;
-  padding-bottom: 24px;
+  padding-bottom: 28px;
   width: 100%;
 }
 
-/* Fila superior: Widget de Clima (Cols 1-3) */
+/* =========================================================
+   GRILLA OFICIAL FIGMA (12 COLUMNAS, STRETCH, MARGIN 160, GUTTER 32)
+   Desktop (>1024px) - Jerarquías, Espaciados Áureos y Cabeceras 6+6 Cols
+   ========================================================= */
+@media (min-width: 1025px) {
+  :root {
+    --grid-margin: 160px;
+    --grid-gutter: 32px;
+    --grid-cols: 12;
+  }
+
+  /* Contenedor general: alineado de punta a punta con los 160px de margen */
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 160px;
+    padding-right: 160px;
+    box-sizing: border-box;
+  }
+
+  /* Navbar flotante: alineada exactamente con las 12 columnas (160px de margen a ambos lados) */
+  header.site-header {
+    width: calc(100% - 320px);
+    max-width: none;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Hero: Widget de Viento (Cols 1 a 3) y Bajada + CTAs (Cols 8 a 12, alineada a la izq) */
+  .hero-weather-col {
+    width: calc((100% - 11 * 32px) / 12 * 3 + 2 * 32px);
+    min-width: 260px;
+    max-width: 320px;
+  }
+
+  .hero-bajada-col {
+    width: calc((100% - 11 * 32px) / 12 * 5 + 4 * 32px);
+    max-width: 480px;
+    text-align: left;
+  }
+
+  /* =========================================================
+     CABECERAS DE SECCIÓN UNIFICADAS (6 COLS TÍTULO + 6 COLS BAJADA ALINEADA A LA IZQ)
+     ========================================================= */
+  .disciplinas-header,
+  .bento-header,
+  .instructores-header,
+  .faq-header,
+  .reviews-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+    align-items: flex-end;
+    margin-bottom: var(--section-header-mb, 44px);
+    width: 100%;
+  }
+
+  .disciplinas-title-col,
+  .bento-header-title-col,
+  .instructores-title-col,
+  .faq-title-col,
+  .reviews-title-col {
+    grid-column: 1 / span 6;
+    text-align: left;
+  }
+
+  .disciplinas-desc-col,
+  .bento-header-desc-col,
+  .instructores-desc-col,
+  .faq-desc-col,
+  .reviews-desc-col {
+    grid-column: 7 / span 6;
+    text-align: left;
+    padding-bottom: 4px;
+  }
+
+  /* Bajadas estandarizadas: tipografía, interlínea e interletra unificadas */
+  .disciplinas-subtext,
+  .bento-header-desc,
+  .instructores-subtext,
+  .faq-subtext,
+  .reviews-subtext {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 1.15vw, 18px);
+    line-height: 1.58;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    opacity: 0.82;
+    margin: 0;
+    max-width: 48ch;
+    text-align: left;
+    display: block;
+  }
+
+  /* Bento Grid: 12 columnas con gutters de 32px */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 280px 280px;
+    gap: 32px;
+  }
+  .bento-cell--wide      { grid-column: 1 / span 5; grid-row: 1; }
+  .bento-cell--dark      { grid-column: 6 / span 3; grid-row: 1; }
+  .bento-cell--tall      { grid-column: 9 / span 4; grid-row: 1 / span 2; }
+  .bento-cell--accent    { grid-column: 1 / span 5; grid-row: 2; }
+  .bento-cell--photo-alt { grid-column: 6 / span 3; grid-row: 2; }
+
+  /* Filosofía Objetivo: 6 cols título + 6 cols texto con gutter 32px */
+  .objetivo-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+    align-items: flex-start;
+  }
+  .objetivo-headline-col {
+    grid-column: 1 / span 6;
+    text-align: left;
+  }
+  .objetivo-right-pane {
+    grid-column: 7 / span 6;
+    text-align: left;
+  }
+
+  /* Instructores Team: 4 cards de 3 columnas cada una */
+  .instructores-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  /* Reseñas Masonry: 4 columnas con gutters de 32px */
+  .reviews-masonry-grid {
+    gap: 32px;
+  }
+}
+
+/* Fila superior: Widget de Clima (Cols 1 a 3) */
 .hero-top-row {
   width: 100%;
 }
 
 .hero-weather-col {
-  max-width: 300px;
-  width: fit-content;
+  width: 100%;
+  max-width: 320px;
 }
 
-/* Bloque inferior: Bajada (Cols 9-12) + H1 Monumental */
+/* Bloque inferior: Bajada (Cols 8-12 en el cielo celeste) + H1 Monumental */
 .hero-bottom-area {
   display: flex;
   flex-direction: column;
@@ -745,7 +901,7 @@ header.site-header:hover {
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  margin-bottom: clamp(48px, 6.5vh, 75px);
+  margin-bottom: clamp(36px, 5.5vh, 60px);
   position: relative;
   z-index: 5;
 }
@@ -755,11 +911,11 @@ header.site-header:hover {
    Unificado con el Navbar flotante: blanco translúcido, nítido y de alto contraste
    ========================================================= */
 .hero-weather-card {
-  background: rgba(254, 254, 254, 0.82);
+  background: rgba(254, 254, 254, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-card, 24px);
   box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08), 
               0 2px 8px rgba(13, 21, 28, 0.04), 
               inset 0 1px 0 rgba(255, 255, 255, 0.95);
@@ -778,8 +934,8 @@ header.site-header:hover {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: fit-content;
-  max-width: 450px;
+  width: 100%;
+  max-width: 440px;
   padding: 0;
   background: transparent;
   border: none;
@@ -790,11 +946,12 @@ header.site-header:hover {
 
 .hero-bajada-text {
   font-family: var(--font-body);
-  font-size: clamp(13px, 0.9vw, 14px);
+  font-size: clamp(13.5px, 0.95vw, 15px);
   font-weight: 450;
   color: #1A1717;
   line-height: 1.55;
   margin: 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .hero-bajada-text strong {
@@ -1269,7 +1426,7 @@ header.site-header:hover {
    SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
    ========================================================= */
 .section-disciplinas {
-  padding: 40px 0 0;
+  padding: var(--section-padding-y, 100px) 0 40px;
   position: relative;
   scroll-margin-top: 88px;
 }
@@ -1281,33 +1438,31 @@ header.site-header:hover {
   background: transparent;
   pointer-events: none;
   padding: 4px 0 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: var(--section-header-mb, 36px);
 }
 
-.disciplinas-title-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 100%;
+.disciplinas-title-col {
+  pointer-events: auto;
 }
 
-.disciplinas-title-group h2 {
+.disciplinas-desc-col {
+  pointer-events: auto;
+}
+
+.disciplinas-title-col h2 {
   white-space: nowrap;
   font-size: clamp(2.2rem, 4.4vw, 4.2rem);
 }
 
-.disciplinas-title-group .section-label {
+.disciplinas-title-col .section-label {
   margin-bottom: 8px;
 }
 
 .disciplinas-subtext {
   max-width: 520px;
-  font-size: 14.5px;
+  font-size: 16px;
   color: var(--ink);
-  line-height: 1.45;
+  line-height: 1.55;
   opacity: 0.82;
   margin-top: 8px;
 }
@@ -1439,9 +1594,9 @@ header.site-header:hover {
 /* Tarjeta Principal de Deporte */
 .sport-card-stage {
   background: #FFFFFF;
-  border-radius: 20px;
+  border-radius: var(--radius-card, 24px);
   border: 1px solid var(--line);
-  padding: 26px 32px;
+  padding: 28px 32px;
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.04), 0 16px 36px rgba(31, 31, 19, 0.1);
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -1464,7 +1619,7 @@ header.site-header:hover {
 }
 
 .sport-media-box {
-  border-radius: 12px;
+  border-radius: var(--radius-inner, 16px);
   overflow: hidden;
   height: clamp(300px, 36vh, 390px);
 }
@@ -1561,287 +1716,493 @@ header.site-header:hover {
 }
 
 /* =========================================================
-   CITA MANIFIESTO & SLIDER FOTOGRÁFICO
+   SECCIÓN: EN NÚMEROS (BENTO GRID)
    ========================================================= */
-.section-mosaic-quote {
-  padding: 24px 0 80px;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
+.section-bento {
+  padding: var(--section-padding-y, 100px) 0;
 }
 
-.mosaic-stage-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 64px;
-  max-width: 1340px;
-  margin: 0 auto;
-  padding: 0 32px;
-  width: 100%;
-}
-
-.mosaic-center-quote {
-  text-align: center;
-  padding: 0 16px;
-  width: 100%;
-}
-
-.mosaic-slider-track {
+/* Header con título a la izquierda y bajada a la derecha estilo referencia */
+.bento-header {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: flex-end;
+  gap: 48px;
+  margin-bottom: var(--section-header-mb, 44px);
+}
+
+.bento-header-title-col .section-label {
+  margin-bottom: 12px;
+}
+
+.bento-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+  font-weight: 400;
+  line-height: 0.96;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.bento-header-desc-col {
+  padding-bottom: 4px;
+}
+
+.bento-header-desc {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.58;
+  color: var(--ink);
+  opacity: 0.82;
+  margin: 0;
+  max-width: 48ch;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  grid-template-rows: 280px 280px;
   gap: 20px;
-  width: 100%;
 }
 
-.mosaic-card-thumb {
-  border-radius: 16px;
+.bento-cell {
+  border-radius: var(--radius-card, 24px);
   overflow: hidden;
-  box-shadow: 0 10px 24px rgba(35, 31, 32, 0.08);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
-  will-change: transform;
+  position: relative;
 }
 
-.mosaic-card-thumb img {
+.bento-cell--photo img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mosaic-card-thumb:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 36px rgba(35, 31, 32, 0.16);
+.bento-cell--photo:hover img {
+  transform: scale(1.04);
 }
 
-.mosaic-center-quote {
-  text-align: center;
-  padding: 0 16px;
-  width: 100%;
+.bento-cell--wide      { grid-column: 1; grid-row: 1; }
+.bento-cell--dark      { grid-column: 2; grid-row: 1; }
+.bento-cell--tall      { grid-column: 3; grid-row: 1 / span 2; }
+.bento-cell--accent    { grid-column: 1; grid-row: 2; }
+.bento-cell--photo-alt { grid-column: 2; grid-row: 2; }
+
+.bento-cell--dark {
+  background-color: var(--ink);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
 }
 
-.manifesto-big-quote {
+.bento-stat-number {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 3.8vw, 4.4rem);
+  font-size: 64px;
   font-weight: 400;
-  line-height: 0.94;
+  line-height: 0.9;
+  color: var(--orange);
+}
+
+.bento-stat-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(254, 254, 254, 0.75);
+  max-width: 30ch;
+}
+
+.bento-cell--accent {
+  background-color: var(--orange);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bento-quote-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.bento-quote-text {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.15;
   text-transform: uppercase;
+  color: #FFFFFF;
   letter-spacing: -0.005em;
-  display: inline-block;
-  max-width: 100%;
-  white-space: nowrap;
+}
 
-  /* Capa 1: textura arriba | Capa 2: color sólido abajo */
-  background-image: 
-    url('./assets/mascara-borde.png'), 
-    linear-gradient(var(--orange), var(--orange));
-  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* --- Tablets --- */
+@media (max-width: 1024px) {
+  .bento-header {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .bento-header-desc {
+    max-width: 55ch;
+  }
+  .bento-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 240px 240px 240px;
+    gap: 16px;
+  }
+  .bento-cell--wide      { grid-column: 1 / span 2; grid-row: 1; }
+  .bento-cell--dark      { grid-column: 1; grid-row: 2; }
+  .bento-cell--tall      { grid-column: 2; grid-row: 2 / span 2; }
+  .bento-cell--accent    { grid-column: 1; grid-row: 3; }
+  .bento-cell--photo-alt { grid-column: 1; grid-row: 3; display: none; } /* se oculta: 5 celdas no cierran prolijo en 2 cols x 3 filas */
+}
 
-  /* Modo multiply */
-  background-blend-mode: multiply;
-
-  /* Aplica el fondo a la silueta del texto */
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-
-  /* Contraste en 100% y brillo en 1.1 */
-  filter: contrast(100%) brightness(1.1);
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  .section-bento { padding: 32px 0 64px; }
+  .bento-header {
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .bento-title {
+    font-size: clamp(2rem, 7.5vw, 2.6rem);
+  }
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 14px;
+  }
+  .bento-cell {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    min-height: 220px;
+    display: block !important; /* revierte el display:none del breakpoint anterior */
+  }
+  .bento-cell--dark,
+  .bento-cell--accent {
+    min-height: auto;
+    padding: 24px;
+  }
+  .bento-stat-number { font-size: 48px; }
+  .bento-quote-text  { font-size: 18px; }
 }
 
 /* =========================================================
-   SECCIÓN: ALQUILER DE KAYAKS (BLOQUE OSCURO)
+   SECCIÓN: ALQUILERES & EXPERIENCIAS (TIDESCAPE SCATTER STYLE)
    ========================================================= */
-.section-kayaks-dark {
+.section-tidescape-cta {
+  position: relative;
+  overflow: hidden;
   background-color: #000000;
-  padding: 128px 0;
+  min-height: clamp(750px, 92vh, 920px);
+  padding: var(--section-padding-y, 100px) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   scroll-margin-top: 88px;
 }
 
-.kayak-card-white {
-  background: #FFFFFF;
-  border-radius: 12px;
-  border: none;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  box-shadow: none;
+/* Glow ambiental concéntrico */
+.tidescape-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 900px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at center, rgba(255, 82, 6, 0.16) 0%, rgba(255, 82, 6, 0.04) 45%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(40px);
 }
 
-.kayak-media {
+.tidescape-container {
   position: relative;
-  height: 100%;
-  min-height: 448px;
+  width: 100%;
+  max-width: 1360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 620px;
+  z-index: 2;
+}
+
+/* Contenido Central: Título, Bajada y CTA */
+.tidescape-center-wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 660px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform, opacity;
+  transform: translateY(calc(30px * (1 - var(--tidescape-p, 0)))) scale(calc(0.92 + 0.08 * var(--tidescape-p, 0)));
+  opacity: calc(0.2 + 0.8 * var(--tidescape-p, 0));
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tidescape-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 6px 16px;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--orange, #FF5206);
+  margin-bottom: 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.tidescape-eyebrow-pill .eyebrow-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--orange);
+  box-shadow: 0 0 10px var(--orange);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+.tidescape-title {
+  font-family: var(--font-display, 'Anton');
+  font-size: clamp(48px, 6.2vw, 84px);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #FEFEFE;
+  margin: 0 0 24px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tidescape-desc {
+  font-family: var(--font-body, 'Inter');
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.65;
+  color: rgba(254, 254, 254, 0.78);
+  max-width: 530px;
+  margin: 0 auto 28px;
+}
+
+.tidescape-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 34px;
+}
+
+.tidescape-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(254, 254, 254, 0.88);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill, 9999px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.tidescape-chip svg {
+  color: var(--orange);
+}
+
+.tidescape-cta-action {
+  display: flex;
+  justify-content: center;
+}
+
+/* Tarjetas Flotantes Scatter */
+.tidescape-cards-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.tidescape-photo-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: auto;
+  width: clamp(230px, 19vw, 290px);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 8px;
+  border-radius: var(--radius-card, 24px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  will-change: transform, opacity;
+  transform: translate(
+    calc(-50% + var(--scatter-x) * var(--tidescape-p, 0)),
+    calc(-50% + var(--scatter-y) * var(--tidescape-p, 0))
+  ) rotate(calc(var(--scatter-rot) * var(--tidescape-p, 0))) scale(calc(0.86 + 0.14 * var(--tidescape-p, 0)));
+  opacity: calc(0.35 + 0.65 * var(--tidescape-p, 0));
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.tidescape-photo-card:hover {
+  border-color: rgba(255, 82, 6, 0.4);
+  box-shadow: 0 32px 65px -10px rgba(255, 82, 6, 0.28), 0 20px 40px rgba(0, 0, 0, 0.85);
+  z-index: 12;
+}
+
+/* Coordenadas de dispersión (Scatter targets) */
+.tidescape-card-tl {
+  --scatter-x: -470px;
+  --scatter-y: -230px;
+  --scatter-rot: -6deg;
+}
+
+.tidescape-card-tr {
+  --scatter-x: 460px;
+  --scatter-y: -250px;
+  --scatter-rot: 5deg;
+}
+
+.tidescape-card-bl {
+  --scatter-x: -450px;
+  --scatter-y: 220px;
+  --scatter-rot: -3deg;
+}
+
+.tidescape-card-br {
+  --scatter-x: 470px;
+  --scatter-y: 200px;
+  --scatter-rot: 4deg;
+}
+
+.tidescape-photo-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.8;
+  border-radius: var(--radius-inner, 16px);
   overflow: hidden;
   background-color: #121212;
 }
 
-.kayak-slider-track {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.kayak-slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: scale(1.03);
-  pointer-events: none;
-}
-
-.kayak-slide.is-active {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  z-index: 2;
-  pointer-events: auto;
-}
-
-.kayak-slide img {
+.tidescape-photo-inner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Indicadores: 3 puntitos en el centro abajo */
-.kayak-dots {
+.tidescape-photo-card:hover .tidescape-photo-inner img {
+  transform: scale(1.06);
+}
+
+.tidescape-card-badge {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  z-index: 10;
-  background: rgba(18, 18, 18, 0.45);
+  gap: 7px;
+  padding: 7px 12px;
+  background: rgba(18, 18, 18, 0.78);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 6px 12px;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: var(--radius-pill, 9999px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 11px;
+  font-weight: 600;
+  color: #FEFEFE;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
 }
 
-.kayak-dot {
-  width: 8px;
-  height: 8px;
+.tidescape-card-badge .badge-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.45);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.25s ease;
+  background: var(--orange);
+  box-shadow: 0 0 6px var(--orange);
+  flex-shrink: 0;
 }
 
-.kayak-dot:hover {
-  background-color: #FFFFFF;
+/* Tablet (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .tidescape-photo-card {
+    width: clamp(200px, 18vw, 250px);
+  }
+  .tidescape-card-tl {
+    --scatter-x: -380px;
+    --scatter-y: -210px;
+  }
+  .tidescape-card-tr {
+    --scatter-x: 370px;
+    --scatter-y: -220px;
+  }
+  .tidescape-card-bl {
+    --scatter-x: -360px;
+    --scatter-y: 200px;
+  }
+  .tidescape-card-br {
+    --scatter-x: 370px;
+    --scatter-y: 190px;
+  }
 }
 
-.kayak-dot.is-active {
-  width: 22px;
-  border-radius: 100px;
-  background-color: var(--orange);
-}
-
-/* Flechas de navegación para desktop */
-.kayak-slider-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(35, 31, 32, 0.08);
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  opacity: 0;
-  transition: opacity 0.25s ease, transform 0.2s ease, background-color 0.2s, color 0.2s;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-}
-
-.kayak-slider-arrow.prev {
-  left: 16px;
-}
-
-.kayak-slider-arrow.next {
-  right: 16px;
-}
-
-.kayak-media:hover .kayak-slider-arrow {
-  opacity: 1;
-}
-
-.kayak-slider-arrow:hover {
-  background-color: #FFFFFF;
-  color: var(--orange);
-  transform: translateY(-50%) scale(1.08);
-}
-
-.kayak-content {
-  padding: 48px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.kayak-content .section-label {
-  margin-bottom: 16px;
-}
-.kayak-title {
-  font-family: var(--font-display);
-  font-size: 40px;
-  font-weight: 400;
-  line-height: 1.05;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  color: var(--ink);
-}
-.kayak-text {
-  font-size: 15px;
-  color: var(--ink);
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-.kayak-features {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 32px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
-}
-.kayak-feat-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.kayak-feat-item::before {
-  content: '•';
-  color: var(--orange);
-  font-size: 16px;
+/* Responsive Laptop pequeña / Tablet (769px - 1024px) */
+@media (max-width: 1024px) {
+  .tidescape-photo-card {
+    width: 200px;
+  }
+  .tidescape-card-tl {
+    --scatter-x: -300px;
+    --scatter-y: -190px;
+  }
+  .tidescape-card-tr {
+    --scatter-x: 300px;
+    --scatter-y: -200px;
+  }
+  .tidescape-card-bl {
+    --scatter-x: -290px;
+    --scatter-y: 180px;
+  }
+  .tidescape-card-br {
+    --scatter-x: 290px;
+    --scatter-y: 180px;
+  }
 }
 
 /* =========================================================
    SECCIÓN: EL OBJETIVO (FILOSOFÍA PEDAGÓGICA)
    ========================================================= */
 .section-objetivo {
-  padding: 128px 0;
+  padding: var(--section-padding-y, 100px) 0;
 }
 
 .objetivo-grid {
@@ -1913,103 +2274,187 @@ header.site-header:hover {
 /* =========================================================
    SECCIÓN: LOS INSTRUCTORES
    ========================================================= */
+/* =========================================================
+   SECCIÓN: LOS INSTRUCTORES
+   ========================================================= */
 .section-instructores {
-  padding: 0 0 120px;
+  padding: var(--section-padding-y, 100px) 0;
   scroll-margin-top: 88px;
 }
 
 .instructores-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: flex-end;
+  gap: 48px;
+  margin-bottom: var(--section-header-mb, 44px);
 }
 
-.instructores-title-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 580px;
+.instructores-title-col .section-label {
+  margin-bottom: 12px;
 }
 
-.instructores-title-group .section-label {
-  margin-bottom: 18px;
+.instructores-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.6vw, 4.8rem);
+  font-weight: 400;
+  line-height: 0.94;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.instructores-desc-col {
+  padding-bottom: 4px;
 }
 
 .instructores-subtext {
-  max-width: 520px;
-  font-size: 14.5px;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.15vw, 18px);
   color: var(--ink);
-  line-height: 1.45;
+  line-height: 1.58;
   opacity: 0.82;
-  margin-top: 8px;
+  margin: 0;
+  max-width: 48ch;
 }
 
 .instructores-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 22px;
 }
+
 .instructor-card {
-  background: #FFFFFF;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  position: relative;
+  background: #f4f4f4;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: none;
-  transition: transform 0.2s ease;
+  box-shadow: 0 8px 24px rgba(35, 31, 32, 0.06);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  aspect-ratio: 1 / 1.18;
+  cursor: pointer;
 }
+
 .instructor-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(35, 31, 32, 0.14);
 }
+
 .instructor-photo {
-  border-radius: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  height: 320px;
-  margin-bottom: 0;
 }
+
 .instructor-photo img {
   width: 100%;
   height: 100%;
-  aspect-ratio: 4/5;
   object-fit: cover;
-  image-orientation: from-image;
   display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.instructor-card:hover .instructor-photo img {
+  transform: scale(1.04);
 }
 
 .instructor-photo img.photo-align-right {
   object-position: right center !important;
 }
+
+/* Badge flotante inferior (estilo referencia): blanco por defecto, se vuelve NARANJA al hacer hover */
+.instructor-info-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  background: rgba(254, 254, 254, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 16px 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s ease, 
+              transform 0.3s ease;
+}
+
 .instructor-name {
-  font-size: 16px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--ink);
-  margin-top: 16px;
-  margin-bottom: 4px;
-  padding: 0 16px;
+  color: #111111;
+  letter-spacing: -0.015em;
+  margin: 0;
+  line-height: 1.2;
+  transition: color 0.3s ease;
 }
-.instructor-role {
-  font-size: 12px;
-  color: var(--ink);
-  padding: 0 16px 16px;
+
+/* Píldoras de deportes que dictan (estilo referencia: borde naranja fino sobre blanco) */
+.instructor-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
 }
-.instructor-role strong {
-  color: var(--orange);
+
+.instructor-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+  color: var(--orange, #f25a24);
+  background: transparent;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px solid var(--orange, #f25a24);
+  transition: all 0.3s ease;
+}
+
+/* =========================================================
+   HOVER STATE: LA CARD SE VUELVE NARANJA
+   ========================================================= */
+.instructor-card:hover .instructor-info-badge {
+  background: var(--orange, #f25a24);
+  border-color: var(--orange, #f25a24);
+  box-shadow: 0 12px 30px rgba(242, 90, 36, 0.40);
+  transform: translateY(-2px);
+}
+
+.instructor-card:hover .instructor-name {
+  color: #FFFFFF;
+}
+
+.instructor-card:hover .instructor-tag {
+  color: var(--orange, #f25a24);
+  background: #FFFFFF;
+  border-color: #FFFFFF;
 }
 
 /* =========================================================
    BANNER DIVIDIDO: EL SPOT & CÁMARA EN VIVO
    ========================================================= */
 .section-spot-split {
-  padding: 96px 0 100px;
+  padding: var(--section-padding-y, 100px) 0;
   scroll-margin-top: 88px;
 }
 
 .spot-split-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-radius: 16px;
+  border-radius: var(--radius-card, 24px);
   border: 1px solid var(--line);
   overflow: hidden;
   box-shadow: none;
@@ -2200,13 +2645,13 @@ header.site-header:hover {
    ========================================================= */
 .section-ubicacion-mapa {
   background-color: #000000;
-  padding: 100px 0;
+  padding: var(--section-padding-y, 100px) 0;
   scroll-margin-top: 88px;
 }
 
 .mapa-card-white {
   background: #FFFFFF;
-  border-radius: 12px;
+  border-radius: var(--radius-card, 24px);
   border: 1px solid var(--line);
   overflow: hidden;
   box-shadow: none;
@@ -2291,13 +2736,13 @@ header.site-header:hover {
    ========================================================= */
 .section-faq {
   background-color: var(--paper);
-  padding: 100px 0 110px;
+  padding: var(--section-padding-y, 100px) 0;
   position: relative;
   scroll-margin-top: 88px;
 }
 
-.faq-title-wrap {
-  margin-bottom: 36px;
+.faq-header {
+  margin-bottom: var(--section-header-mb, 36px);
 }
 
 .motion-accordion {
@@ -2479,30 +2924,26 @@ header.site-header:hover {
    SECCIÓN: LOS ALUMNOS DICEN (RESEÑAS)
    ========================================================= */
 .section-alumnos-reviews {
-  padding: 85px 0 50px;
+  padding: var(--section-padding-y, 100px) 0 48px;
   background-color: transparent;
 }
 
 .reviews-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 36px;
+  margin-bottom: var(--section-header-mb, 44px);
 }
 
-.reviews-title-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 100%;
-}
-
-.reviews-title-group .section-label {
+.reviews-title-col .section-label {
   margin-bottom: 8px;
 }
 
 .reviews-subtext {
-  display: none;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.58;
+  color: var(--ink);
+  opacity: 0.82;
+  margin: 0;
+  max-width: 48ch;
 }
 
 .reviews-masonry-grid {
@@ -2520,7 +2961,7 @@ header.site-header:hover {
 
 .review-cell-card {
   background: #FFFFFF;
-  border-radius: 14px;
+  border-radius: var(--radius-card, 24px);
   border: 1px solid var(--line);
   padding: 22px 20px;
   box-shadow: 0 4px 16px rgba(35, 31, 32, 0.04);
@@ -2881,7 +3322,33 @@ header.site-header:hover {
   .scroll-stack-card:last-child { margin-bottom: 6vh; }
 
   /* Secciones intermedias */
-  .kayak-card-white { grid-template-columns: 1fr; }
+  .disciplinas-header,
+  .bento-header,
+  .instructores-header,
+  .faq-header,
+  .reviews-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 28px;
+    width: 100%;
+  }
+  .disciplinas-title-col,
+  .bento-header-title-col,
+  .instructores-title-col,
+  .faq-title-col,
+  .reviews-title-col,
+  .disciplinas-desc-col,
+  .bento-header-desc-col,
+  .instructores-desc-col,
+  .faq-desc-col,
+  .reviews-desc-col {
+    width: 100%;
+    grid-column: auto;
+    text-align: left;
+  }
+
   .objetivo-grid { grid-template-columns: 1fr; gap: 40px; }
   .instructores-grid { grid-template-columns: repeat(2, 1fr); }
   .spot-split-grid { grid-template-columns: 1fr; }
@@ -3042,10 +3509,12 @@ header.site-header:hover {
     margin-bottom: 14px;
     padding: 0;
   }
-  .disciplinas-title-group {
+  .disciplinas-title-group,
+  .disciplinas-title-col {
     width: 100%;
   }
-  .disciplinas-title-group h2 {
+  .disciplinas-title-group h2,
+  .disciplinas-title-col h2 {
     font-size: clamp(1.5rem, 6.2vw, 2.5rem);
     white-space: nowrap;
     margin-bottom: 0;
@@ -3101,84 +3570,68 @@ header.site-header:hover {
     height: 44px;
   }
 
-  /* Kayaks & SUP Alquileres */
-  .section-kayaks-dark {
-    padding: 64px 0;
+  /* Alquileres Tidescape Style Mobile */
+  .section-tidescape-cta {
+    min-height: auto;
+    padding: 64px 0 72px;
   }
-  .kayak-media {
-    min-height: 240px;
-    height: 240px;
+  .tidescape-glow {
+    width: 100%;
+    height: 400px;
   }
-  .kayak-slider-arrow {
-    display: none;
+  .tidescape-container {
+    min-height: auto;
+    flex-direction: column;
+    gap: 36px;
   }
-  .kayak-dots {
-    bottom: 12px;
-    padding: 5px 10px;
+  .tidescape-center-wrap {
+    transform: none !important;
+    opacity: 1 !important;
+    max-width: 100%;
   }
-  .kayak-content {
-    padding: 28px 20px;
-  }
-  .kayak-title {
-    font-size: 28px;
+  .tidescape-title {
+    font-size: clamp(34px, 9vw, 44px);
     margin-bottom: 16px;
   }
-  .kayak-text {
+  .tidescape-desc {
     font-size: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
-  .kayak-features {
-    margin-bottom: 24px;
-    gap: 6px;
+  .tidescape-chips {
+    margin-bottom: 28px;
+    gap: 8px;
   }
-  .kayak-content .btn-pill-orange {
-    --btn-h: 44px;
-    --btn-icon-size: 32px;
+  .tidescape-chip {
+    font-size: 11.5px;
+    padding: 5px 11px;
+  }
+  .tidescape-cards-wrap {
+    position: static;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
     width: 100%;
-    justify-content: center;
-    height: 44px;
+    margin-top: 10px;
+    pointer-events: auto;
+  }
+  .tidescape-photo-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    transform: none !important;
+    opacity: 1 !important;
+    padding: 6px;
+  }
+  .tidescape-card-badge {
+    font-size: 10px;
+    padding: 5px 8px;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
   }
 
-  /* Mosaico & Cita Manifiesto */
-  .section-mosaic-quote {
-    padding: 18px 0 48px;
-  }
-  .mosaic-stage-wrap {
-    padding: 0;
-    gap: 38px;
-  }
-  .mosaic-center-quote {
-    padding: 0 18px;
-  }
-  .manifesto-big-quote {
-    font-size: clamp(1.4rem, 5.2vw, 2.6rem);
-    line-height: 0.98;
-    white-space: nowrap;
-  }
-  .mosaic-slider-track {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 14px;
-    padding: 8px 18px 20px;
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .mosaic-slider-track::-webkit-scrollbar {
-    display: none;
-  }
-  .mosaic-card-thumb {
-    flex: 0 0 76%;
-    scroll-snap-align: center;
-    border-radius: 16px;
-    box-shadow: 0 8px 22px rgba(35, 31, 32, 0.10);
-  }
-  .mosaic-card-thumb img {
-    height: 200px;
-    border-radius: 16px;
-  }
 
   /* Filosofía / Objetivo */
   .section-objetivo {
@@ -3214,17 +3667,48 @@ header.site-header:hover {
     padding: 0 0 64px;
   }
   .instructores-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 14px;
     margin-bottom: 28px;
   }
-  .instructores-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .instructores-title {
+    font-size: clamp(2rem, 7.5vw, 2.8rem);
   }
-  .instructor-photo {
-    height: 280px;
+  .instructores-subtext {
+    max-width: 55ch;
+  }
+  .instructores-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .instructor-card {
+    border-radius: 20px;
+    aspect-ratio: 1 / 1.25;
+  }
+  .instructor-info-badge {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    gap: 6px;
+  }
+  .instructor-name {
+    font-size: 0.95rem;
+  }
+  .instructor-tag {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+
+  @media (max-width: 480px) {
+    .instructores-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .instructor-card {
+      aspect-ratio: 1 / 1.15;
+    }
   }
 
   /* Mapa */
@@ -3469,7 +3953,8 @@ header.site-header:hover {
     top: 60px;
     margin-bottom: 10px;
   }
-  .disciplinas-title-group h2 {
+  .disciplinas-title-group h2,
+  .disciplinas-title-col h2 {
     font-size: clamp(1.35rem, 6.6vw, 1.85rem);
     white-space: nowrap;
     margin-bottom: 0;
@@ -3493,7 +3978,6 @@ header.site-header:hover {
   .sport-title-giant {
     font-size: 24px;
   }
-  .kayak-content,
   .mapa-info-pane,
   .spot-orange-card,
   .spot-dark-camera-card {

@@ -363,118 +363,99 @@ function initMobileMenu() {
   });
 }
 
-// Slider interactivo de la tarjeta de alquileres (Kayaks, SUP, Windsurf)
-function initKayakSlider() {
-  const slider = document.getElementById('kayakSlider');
-  if (!slider) return;
+// Animación de dispersión (Scatter) al hacer scroll - Sección Alquileres (estilo TideScape)
+function initTidescapeScatter() {
+  const section = document.querySelector('.section-tidescape-cta');
+  if (!section) return;
 
-  const slides = slider.querySelectorAll('.kayak-slide');
-  const dots = slider.querySelectorAll('.kayak-dot');
-  const prevBtn = slider.querySelector('.kayak-slider-arrow.prev');
-  const nextBtn = slider.querySelector('.kayak-slider-arrow.next');
-
-  if (!slides.length || !dots.length) return;
-
-  let currentIndex = 0;
-  let timer = null;
-  const intervalTime = 4200;
-
-  function goToSlide(index) {
-    currentIndex = (index + slides.length) % slides.length;
-
-    slides.forEach((slide, i) => {
-      const isActive = i === currentIndex;
-      slide.classList.toggle('is-active', isActive);
-      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-    });
-
-    dots.forEach((dot, i) => {
-      const isActive = i === currentIndex;
-      dot.classList.toggle('is-active', isActive);
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
+  // Si el usuario prefiere movimiento reducido, fijamos el estado final estático
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    section.style.setProperty('--tidescape-p', '1');
+    return;
   }
 
-  function nextSlide() {
-    goToSlide(currentIndex + 1);
+  let ticking = false;
+  let isIntersecting = false;
+
+  function updateScatter() {
+    ticking = false;
+    if (!isIntersecting && window.innerWidth > 768) return;
+
+    const rect = section.getBoundingClientRect();
+    const windowH = window.innerHeight;
+
+    // Se calcula el progreso desde que el borde superior entra al viewport
+    // hasta que el centro de la sección llega a la zona focal
+    const startY = windowH * 0.95;
+    const endY = windowH * 0.18;
+
+    const rawProgress = (startY - rect.top) / (startY - endY);
+    const clampedProgress = Math.max(0, Math.min(1, rawProgress));
+
+    // Curva de aceleración/desaceleración suave y natural
+    const easedProgress = 1 - Math.pow(1 - clampedProgress, 2.6);
+
+    section.style.setProperty('--tidescape-p', easedProgress.toFixed(4));
   }
 
-  function prevSlide() {
-    goToSlide(currentIndex - 1);
-  }
-
-  function startAutoplay() {
-    stopAutoplay();
-    timer = setInterval(nextSlide, intervalTime);
-  }
-
-  function stopAutoplay() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(updateScatter);
+      ticking = true;
     }
   }
 
-  // Clic en los 3 puntitos
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetIndex = parseInt(dot.getAttribute('data-slide'), 10);
-      goToSlide(targetIndex);
-      startAutoplay();
-    });
-  });
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isIntersecting = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          updateScatter();
+        }
+      });
+    }, { rootMargin: '250px 0px' });
 
-  // Flechas de navegación
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      prevSlide();
-      startAutoplay();
-    });
+    observer.observe(section);
+  } else {
+    isIntersecting = true;
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      nextSlide();
-      startAutoplay();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  // Ejecución inicial
+  updateScatter();
+
+  // Efecto de paralaje interactivo al pasar el cursor en computadoras de escritorio
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const cards = section.querySelectorAll('[data-tidescape-card]');
+    section.addEventListener('mousemove', (e) => {
+      if (window.innerWidth <= 768) return;
+      const rect = section.getBoundingClientRect();
+      const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+      const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+
+      cards.forEach((card, i) => {
+        const factor = (i % 2 === 0 ? 1 : -1) * (14 + i * 4);
+        card.style.transform = `translate(
+          calc(-50% + var(--scatter-x) * var(--tidescape-p, 0) + ${mouseX * factor}px),
+          calc(-50% + var(--scatter-y) * var(--tidescape-p, 0) + ${mouseY * factor}px)
+        ) rotate(calc(var(--scatter-rot) * var(--tidescape-p, 0))) scale(calc(0.86 + 0.14 * var(--tidescape-p, 0)))`;
+      });
+    });
+
+    section.addEventListener('mouseleave', () => {
+      cards.forEach((card) => {
+        card.style.transform = '';
+      });
     });
   }
-
-  // Pausar en hover en desktop
-  slider.addEventListener('mouseenter', stopAutoplay);
-  slider.addEventListener('mouseleave', startAutoplay);
-
-  // Soporte táctil / swipe en móviles
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  slider.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    stopAutoplay();
-  }, { passive: true });
-
-  slider.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-    }
-    startAutoplay();
-  }, { passive: true });
-
-  startAutoplay();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
-  initKayakSlider();
+  initTidescapeScatter();
   initAccordion();
   initDropdown();
   initMobileMenu();
