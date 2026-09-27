@@ -2025,16 +2025,17 @@ header.site-header:hover {
   box-shadow: none !important;
 }
 
-/* Esquinas y animación hacia el centro */
+/* Esquinas y animación hacia el centro con inclinación */
 .tidescape-card-tl {
   top: 0;
   left: 0;
   --shift-x: 280px;
   --shift-y: 120px;
+  --rot: -6deg;
   transform: translate(
     calc(var(--shift-x) * (1 - var(--tidescape-p, 1))),
     calc(var(--shift-y) * (1 - var(--tidescape-p, 1)))
-  );
+  ) rotate(calc(var(--rot) * var(--tidescape-p, 1)));
 }
 
 .tidescape-card-tr {
@@ -2042,10 +2043,11 @@ header.site-header:hover {
   right: 0;
   --shift-x: 280px;
   --shift-y: 120px;
+  --rot: 5deg;
   transform: translate(
     calc(-1 * var(--shift-x) * (1 - var(--tidescape-p, 1))),
     calc(var(--shift-y) * (1 - var(--tidescape-p, 1)))
-  );
+  ) rotate(calc(var(--rot) * var(--tidescape-p, 1)));
 }
 
 .tidescape-card-bl {
@@ -2053,10 +2055,11 @@ header.site-header:hover {
   left: 0;
   --shift-x: 280px;
   --shift-y: 120px;
+  --rot: -4deg;
   transform: translate(
     calc(var(--shift-x) * (1 - var(--tidescape-p, 1))),
     calc(-1 * var(--shift-y) * (1 - var(--tidescape-p, 1)))
-  );
+  ) rotate(calc(var(--rot) * var(--tidescape-p, 1)));
 }
 
 .tidescape-card-br {
@@ -2064,10 +2067,11 @@ header.site-header:hover {
   right: 0;
   --shift-x: 280px;
   --shift-y: 120px;
+  --rot: 5deg;
   transform: translate(
     calc(-1 * var(--shift-x) * (1 - var(--tidescape-p, 1))),
     calc(-1 * var(--shift-y) * (1 - var(--tidescape-p, 1)))
-  );
+  ) rotate(calc(var(--rot) * var(--tidescape-p, 1)));
 }
 
 /* Tablet (769px - 1024px) */
