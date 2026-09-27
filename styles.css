@@ -351,26 +351,55 @@ header.site-header:hover {
 }
 
 .header-nav {
+  position: relative;
   display: flex;
-  list-style: none;
-  gap: 24px;
   align-items: center;
-  justify-content: center;
+  gap: 2px;
+  list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 4px;
 }
 
-.header-nav a {
+/* Pill highlight flotante detrás de los links (Unlumen Highlight) */
+.nav-highlight-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-pill, 9999px);
+  background: rgba(35, 31, 32, 0.06);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.16s ease;
+}
+
+.header-nav .nav-item {
+  position: relative;
+  z-index: 1;
+}
+
+.header-nav .nav-link {
   color: var(--ink);
   text-decoration: none;
+  font-family: var(--font-body);
   font-size: 13.5px;
   font-weight: 600;
-  padding: 8px 6px;
-  transition: color 0.2s ease;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill, 9999px);
+  transition: color 0.18s ease;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-.header-nav a:hover {
+.header-nav .nav-link:hover,
+.header-nav .nav-dropdown.is-open .nav-dropdown-trigger {
   color: var(--orange);
 }
 
@@ -378,37 +407,16 @@ header.site-header:hover {
   display: none;
 }
 
-/* Dropdown Deportes en Navbar */
+/* Dropdown Deportes en Navbar (Motion Navigation Menu) */
 .nav-dropdown {
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-.nav-dropdown-trigger {
-  background: none;
-  border: none;
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 13.5px;
-  font-weight: 600;
-  padding: 8px 6px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: color 0.2s ease;
-  white-space: nowrap;
-}
-
-.nav-dropdown-trigger:hover,
-.nav-dropdown:hover .nav-dropdown-trigger,
-.nav-dropdown.is-open .nav-dropdown-trigger {
-  color: var(--orange);
-}
-
 .dropdown-chevron {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-left: 5px;
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-dropdown:hover .dropdown-chevron,
@@ -416,93 +424,140 @@ header.site-header:hover {
   transform: rotate(180deg);
 }
 
-.nav-dropdown-menu {
+/* Viewport Flotante de MotionNavigationMenu */
+.nav-dropdown-viewport {
   position: absolute;
-  top: calc(100% + 14px);
+  top: calc(100% + 10px);
   left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  min-width: 185px;
-  background: #FFFFFF;
-  border-radius: 18px;
-  border: 1px solid rgba(35, 31, 32, 0.08);
-  box-shadow: 0 16px 40px rgba(35, 31, 32, 0.12), 0 4px 12px rgba(35, 31, 32, 0.04);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  transform: translateX(-50%) translateY(8px) scale(0.96);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
-  z-index: 1050;
+  z-index: 1100;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.22s;
+  will-change: transform, opacity;
 }
 
-.nav-dropdown-menu::before {
+/* Buffer invisible para evitar pérdida de cursor entre botón y viewport */
+.nav-dropdown-viewport::before {
   content: '';
   position: absolute;
   top: -16px;
-  left: 0;
-  right: 0;
-  height: 16px;
+  left: -20px;
+  right: -20px;
+  height: 20px;
 }
 
-.nav-dropdown:hover .nav-dropdown-menu,
-.nav-dropdown.is-open .nav-dropdown-menu {
+.nav-dropdown:hover .nav-dropdown-viewport,
+.nav-dropdown.is-open .nav-dropdown-viewport {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0) scale(1);
 }
 
-.dropdown-sport-item {
+/* Caret / Triángulo apuntando hacia el botón */
+.nav-dropdown-caret {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #FFFFFF;
+  border-left: 1px solid rgba(35, 31, 32, 0.08);
+  border-top: 1px solid rgba(35, 31, 32, 0.08);
+  transform: translateX(-50%) rotate(45deg);
+  z-index: 2;
+  border-top-left-radius: 2px;
+}
+
+/* Menú interior con blur */
+.nav-dropdown-menu {
+  position: relative;
+  min-width: 255px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-inner, 16px);
+  border: 1px solid rgba(35, 31, 32, 0.09);
+  box-shadow: 0 20px 48px -8px rgba(35, 31, 32, 0.14),
+              0 6px 16px -2px rgba(35, 31, 32, 0.06);
+  padding: 6px;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: 12px;
-  text-decoration: none;
-  transition: background-color 0.18s ease, transform 0.18s ease;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
 }
 
-.dropdown-sport-item:hover {
-  background-color: var(--light-1);
-  transform: translateX(2px);
-}
-
-.dropdown-sport-icon {
-  width: 36px;
-  height: 36px;
+/* Pill highlight dentro del dropdown (MotionNavigationMenuContentInner) */
+.dropdown-hover-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
   border-radius: 10px;
-  background: var(--light-1);
-  color: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1;
-  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+  background: rgba(255, 82, 6, 0.08);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.14s ease;
 }
 
-.dropdown-sport-item:hover .dropdown-sport-icon {
-  background: var(--orange);
-  color: #FFFFFF;
-  transform: scale(1.06);
+/* Item de deporte sin números */
+.dropdown-sport-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color 0.18s ease;
+}
+
+.dropdown-sport-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .dropdown-sport-name {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--ink);
   line-height: 1.2;
   transition: color 0.18s ease;
 }
 
+.dropdown-sport-desc {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(35, 31, 32, 0.58);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.dropdown-sport-arrow {
+  color: rgba(35, 31, 32, 0.35);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  flex-shrink: 0;
+}
+
 .dropdown-sport-item:hover .dropdown-sport-name {
   color: var(--orange);
+}
+
+.dropdown-sport-item:hover .dropdown-sport-arrow {
+  color: var(--orange);
+  transform: translateX(3px);
 }
 
 .header-cta-wrap,

@@ -22,39 +22,65 @@
         <img src="./assets/logo-ombu-navbar.png" alt="Logo Escuela Ombú" class="brand-disc-img">
       </a>
 
-      <nav id="main-navigation" aria-label="Navegación principal">
-        <ul class="header-nav">
-          <li><a href="#disciplinas">Aprendizaje</a></li>
-          <li><a href="#kayaks">Alquileres</a></li>
-          <li><a href="#spot">El spot</a></li>
-          <li><a href="#instructores">Nosotros</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+      <nav id="main-navigation" class="motion-nav-root" aria-label="Navegación principal">
+        <ul class="header-nav" id="headerNavList">
+          <!-- Pill highlight flotante (HighlightItem de Unlumen UI) -->
+          <li class="nav-highlight-pill" id="navHighlightPill" aria-hidden="true"></li>
+
+          <li class="nav-item"><a href="#disciplinas" class="nav-link">Aprendizaje</a></li>
+          <li class="nav-item"><a href="#kayaks" class="nav-link">Alquileres</a></li>
+          <li class="nav-item"><a href="#spot" class="nav-link">El spot</a></li>
+          <li class="nav-item"><a href="#instructores" class="nav-link">Nosotros</a></li>
+          <li class="nav-item nav-dropdown" id="navSportsDropdown">
+            <button type="button" class="nav-dropdown-trigger nav-link" aria-expanded="false" aria-haspopup="true" id="navSportsTrigger">
               <span>Deportes</span>
               <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
-            <div class="nav-dropdown-menu">
-              <a href="/kitesurf/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">1</span>
-                <span class="dropdown-sport-name">Kitesurf</span>
-              </a>
-              <a href="/windsurf/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">2</span>
-                <span class="dropdown-sport-name">Windsurf</span>
-              </a>
-              <a href="/wingfoil/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">3</span>
-                <span class="dropdown-sport-name">Wingfoil</span>
-              </a>
-              <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">4</span>
-                <span class="dropdown-sport-name">SUP Paddle</span>
-              </a>
+
+            <!-- Viewport flotante de MotionNavigationMenu -->
+            <div class="nav-dropdown-viewport" id="navSportsViewport">
+              <div class="nav-dropdown-caret" aria-hidden="true"></div>
+
+              <div class="nav-dropdown-menu">
+                <div class="dropdown-hover-pill" id="dropdownHoverPill" aria-hidden="true"></div>
+
+                <a href="/kitesurf/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Kitesurf</span>
+                    <span class="dropdown-sport-desc">Viento, cometa & saltos</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="/windsurf/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Windsurf</span>
+                    <span class="dropdown-sport-desc">Vela, equilibrio & planeo</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="/wingfoil/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Wingfoil</span>
+                    <span class="dropdown-sport-desc">Ala inflable & vuelo sobre foil</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">SUP Paddle</span>
+                    <span class="dropdown-sport-desc">Remo de pie & travesías guiadas</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </li>
-          <li><a href="#faq">FAQ</a></li>
+          <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
         </ul>
       </nav>
 

@@ -299,24 +299,107 @@ function initAccordion() {
   });
 }
 
-// Menú desplegable accesible para "Deportes" en Navbar
-function initDropdown() {
-  const dropdown = document.querySelector('.nav-dropdown');
-  const trigger = document.querySelector('.nav-dropdown-trigger');
-  if (!dropdown || !trigger) return;
+// Motion Navigation Menu (Inspirado en Unlumen UI / Framer Motion)
+function initMotionNav() {
+  const navList = document.getElementById('headerNavList');
+  const highlightPill = document.getElementById('navHighlightPill');
+  const dropdown = document.getElementById('navSportsDropdown');
+  const trigger = document.getElementById('navSportsTrigger');
+  const viewport = document.getElementById('navSportsViewport');
+  const dropdownHoverPill = document.getElementById('dropdownHoverPill');
 
-  trigger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = dropdown.classList.toggle('is-open');
-    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  if (!navList || !highlightPill) return;
+
+  const navLinks = navList.querySelectorAll('.nav-link');
+  let navLeaveTimer = null;
+
+  function movePill(targetEl) {
+    clearTimeout(navLeaveTimer);
+    const navRect = navList.getBoundingClientRect();
+    const itemRect = targetEl.getBoundingClientRect();
+
+    const x = itemRect.left - navRect.left;
+    const y = itemRect.top - navRect.top;
+
+    highlightPill.style.transform = `translate(${x}px, ${y}px)`;
+    highlightPill.style.width = `${itemRect.width}px`;
+    highlightPill.style.height = `${itemRect.height}px`;
+    highlightPill.style.opacity = '1';
+  }
+
+  function hidePill() {
+    navLeaveTimer = setTimeout(() => {
+      highlightPill.style.opacity = '0';
+    }, 120);
+  }
+
+  navLinks.forEach((link) => {
+    link.addEventListener('mouseenter', () => movePill(link));
+    link.addEventListener('focus', () => movePill(link));
   });
 
-  document.addEventListener('click', (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
+  navList.addEventListener('mouseleave', hidePill);
+
+  // Sub-menú de Deportes con Viewport interactivo
+  if (dropdown && trigger && viewport) {
+    let dropdownCloseTimer = null;
+
+    function openDropdown() {
+      clearTimeout(dropdownCloseTimer);
+      dropdown.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
     }
-  });
+
+    function closeDropdown() {
+      dropdownCloseTimer = setTimeout(() => {
+        dropdown.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        if (dropdownHoverPill) {
+          dropdownHoverPill.style.opacity = '0';
+        }
+      }, 140);
+    }
+
+    dropdown.addEventListener('mouseenter', openDropdown);
+    dropdown.addEventListener('mouseleave', closeDropdown);
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('is-open');
+      trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Pill highlight interno para los items de deportes (HighlightItem)
+    if (dropdownHoverPill) {
+      const sportItems = dropdown.querySelectorAll('.dropdown-sport-item');
+      const menuEl = dropdown.querySelector('.nav-dropdown-menu');
+
+      sportItems.forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+          const menuRect = menuEl.getBoundingClientRect();
+          const itemRect = item.getBoundingClientRect();
+          const x = itemRect.left - menuRect.left;
+          const y = itemRect.top - menuRect.top;
+
+          dropdownHoverPill.style.transform = `translate(${x}px, ${y}px)`;
+          dropdownHoverPill.style.width = `${itemRect.width}px`;
+          dropdownHoverPill.style.height = `${itemRect.height}px`;
+          dropdownHoverPill.style.opacity = '1';
+        });
+      });
+
+      menuEl.addEventListener('mouseleave', () => {
+        dropdownHoverPill.style.opacity = '0';
+      });
+    }
+  }
 }
 
 // Menú hamburguesa móvil / tablet
@@ -449,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollStack();
   initTidescapeScatter();
   initAccordion();
-  initDropdown();
+  initMotionNav();
   initMobileMenu();
   setInterval(fetchLiveWind, 10 * 60 * 1000);
 });
