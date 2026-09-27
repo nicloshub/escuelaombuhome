@@ -368,88 +368,80 @@ function initTidescapeScatter() {
   const section = document.querySelector('.section-tidescape-cta');
   if (!section) return;
 
-  // Si el usuario prefiere movimiento reducido, fijamos el estado final estático
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     section.style.setProperty('--tidescape-p', '1');
     return;
   }
 
-  let ticking = false;
-  let isIntersecting = false;
+  let targetP = 0;
+  let currentP = 0;
+  let rafId = null;
+  let isVisible = false;
 
-  function updateScatter() {
-    ticking = false;
-    if (!isIntersecting && window.innerWidth > 768) return;
-
+  function calculateTarget() {
+    if (window.innerWidth <= 768) {
+      targetP = 1;
+      return;
+    }
     const rect = section.getBoundingClientRect();
     const windowH = window.innerHeight;
 
-    // Se calcula el progreso desde que el borde superior entra al viewport
-    // hasta que el centro de la sección llega a la zona focal
-    const startY = windowH * 0.95;
-    const endY = windowH * 0.18;
+    // Inicia cuando el tope de la sección entra a 88% del viewport
+    // Llega a su dispersión plena (1.0) cuando la sección queda en el tercio central
+    const startY = windowH * 0.88;
+    const endY = windowH * 0.32;
 
-    const rawProgress = (startY - rect.top) / (startY - endY);
-    const clampedProgress = Math.max(0, Math.min(1, rawProgress));
-
-    // Curva de aceleración/desaceleración suave y natural
-    const easedProgress = 1 - Math.pow(1 - clampedProgress, 2.6);
-
-    section.style.setProperty('--tidescape-p', easedProgress.toFixed(4));
+    const raw = (startY - rect.top) / (startY - endY);
+    targetP = Math.max(0, Math.min(1, raw));
   }
 
-  function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(updateScatter);
-      ticking = true;
+  function loop() {
+    const diff = targetP - currentP;
+    if (Math.abs(diff) > 0.001) {
+      currentP += diff * 0.14; // Lerp suave que emula la física de resorte de Framer
+      section.style.setProperty('--tidescape-p', currentP.toFixed(4));
+      rafId = requestAnimationFrame(loop);
+    } else {
+      currentP = targetP;
+      section.style.setProperty('--tidescape-p', currentP.toFixed(4));
+      rafId = null;
+    }
+  }
+
+  function triggerUpdate() {
+    calculateTarget();
+    if (!rafId) {
+      rafId = requestAnimationFrame(loop);
     }
   }
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        isIntersecting = entry.isIntersecting;
-        if (entry.isIntersecting) {
-          updateScatter();
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          triggerUpdate();
         }
       });
-    }, { rootMargin: '250px 0px' });
+    }, { rootMargin: '150px 0px' });
 
     observer.observe(section);
   } else {
-    isIntersecting = true;
+    isVisible = true;
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
+  window.addEventListener('scroll', () => {
+    if (isVisible || window.innerWidth > 768) {
+      triggerUpdate();
+    }
+  }, { passive: true });
 
-  // Ejecución inicial
-  updateScatter();
+  window.addEventListener('resize', triggerUpdate, { passive: true });
 
-  // Efecto de paralaje interactivo al pasar el cursor en computadoras de escritorio
-  if (window.matchMedia('(pointer: fine)').matches) {
-    const cards = section.querySelectorAll('[data-tidescape-card]');
-    section.addEventListener('mousemove', (e) => {
-      if (window.innerWidth <= 768) return;
-      const rect = section.getBoundingClientRect();
-      const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
-      const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
-
-      cards.forEach((card, i) => {
-        const factor = (i % 2 === 0 ? 1 : -1) * (14 + i * 4);
-        card.style.transform = `translate(
-          calc(-50% + var(--scatter-x) * var(--tidescape-p, 0) + ${mouseX * factor}px),
-          calc(-50% + var(--scatter-y) * var(--tidescape-p, 0) + ${mouseY * factor}px)
-        ) rotate(calc(var(--scatter-rot) * var(--tidescape-p, 0))) scale(calc(0.86 + 0.14 * var(--tidescape-p, 0)))`;
-      });
-    });
-
-    section.addEventListener('mouseleave', () => {
-      cards.forEach((card) => {
-        card.style.transform = '';
-      });
-    });
-  }
+  // Inicialización
+  calculateTarget();
+  currentP = targetP;
+  section.style.setProperty('--tidescape-p', currentP.toFixed(4));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
