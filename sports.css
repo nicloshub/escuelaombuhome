@@ -78,7 +78,6 @@
 /* TABLET (768px a 1023px) */
 @media (min-width: 768px) {
   :root {
-    /* Escala Tipográfica Tablet */
     --h1-size: 96px;
     --h1-lh: 104px;
 
@@ -100,15 +99,12 @@
     --caption-size: 14px;
     --caption-lh: 20px;
 
-    /* Grilla Tablet */
     --container-padding: 64px;
     --grid-cols: 12;
     --grid-gutter: 24px;
 
-    /* Macro-espaciado Tablet */
     --section-padding-y: 96px;
 
-    /* Navbar Tablet */
     --nav-height: 72px;
     --nav-margin-x: 64px;
   }
@@ -117,7 +113,6 @@
 /* DESKTOP (>= 1024px) */
 @media (min-width: 1024px) {
   :root {
-    /* Escala Tipográfica Desktop */
     --h1-size: 130px;
     --h1-lh: 144px;
     --h1-ls: -0.02em;
@@ -141,22 +136,19 @@
     --caption-size: 14px;
     --caption-lh: 20px;
 
-    /* Grilla Desktop (1440px con 160px padding lateral) */
     --container-padding: 160px;
     --grid-cols: 12;
     --grid-gutter: 32px;
 
-    /* Macro-espaciado Desktop */
     --section-padding-y: 160px;
 
-    /* Navbar Desktop */
     --nav-height: 80px;
     --nav-margin-x: 160px;
   }
 }
 
 /* =========================================================
-   RESETEO BASE Y TIPOGRAFÍA GLOBAL
+   RESETEO BASE
    ========================================================= */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -180,7 +172,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Títulos H1-H4 en Anton */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 400;
@@ -228,7 +219,7 @@ img {
 }
 
 /* =========================================================
-   CONTENEDOR Y GRILLA (.container)
+   CONTENEDOR Y MACRO-ESPACIADOS
    ========================================================= */
 .container {
   width: 100%;
@@ -239,7 +230,6 @@ img {
   padding-right: var(--container-padding);
 }
 
-/* Macro-espaciado entre secciones */
 .section-macro {
   padding-top: var(--section-padding-y);
   padding-bottom: var(--section-padding-y);
@@ -266,26 +256,13 @@ img {
 }
 
 /* =========================================================
-   5. CABECERA EDITORIAL (H2 + BAJADA EN GRILLA)
+   5. CABECERA EDITORIAL (H2 SE SOSTIENE SOLO, SIN KICKERS)
    ========================================================= */
-/* Mobile First Base: 1 sola columna vertical con gap 16px */
 .editorial-header {
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-bottom: 48px;
-}
-
-.editorial-tag {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--caption-size);
-  line-height: var(--caption-lh);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 8px;
 }
 
 .editorial-title {
@@ -300,7 +277,6 @@ img {
   color: var(--text-muted);
 }
 
-/* TABLET (>= 768px): Grilla 12 cols (H2 en col 1/span 5, Bajada en col 6/span 7) */
 @media (min-width: 768px) {
   .editorial-header {
     display: grid;
@@ -310,17 +286,17 @@ img {
     margin-bottom: 64px;
   }
 
-  .editorial-title-col {
+  .editorial-title {
     grid-column: 1 / span 5;
+    margin-bottom: 0;
   }
 
   .editorial-lead {
     grid-column: 6 / span 7;
-    margin-top: 4px; /* Compensación óptica con el line-height del H2 */
+    margin-top: 4px;
   }
 }
 
-/* DESKTOP (>= 1024px): Grilla 12 cols (H2 en col 1/span 4, Cols 5-7 vacías, Bajada en col 8/span 5) */
 @media (min-width: 1024px) {
   .editorial-header {
     display: grid;
@@ -330,18 +306,19 @@ img {
     margin-bottom: 80px;
   }
 
-  .editorial-title-col {
+  .editorial-title {
     grid-column: 1 / span 4;
+    margin-bottom: 0;
   }
 
   .editorial-lead {
-    grid-column: 8 / span 5;
-    margin-top: 8px; /* Alineación top óptica exacta con la primera línea del H2 */
+    grid-column: 8 / span 5; /* Columnas 5, 6 y 7 quedan totalmente vacías */
+    margin-top: 8px; /* Alineación óptica top exacta con la primera línea del H2 */
   }
 }
 
 /* =========================================================
-   6. COMPONENTES: BOTONES (8pt Grid Padding)
+   BOTONES (8pt Grid Padding)
    ========================================================= */
 .btn-pill-orange,
 .btn-pill-dark,
@@ -357,7 +334,7 @@ img {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   border-radius: var(--radius-pill);
-  padding: 12px 24px; /* Múltiplo de 8/4 */
+  padding: 12px 24px;
   border: 1px solid transparent;
   cursor: pointer;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease;
@@ -368,7 +345,7 @@ img {
   .btn-pill-orange,
   .btn-pill-dark,
   .btn-pill-white {
-    padding: 16px 32px; /* Múltiplo exacto de 8 en Tablet y Desktop */
+    padding: 16px 32px;
   }
 }
 
@@ -425,6 +402,7 @@ img {
   -webkit-backdrop-filter: blur(12px);
   color: var(--white);
   transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
@@ -440,10 +418,9 @@ img {
   color: var(--white);
 }
 
-/* Íconos circulares dentro de botones */
 .btn-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -451,7 +428,7 @@ img {
 }
 
 /* =========================================================
-   6. NAVBAR Y HEADER
+   HEADER & NAVBAR FLOTANTE
    ========================================================= */
 header.site-header {
   position: fixed;
@@ -512,7 +489,6 @@ header.site-header {
   }
 }
 
-/* Desktop Nav links */
 nav.desktop-nav {
   display: none;
 }
@@ -527,11 +503,10 @@ nav.desktop-nav {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 32px; /* Múltiplo de 8 */
+    gap: 32px;
   }
 
   .desktop-nav-link {
-    font-family: var(--font-body);
     font-size: var(--btn-size);
     line-height: var(--btn-lh);
     font-weight: 500;
@@ -546,7 +521,6 @@ nav.desktop-nav {
     color: var(--orange);
   }
 
-  /* Dropdown en desktop */
   .desktop-dropdown {
     position: relative;
   }
@@ -556,7 +530,7 @@ nav.desktop-nav {
     top: calc(100% + 16px);
     left: 50%;
     transform: translateX(-50%) translateY(8px);
-    width: 260px;
+    width: 240px;
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: var(--radius-inner);
@@ -591,7 +565,6 @@ nav.desktop-nav {
   }
 }
 
-/* Header CTAs */
 .header-actions {
   display: flex;
   align-items: center;
@@ -647,10 +620,8 @@ nav.desktop-nav {
   height: 2px;
   background-color: var(--ink);
   border-radius: 2px;
-  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* Mobile Drawer */
 .mobile-nav-drawer {
   display: none;
   position: fixed;
@@ -715,7 +686,7 @@ nav.desktop-nav {
 }
 
 /* =========================================================
-   SECCIÓN HERO DEL DEPORTE
+   1. HERO: PROMESA + VIENTO EN VIVO
    ========================================================= */
 .sport-hero-section {
   position: relative;
@@ -737,8 +708,8 @@ nav.desktop-nav {
 
 @media (min-width: 1024px) {
   .sport-hero-section {
-    min-height: 90vh;
-    padding-top: 200px;
+    min-height: 92vh;
+    padding-top: 208px;
     padding-bottom: 128px;
   }
 }
@@ -754,7 +725,7 @@ nav.desktop-nav {
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  filter: brightness(0.68) saturate(1.1);
+  filter: brightness(0.65) saturate(1.1);
 }
 
 .sport-hero-overlay {
@@ -763,9 +734,9 @@ nav.desktop-nav {
   z-index: 2;
   background: linear-gradient(
     180deg,
-    rgba(35, 31, 32, 0.30) 0%,
-    rgba(35, 31, 32, 0.60) 50%,
-    rgba(35, 31, 32, 0.95) 100%
+    rgba(35, 31, 32, 0.35) 0%,
+    rgba(35, 31, 32, 0.65) 50%,
+    rgba(35, 31, 32, 0.96) 100%
   );
   pointer-events: none;
 }
@@ -775,72 +746,57 @@ nav.desktop-nav {
   z-index: 3;
 }
 
-.sport-hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: rgba(254, 254, 254, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(254, 254, 254, 0.20);
-  border-radius: var(--radius-pill);
-  font-family: var(--font-body);
-  font-size: var(--caption-size);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 24px;
+.hero-editorial-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-.sport-hero-badge .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--orange);
-  box-shadow: 0 0 10px var(--orange);
+@media (min-width: 1024px) {
+  .hero-editorial-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
+    align-items: end;
+  }
+
+  .hero-main-col {
+    grid-column: 1 / span 8;
+  }
+
+  .hero-wind-col {
+    grid-column: 9 / span 4;
+  }
 }
 
 .sport-hero-title {
   color: var(--white);
   margin-bottom: 24px;
+  max-width: 900px;
 }
 
 .sport-hero-desc {
   max-width: 680px;
   font-size: var(--body-size);
   line-height: var(--body-lh);
-  color: rgba(254, 254, 254, 0.88);
+  color: rgba(254, 254, 254, 0.90);
   margin-bottom: 32px;
 }
 
-/* Specs pills bar */
-.sport-specs-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.sport-spec-pill {
+.hero-hard-data-bar {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   padding: 8px 16px;
-  background: rgba(35, 31, 32, 0.70);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(254, 254, 254, 0.18);
+  background: rgba(255, 82, 6, 0.16);
+  border: 1px solid rgba(255, 82, 6, 0.40);
   border-radius: var(--radius-pill);
-  font-size: var(--caption-size);
-  font-weight: 600;
-  color: var(--white);
-}
-
-.sport-spec-pill svg {
-  color: var(--orange);
-  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFA726;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 32px;
 }
 
 .sport-hero-actions {
@@ -856,152 +812,333 @@ nav.desktop-nav {
   }
 }
 
-/* =========================================================
-   SECCIÓN BENTO: SEGURIDAD Y EQUIPAMIENTO (12 COLS GRILLA)
-   ========================================================= */
-.bento-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--grid-gutter);
-}
-
-@media (min-width: 768px) {
-  .bento-grid {
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .bento-card {
-    grid-column: span 4; /* 3 cards de 4 cols cada una */
-  }
-}
-
-.bento-card {
-  background: var(--white);
-  border: 1px solid var(--line);
+/* Widget de Viento en Hero */
+.hero-wind-card {
+  background: rgba(35, 31, 32, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line-dark);
   border-radius: var(--radius-card);
-  padding: 32px 24px;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  padding: 24px;
 }
 
-@media (min-width: 1024px) {
-  .bento-card {
-    padding: 40px 32px;
-  }
-}
-
-.bento-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(255, 82, 6, 0.30);
-}
-
-.bento-icon-box {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-inner);
-  background: var(--shade);
-  color: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 24px;
-}
-
-.bento-card-title {
-  margin-bottom: 16px;
-}
-
-.bento-card-desc {
-  font-size: var(--body-size);
-  line-height: var(--body-lh);
-}
-
-/* =========================================================
-   SECCIÓN NIVELES & CURSOS (12 COLS GRILLA)
-   ========================================================= */
-.levels-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--grid-gutter);
-}
-
-@media (min-width: 768px) {
-  .levels-grid {
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .level-card {
-    grid-column: span 4; /* 3 cards de 4 cols cada una */
-  }
-}
-
-.level-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  padding: 32px 24px;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-@media (min-width: 1024px) {
-  .level-card {
-    padding: 40px 32px;
-  }
-}
-
-.level-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--orange);
-}
-
-.level-card-top {
+.wind-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
-}
-
-.level-badge-num {
-  font-family: var(--font-display);
-  font-size: 40px;
-  line-height: 1;
-  color: var(--orange);
-}
-
-.level-badge-tag {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 6px 12px;
-  border-radius: var(--radius-pill);
-  background: var(--light-1);
-  color: var(--ink);
-}
-
-.level-card-title {
   margin-bottom: 16px;
 }
 
-.level-card-summary {
-  margin-bottom: 24px;
+.wind-card-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
 }
 
-.level-checklist {
-  list-style: none;
+.wind-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #4CAF50;
+}
+
+.wind-live-badge .pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4CAF50;
+  box-shadow: 0 0 8px #4CAF50;
+}
+
+.wind-main-readout {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.wind-knots-num {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1;
+  color: var(--white);
+}
+
+.wind-speed-km {
+  font-size: 14px;
+  color: rgba(254, 254, 254, 0.65);
+}
+
+.wind-direction-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.compass-needle-mini {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  transition: transform 0.5s ease;
+}
+
+.wind-status-banner {
+  font-size: 13px;
+  font-weight: 600;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-dark);
+}
+
+/* =========================================================
+   2. EL CAMINO: 14 OBJETIVOS EN 3 NIVELES
+   ========================================================= */
+.camino-tabs-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 16px;
   margin-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.camino-tab-btn {
+  background: var(--light-1);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.camino-tab-btn:hover {
+  background: #EBEBEB;
+}
+
+.camino-tab-btn.is-active {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.camino-level-panel {
+  display: none;
+}
+
+.camino-level-panel.is-active {
+  display: block;
+}
+
+.objectives-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 768px) {
+  .objectives-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .objective-card {
+    grid-column: span 6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .objective-card {
+    grid-column: span 6;
+  }
+}
+
+.objective-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-inner);
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.objective-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--orange);
+}
+
+.objective-num-box {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1;
+  color: var(--orange);
+  flex-shrink: 0;
+  width: 40px;
+}
+
+.objective-body h3 {
+  font-size: 20px;
+  line-height: 26px;
+  margin-bottom: 8px;
+}
+
+.objective-body p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =========================================================
+   3. SEGURIDAD: SIEMPRE HAY UN BOTE DETRÁS TUYO
+   ========================================================= */
+.seguridad-editorial-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 1024px) {
+  .seguridad-editorial-layout {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .seguridad-hero-card {
+    grid-column: 1 / span 7;
+  }
+
+  .seguridad-pillars-col {
+    grid-column: 8 / span 5;
+  }
+}
+
+.seguridad-hero-card {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-card);
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .seguridad-hero-card {
+    padding: 56px 40px;
+  }
+}
+
+.seguridad-hero-card h3 {
+  color: var(--white);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  margin-bottom: 16px;
+}
+
+.seguridad-hero-card p {
+  color: var(--text-light-muted);
+  margin-bottom: 32px;
+}
+
+.seguridad-pillars-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.seguridad-pillar-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-inner);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.seguridad-pillar-item h3 {
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.seguridad-pillar-item p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* =========================================================
+   4. EQUIPO: NO COMPRES NADA. TRAÉ TOALLA.
+   ========================================================= */
+.equipo-single-block {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 1024px) {
+  .equipo-single-block {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .equipo-img-wrap {
+    grid-column: 1 / span 6;
+  }
+
+  .equipo-content-wrap {
+    grid-column: 7 / span 6;
+    padding: 64px 48px;
+  }
+}
+
+.equipo-img-wrap {
+  min-height: 320px;
+  background-color: var(--light-1);
+}
+
+.equipo-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.equipo-content-wrap {
+  padding: 32px 24px;
+}
+
+.equipo-content-wrap h3 {
+  margin-bottom: 16px;
+}
+
+.equipo-shortlist {
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin: 24px 0 32px;
 }
 
-.level-checklist li {
+.equipo-shortlist li {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -1010,86 +1147,260 @@ nav.desktop-nav {
   color: var(--ink);
 }
 
-.level-checklist li svg {
+.equipo-shortlist li svg {
   color: var(--orange);
   flex-shrink: 0;
   margin-top: 3px;
 }
 
-.level-card-footer {
-  margin-top: auto;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
+.equipo-note-box {
+  background: var(--light-1);
+  border-left: 3px solid var(--orange);
+  border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
+  padding: 16px 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 500;
 }
 
 /* =========================================================
-   SECCIÓN SPOT BOX: EL MOLINO ACASSUSO
+   5. CONDICIONES: SABÉS CUÁNDO VENIR ANTES DE VENIR
    ========================================================= */
-.spot-feature-box {
+.condiciones-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 1024px) {
+  .condiciones-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .condiciones-camara-card {
+    grid-column: 1 / span 7;
+  }
+
+  .condiciones-alerta-card {
+    grid-column: 8 / span 5;
+  }
+}
+
+.condiciones-camara-card {
   background: var(--ink);
   color: var(--white);
   border-radius: var(--radius-card);
   padding: 40px 24px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 @media (min-width: 768px) {
-  .spot-feature-box {
-    padding: 64px 48px;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--grid-gutter);
-    align-items: center;
-  }
-
-  .spot-feature-info {
-    grid-column: 1 / span 5;
-  }
-
-  .spot-feature-items-grid {
-    grid-column: 7 / span 6;
+  .condiciones-camara-card {
+    padding: 56px 40px;
   }
 }
 
-.spot-feature-info h3 {
+.condiciones-camara-card h3 {
   color: var(--white);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  line-height: 1.05;
   margin-bottom: 16px;
 }
 
-.spot-feature-info p {
+.condiciones-camara-card p {
   color: var(--text-light-muted);
   margin-bottom: 32px;
 }
 
-.spot-feature-items-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+.condiciones-alerta-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-card);
 }
 
 @media (min-width: 768px) {
-  .spot-feature-items-grid {
-    grid-template-columns: 1fr 1fr;
+  .condiciones-alerta-card {
+    padding: 48px 32px;
   }
 }
 
-.spot-item-card {
-  background: rgba(254, 254, 254, 0.06);
-  border: 1px solid var(--line-dark);
-  border-radius: var(--radius-inner);
-  padding: 24px;
+.condiciones-alerta-card h3 {
+  margin-bottom: 16px;
 }
 
-.spot-item-tag {
+.condiciones-alerta-card p {
+  margin-bottom: 32px;
+}
+
+/* =========================================================
+   6. PRUEBA SOCIAL: LLEGARON SIN SABER NADA
+   ========================================================= */
+.social-proof-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 1024px) {
+  .social-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .review-featured-card {
+    grid-column: 1 / span 7;
+  }
+
+  .reviews-stacked-col {
+    grid-column: 8 / span 5;
+    display: flex;
+    flex-direction: column;
+    gap: var(--grid-gutter);
+  }
+}
+
+.review-featured-card {
+  background: var(--white);
+  border: 2px solid var(--orange);
+  border-radius: var(--radius-card);
+  padding: 40px 24px;
+  box-shadow: 0 16px 36px rgba(255, 82, 6, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .review-featured-card {
+    padding: 56px 40px;
+  }
+}
+
+.review-stars-row {
+  color: var(--orange);
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+.review-featured-quote {
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+
+.review-author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.review-avatar-disc {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-author-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.review-author-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.review-secondary-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-inner);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.review-secondary-quote {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+/* =========================================================
+   7. INSTRUCTORES: CON QUIÉN VAS A APRENDER
+   ========================================================= */
+.coaches-editorial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 768px) {
+  .coaches-editorial-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .coach-card {
+    grid-column: span 6;
+  }
+}
+
+.coach-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.coach-img-box {
+  width: 100%;
+  height: 340px;
+  background-color: var(--light-1);
+}
+
+@media (min-width: 1024px) {
+  .coach-img-box {
+    height: 400px;
+  }
+}
+
+.coach-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.coach-content {
+  padding: 32px 24px;
+}
+
+@media (min-width: 1024px) {
+  .coach-content {
+    padding: 40px 32px;
+  }
+}
+
+.coach-role-meta {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -1098,29 +1409,36 @@ nav.desktop-nav {
   margin-bottom: 8px;
 }
 
-.spot-item-desc {
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(254, 254, 254, 0.90);
+.coach-name {
+  margin-bottom: 16px;
+}
+
+.coach-quote-box {
+  background: var(--light-1);
+  border-radius: var(--radius-inner);
+  padding: 20px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+  font-style: italic;
 }
 
 /* =========================================================
-   SECCIÓN TARIFAS & PLANES (12 COLS GRILLA)
+   8. PRECIO Y FORMATO: CUÁNTO CUESTA Y CUÁNTO LLEVA
    ========================================================= */
-.pricing-grid {
+.pricing-editorial-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--grid-gutter);
-  align-items: stretch;
 }
 
 @media (min-width: 768px) {
-  .pricing-grid {
+  .pricing-editorial-grid {
     grid-template-columns: repeat(12, 1fr);
   }
 
   .pricing-card {
-    grid-column: span 4; /* 3 cards de 4 cols cada una */
+    grid-column: span 6;
   }
 }
 
@@ -1132,38 +1450,17 @@ nav.desktop-nav {
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-card);
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 @media (min-width: 1024px) {
   .pricing-card {
-    padding: 48px 32px;
+    padding: 48px 40px;
   }
-}
-
-.pricing-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
 }
 
 .pricing-card.is-featured {
   border: 2px solid var(--orange);
-  box-shadow: 0 16px 36px rgba(255, 82, 6, 0.16);
-}
-
-.pricing-badge-popular {
-  position: absolute;
-  top: -14px;
-  left: 24px;
-  background: var(--orange);
-  color: var(--white);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
+  box-shadow: 0 16px 36px rgba(255, 82, 6, 0.14);
 }
 
 .pricing-title {
@@ -1171,7 +1468,7 @@ nav.desktop-nav {
 }
 
 .pricing-desc {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   margin-bottom: 24px;
 }
@@ -1187,13 +1484,13 @@ nav.desktop-nav {
 
 .pricing-amount {
   font-family: var(--font-display);
-  font-size: 44px;
+  font-size: 48px;
   line-height: 1;
   color: var(--ink);
 }
 
 .pricing-unit {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-muted);
 }
@@ -1210,7 +1507,7 @@ nav.desktop-nav {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.45;
   color: var(--ink);
 }
@@ -1218,7 +1515,7 @@ nav.desktop-nav {
 .pricing-features-list li svg {
   color: var(--orange);
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .pricing-btn-box {
@@ -1230,98 +1527,16 @@ nav.desktop-nav {
 }
 
 /* =========================================================
-   SECCIÓN INSTRUCTORES (12 COLS GRILLA)
+   9. FAQ: ANTES DE ANOTARTE
    ========================================================= */
-.coaches-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--grid-gutter);
-}
-
-@media (min-width: 768px) {
-  .coaches-grid {
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .coach-card {
-    grid-column: span 6; /* 2 cards de 6 cols cada una */
-  }
-}
-
-.coach-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-}
-
-.coach-img-box {
-  width: 100%;
-  height: 320px;
-  background-color: var(--light-1);
-  overflow: hidden;
-}
-
-@media (min-width: 1024px) {
-  .coach-img-box {
-    height: 380px;
-  }
-}
-
-.coach-img-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.coach-card:hover .coach-img-box img {
-  transform: scale(1.04);
-}
-
-.coach-content {
-  padding: 32px 24px;
-}
-
-@media (min-width: 1024px) {
-  .coach-content {
-    padding: 32px;
-  }
-}
-
-.coach-role-tag {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 8px;
-}
-
-.coach-name {
-  margin-bottom: 12px;
-}
-
-.coach-bio {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-/* =========================================================
-   SECCIÓN FAQ: ACORDEÓN INTERACTIVO
-   ========================================================= */
-.faq-container-grid {
+.faq-grid-wrapper {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--grid-gutter);
 }
 
 @media (min-width: 1024px) {
-  .faq-container-grid {
+  .faq-grid-wrapper {
     grid-template-columns: repeat(12, 1fr);
   }
 
@@ -1394,16 +1609,34 @@ nav.desktop-nav {
 }
 
 /* =========================================================
-   SECCIÓN PRE-FOOTER CTA BANNER
+   10. MANIFIESTO Y CIERRE
    ========================================================= */
-.prefooter-banner-section {
-  padding: 64px 0 96px;
+.manifiesto-statement-card {
+  background: var(--light-1);
+  border-radius: var(--radius-card);
+  padding: 48px 24px;
+  margin-bottom: 48px;
+  text-align: center;
 }
 
-@media (min-width: 1024px) {
-  .prefooter-banner-section {
-    padding: 96px 0 128px;
+@media (min-width: 768px) {
+  .manifiesto-statement-card {
+    padding: 72px 48px;
   }
+}
+
+.manifiesto-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.15;
+  color: var(--ink);
+  max-width: 900px;
+  margin: 0 auto;
+  text-transform: uppercase;
+}
+
+.prefooter-banner-section {
+  padding-bottom: var(--section-padding-y);
 }
 
 .prefooter-banner-card {
@@ -1411,14 +1644,14 @@ nav.desktop-nav {
   background: var(--ink);
   color: var(--white);
   border-radius: var(--radius-card);
-  padding: 48px 24px;
+  padding: 56px 24px;
   text-align: center;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .prefooter-banner-card {
-    padding: 80px 48px;
+    padding: 88px 48px;
   }
 }
 
@@ -1435,25 +1668,21 @@ nav.desktop-nav {
   pointer-events: none;
 }
 
-.prefooter-tag-wrap {
-  margin-bottom: 24px;
-}
-
 .prefooter-headline {
   color: var(--white);
   margin-bottom: 24px;
 }
 
 .prefooter-banner-desc {
-  max-width: 600px;
+  max-width: 640px;
   margin-left: auto;
   margin-right: auto;
-  color: rgba(254, 254, 254, 0.85);
+  color: rgba(254, 254, 254, 0.88);
   margin-bottom: 40px;
 }
 
 /* =========================================================
-   FOOTER UNIFICADO (8pt Grid Layout)
+   FOOTER UNIFICADO
    ========================================================= */
 .site-footer-wrapper {
   padding-bottom: 64px;
@@ -1596,7 +1825,7 @@ nav.desktop-nav {
 }
 
 /* =========================================================
-   BOTÓN FLOTANTE WHATSAPP (ACCESIBILIDAD Y TAP TARGET 56PX)
+   BOTÓN FLOTANTE WHATSAPP (56px)
    ========================================================= */
 .floating-wpp-btn {
   position: fixed;
