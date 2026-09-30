@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aprende Kitesurf en San Isidro | Escuela Ombú — Acassuso</title>
-  <meta name="description" content="Aprendé a volar sobre el río. Y a volver solo. Clases particulares de kitesurf desde $120.000 con gomón de rescate, radiocasco BbTalkin y equipo incluido en Acassuso.">
+  <meta name="description" content="El viento no perdona improvisados. Aprendé kitesurf en Acassuso a 20 minutos de Capital con gomón de rescate, radiocasco BbTalkin y equipo incluido.">
   <link rel="icon" type="image/png" href="../assets/logo-ombu-footer.png">
   <link rel="apple-touch-icon" href="../assets/logo-ombu-footer.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,68 +84,115 @@
 
   <main>
     <!-- =========================================================
-         1. HERO: PROMESA + DATO DURO + VIENTO EN VIVO
+         1. HERO: COMPOSICIÓN SEGÚN MAQUETA FIGMA + COMPONENTES HOME
          ========================================================= -->
-    <section class="sport-hero-section" id="inicio">
-      <div class="sport-hero-bg">
-        <img src="../assets/deporte-kitesurf.jpg" alt="Kitesurf en Escuela Ombú, Acassuso" fetchpriority="high">
-      </div>
-      <div class="sport-hero-overlay"></div>
-
-      <div class="container sport-hero-content">
-        <div class="hero-editorial-grid">
-          <div class="hero-main-col">
-            <h1 class="sport-hero-title">
-              APRENDÉ A VOLAR SOBRE EL RÍO. Y A VOLVER SOLO.
+    <section class="hero-split-section" id="inicio">
+      <div class="container">
+        <div class="hero-split-grid">
+          <!-- Columna Izquierda: Título en Anton, Bajada y CTAs -->
+          <div class="hero-content-col">
+            <h1 class="hero-split-title">
+              EL VIENTO NO<br>
+              PERDONA<br>
+              <span class="hero-word-orange">IMPROVISADOS.</span>
             </h1>
 
-            <div class="hero-hard-data-bar">
-              Clase particular desde $120.000 · Equipo incluido · 8 a 10 hs para autonomía
-            </div>
-
-            <p class="sport-hero-desc">
-              Te enseñamos con un método paso a paso en el banco de arena de Acassuso: radiocasco en vivo en tu oído, lancha de rescate en guardia permanente y un camino medible hacia tu independencia.
+            <p class="hero-split-bajada">
+              Escuela de kitesurf, windsurf, wingfoil y SUP a 20 minutos de Capital. Clases por nivel, sin atajos, con lancha de apoyo y equipo incluido.
             </p>
 
-            <div class="sport-hero-actions">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20particular%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
-                RESERVAR MI CLASE
+            <div class="hero-split-actions">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+                RESERVÁ TU CLASE
                 <span class="btn-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </span>
               </a>
-              <a href="#camino" class="btn-pill-outline-light">
-                VER EL CAMINO
+              <a href="#camino" class="hero-secondary-link">
+                Ver los 14 objetivos →
               </a>
             </div>
           </div>
 
-          <!-- Widget de Viento en Vivo Integrado en Hero -->
-          <div class="hero-wind-col">
-            <div class="hero-wind-card">
-              <div class="wind-card-header">
-                <span class="wind-card-title">VIENTO EN EL SPOT (ACASSUSO)</span>
-                <span class="wind-live-badge">
-                  <span class="pulse-dot"></span>
-                  EN VIVO
-                </span>
+          <!-- Columna Derecha: Foto de Kitesurf + 3 Badges Flotantes -->
+          <div class="hero-visual-col">
+            <div class="hero-stage-container">
+              <!-- Frame Principal con Foto de Kitesurf -->
+              <div class="hero-main-photo-frame">
+                <img src="../assets/deporte-kitesurf.jpg" alt="Kitesurf en el Río de la Plata - Escuela Ombú Acassuso" fetchpriority="high">
               </div>
 
-              <div class="wind-main-readout">
-                <span class="wind-knots-num" id="liveWindKnots">-- kts</span>
-                <span class="wind-speed-km" id="liveWindSpeed">-- km/h</span>
-              </div>
+              <!-- Badge Flotante 1: "+15 AÑOS DE EXPERIENCIA" (Top Left Naranja) -->
+              <aside class="badge-experience-card" aria-label="Trayectoria de la escuela">
+                <span class="badge-experience-num">+15</span>
+                <span class="badge-experience-text">AÑOS DE<br>EXPERIENCIA</span>
+              </aside>
 
-              <div class="wind-direction-row">
-                <span class="compass-needle-mini" id="liveCompassNeedle">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 19 21 12 17 5 21 12 2"></polygon></svg>
-                </span>
-                <span id="liveWindDir">Cargando rumbo...</span>
-              </div>
+              <!-- Badge Flotante 2: "4.9/5" Reseñas & Avatares (Bottom Left Celeste/Agua) -->
+              <aside class="badge-rating-card" aria-label="Calificación de alumnos">
+                <div class="badge-rating-top">
+                  <span class="badge-rating-score">4.9/5</span>
+                  <span class="badge-rating-stars">★★★★★</span>
+                </div>
+                <p class="badge-rating-caption">
+                  Más de 1.200 alumnos formados con seguridad y técnica en el río.
+                </p>
+                <div class="badge-avatars-cluster">
+                  <img src="../assets/instructores_nico.jpg" alt="Alumno Ombú" class="badge-avatar-img">
+                  <img src="../assets/instructores_ramiro.jpg" alt="Alumno Ombú" class="badge-avatar-img">
+                  <img src="../assets/instructores_chivi.jpeg" alt="Alumno Ombú" class="badge-avatar-img">
+                  <div class="badge-avatar-plus">+</div>
+                </div>
+              </aside>
 
-              <div class="wind-status-banner" id="liveWindStatus">
-                Monitoreando condiciones del río...
-              </div>
+              <!-- Badge Flotante 3: Widget Oficial de Viento de la Home (Right Overlapping) -->
+              <aside class="hero-weather-card" aria-label="Condición del viento en vivo">
+                <div class="weather-header-stack">
+                  <div class="weather-live-badge">
+                    <span class="weather-radar-ping"></span>
+                    <span class="weather-live-dot"></span>
+                    <span class="weather-live-text">EN VIVO</span>
+                  </div>
+                  <div class="weather-title-label">CONDICIÓN DEL VIENTO</div>
+                </div>
+
+                <div class="weather-main-grid">
+                  <div class="weather-metric-primary">
+                    <div class="weather-speed-cluster">
+                      <span class="weather-speed-num" id="heroWindSpeed">--</span>
+                      <div class="weather-speed-units">
+                        <span class="speed-unit-kmh">KM/H</span>
+                        <span class="speed-unit-knots" id="heroWindKnots">-- nudos</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Brújula Náutica Dinámica -->
+                  <div class="weather-compass-box" title="Dirección del viento">
+                    <div class="compass-dial">
+                      <span class="compass-marker n">N</span>
+                      <span class="compass-marker e">E</span>
+                      <span class="compass-marker s">S</span>
+                      <span class="compass-marker o">O</span>
+                      <div class="compass-arrow-wrap" id="heroCompassDial">
+                        <svg class="compass-needle-svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                          <polygon class="compass-needle-north" points="12,2 16,14 12,11 8,14" />
+                          <polygon class="compass-needle-south" points="12,22 16,14 12,11 8,14" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="weather-progress-bar-wrap">
+                  <div class="weather-progress-bar-fill" id="heroWindBar" style="width: 45%;"></div>
+                </div>
+
+                <div class="weather-status-footer">
+                  <span class="weather-caption" id="heroWindCaption">Viento moderado</span>
+                  <span class="weather-suitability-pill" id="heroSpotSuitability">Ideal Kitesurf</span>
+                </div>
+              </aside>
             </div>
           </div>
         </div>
@@ -322,7 +369,6 @@
           </p>
         </header>
 
-        <!-- Layout asimétrico de seguridad -->
         <div class="seguridad-editorial-layout">
           <article class="seguridad-hero-card">
             <div>
@@ -372,7 +418,6 @@
           </p>
         </header>
 
-        <!-- Bloque único editorial con foto grande + lista corta -->
         <div class="equipo-single-block">
           <div class="equipo-img-wrap">
             <img src="../assets/mosaico-tablas.jpg" alt="Equipamiento de Kitesurf provisto por Escuela Ombú" loading="lazy">
@@ -425,7 +470,6 @@
         </header>
 
         <div class="condiciones-grid">
-          <!-- Card Cámara 24/7 -->
           <article class="condiciones-camara-card">
             <div>
               <h3>CÁMARA EN VIVO DEL RÍO 24/7</h3>
@@ -443,7 +487,6 @@
             </div>
           </article>
 
-          <!-- Card Alerta WhatsApp -->
           <article class="condiciones-alerta-card">
             <div>
               <h3>AVISO DIRECTO DE DÍAS BUENOS</h3>
@@ -479,7 +522,6 @@
         </header>
 
         <div class="social-proof-grid">
-          <!-- Reseña Grande Destacada (Santiago Muñoz) -->
           <article class="review-featured-card">
             <div class="review-stars-row">★★★★★</div>
             <p class="review-featured-quote">
@@ -494,7 +536,6 @@
             </div>
           </article>
 
-          <!-- Reseñas Secundarias -->
           <div class="reviews-stacked-col">
             <article class="review-secondary-card">
               <div class="review-stars-row" style="margin-bottom: 12px;">★★★★★</div>
@@ -543,7 +584,6 @@
         </header>
 
         <div class="coaches-editorial-grid">
-          <!-- Nico Cloos -->
           <article class="coach-card">
             <div class="coach-img-box">
               <img src="../assets/instructores_nico.jpg" alt="Nicolás Cloos - Director Escuela Ombú" loading="lazy">
@@ -557,7 +597,6 @@
             </div>
           </article>
 
-          <!-- Ramiro Oreiro -->
           <article class="coach-card">
             <div class="coach-img-box">
               <img src="../assets/instructores_ramiro.jpg" alt="Ramiro Oreiro - Head Coach Kitesurf Ombú" loading="lazy">
@@ -589,7 +628,6 @@
         </header>
 
         <div class="pricing-editorial-grid">
-          <!-- Opción 1: Clase Particular -->
           <article class="pricing-card">
             <h3 class="pricing-title">CLASE PARTICULAR</h3>
             <p class="pricing-desc">Sesión individual de 2 horas con instructor 100% dedicado a vos.</p>
@@ -625,7 +663,6 @@
             </div>
           </article>
 
-          <!-- Opción 2: Curso Autonomía -->
           <article class="pricing-card is-featured">
             <h3 class="pricing-title">CURSO HACIA LA AUTONOMÍA</h3>
             <p class="pricing-desc">El plan integral de 8 a 10 horas totales para completar los 14 objetivos.</p>
@@ -751,14 +788,12 @@
          ========================================================= -->
     <section class="prefooter-banner-section" id="cierre">
       <div class="container">
-        <!-- Bloque Manifiesto -->
         <div class="manifiesto-statement-card">
           <p class="manifiesto-quote">
             "El objetivo no es que tomes clases para siempre. El objetivo es que un día vengas, armes tu equipo y entres al río solo."
           </p>
         </div>
 
-        <!-- Banner de Acción Final -->
         <div class="prefooter-banner-card">
           <h2 class="prefooter-headline">
             ¿ARRANCAMOS CON TU NIVEL 1?

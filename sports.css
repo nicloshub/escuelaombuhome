@@ -256,7 +256,7 @@ img {
 }
 
 /* =========================================================
-   5. CABECERA EDITORIAL (H2 SE SOSTIENE SOLO, SIN KICKERS)
+   CABECERA EDITORIAL (H2 SE SOSTIENE SOLO)
    ========================================================= */
 .editorial-header {
   display: flex;
@@ -312,8 +312,8 @@ img {
   }
 
   .editorial-lead {
-    grid-column: 8 / span 5; /* Columnas 5, 6 y 7 quedan totalmente vacías */
-    margin-top: 8px; /* Alineación óptica top exacta con la primera línea del H2 */
+    grid-column: 8 / span 5;
+    margin-top: 8px;
   }
 }
 
@@ -381,41 +381,6 @@ img {
   background-color: var(--light-1);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-}
-
-.btn-pill-outline-light {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  font-family: var(--font-body);
-  font-size: var(--btn-size);
-  line-height: var(--btn-lh);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border-radius: var(--radius-pill);
-  padding: 12px 24px;
-  background-color: rgba(254, 254, 254, 0.10);
-  border: 1px solid rgba(254, 254, 254, 0.30);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--white);
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-@media (min-width: 768px) {
-  .btn-pill-outline-light {
-    padding: 16px 32px;
-  }
-}
-
-.btn-pill-outline-light:hover {
-  background-color: rgba(254, 254, 254, 0.22);
-  border-color: rgba(254, 254, 254, 0.55);
-  transform: translateY(-2px);
-  color: var(--white);
 }
 
 .btn-icon {
@@ -686,218 +651,495 @@ nav.desktop-nav {
 }
 
 /* =========================================================
-   1. HERO: PROMESA + VIENTO EN VIVO
+   1. HERO: COMPOSICIÓN ASIMÉTRICA CON COMPONENTES DE LA HOME
+   (Estilo Maqueta Figma: Título en Anton, Foto + 3 Floating Badges)
    ========================================================= */
-.sport-hero-section {
+.hero-split-section {
   position: relative;
-  min-height: 85vh;
-  display: flex;
-  align-items: flex-end;
-  padding-top: 144px;
+  background-color: #F3F3F5;
+  padding-top: 120px;
   padding-bottom: 64px;
-  background-color: var(--ink);
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
-  .sport-hero-section {
-    padding-top: 176px;
+  .hero-split-section {
+    padding-top: 144px;
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-split-section {
+    padding-top: 168px;
     padding-bottom: 96px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .sport-hero-section {
-    min-height: 92vh;
-    padding-top: 208px;
-    padding-bottom: 128px;
-  }
-}
-
-.sport-hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.sport-hero-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  filter: brightness(0.65) saturate(1.1);
-}
-
-.sport-hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(
-    180deg,
-    rgba(35, 31, 32, 0.35) 0%,
-    rgba(35, 31, 32, 0.65) 50%,
-    rgba(35, 31, 32, 0.96) 100%
-  );
-  pointer-events: none;
-}
-
-.sport-hero-content {
-  position: relative;
-  z-index: 3;
-}
-
-.hero-editorial-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-@media (min-width: 1024px) {
-  .hero-editorial-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--grid-gutter);
-    align-items: end;
-  }
-
-  .hero-main-col {
-    grid-column: 1 / span 8;
-  }
-
-  .hero-wind-col {
-    grid-column: 9 / span 4;
-  }
-}
-
-.sport-hero-title {
-  color: var(--white);
-  margin-bottom: 24px;
-  max-width: 900px;
-}
-
-.sport-hero-desc {
-  max-width: 680px;
-  font-size: var(--body-size);
-  line-height: var(--body-lh);
-  color: rgba(254, 254, 254, 0.90);
-  margin-bottom: 32px;
-}
-
-.hero-hard-data-bar {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 16px;
-  background: rgba(255, 82, 6, 0.16);
-  border: 1px solid rgba(255, 82, 6, 0.40);
-  border-radius: var(--radius-pill);
-  font-size: 13px;
-  font-weight: 700;
-  color: #FFA726;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 32px;
-}
-
-.sport-hero-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-@media (min-width: 768px) {
-  .sport-hero-actions {
-    flex-direction: row;
+    min-height: 85vh;
+    display: flex;
     align-items: center;
   }
 }
 
-/* Widget de Viento en Hero */
-.hero-wind-card {
-  background: rgba(35, 31, 32, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--line-dark);
-  border-radius: var(--radius-card);
-  padding: 24px;
+.hero-split-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: stretch;
 }
 
-.wind-card-header {
+@media (min-width: 1024px) {
+  .hero-split-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
+    align-items: center;
+  }
+
+  .hero-content-col {
+    grid-column: 1 / span 5;
+  }
+
+  .hero-visual-col {
+    grid-column: 6 / span 7;
+  }
+}
+
+.hero-split-title {
+  color: var(--ink);
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.hero-word-orange {
+  color: var(--orange);
+  display: block;
+}
+
+.hero-split-bajada {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+@media (min-width: 768px) {
+  .hero-split-bajada {
+    font-size: 17px;
+  }
+}
+
+.hero-split-actions {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.wind-card-title {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--orange);
-}
-
-.wind-live-badge {
+.hero-secondary-link {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: color 0.2s ease, transform 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+.hero-secondary-link:hover {
+  color: var(--orange);
+  transform: translateX(3px);
+}
+
+/* Visual Stage & Floating Badges */
+.hero-stage-container {
+  position: relative;
+  width: 100%;
+}
+
+.hero-main-photo-frame {
+  width: 100%;
+  height: 340px;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: #E2E2E6;
+  box-shadow: 0 20px 48px rgba(13, 21, 28, 0.08);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero-main-photo-frame {
+    height: 440px;
+    border-radius: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-main-photo-frame {
+    height: 520px;
+    border-radius: 36px;
+  }
+}
+
+.hero-main-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* Badge 1: Naranja "+15 AÑOS DE EXPERIENCIA" (Top Left) */
+.badge-experience-card {
+  background-color: var(--orange);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 16px 20px;
+  box-shadow: 0 12px 30px rgba(255, 82, 6, 0.35);
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  position: absolute;
+  top: -14px;
+  left: 12px;
+  z-index: 5;
+}
+
+@media (min-width: 1024px) {
+  .badge-experience-card {
+    top: -18px;
+    left: -20px;
+    padding: 18px 24px;
+  }
+}
+
+.badge-experience-num {
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.badge-experience-text {
+  font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4CAF50;
+  line-height: 1.25;
 }
 
-.wind-live-badge .pulse-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4CAF50;
-  box-shadow: 0 0 8px #4CAF50;
+/* Badge 2: "4.9/5" Reseñas & Avatares (Bottom Left) */
+.badge-rating-card {
+  background: linear-gradient(145deg, #6FAEE0 0%, #4388C8 100%);
+  color: var(--white);
+  border-radius: 24px;
+  padding: 18px 20px;
+  max-width: 230px;
+  box-shadow: 0 16px 36px rgba(35, 90, 140, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  position: absolute;
+  bottom: -18px;
+  left: 12px;
+  z-index: 5;
 }
 
-.wind-main-readout {
+@media (min-width: 1024px) {
+  .badge-rating-card {
+    bottom: -24px;
+    left: -16px;
+    padding: 22px 24px;
+    max-width: 250px;
+  }
+}
+
+.badge-rating-top {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 
-.wind-knots-num {
+.badge-rating-score {
   font-family: var(--font-display);
-  font-size: 48px;
+  font-size: 32px;
   line-height: 1;
-  color: var(--white);
 }
 
-.wind-speed-km {
+.badge-rating-stars {
+  color: #FFA726;
   font-size: 14px;
-  color: rgba(254, 254, 254, 0.65);
+  letter-spacing: 1px;
 }
 
-.wind-direction-row {
+.badge-rating-caption {
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 12px;
+}
+
+.badge-avatars-cluster {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--white);
-  margin-bottom: 16px;
 }
 
-.compass-needle-mini {
-  width: 20px;
-  height: 20px;
-  display: inline-flex;
+.badge-avatar-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  object-fit: cover;
+  margin-left: -8px;
+}
+
+.badge-avatar-img:first-child {
+  margin-left: 0;
+}
+
+.badge-avatar-plus {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--white);
+  border: 2px solid #FFFFFF;
+  display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--orange);
-  transition: transform 0.5s ease;
+  font-size: 12px;
+  font-weight: 800;
+  margin-left: -8px;
 }
 
-.wind-status-banner {
-  font-size: 13px;
+/* Badge 3: Widget de Viento Oficial de la Home (Right Overlapping) */
+.hero-weather-card {
+  background: rgba(254, 254, 254, 0.92);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--radius-card, 24px);
+  box-shadow: 0 16px 36px rgba(13, 21, 28, 0.12),
+              0 2px 8px rgba(13, 21, 28, 0.04);
+  color: var(--ink);
+  padding: 16px 18px;
+  width: 100%;
+  max-width: 250px;
+  margin-top: 32px;
+  position: relative;
+  z-index: 5;
+}
+
+@media (min-width: 1024px) {
+  .hero-weather-card {
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    transform: translateY(-50%);
+    margin-top: 0;
+    padding: 18px 20px;
+    width: 260px;
+  }
+}
+
+.weather-header-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.weather-live-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--orange);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.weather-radar-ping {
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1.5px solid var(--orange);
+  animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes radar-ping {
+  0% { transform: translateY(-50%) scale(0.6); opacity: 1; }
+  100% { transform: translateY(-50%) scale(2.3); opacity: 0; }
+}
+
+.weather-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--orange);
+  box-shadow: 0 0 8px rgba(255, 82, 6, 0.7);
+}
+
+.weather-title-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(35, 31, 32, 0.55);
+}
+
+.weather-main-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.weather-metric-primary {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-speed-cluster {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.weather-speed-num {
+  font-family: var(--font-body);
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+}
+
+.weather-speed-units {
+  display: flex;
+  flex-direction: column;
+}
+
+.speed-unit-kmh {
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(35, 31, 32, 0.65);
+}
+
+.speed-unit-knots {
+  font-size: 11px;
   font-weight: 600;
-  padding-top: 12px;
-  border-top: 1px solid var(--line-dark);
+  color: var(--orange);
+  margin-top: 2px;
+}
+
+/* Brújula Náutica */
+.weather-compass-box {
+  width: 52px;
+  height: 52px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compass-dial {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(35, 31, 32, 0.15);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compass-marker {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(35, 31, 32, 0.4);
+  line-height: 1;
+}
+
+.compass-marker.n { top: 2px; left: 50%; transform: translateX(-50%); }
+.compass-marker.s { bottom: 2px; left: 50%; transform: translateX(-50%); }
+.compass-marker.e { right: 2px; top: 50%; transform: translateY(-50%); }
+.compass-marker.o { left: 2px; top: 50%; transform: translateY(-50%); }
+.compass-marker.is-active { color: var(--orange); font-weight: 900; }
+
+.compass-arrow-wrap {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.compass-needle-svg {
+  width: 20px;
+  height: 20px;
+}
+
+.compass-needle-north {
+  fill: var(--orange);
+}
+
+.compass-needle-south {
+  fill: var(--ink);
+}
+
+.weather-progress-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(35, 31, 32, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.weather-progress-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.weather-status-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.weather-caption {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.weather-suitability-pill {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--shade);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
 }
 
 /* =========================================================
@@ -956,12 +1198,6 @@ nav.desktop-nav {
     grid-template-columns: repeat(12, 1fr);
   }
 
-  .objective-card {
-    grid-column: span 6;
-  }
-}
-
-@media (min-width: 1024px) {
   .objective-card {
     grid-column: span 6;
   }
@@ -1035,8 +1271,6 @@ nav.desktop-nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
-  overflow: hidden;
 }
 
 @media (min-width: 768px) {

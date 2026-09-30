@@ -1,7 +1,7 @@
 /**
  * Escuela Ombú - Subpáginas de Deportes (sports.js)
  * Interactividad Mobile-First:
- * 1. Telemetría de viento en vivo (Open-Meteo API en Acassuso)
+ * 1. Telemetría de viento en tiempo real (Open-Meteo API en Acassuso - Widget oficial de la Home)
  * 2. Navegación por tabs de los 14 objetivos (El Camino)
  * 3. Acordeón de FAQs
  * 4. Menú drawer mobile
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(fetchLiveWind, 10 * 60 * 1000); // Actualiza cada 10 min
 });
 
-// 1. Telemetría de viento en tiempo real para Acassuso
+// 1. Telemetría de viento en tiempo real para Acassuso (Sincronizado con componentes de la Home)
 async function fetchLiveWind() {
   try {
     const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh');
@@ -26,34 +26,78 @@ async function fetchLiveWind() {
       const knots = Math.round(speedKm / 1.852);
       const deg = Math.round(data.current.wind_direction_10m ?? 0);
 
+      // Elementos del Widget Home
+      const speedEl = document.getElementById('heroWindSpeed');
+      const knotsEl = document.getElementById('heroWindKnots');
+      const compassDial = document.getElementById('heroCompassDial');
+      const captionEl = document.getElementById('heroWindCaption');
+      const suitabilityEl = document.getElementById('heroSpotSuitability');
+      const barEl = document.getElementById('heroWindBar');
+
+      // Elementos alternativos / complementarios
+      const altKnots = document.getElementById('liveWindKnots');
+      const altSpeed = document.getElementById('liveWindSpeed');
+      const altDir = document.getElementById('liveWindDir');
+      const altCompass = document.getElementById('liveCompassNeedle');
+
+      if (speedEl) speedEl.textContent = speedKm;
+      if (knotsEl) knotsEl.textContent = `${knots} nudos`;
+      if (altKnots) altKnots.textContent = `${knots} kts`;
+      if (altSpeed) altSpeed.textContent = `${speedKm} km/h`;
+
+      // Rumbos náuticos oficiales en español
       const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
       const dirIndex = Math.round(deg / 45) % 8;
       const dirStr = dirs[dirIndex];
+      if (altDir) altDir.textContent = `${dirStr} (${deg}°)`;
 
-      const knotsEl = document.getElementById('liveWindKnots');
-      const speedEl = document.getElementById('liveWindSpeed');
-      const dirEl = document.getElementById('liveWindDir');
-      const compassEl = document.getElementById('liveCompassNeedle');
-      const statusEl = document.getElementById('liveWindStatus');
+      // Rotación de la brújula náutica hacia la procedencia del viento
+      if (compassDial) {
+        compassDial.style.transform = `rotate(${deg}deg)`;
+      }
+      if (altCompass) {
+        altCompass.style.transform = `rotate(${deg}deg)`;
+      }
 
-      if (knotsEl) knotsEl.textContent = `${knots} kts`;
-      if (speedEl) speedEl.textContent = `${speedKm} km/h`;
-      if (dirEl) dirEl.textContent = `${dirStr} (${deg}°)`;
-      if (compassEl) compassEl.style.transform = `rotate(${deg}deg)`;
+      // Iluminar la letra cardinal activa (N, E, S, O)
+      const markerN = document.querySelector('.compass-marker.n');
+      const markerE = document.querySelector('.compass-marker.e');
+      const markerS = document.querySelector('.compass-marker.s');
+      const markerO = document.querySelector('.compass-marker.o');
 
-      if (statusEl) {
+      [markerN, markerE, markerS, markerO].forEach(m => m && m.classList.remove('is-active'));
+
+      if (deg >= 315 || deg < 45) {
+        markerN?.classList.add('is-active');
+      } else if (deg >= 45 && deg < 135) {
+        markerE?.classList.add('is-active');
+      } else if (deg >= 135 && deg < 225) {
+        markerS?.classList.add('is-active');
+      } else if (deg >= 225 && deg < 315) {
+        markerO?.classList.add('is-active');
+      }
+
+      // Barra de progreso del viento
+      if (barEl) {
+        const percent = Math.min(100, Math.max(12, Math.round((speedKm / 45) * 100)));
+        barEl.style.width = `${percent}%`;
+        barEl.style.background = 'var(--orange)';
+      }
+
+      // Recomendación de disciplina según nudos
+      if (captionEl && suitabilityEl) {
         if (knots >= 14 && knots <= 26) {
-          statusEl.textContent = 'Condición óptima para Kitesurf';
-          statusEl.style.color = 'var(--orange)';
+          captionEl.textContent = 'Condición óptima de planeo';
+          suitabilityEl.textContent = 'Ideal Kitesurf';
         } else if (knots >= 10 && knots < 14) {
-          statusEl.textContent = 'Viento suave · Ideal iniciación en tierra';
-          statusEl.style.color = '#FFA726';
+          captionEl.textContent = 'Viento moderado';
+          suitabilityEl.textContent = 'Iniciación Kite & Wing';
         } else if (knots < 10) {
-          statusEl.textContent = 'Viento calmo · Esperando térmico';
-          statusEl.style.color = 'var(--text-light-muted)';
+          captionEl.textContent = 'Agua calma sin viento';
+          suitabilityEl.textContent = 'Ideal SUP & Kayak';
         } else {
-          statusEl.textContent = 'Viento fuerte en el spot · Nivel pro';
-          statusEl.style.color = '#EF5350';
+          captionEl.textContent = 'Viento fuerte en el spot';
+          suitabilityEl.textContent = 'Kite & Wind Pro';
         }
       }
     }
