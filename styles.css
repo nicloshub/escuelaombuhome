@@ -1,6 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
+  /* =========================================================
+     SISTEMA DE DISEÑO: GRILLA BASE MOBILE-FIRST (4 COLS & 8PT GRID)
+     ========================================================= */
+  --grid-cols: 4;
+  --grid-gutter: 16px;
+  --grid-margin: 24px;
+  --gutter: 16px;
+  --page-margin: 24px;
+
+  /* Espaciado Macro entre Secciones (Múltiplos de 8) */
+  --section-spacing-desktop: 160px; /* 20 * 8px */
+  --section-spacing-tablet: 96px;   /* 12 * 8px */
+  --section-spacing-mobile: 64px;   /* 8 * 8px */
+  --section-padding-y: var(--section-spacing-mobile);
+  --section-header-mb: 24px;        /* 3 * 8px */
+
+  /* Espaciados Atómicos (8pt Grid) */
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-128: 128px;
+  --space-160: 160px;
+
+  /* =========================================================
+     ESCALA TIPOGRÁFICA BASE MOBILE (8PT GRID)
+     Fuente Primaria (Display/Títulos): Anton, sans-serif
+     Fuente Secundaria (Cuerpo/UI): Inter, sans-serif
+     ========================================================= */
+  --font-family-display: 'Anton', Impact, sans-serif;
+  --font-family-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* H1 (Hero Mobile): Font-size: 64px | Line-height: 72px */
+  --font-h1-family: var(--font-family-display);
+  --font-h1-size: 64px;
+  --font-h1-lh: 72px;
+  --font-h1-ls: -0.02em;
+
+  /* H2 (Títulos de sección Mobile): Font-size: 40px | Line-height: 48px */
+  --font-h2-family: var(--font-family-display);
+  --font-h2-size: 40px;
+  --font-h2-lh: 48px;
+  --font-h2-ls: -0.015em;
+
+  /* H3 (Títulos de tarjetas Mobile): Font-size: 24px | Line-height: 32px */
+  --font-h3-family: var(--font-family-display);
+  --font-h3-size: 24px;
+  --font-h3-lh: 32px;
+  --font-h3-ls: 0;
+
+  /* H4 (Subtítulos pequeños Mobile): Font-size: 20px | Line-height: 28px */
+  --font-h4-family: var(--font-family-display);
+  --font-h4-size: 20px;
+  --font-h4-lh: 28px;
+  --font-h4-ls: 0;
+
+  /* Cuerpo (Body/Bajadas Mobile): Font-size: 16px | Line-height: 24px */
+  --font-body-family: var(--font-family-body);
+  --font-body-size: 16px;
+  --font-body-lh: 24px;
+  --font-body-ls: 0;
+
+  /* Caption/UI Mobile: Font-size: 14px | Line-height: 20px */
+  --font-caption-family: var(--font-family-body);
+  --font-caption-size: 14px;
+  --font-caption-lh: 20px;
+
+  /* Aliases para compatibilidad */
+  --font-display: var(--font-family-display);
+  --font-body: var(--font-family-body);
+  --font-mono: var(--font-family-body);
+
   /* Regla Áurea: Factor de proporción áurea */
   --phi: 1.618;
 
@@ -17,17 +94,6 @@
   --orange: var(--primary); /* Botones y acentos: #FF5206 */
   --deep: var(--primary);
   --line: rgba(35, 31, 32, 0.10);
-  
-  /* Grilla Figma 12 Columnas */
-  --gutter: 32px;
-  --page-margin: 160px;
-  --grid-margin: 160px;
-  --grid-gutter: 32px;
-  --grid-cols: 12;
-
-  /* Espaciado de Secciones (Ritmo Áureo) */
-  --section-padding-y: clamp(88px, 7.5vw, 120px);
-  --section-header-mb: clamp(36px, 3.5vw, 48px);
 
   /* Aliases para compatibilidad */
   --bg-sand: var(--paper); /* #FEFEFE */
@@ -47,10 +113,6 @@
   --border-subtle: rgba(35, 31, 32, 0.20);
   --border-dark: rgba(254, 254, 254, 0.15);
 
-  --font-display: 'Anton', Impact, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Inter', system-ui, sans-serif;
-
   /* =========================================================
      SISTEMA UNIFICADO DE RADIOS DE CARDS (ARMONÍA Y CONCENTRICIDAD)
      ========================================================= */
@@ -66,7 +128,23 @@
   /* Sombras calibradas con offset natural y blur suave */
   --shadow-card: 0 4px 16px rgba(35, 31, 32, 0.05);
   --shadow-lg: 0 16px 36px rgba(35, 31, 32, 0.09);
-  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* =========================================================
+     SISTEMA DE MOVIMIENTO Y FÍSICA FLUIDA (APPLE DESIGN & ANIMATE)
+     ========================================================= */
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);       /* Curva de resorte elástico fluida Apple WWDC */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);         /* Entrada rápida UI / Salida responsiva */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);     /* Movimiento continuo y reubicación */
+  --ease-press: cubic-bezier(0.2, 0.8, 0.2, 1);       /* Respuesta táctil instantánea pointer-down */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);      /* Expansión fluida de acordeones y cajones */
+
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 320ms;
+  --duration-slow: 480ms;
+  --duration-scene: 700ms;
+
+  --transition: all 0.25s var(--ease-apple);
 }
 
 :focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
@@ -89,45 +167,79 @@ body {
   font-family: var(--font-body);
   line-height: 1.6;
   letter-spacing: -0.01em;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
 /* =========================================================
-   CONTAINERS & SHARED STYLES
+   CONTAINERS & SHARED STYLES (GRILLA 12 COLS & 8PT GRID)
    ========================================================= */
 .container {
-  max-width: 1340px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 32px;
+  padding-left: var(--grid-margin, 24px);
+  padding-right: var(--grid-margin, 24px);
+  box-sizing: border-box;
 }
 
 .section-padding {
-  padding: var(--section-padding-y, 100px) 0;
+  padding: var(--section-padding-y, 64px) 0;
 }
 
-/* Tipografías Display con Proporciones Áureas */
-h1, h2, h3, h4, .display-title {
-  font-family: var(--font-display);
+/* Tipografías Display con Jerarquía y Proporciones Estrictas */
+h1 {
+  font-family: var(--font-h1-family);
+  font-size: var(--font-h1-size);
+  line-height: var(--font-h1-lh);
+  letter-spacing: var(--font-h1-ls);
   font-weight: 400;
   text-transform: uppercase;
 }
 
-.display-title {
-  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+h2, .display-title, .bento-title, .instructores-title, .tidescape-title, .objetivo-headline, .objetivo-title, .mapa-title, .prefooter-heading {
+  font-family: var(--font-h2-family);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-lh);
+  letter-spacing: var(--font-h2-ls);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+h3, .scroll-card-sport, .sport-title-giant, .objetivo-card-title, .spot-card-title {
+  font-family: var(--font-h3-family);
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-lh);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-family: var(--font-h4-family);
+  font-size: var(--font-h4-size);
+  line-height: var(--font-h4-lh);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+body, p, .disciplinas-subtext, .bento-header-desc, .instructores-subtext, .faq-subtext, .reviews-subtext, .objetivo-subtext, .objetivo-lead-p, .tidescape-desc, .hero-bajada-text {
+  font-family: var(--font-body-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-lh);
+  letter-spacing: var(--font-body-ls);
+  font-weight: 400;
 }
 
 .section-label, .eyebrow {
-  font-family: var(--font-body);
-  font-size: 11.5px;
-  line-height: 1.4;
+  font-family: var(--font-caption-family);
+  font-size: 12px;
+  line-height: 16px;
+  height: 16px;
   font-weight: 700;
   color: var(--orange);
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  margin-top: 0;
+  margin-bottom: 16px;
   display: block;
 }
 
@@ -145,8 +257,9 @@ h1, h2, h3, h4, .display-title {
   --btn-icon-size: 34px;
   --btn-gap: calc((var(--btn-h) - var(--btn-icon-size)) / 2);
 
-  font-family: var(--font-body);
-  font-size: 13.5px;
+  font-family: var(--font-caption-family);
+  font-size: var(--font-caption-size);
+  line-height: var(--font-caption-lh);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -164,7 +277,22 @@ h1, h2, h3, h4, .display-title {
   text-decoration: none;
   white-space: nowrap;
   box-sizing: border-box;
-  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  transition: background-color 0.25s var(--ease-apple), color 0.25s var(--ease-apple), border-color 0.25s var(--ease-apple), box-shadow 0.25s var(--ease-apple), transform 0.25s var(--ease-apple);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-pill-dark:hover,
+  .btn-pill-orange:hover,
+  .btn-pill-white:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.btn-pill-dark:active,
+.btn-pill-orange:active,
+.btn-pill-white:active {
+  transform: scale(0.97) !important;
+  transition: transform 100ms var(--ease-press) !important;
 }
 
 /* Contenedor circular del icono: 100% concéntrico con el semicírculo derecho */
@@ -181,7 +309,7 @@ h1, h2, h3, h4, .display-title {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s ease;
+  transition: background-color 0.25s var(--ease-apple), color 0.25s var(--ease-apple), transform 0.25s var(--ease-apple);
   will-change: transform;
 }
 
@@ -193,7 +321,7 @@ h1, h2, h3, h4, .display-title {
   display: block;
   transform-box: fill-box;
   transform-origin: 50% 50%;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s var(--ease-apple);
   will-change: transform;
 }
 
@@ -352,7 +480,7 @@ header.site-header:hover {
 
 .header-nav {
   position: relative;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 2px;
   list-style: none;
@@ -606,7 +734,7 @@ header.site-header:hover {
 
 /* Botón de Menú Móvil */
 .mobile-menu-btn {
-  display: none;
+  display: inline-flex;
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -797,141 +925,8 @@ header.site-header:hover {
   width: 100%;
 }
 
-/* =========================================================
-   GRILLA OFICIAL FIGMA (12 COLUMNAS, STRETCH, MARGIN 160, GUTTER 32)
-   Desktop (>1024px) - Jerarquías, Espaciados Áureos y Cabeceras 6+6 Cols
-   ========================================================= */
-@media (min-width: 1025px) {
-  :root {
-    --grid-margin: 160px;
-    --grid-gutter: 32px;
-    --grid-cols: 12;
-  }
 
-  /* Contenedor general: alineado de punta a punta con los 160px de margen */
-  .container {
-    width: 100%;
-    max-width: 100%;
-    padding-left: 160px;
-    padding-right: 160px;
-    box-sizing: border-box;
-  }
 
-  /* Navbar flotante: alineada exactamente con las 12 columnas (160px de margen a ambos lados) */
-  header.site-header {
-    width: calc(100% - 320px);
-    max-width: none;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  /* Hero: Widget de Viento (Cols 1 a 3) y Bajada + CTAs (Cols 8 a 12, alineada a la izq) */
-  .hero-weather-col {
-    width: calc((100% - 11 * 32px) / 12 * 3 + 2 * 32px);
-    min-width: 260px;
-    max-width: 320px;
-  }
-
-  .hero-bajada-col {
-    width: calc((100% - 11 * 32px) / 12 * 5 + 4 * 32px);
-    max-width: 480px;
-    text-align: left;
-  }
-
-  /* =========================================================
-     CABECERAS DE SECCIÓN UNIFICADAS (6 COLS TÍTULO + 6 COLS BAJADA ALINEADA A LA IZQ)
-     ========================================================= */
-  .disciplinas-header,
-  .bento-header,
-  .instructores-header,
-  .faq-header,
-  .reviews-header {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 32px;
-    align-items: flex-end;
-    margin-bottom: var(--section-header-mb, 44px);
-    width: 100%;
-  }
-
-  .disciplinas-title-col,
-  .bento-header-title-col,
-  .instructores-title-col,
-  .faq-title-col,
-  .reviews-title-col {
-    grid-column: 1 / span 6;
-    text-align: left;
-  }
-
-  .disciplinas-desc-col,
-  .bento-header-desc-col,
-  .instructores-desc-col,
-  .faq-desc-col,
-  .reviews-desc-col {
-    grid-column: 7 / span 6;
-    text-align: left;
-    padding-bottom: 4px;
-  }
-
-  /* Bajadas estandarizadas: tipografía, interlínea e interletra unificadas */
-  .disciplinas-subtext,
-  .bento-header-desc,
-  .instructores-subtext,
-  .faq-subtext,
-  .reviews-subtext {
-    font-family: var(--font-body);
-    font-size: clamp(16px, 1.15vw, 18px);
-    line-height: 1.58;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    opacity: 0.82;
-    margin: 0;
-    max-width: 48ch;
-    text-align: left;
-    display: block;
-  }
-
-  /* Bento Grid: 12 columnas con gutters de 32px */
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 280px 280px;
-    gap: 32px;
-  }
-  .bento-cell--wide      { grid-column: 1 / span 5; grid-row: 1; }
-  .bento-cell--dark      { grid-column: 6 / span 3; grid-row: 1; }
-  .bento-cell--tall      { grid-column: 9 / span 4; grid-row: 1 / span 2; }
-  .bento-cell--accent    { grid-column: 1 / span 5; grid-row: 2; }
-  .bento-cell--photo-alt { grid-column: 6 / span 3; grid-row: 2; }
-
-  /* Filosofía Objetivo: 6 cols título + 6 cols texto con gutter 32px */
-  .objetivo-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 32px;
-    align-items: flex-start;
-  }
-  .objetivo-headline-col {
-    grid-column: 1 / span 6;
-    text-align: left;
-  }
-  .objetivo-right-pane {
-    grid-column: 7 / span 6;
-    text-align: left;
-  }
-
-  /* Instructores Team: 4 cards de 3 columnas cada una */
-  .instructores-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-  }
-
-  /* Reseñas Masonry: 4 columnas con gutters de 32px */
-  .reviews-masonry-grid {
-    gap: 32px;
-  }
-}
 
 /* Fila superior: Widget de Clima (Cols 1 a 3) */
 .hero-top-row {
@@ -943,10 +938,11 @@ header.site-header:hover {
   max-width: 320px;
 }
 
-/* Bloque inferior: Bajada (Cols 8-12 en el cielo celeste) + H1 Monumental */
+/* Bloque inferior: H1 Monumental + Bajada con CTAs (Mobile: Columna, Desktop >=960px: Grilla 12 Columnas) */
 .hero-bottom-area {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   width: 100%;
   margin-top: auto;
   position: relative;
@@ -954,12 +950,14 @@ header.site-header:hover {
 
 .hero-bajada-row {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 100%;
-  margin-bottom: clamp(36px, 5.5vh, 60px);
+  margin: 0;
   position: relative;
   z-index: 5;
 }
+
+
 
 /* =========================================================
    SISTEMA DE VIDRIO UNIFICADO HERO (WHITE FROSTED LIQUID GLASS)
@@ -988,9 +986,9 @@ header.site-header:hover {
 .hero-bajada-col {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
   width: 100%;
-  max-width: 440px;
+  max-width: 468px;
   padding: 0;
   background: transparent;
   border: none;
@@ -1001,12 +999,12 @@ header.site-header:hover {
 
 .hero-bajada-text {
   font-family: var(--font-body);
-  font-size: clamp(13.5px, 0.95vw, 15px);
-  font-weight: 450;
+  font-size: 15px;
+  font-weight: 500;
   color: #1A1717;
-  line-height: 1.55;
+  line-height: 1.5;
   margin: 0;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.7);
 }
 
 .hero-bajada-text strong {
@@ -1043,21 +1041,24 @@ header.site-header:hover {
   min-height: 44px;
   padding: 0 1.5rem;
   color: var(--ink);
-  background-color: transparent;
-  border: 1.5px solid rgba(35, 31, 32, 0.22);
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1px solid var(--ink);
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
   line-height: 1;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
 
 .hero-cta-sports:hover {
-  background-color: var(--ink);
+  background-color: var(--ink) !important;
   border-color: var(--ink);
   color: #FFFFFF;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(35, 31, 32, 0.16);
 }
 
 .hero-cta-sports:active {
@@ -1317,7 +1318,7 @@ header.site-header:hover {
   padding: 3px 8px;
   border-radius: 100px;
   white-space: nowrap;
-  background: transparent;
+  background: transparent !important;
   color: var(--orange);
   border: 1px solid var(--orange);
   flex-shrink: 0;
@@ -1328,7 +1329,7 @@ header.site-header:hover {
 .weather-suitability-pill.is-moderate,
 .weather-suitability-pill.is-calm,
 .weather-suitability-pill.is-strong {
-  background: transparent;
+  background: transparent !important;
   color: var(--orange);
   border-color: var(--orange);
 }
@@ -1337,20 +1338,20 @@ header.site-header:hover {
 .hero-headline-wrap {
   width: 100%;
   margin-top: auto;
-  padding-bottom: 8px;
+  padding-bottom: 0;
 }
 
 .hero-giant-heading {
-  font-family: var(--font-display);
-  font-size: clamp(3.2rem, 7.8vw, 8.2rem);
+  font-family: var(--font-h1-family);
+  font-size: var(--font-h1-size);
   font-weight: 400;
-  line-height: 0.88;
-  letter-spacing: -0.015em;
+  line-height: var(--font-h1-lh);
+  letter-spacing: var(--font-h1-ls);
   text-transform: uppercase;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: clamp(8px, calc(var(--font-h1-lh) - var(--font-h1-size)), 16px);
   width: 100%;
 }
 
@@ -1359,9 +1360,9 @@ header.site-header:hover {
   color: var(--ink);
   display: inline-flex;
   align-items: center;
-  gap: 0.22em;
+  gap: 0.25em;
   white-space: nowrap;
-  line-height: 0.9;
+  line-height: 1;
   animation: heroFadeInLeft 1.25s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
   will-change: transform, opacity;
 }
@@ -1399,7 +1400,7 @@ header.site-header:hover {
   color: var(--orange);
   display: block;
   white-space: nowrap;
-  line-height: 0.9;
+  line-height: 1;
   align-self: flex-start;
   margin-left: 0;
   text-align: left;
@@ -1481,19 +1482,19 @@ header.site-header:hover {
    SECCIÓN: ELEGÍ TU DISCIPLINA (SCROLL STACK CARDS)
    ========================================================= */
 .section-disciplinas {
-  padding: var(--section-padding-y, 100px) 0 40px;
+  padding: var(--section-padding-y, 160px) 0 48px;
   position: relative;
   scroll-margin-top: 88px;
 }
 
 .disciplinas-header {
   position: sticky;
-  top: 92px;
+  top: 84px;
   z-index: 25;
   background: transparent;
   pointer-events: none;
-  padding: 4px 0 8px;
-  margin-bottom: var(--section-header-mb, 36px);
+  padding: 0;
+  margin-bottom: var(--section-header-mb, 48px);
 }
 
 .disciplinas-title-col {
@@ -1505,110 +1506,78 @@ header.site-header:hover {
 }
 
 .disciplinas-title-col h2 {
-  white-space: nowrap;
-  font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+  white-space: normal;
+  font-family: var(--font-h2-family);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-lh);
+  letter-spacing: var(--font-h2-ls);
 }
 
 .disciplinas-title-col .section-label {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .disciplinas-subtext {
-  max-width: 520px;
-  font-size: 16px;
+  font-family: var(--font-body-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-lh);
+  letter-spacing: var(--font-body-ls);
   color: var(--ink);
-  line-height: 1.55;
-  opacity: 0.82;
-  margin-top: 8px;
+  opacity: 0.85;
+  margin: 0;
+  max-width: none;
 }
 
-/* Layout con Stack de Tarjetas + Rail Lateral */
+/* Layout con Stack de Tarjetas + Rail Lateral (12 Columnas Figma) */
 .disciplinas-stack-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 165px;
-  gap: 40px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px;
   align-items: stretch;
   position: relative;
 }
 
-/* Rail Lateral Minimalista de Navegación */
+/* Rail Lateral Minimalista de Navegación (Columna 12) */
 .disciplinas-side-rail {
+  grid-column: 12 / span 1;
   position: relative;
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .side-rail-sticky {
   position: sticky;
-  top: 255px;
+  top: 280px;
+  height: clamp(320px, 38vh, 420px);
   display: flex;
-  align-items: stretch;
-  gap: 16px;
-  padding: 4px 0;
+  align-items: center;
+  justify-content: center;
   user-select: none;
 }
 
-/* Línea conectora vertical */
+/* Línea conectora vertical / track pura minimalista (solo la línea) */
 .side-rail-track {
-  width: 2px;
-  background: var(--line);
+  width: 3px;
+  height: 180px;
+  background: rgba(35, 31, 32, 0.12);
   position: relative;
-  border-radius: 2px;
-  margin: 4px 0;
+  border-radius: 9999px;
+  cursor: pointer;
 }
 
 .side-rail-thumb {
-  width: 2px;
-  height: 24px;
+  width: 5px;
+  height: 44px;
   background: var(--orange);
   position: absolute;
   top: 0;
-  left: 0;
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255, 92, 45, 0.4);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.side-rail-list {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.side-rail-item {
-  background: none;
-  border: none;
-  padding: 4px 0;
-  cursor: pointer;
-  display: block;
-  text-align: left;
-  opacity: 0.35;
-  transform: translateX(0);
-  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
-}
-
-.side-rail-item:hover {
-  opacity: 0.75;
-  transform: translateX(3px);
-}
-
-.side-rail-item.active {
-  opacity: 1;
-  transform: translateX(4px);
-}
-
-.side-rail-name {
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 400;
-  text-transform: uppercase;
-  color: var(--ink);
-  letter-spacing: 0.03em;
-  line-height: 1;
-  transition: color 0.25s ease;
-}
-
-.side-rail-item.active .side-rail-name {
-  color: var(--orange);
+  left: -1px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 10px rgba(255, 82, 6, 0.45);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Mini indicador flotante para móviles */
@@ -1627,15 +1596,16 @@ header.site-header:hover {
   box-shadow: 0 4px 12px rgba(31, 31, 19, 0.15);
 }
 
-/* Contenedor del Stack */
+/* Contenedor del Stack (Columnas 1 a 11 de la grilla de 12) */
 .scroll-stack-container {
+  grid-column: 1 / span 11;
   position: relative;
   width: 100%;
 }
 
 .scroll-stack-card {
   position: sticky;
-  top: 255px;
+  top: 280px;
   margin-bottom: 24vh;
   width: 100%;
   transform-origin: top center;
@@ -1649,14 +1619,14 @@ header.site-header:hover {
 /* Tarjeta Principal de Deporte */
 .sport-card-stage {
   background: #FFFFFF;
-  border-radius: var(--radius-card, 24px);
-  border: 1px solid var(--line);
+  border-radius: 28px;
+  border: 1px solid rgba(35, 31, 32, 0.08);
   padding: 28px 32px;
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.04), 0 16px 36px rgba(31, 31, 19, 0.1);
+  box-shadow: 0 16px 40px rgba(13, 21, 28, 0.06);
   display: grid;
   grid-template-columns: 1fr 1.15fr;
   gap: 36px;
-  align-items: center;
+  align-items: stretch;
   overflow: hidden;
   transform-origin: top center;
   transition: transform 0.1s ease-out, filter 0.1s ease-out, box-shadow 0.2s ease;
@@ -1664,19 +1634,14 @@ header.site-header:hover {
 }
 
 .sport-tag-pill {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--orange);
-  margin-bottom: 8px;
-  text-transform: uppercase;
+  display: none;
 }
 
 .sport-media-box {
-  border-radius: var(--radius-inner, 16px);
+  border-radius: 20px;
   overflow: hidden;
-  height: clamp(300px, 36vh, 390px);
+  height: 100%;
+  min-height: clamp(340px, 42vh, 440px);
 }
 .sport-media-box img {
   width: 100%;
@@ -1694,32 +1659,43 @@ header.site-header:hover {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  padding: 10px 0;
+  padding: 6px 0;
 }
 
 .sport-title-giant {
   font-family: var(--font-display);
-  font-size: 40px;
+  font-size: clamp(38px, 4vw, 54px);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin: 0 0 6px 0;
+  color: var(--orange);
+  letter-spacing: -0.01em;
+}
+
+.sport-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(19px, 1.7vw, 24px);
+  font-weight: 500;
   color: var(--ink);
+  line-height: 1.25;
+  margin: 0 0 14px 0;
 }
 
 .sport-desc-text {
-  font-size: 15px;
-  color: var(--ink);
-  line-height: 1.6;
-  margin-bottom: 24px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: #4A4545;
+  line-height: 1.55;
+  margin: 0 0 20px 0;
 }
 
 /* Grilla de especificaciones 2x2 */
 .sport-specs-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-block: 28px;
+  gap: 14px 24px;
+  margin: 0 0 20px 0;
   padding-bottom: 0;
   border-bottom: none;
 }
@@ -1729,25 +1705,26 @@ header.site-header:hover {
 }
 .spec-box-label {
   color: var(--orange);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: .05em;
+  letter-spacing: .06em;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .spec-box-val {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 500;
   color: var(--ink);
+  line-height: 1.35;
 }
 
 .sport-cta-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  border-top: 1px solid rgba(35, 31, 32, 0.08);
 }
 .sport-price-wrap {
   display: flex;
@@ -1755,16 +1732,16 @@ header.site-header:hover {
 }
 .price-label-tiny {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 10.5px;
   color: var(--orange);
   text-transform: uppercase;
   font-weight: 700;
-  letter-spacing: .05em;
+  letter-spacing: .06em;
   margin-bottom: 4px;
 }
 .price-val-big {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: clamp(28px, 2.5vw, 36px);
   font-weight: 400;
   color: var(--ink);
   line-height: 1;
@@ -1774,52 +1751,40 @@ header.site-header:hover {
    SECCIÓN: EN NÚMEROS (BENTO GRID)
    ========================================================= */
 .section-bento {
-  padding: var(--section-padding-y, 100px) 0;
+  padding: var(--section-padding-y, 160px) 0;
 }
 
-/* Header con título a la izquierda y bajada a la derecha estilo referencia */
 .bento-header {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: flex-end;
-  gap: 48px;
-  margin-bottom: var(--section-header-mb, 44px);
-}
-
-.bento-header-title-col .section-label {
-  margin-bottom: 12px;
+  margin-bottom: var(--section-header-mb, 48px);
 }
 
 .bento-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+  font-family: var(--font-h2-family);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-lh);
+  letter-spacing: var(--font-h2-ls);
   font-weight: 400;
-  line-height: 0.96;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
-}
-
-.bento-header-desc-col {
-  padding-bottom: 4px;
 }
 
 .bento-header-desc {
-  font-family: var(--font-body);
-  font-size: clamp(16px, 1.15vw, 18px);
-  line-height: 1.58;
+  font-family: var(--font-body-family);
+  font-size: var(--font-body-size, 16px);
+  line-height: var(--font-body-lh, 1.55);
+  letter-spacing: var(--font-body-ls, -0.01em);
   color: var(--ink);
-  opacity: 0.82;
+  opacity: 0.85;
   margin: 0;
-  max-width: 48ch;
+  max-width: 587px;
 }
 
 .bento-grid {
   display: grid;
-  grid-template-columns: 1.25fr 1fr 1fr;
+  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 280px 280px;
-  gap: 20px;
+  gap: var(--grid-gutter, 32px);
 }
 
 .bento-cell {
@@ -1840,19 +1805,19 @@ header.site-header:hover {
   transform: scale(1.04);
 }
 
-.bento-cell--wide      { grid-column: 1; grid-row: 1; }
-.bento-cell--dark      { grid-column: 2; grid-row: 1; }
-.bento-cell--tall      { grid-column: 3; grid-row: 1 / span 2; }
-.bento-cell--accent    { grid-column: 1; grid-row: 2; }
-.bento-cell--photo-alt { grid-column: 2; grid-row: 2; }
+.bento-cell--wide      { grid-column: 1 / span 4; grid-row: 1; }
+.bento-cell--dark      { grid-column: 5 / span 3; grid-row: 1; }
+.bento-cell--tall      { grid-column: 8 / span 5; grid-row: 1 / span 2; }
+.bento-cell--sponsor,
+.bento-cell--accent    { grid-column: 1 / span 3; grid-row: 2; }
+.bento-cell--photo-alt { grid-column: 4 / span 4; grid-row: 2; }
 
 .bento-cell--dark {
   background-color: var(--ink);
-  padding: 32px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 16px;
+  justify-content: space-between;
 }
 
 .bento-stat-number {
@@ -1868,89 +1833,48 @@ header.site-header:hover {
   font-size: 14px;
   line-height: 1.5;
   color: rgba(254, 254, 254, 0.75);
-  max-width: 30ch;
+  max-width: 28ch;
+  margin: 0;
 }
 
-.bento-cell--accent {
-  background-color: var(--orange);
-  padding: 32px;
+/* Sponsor Oficial HARD WIND en Bento Grid */
+.bento-cell--sponsor {
+  background: var(--orange);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 28px;
 }
 
-.bento-quote-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-}
-
-.bento-quote-text {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 1.15;
+.bento-sponsor-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #FFFFFF;
-  letter-spacing: -0.005em;
 }
 
-/* --- Tablets --- */
-@media (max-width: 1024px) {
-  .bento-header {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    margin-bottom: 32px;
-  }
-  .bento-header-desc {
-    max-width: 55ch;
-  }
-  .bento-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 240px 240px 240px;
-    gap: 16px;
-  }
-  .bento-cell--wide      { grid-column: 1 / span 2; grid-row: 1; }
-  .bento-cell--dark      { grid-column: 1; grid-row: 2; }
-  .bento-cell--tall      { grid-column: 2; grid-row: 2 / span 2; }
-  .bento-cell--accent    { grid-column: 1; grid-row: 3; }
-  .bento-cell--photo-alt { grid-column: 1; grid-row: 3; display: none; } /* se oculta: 5 celdas no cierran prolijo en 2 cols x 3 filas */
+.bento-sponsor-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: auto;
 }
 
-/* --- Mobile --- */
-@media (max-width: 768px) {
-  .section-bento { padding: 32px 0 64px; }
-  .bento-header {
-    gap: 14px;
-    margin-bottom: 24px;
-  }
-  .bento-title {
-    font-size: clamp(2rem, 7.5vw, 2.6rem);
-  }
-  .bento-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
-    gap: 14px;
-  }
-  .bento-cell {
-    grid-column: 1 !important;
-    grid-row: auto !important;
-    min-height: 220px;
-    display: block !important; /* revierte el display:none del breakpoint anterior */
-  }
-  .bento-cell--dark,
-  .bento-cell--accent {
-    min-height: auto;
-    padding: 24px;
-  }
-  .bento-stat-number { font-size: 48px; }
-  .bento-quote-text  { font-size: 18px; }
+.bento-sponsor-logo {
+  max-width: 100%;
+  width: 215px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
+
+
+
 
 /* =========================================================
    SECCIÓN: ALQUILERES & EXPERIENCIAS (TIDESCAPE SCATTER STYLE)
@@ -1959,7 +1883,7 @@ header.site-header:hover {
   position: relative;
   overflow: hidden;
   background-color: #000000;
-  padding: var(--section-padding-y, 100px) 0;
+  padding: var(--section-padding-y, 160px) 0;
   scroll-margin-top: 88px;
 }
 
@@ -2014,7 +1938,16 @@ header.site-header:hover {
   line-height: 1.65;
   color: rgba(254, 254, 254, 0.85);
   max-width: 540px;
-  margin: 0 auto 28px;
+  margin: 0 auto 16px;
+}
+
+.tidescape-support-line {
+  font-family: var(--font-body, 'Inter');
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--orange);
+  margin: 0 auto 32px;
+  letter-spacing: 0.01em;
 }
 
 /* Chips oficiales en sistema */
@@ -2129,144 +2062,330 @@ header.site-header:hover {
   ) rotate(calc(var(--rot) * var(--tidescape-p, 1)));
 }
 
-/* Tablet (769px - 1024px) */
-@media (max-width: 1024px) {
-  .tidescape-container {
-    min-height: 600px;
-  }
-  .tidescape-photo-card {
-    width: 200px;
-    height: 230px;
-  }
-  .tidescape-card-tl,
-  .tidescape-card-tr,
-  .tidescape-card-bl,
-  .tidescape-card-br {
-    --shift-x: 180px;
-    --shift-y: 80px;
-  }
-}
+
+
 
 
 /* =========================================================
-   SECCIÓN: EL OBJETIVO (FILOSOFÍA PEDAGÓGICA)
+   SECCIÓN: EL OBJETIVO (APRENDIZAJES EDITORIALES ESCALONADOS)
+   Identidad Visual:
+   - Fondo blanco cálido #F6F5EF
+   - Títulos en negro carbón #22221E
+   - Acentos en naranja #FF5206
+   - Textos secundarios en gris #626258
+   - Tipografía Anton para títulos y números grandes
+   - Tipografía Inter para bajadas, descripciones y etiquetas
+   - Sin tarjetas, sombras ni contenedores con bordes redondeados
+   - Espacio generoso y alineaciones precisas
+   ========================================================= */
+/* =========================================================
+   SECCIÓN: EL OBJETIVO (TRES CARDS ESCALONADAS CON RECORTE)
    ========================================================= */
 .section-objetivo {
-  padding: var(--section-padding-y, 100px) 0;
+  background-color: #FFFFFF;
+  padding: var(--section-padding-y, 160px) 0 calc(var(--section-padding-y, 160px) + 64px); /* absorbe los 64px de escalonamiento de la 3ra card */
+  scroll-margin-top: 88px;
+  position: relative;
+  overflow: hidden;
 }
 
-.objetivo-grid {
+/* ENCABEZADO: 12 Columnas Asimétrico (4 Cols Título / 3 Cols Vacías / 5 Cols Bajada) */
+.objetivo-header {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 80px;
-  align-items: flex-start;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-gutter, 32px);
+  align-items: start; /* Alineación superior estricta */
+  margin-bottom: var(--section-header-mb, 48px);
 }
 
-.objetivo-headline {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 5.2vw, 5.2rem);
-  font-weight: 400;
-  line-height: 0.95;
+/* Columna Izquierda: 4 columnas */
+.objetivo-title-col {
+  grid-column: 1 / span 4;
+  text-align: left;
+}
+
+.objetivo-title {
+  font-family: var(--font-h2-family, 'Anton', sans-serif);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-lh);
+  letter-spacing: var(--font-h2-ls);
+  color: #22221E;
   text-transform: uppercase;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-}
-.objetivo-headline span.orange,
-.objetivo-headline span.accent {
-  color: var(--orange);
+  margin: 0;
 }
 
-.objetivo-right-pane {
+.objetivo-title .highlight-orange {
+  color: #FF5206;
+}
+
+/* Columna Derecha: 5 columnas (dejando cols 5-7 vacías para espacio en blanco) */
+.objetivo-desc-col {
+  grid-column: 8 / span 5;
+  padding-top: 32px; /* Compensa la altura de .section-label para alinear visualmente con el H2 */
+  margin: 0;
+  text-align: left;
+}
+
+.objetivo-subtext {
+  font-family: var(--font-body-family, 'Inter', sans-serif);
+  font-size: var(--font-body-size, 18px);
+  line-height: var(--font-body-lh, 28px);
+  letter-spacing: var(--font-body-ls, 0);
+  color: #626258;
+  margin: 0;
+  max-width: none;
+}
+
+/* CARDS ESCALONADAS: Tres columnas de igual ancho */
+.objetivo-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 24px;
+  align-items: start;
+  width: 100%;
+}
+
+/* Contenedor relativo de cada card */
+.objetivo-card {
+  position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-}
-.objetivo-lead-p {
-  font-size: 16px;
-  color: var(--ink);
-  line-height: 1.65;
+  min-height: 340px;
+  cursor: pointer;
+  transition: transform 0.35s var(--ease-apple);
 }
 
-.benefits {
+/* Escalonamiento vertical descendente de izquierda a derecha */
+.objetivo-card:nth-child(1) {
+  margin-top: 0;
+}
+
+.objetivo-card:nth-child(2) {
   margin-top: 32px;
 }
-.benefit {
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  gap: 16px;
-  padding-block: 20px;
-  border-top: 1px solid var(--line);
-  align-items: start;
+
+.objetivo-card:nth-child(3) {
+  margin-top: 64px;
 }
-.benefit img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  margin-top: 2px;
+
+/* Fondo vectorial SVG de la Card con recorte curvado armónico continuo */
+.objetivo-card-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+  filter: drop-shadow(0 10px 24px rgba(13, 21, 28, 0.05));
+  transition: filter 0.35s var(--ease-apple);
 }
-.benefit strong {
+
+.objetivo-card-path {
+  fill: #FFFFFF;
+  stroke: rgba(35, 31, 32, 0.10);
+  stroke-width: 1.2px;
+  transition: stroke 0.35s ease, fill 0.35s ease;
+}
+
+/* Medallón circular naranja con flecha diagonal ↘ */
+.objetivo-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #FF5206;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 4px 14px rgba(255, 82, 6, 0.35);
+  transition: transform 0.35s var(--ease-apple), box-shadow 0.35s ease, background-color 0.35s ease;
+}
+
+.objetivo-badge-arrow {
+  width: 18px;
+  height: 18px;
+  stroke: #FFFFFF;
+  flex-shrink: 0;
+  transition: transform 0.35s var(--ease-apple), stroke 0.35s ease;
+}
+
+/* Contenido de la Card dentro de la forma */
+.objetivo-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 88px 32px 32px 32px; /* 88px arriba para no competir con el medallón */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Número: Anton, 44px */
+.objetivo-card-num {
+  font-family: var(--font-h2-family, 'Anton', sans-serif);
+  font-size: clamp(40px, 3.2vw, 46px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #22221E;
+  margin-bottom: 16px;
   display: block;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
+  transition: color 0.35s ease;
 }
-.benefit p {
-  font-family: var(--font-body);
-  font-size: 13px;
-  margin-top: 4px;
-  color: var(--ink);
-  opacity: 0.8;
-  line-height: 1.5;
-  margin-bottom: 0;
+
+/* 03 usa el naranja de marca */
+.objetivo-card:nth-child(3) .objetivo-card-num {
+  color: #FF5206;
+}
+
+/* Título: H3 Anton */
+.objetivo-card-title {
+  font-family: var(--font-h3-family, 'Anton', sans-serif);
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-lh);
+  letter-spacing: var(--font-h3-ls, 0);
+  color: #22221E;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+  transition: color 0.35s ease;
+}
+
+/* Descripción: Inter regular, cuerpo unificado */
+.objetivo-card-desc {
+  font-family: var(--font-body-family, 'Inter', sans-serif);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-lh);
+  letter-spacing: var(--font-body-ls, 0);
+  color: #626258;
+  margin: 0;
+  max-width: 36ch;
+  transition: color 0.35s ease;
+}
+
+/* Microinteracciones Hover en cada Card: Fondo 100% Naranja Ombú */
+@media (hover: hover) and (pointer: fine) {
+  .section-objetivo .objetivo-card:hover,
+  .section-objetivo.is-in-view .objetivo-card:hover,
+  .objetivo-card:hover {
+    transform: translateY(-8px);
+  }
+  .section-objetivo .objetivo-card:hover .objetivo-card-shape,
+  .section-objetivo.is-in-view .objetivo-card:hover .objetivo-card-shape,
+  .objetivo-card:hover .objetivo-card-shape {
+    filter: drop-shadow(0 22px 48px rgba(255, 82, 6, 0.38));
+  }
+  .section-objetivo .objetivo-card:hover .objetivo-card-path,
+  .section-objetivo.is-in-view .objetivo-card:hover .objetivo-card-path,
+  .objetivo-card:hover .objetivo-card-path {
+    fill: #FF5206 !important;
+    stroke: #FF5206 !important;
+  }
+  .section-objetivo .objetivo-card:hover .objetivo-card-num,
+  .section-objetivo.is-in-view .objetivo-card:hover .objetivo-card-num,
+  .objetivo-card:hover .objetivo-card-num {
+    color: #FFFFFF !important;
+  }
+  .section-objetivo .objetivo-card:hover .objetivo-card-title,
+  .section-objetivo.is-in-view .objetivo-card:hover .objetivo-card-title,
+  .objetivo-card:hover .objetivo-card-title {
+    color: #FFFFFF !important;
+  }
+  .section-objetivo .objetivo-card:hover .objetivo-card-desc,
+  .section-objetivo.is-in-view .objetivo-card:hover .objetivo-card-desc,
+  .objetivo-card:hover .objetivo-card-desc {
+    color: rgba(255, 255, 255, 0.94) !important;
+  }
+  .section-objetivo .objetivo-card:hover .objetivo-badge,
+  .section-objetivo.is-in-view .objetivo-card:hover .objetivo-badge,
+  .objetivo-card:hover .objetivo-badge {
+    background-color: #FFFFFF !important;
+    transform: scale(1.10);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  }
+  .section-objetivo .objetivo-card:hover .objetivo-badge-arrow,
+  .section-objetivo.is-in-view .objetivo-card:hover .objetivo-badge-arrow,
+  .objetivo-card:hover .objetivo-badge-arrow {
+    stroke: #FF5206 !important;
+    transform: translate(2px, 2px);
+  }
 }
 
 /* =========================================================
-   SECCIÓN: LOS INSTRUCTORES
+   MOVIMIENTO: Revelado secuencial suave (Apple Physics)
    ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  .section-objetivo.animate-ready .objetivo-card {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)),
+                transform 0.6s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
+    will-change: opacity, transform;
+  }
+
+  .section-objetivo.animate-ready .objetivo-card:nth-child(1) {
+    transition-delay: 0ms;
+  }
+
+  .section-objetivo.animate-ready .objetivo-card:nth-child(2) {
+    transition-delay: 140ms;
+  }
+
+  .section-objetivo.animate-ready .objetivo-card:nth-child(3) {
+    transition-delay: 280ms;
+  }
+
+  .section-objetivo.is-in-view .objetivo-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .objetivo-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* =========================================================
    SECCIÓN: LOS INSTRUCTORES
    ========================================================= */
 .section-instructores {
-  padding: var(--section-padding-y, 100px) 0;
+  padding: var(--section-padding-y, 160px) 0;
   scroll-margin-top: 88px;
 }
 
 .instructores-header {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: flex-end;
-  gap: 48px;
-  margin-bottom: var(--section-header-mb, 44px);
-}
-
-.instructores-title-col .section-label {
-  margin-bottom: 12px;
+  margin-bottom: var(--section-header-mb, 48px);
 }
 
 .instructores-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.6rem, 4.6vw, 4.8rem);
+  font-family: var(--font-h2-family);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-lh);
+  letter-spacing: var(--font-h2-ls);
   font-weight: 400;
-  line-height: 0.94;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
   color: var(--ink);
   margin: 0;
-}
-
-.instructores-desc-col {
-  padding-bottom: 4px;
 }
 
 .instructores-subtext {
-  font-family: var(--font-body);
-  font-size: clamp(16px, 1.15vw, 18px);
+  font-family: var(--font-body-family);
+  font-size: var(--font-body-size);
   color: var(--ink);
-  line-height: 1.58;
-  opacity: 0.82;
+  line-height: var(--font-body-lh);
+  letter-spacing: var(--font-body-ls);
+  opacity: 0.85;
   margin: 0;
-  max-width: 48ch;
 }
 
 .instructores-grid {
@@ -2397,7 +2516,7 @@ header.site-header:hover {
    BANNER DIVIDIDO: EL SPOT & CÁMARA EN VIVO
    ========================================================= */
 .section-spot-split {
-  padding: var(--section-padding-y, 100px) 0;
+  padding: var(--section-padding-y, 160px) 0;
   scroll-margin-top: 88px;
 }
 
@@ -2594,8 +2713,8 @@ header.site-header:hover {
    SECCIÓN: ESTAMOS JUNTO AL RÍO (MAPA Y CONTACTO - BLOQUE OSCURO)
    ========================================================= */
 .section-ubicacion-mapa {
-  background-color: #000000;
-  padding: var(--section-padding-y, 100px) 0;
+  background-color: var(--paper, #FAF9F5);
+  padding: var(--section-padding-y, 160px) 0;
   scroll-margin-top: 88px;
 }
 
@@ -2604,7 +2723,7 @@ header.site-header:hover {
   border-radius: var(--radius-card, 24px);
   border: 1px solid var(--line);
   overflow: hidden;
-  box-shadow: none;
+  box-shadow: 0 16px 40px rgba(13, 21, 28, 0.05);
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -2626,7 +2745,7 @@ header.site-header:hover {
 }
 
 .mapa-info-pane {
-  padding: 60px 48px;
+  padding: 56px 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2637,8 +2756,21 @@ header.site-header:hover {
   font-weight: 400;
   line-height: 1.05;
   text-transform: uppercase;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
   color: var(--ink);
+}
+
+.mapa-bajada {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: #555550;
+  margin: 0 0 24px 0;
+  max-width: 44ch;
+}
+
+.mapa-cta-row {
+  margin-top: 24px;
 }
 
 .mapa-items-list {
@@ -2686,13 +2818,13 @@ header.site-header:hover {
    ========================================================= */
 .section-faq {
   background-color: var(--paper);
-  padding: var(--section-padding-y, 100px) 0;
+  padding: var(--section-padding-y, 160px) 0;
   position: relative;
   scroll-margin-top: 88px;
 }
 
 .faq-header {
-  margin-bottom: var(--section-header-mb, 36px);
+  margin-bottom: var(--section-header-mb, 48px);
 }
 
 .motion-accordion {
@@ -2874,26 +3006,26 @@ header.site-header:hover {
    SECCIÓN: LOS ALUMNOS DICEN (RESEÑAS)
    ========================================================= */
 .section-alumnos-reviews {
-  padding: var(--section-padding-y, 100px) 0 48px;
+  padding: var(--section-padding-y, 160px) 0 80px;
   background-color: transparent;
 }
 
 .reviews-header {
-  margin-bottom: var(--section-header-mb, 44px);
+  margin-bottom: var(--section-header-mb, 48px);
 }
 
 .reviews-title-col .section-label {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .reviews-subtext {
-  font-family: var(--font-body);
-  font-size: clamp(16px, 1.15vw, 18px);
-  line-height: 1.58;
+  font-family: var(--font-body-family);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-lh);
+  letter-spacing: var(--font-body-ls);
   color: var(--ink);
-  opacity: 0.82;
+  opacity: 0.85;
   margin: 0;
-  max-width: 48ch;
 }
 
 .reviews-masonry-grid {
@@ -2918,11 +3050,8 @@ header.site-header:hover {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.review-cell-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(35, 31, 32, 0.08);
+  position: relative;
+  box-sizing: border-box;
 }
 
 .review-user-top {
@@ -2999,7 +3128,7 @@ header.site-header:hover {
 .section-prefooter-banner {
   position: relative;
   background: transparent;
-  padding: 40px 0 60px;
+  padding: 80px 0 96px;
   border-top: none;
 }
 
@@ -3010,14 +3139,31 @@ header.site-header:hover {
   align-items: center;
 }
 
+.prefooter-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .prefooter-heading {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 7.5vw, 7.5rem);
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
   font-weight: 400;
-  line-height: 0.92;
+  line-height: 0.94;
   text-transform: uppercase;
   color: var(--ink);
   letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.prefooter-subtext {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.25vw, 20px);
+  color: #333330;
+  margin: 0;
+  max-width: 44ch;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 /* =========================================================
@@ -3209,15 +3355,55 @@ header.site-header:hover {
 }
 
 /* =========================================================
-   RESPONSIVE DESIGN COMPLETO & PULIDO
+   MEDIA QUERY TABLET (>= 768px)
    ========================================================= */
+@media (min-width: 768px) {
+  :root {
+    --grid-cols: 8;
+    --grid-gutter: 24px;
+    --grid-margin: 64px;
+    --gutter: 24px;
+    --page-margin: 64px;
 
-/* --- TABLETS & PANTALLAS MEDIANAS (max-width: 1024px) --- */
-@media (max-width: 1024px) {
-  /* Header & Navegación */
+    --section-padding-y: var(--section-spacing-tablet);
+    --section-header-mb: 32px;
+
+    /* Escala Tipográfica Tablet (8pt grid) */
+    --font-h1-size: 96px;
+    --font-h1-lh: 104px;
+    --font-h1-ls: -0.02em;
+
+    --font-h2-size: 48px;
+    --font-h2-lh: 56px;
+    --font-h2-ls: -0.015em;
+
+    --font-h3-size: 28px;
+    --font-h3-lh: 36px;
+    --font-h3-ls: 0;
+
+    --font-h4-size: 20px;
+    --font-h4-lh: 28px;
+    --font-h4-ls: 0;
+
+    --font-body-size: 18px;
+    --font-body-lh: 28px;
+    --font-body-ls: 0;
+
+    --font-caption-size: 16px;
+    --font-caption-lh: 24px;
+  }
+
+  .container {
+    padding-left: var(--grid-margin, 64px);
+    padding-right: var(--grid-margin, 64px);
+  }
+
+  /* Header Tablet */
   header.site-header {
+    width: calc(100% - (var(--grid-margin, 64px) * 2));
+    max-width: none;
     border-radius: 24px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    padding: 8px 18px;
   }
   .header-nav { display: none; }
   .mobile-menu-btn { display: inline-flex; }
@@ -3232,13 +3418,11 @@ header.site-header:hover {
     align-items: center;
     gap: 8px;
   }
-  header.site-header.menu-open {
-    border-radius: 24px;
-    background: rgba(254, 254, 254, 0.98);
-    box-shadow: 0 16px 40px rgba(35, 31, 32, 0.16);
-  }
 
-  /* Hero */
+  /* Hero Tablet */
+  .hero-weather-col {
+    max-width: 320px;
+  }
   .hero-bajada-row {
     display: flex;
     flex-direction: column;
@@ -3246,7 +3430,6 @@ header.site-header:hover {
     margin-bottom: 32px;
   }
   .hero-bajada-col {
-    grid-column: auto;
     max-width: 100%;
   }
   .hero-title-line-2 {
@@ -3255,694 +3438,713 @@ header.site-header:hover {
     text-align: right;
   }
 
-  /* Disciplinas */
-  .disciplinas-header {
-    position: sticky;
-    top: 76px;
-    z-index: 25;
-    pointer-events: auto;
-    margin-bottom: 18px;
-    padding: 0;
-  }
-  .disciplinas-stack-layout { grid-template-columns: 1fr; }
-  .disciplinas-side-rail { display: none; }
-  .sport-card-stage { grid-template-columns: 1fr; }
-  .sport-media-box { height: 300px; }
-  .scroll-stack-card { top: calc(185px + var(--card-index, 0) * 10px); margin-bottom: 18vh; }
-  .scroll-stack-card:last-child { margin-bottom: 6vh; }
-
-  /* Secciones intermedias */
+  /* Cabeceras de Secciones en Tablet: Grid 12 cols (Cols 1-5 Título, Cols 6-12 Bajada) */
   .disciplinas-header,
   .bento-header,
   .instructores-header,
   .faq-header,
-  .reviews-header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 28px;
+  .reviews-header,
+  .objetivo-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--grid-gutter, 24px);
+    align-items: start;
+    margin-bottom: var(--section-header-mb, 32px);
     width: 100%;
   }
+
   .disciplinas-title-col,
   .bento-header-title-col,
   .instructores-title-col,
   .faq-title-col,
   .reviews-title-col,
+  .objetivo-title-col {
+    grid-column: 1 / span 5;
+    text-align: left;
+    width: auto;
+  }
+
+  .disciplinas-title-col h2,
+  .bento-header-title-col h2,
+  .instructores-title-col h2,
+  .faq-title-col h2,
+  .reviews-title-col h2,
+  .objetivo-title-col h2,
+  .objetivo-title {
+    font-size: var(--font-h2-size);
+    line-height: var(--font-h2-lh);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
   .disciplinas-desc-col,
   .bento-header-desc-col,
   .instructores-desc-col,
   .faq-desc-col,
-  .reviews-desc-col {
-    width: 100%;
-    grid-column: auto;
+  .reviews-desc-col,
+  .objetivo-desc-col {
+    grid-column: 6 / span 7;
     text-align: left;
+    padding-top: 24px;
+    width: auto;
+    margin: 0;
   }
 
-  .objetivo-grid { grid-template-columns: 1fr; gap: 40px; }
-  .instructores-grid { grid-template-columns: repeat(2, 1fr); }
-  .spot-split-grid { grid-template-columns: 1fr; }
-  .mapa-card-white { grid-template-columns: 1fr; }
-  .reviews-masonry-grid { grid-template-columns: repeat(2, 1fr); }
-  .footer-top-columns { grid-template-columns: 1fr 1fr; }
-}
-
-/* --- MOBILE GENERAL (max-width: 768px) --- */
-@media (max-width: 768px) {
-  /* Contenedor & Header */
-  .container {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-  header.site-header {
-    width: calc(100% - 24px);
-    top: 10px;
-    padding: 6px 12px;
-    border-radius: 24px;
-  }
-  .nav-btn-reserve {
-    font-size: 11.5px;
-    padding: 9px 16px;
-    letter-spacing: 0.03em;
-  }
-  .mobile-menu-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-  /* Hero */
-  .hero-section {
-    min-height: 100svh;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-  }
-  .hero-content-wrap,
-  .container.hero-content-wrap {
-    padding-top: calc(88px + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    min-height: 100svh;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    flex: 1;
-    box-sizing: border-box;
-  }
-  .hero-top-row {
-    display: flex !important;
-    width: 100%;
-    margin-bottom: 12px;
-    z-index: 10;
-  }
-  .hero-weather-col {
-    display: block !important;
-    width: 100%;
-    max-width: 100%;
-  }
-  .hero-weather-card {
-    max-width: 100%;
-    padding: 12px 16px 10px;
-    border-radius: 18px;
-  }
-  .weather-speed-num {
-    font-size: 34px;
-  }
-  .compass-dial {
-    width: 42px;
-    height: 42px;
-  }
-  .weather-progress-bar-wrap {
-    margin: 10px 0 6px;
-  }
-  .hero-bottom-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    width: 100%;
-    margin-top: auto;
-    gap: 14px;
-  }
-  .hero-headline-wrap {
-    order: 1;
-    margin-top: 0;
-    padding-bottom: 0;
-    margin-left: -8px;
-    margin-right: -8px;
-    width: calc(100% + 16px);
-  }
-  .hero-giant-heading {
-    font-size: clamp(2.4rem, 12.2vw, 4.2rem);
-    line-height: 0.88;
-    letter-spacing: -0.02em;
-    gap: 4px;
-  }
-  .hero-title-line-1 {
-    white-space: nowrap;
-    align-self: flex-start;
-    gap: 0.16em;
-  }
-  .hero-title-line-1 .hero-title-badge {
-    width: 0.65em;
-    height: 0.65em;
-  }
-  .hero-title-line-2 {
-    white-space: nowrap;
-    align-self: flex-start;
-    margin-left: 0;
-    text-align: left;
-  }
-  .hero-bajada-row {
-    order: 2;
+  .disciplinas-subtext,
+  .bento-header-desc,
+  .instructores-subtext,
+  .faq-subtext,
+  .reviews-subtext,
+  .objetivo-subtext {
+    font-family: var(--font-body-family);
+    font-size: var(--font-body-size, 18px);
+    line-height: var(--font-body-lh, 28px);
+    letter-spacing: var(--font-body-ls, 0);
+    color: var(--ink);
+    opacity: 0.85;
     margin-top: 0;
     margin-bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-  }
-  .hero-bajada-col {
-    padding: 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    gap: 12px;
-    width: 100%;
-    max-width: 100%;
-  }
-  .hero-actions-row {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-  .hero-actions-row .btn-pill-orange,
-  .hero-actions-row .hero-cta-sports {
-    --btn-h: 46px;
-    --btn-icon-size: 34px;
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    height: 46px;
+    text-align: left;
+    display: block;
+    max-width: none;
   }
 
-  /* Disciplinas */
-  .section-disciplinas {
-    padding: 36px 0 0;
-    scroll-margin-top: 80px;
-  }
-  .disciplinas-header {
-    position: sticky;
-    top: 66px;
-    z-index: 25;
-    pointer-events: auto;
-    margin-bottom: 14px;
-    padding: 0;
-  }
-  .disciplinas-title-group,
-  .disciplinas-title-col {
-    width: 100%;
-  }
-  .disciplinas-title-group h2,
-  .disciplinas-title-col h2 {
-    font-size: clamp(1.5rem, 6.2vw, 2.5rem);
-    white-space: nowrap;
-    margin-bottom: 0;
-  }
-  .disciplinas-subtext {
-    display: none;
-  }
-  .scroll-stack-card {
-    top: calc(132px + var(--card-index, 0) * 8px);
-    margin-bottom: 12vh;
-  }
-  .scroll-stack-card:last-child {
-    margin-bottom: 4vh;
-  }
-  .sport-card-stage {
-    padding: 20px 18px;
-    border-radius: 16px;
-    gap: 16px;
-  }
-  .sport-media-box {
-    height: 210px;
-    border-radius: 10px;
-  }
-  .sport-title-giant {
-    font-size: 28px;
-    margin-bottom: 10px;
-  }
-  .sport-desc-text {
-    font-size: 14px;
-    margin-bottom: 16px;
-    line-height: 1.55;
-  }
-  .sport-specs-grid {
-    gap: 14px 16px;
-    margin-block: 16px;
-  }
-  .sport-cta-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-    padding-top: 16px;
-  }
-  .sport-price-wrap {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-  .sport-cta-row .btn-pill-orange {
-    --btn-h: 44px;
-    --btn-icon-size: 32px;
-    width: 100%;
-    justify-content: center;
-    height: 44px;
+  /* Disciplinas en Tablet */
+  .disciplinas-stack-layout { grid-template-columns: 1fr !important; }
+  .disciplinas-side-rail { display: none !important; }
+  .scroll-stack-container, .disciplinas-cards-stack { grid-column: 1 / -1 !important; width: 100% !important; }
+  .sport-card-stage { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+  .sport-media-box { height: 300px !important; min-height: 300px !important; grid-column: auto !important; }
+  .sport-details-box, .sport-info-box { display: flex !important; flex-direction: column !important; justify-content: space-between !important; grid-column: auto !important; }
+  .scroll-stack-card { top: 84px; margin-bottom: 18vh; }
+  .scroll-stack-card:last-child { margin-bottom: 6vh; }
+
+  /* Objetivo Cards en Tablet */
+  .objetivo-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 
-  /* Alquileres Tidescape Style Mobile */
-  .section-tidescape-cta {
-    min-height: auto;
-    padding: 64px 0 72px;
-  }
-  .tidescape-container {
-    min-height: auto;
-    flex-direction: column;
-    gap: 32px;
-  }
-  .tidescape-center-wrap {
-    transform: none !important;
-    opacity: 1 !important;
-    max-width: 100%;
-  }
-  .tidescape-title {
-    font-size: clamp(34px, 9vw, 44px);
-    margin-bottom: 16px;
-    -webkit-text-stroke: 0 !important;
-    text-stroke: 0 !important;
-    text-shadow: none !important;
-  }
-  .tidescape-desc {
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  .tidescape-center-wrap .kayak-features {
-    gap: 16px;
-    margin-bottom: 26px;
-    font-size: 13px;
-  }
-  .tidescape-photos-wrap {
-    position: static;
-    inset: auto;
+  /* Bento Grid en Tablet (2 columnas) */
+  .bento-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    width: 100%;
-    margin-top: 10px;
-    pointer-events: auto;
+    grid-template-rows: auto;
+    gap: 24px;
   }
-  .tidescape-photo-card {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    height: 160px;
-    transform: none !important;
-    opacity: 1 !important;
-    border: none !important;
-    box-shadow: none !important;
-    border-radius: var(--radius-card, 24px);
-  }
-  .tidescape-photo-card img {
-    border-radius: var(--radius-card, 24px);
-    border: none !important;
-    box-shadow: none !important;
+  .bento-cell--wide { grid-column: span 2; }
+  .bento-cell--dark { grid-column: auto; }
+  .bento-cell--tall { grid-column: span 2; min-height: 380px; }
+  .bento-cell--sponsor { grid-column: auto; }
+  .bento-cell--photo-alt { grid-column: auto; display: block; }
+
+  /* Instructores Team en Tablet (2 columnas) */
+  .instructores-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
-
-  /* Filosofía / Objetivo */
-  .section-objetivo {
-    padding: 64px 0;
+  /* Reseñas Masonry en Tablet (2 columnas) */
+  .reviews-masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
-  .objetivo-grid {
+
+  /* Spot y Ubicación en Tablet */
+  .spot-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .mapa-card-white {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* Footer en Tablet */
+  .footer-top-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 32px;
   }
-  .objetivo-headline {
-    font-size: clamp(2.2rem, 8.5vw, 3.4rem);
-    line-height: 0.98;
-  }
-  .objetivo-lead-p {
-    font-size: 14.5px;
-    line-height: 1.6;
-  }
-  .benefits {
-    margin-top: 24px;
-  }
-  .benefit {
-    padding-block: 16px;
-    gap: 14px;
-  }
-  .benefit strong {
-    font-size: 15px;
-  }
-  .benefit p {
-    font-size: 13px;
-  }
 
-  /* Instructores */
-  .section-instructores {
-    padding: 0 0 64px;
+  /* Tidescape Tablet */
+  .tidescape-scatter-board {
+    height: 480px;
   }
-  .instructores-header {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-  .instructores-title {
-    font-size: clamp(2rem, 7.5vw, 2.8rem);
-  }
-  .instructores-subtext {
-    max-width: 55ch;
-  }
-  .instructores-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-  .instructor-card {
-    border-radius: 20px;
-    aspect-ratio: 1 / 1.25;
-  }
-  .instructor-info-badge {
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    padding: 12px 14px;
-    border-radius: 14px;
-    gap: 6px;
-  }
-  .instructor-name {
-    font-size: 0.95rem;
-  }
-  .instructor-tag {
-    font-size: 0.65rem;
-    padding: 3px 8px;
-  }
-
-  @media (max-width: 480px) {
-    .instructores-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .instructor-card {
-      aspect-ratio: 1 / 1.15;
-    }
-  }
-
-  /* Mapa */
-  .section-ubicacion-mapa {
-    padding: 64px 0;
-  }
-  .mapa-view-pane {
-    min-height: 240px;
-    height: 240px;
-  }
-  .mapa-info-pane {
-    padding: 32px 20px;
-  }
-  .mapa-title {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  .mapa-items-list {
-    gap: 18px;
-  }
-
-  /* Spot Cámara en Vivo */
-  .section-spot-split {
-    padding: 64px 0;
-  }
-  .spot-orange-card {
-    padding: 36px 24px;
-  }
-  .spot-card-title {
-    font-size: clamp(2rem, 7.5vw, 2.6rem);
-    margin-bottom: 14px;
-  }
-  .spot-card-text {
-    font-size: 14.5px;
-    margin-bottom: 28px;
-  }
-  .spot-orange-card .btn-pill-white {
-    --btn-h: 46px;
-    --btn-icon-size: 34px;
-    width: 100%;
-    justify-content: center;
-  }
-  .spot-dark-camera-card {
-    padding: 24px 20px;
-    min-height: 260px;
-  }
-
-  /* FAQ */
-  .section-faq {
-    padding: 64px 0 72px;
-  }
-  .faq-title-wrap {
-    margin-bottom: 24px;
-  }
-  .faq-title-wrap h2 {
-    font-size: clamp(2.2rem, 8vw, 3.2rem);
-  }
-  .motion-accordion {
-    margin-top: 24px;
-    gap: 10px;
-  }
-  .motion-accordion-trigger {
-    padding: 16px 18px;
-    gap: 12px;
-    border-radius: 18px;
-  }
-  .motion-accordion-question {
-    font-size: 14.5px;
-  }
-  .motion-accordion-icon {
-    width: 36px;
-    height: 36px;
-  }
-  .motion-accordion-content-inner {
-    padding: 0 18px 18px 18px;
-  }
-  .motion-accordion-content-inner p {
-    font-size: 14px;
-  }
-
-  /* Reseñas */
-  .section-alumnos-reviews {
-    padding: 60px 0 40px;
-  }
-  .reviews-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-  .reviews-masonry-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .reviews-masonry-col {
-    gap: 14px;
-  }
-  .review-cell-card {
-    padding: 18px 16px;
-  }
-
-  /* Reseñas en mobile */
-  .section-alumnos-reviews {
-    padding: 56px 0 36px;
-  }
-
-  /* Fondo de la sección inferior en mobile: acotado a la zona inferior (CTA + Footer) para evitar zoom 15x por la altura de las 10 reseñas */
-  .bottom-parallax-bg {
-    top: auto;
-    bottom: 0;
-    height: 1050px;
-    background-attachment: scroll;
-    background-size: cover;
-    background-position: 58% 12%;
-  }
-  .bottom-cream-gradient-overlay {
-    top: auto;
-    bottom: 0;
-    height: 1050px;
-    inset: auto 0 0 0;
-    background: linear-gradient(
-      to bottom,
-      var(--paper) 0%,
-      rgba(254, 254, 254, 0.92) 16%,
-      rgba(254, 254, 254, 0.45) 34%,
-      transparent 58%
-    );
-  }
-
-  /* Prefooter CTA */
-  .section-prefooter-banner {
-    padding: 44px 0 54px;
-  }
-  .prefooter-flex-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-  .prefooter-heading {
-    font-size: clamp(2.2rem, 9.5vw, 3.4rem);
-  }
-  .prefooter-flex-row .btn-pill-orange {
-    --btn-h: 48px;
-    --btn-icon-size: 36px;
-    width: 100%;
-    justify-content: center;
-    height: 48px;
-  }
-
-  /* Footer */
-  .site-footer-wrapper {
-    padding: 16px 0 36px;
-  }
-  .footer-floating-card {
-    padding: 36px 20px 0 20px;
-    border-radius: 20px;
-  }
-  .footer-top-columns {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    margin-bottom: 28px;
-  }
-  .footer-brand-p {
-    max-width: 100%;
-  }
-  .footer-sub-row {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-    padding: 20px 0;
-  }
-  .footer-social-icons {
-    justify-content: center;
-  }
-  .footer-horizontal-logo-wrap {
-    width: 100%;
-    margin-top: 14px;
-    margin-bottom: -16px;
-  }
-
-  /* Botón Flotante WhatsApp */
-  .floating-wpp-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 52px;
-    height: 52px;
-  }
-  .floating-wpp-btn svg {
-    width: 26px;
-    height: 26px;
-  }
+  .tidescape-card-tl { --shift-x: -180px; --shift-y: -90px; }
+  .tidescape-card-tr { --shift-x: 180px; --shift-y: -80px; }
+  .tidescape-card-bl { --shift-x: -180px; --shift-y: 80px; }
+  .tidescape-card-br { --shift-x: 180px; --shift-y: 80px; }
 }
 
-/* --- TELÉFONOS CHICOS (max-width: 480px) --- */
-@media (max-width: 480px) {
+/* =========================================================
+   MEDIA QUERY DESKTOP (>= 1024px)
+   Máxima prioridad en la cascada para Desktop y monitores 1440px
+   ========================================================= */
+@media (min-width: 1024px) {
+  :root {
+    --grid-cols: 12;
+    --grid-gutter: 32px;
+    --grid-margin: 160px;
+    --gutter: 32px;
+    --page-margin: 160px;
+
+    --section-spacing-desktop: 160px;
+    --section-padding-y: 160px;
+    --section-header-mb: 48px;
+
+    /* Escala Tipográfica Desktop Estricta (8pt Grid) */
+    --font-h1-size: 130px;
+    --font-h1-lh: 144px;
+    --font-h1-ls: -0.02em;
+
+    --font-h2-size: 60px;
+    --font-h2-lh: 72px;
+    --font-h2-ls: -0.015em;
+
+    --font-h3-size: 32px;
+    --font-h3-lh: 40px;
+    --font-h3-ls: 0;
+
+    --font-h4-size: 24px;
+    --font-h4-lh: 32px;
+    --font-h4-ls: 0;
+
+    --font-body-size: 18px;
+    --font-body-lh: 28px;
+    --font-body-ls: 0;
+
+    --font-caption-size: 16px;
+    --font-caption-lh: 24px;
+  }
+
+  /* Contenedor general Desktop: max-width 1440px, centrado y con márgenes laterales de 160px */
   .container {
-    padding-left: 14px;
-    padding-right: 14px;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: var(--grid-margin, 160px);
+    padding-right: var(--grid-margin, 160px);
+    box-sizing: border-box;
   }
-  .hero-content-wrap,
-  .container.hero-content-wrap {
-    padding-top: calc(80px + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  }
-  .hero-bottom-area {
-    gap: 10px;
-  }
+
+  /* Navbar flotante Desktop: centrado con margen de 160px a ambos lados */
   header.site-header {
-    width: calc(100% - 16px);
-    top: 8px;
-    padding: 5px 10px;
+    width: calc(100% - (var(--grid-margin, 160px) * 2));
+    max-width: 1120px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 100px;
+    padding: 8px 18px;
   }
-  .brand-disc-img {
-    width: 32px;
-    height: 32px;
+  .header-nav { display: flex !important; }
+  .mobile-menu-btn { display: none !important; }
+  .mobile-nav-drawer { display: none !important; }
+
+  /* Hero: Widget de Viento (Cols 1 a 3) */
+  .hero-weather-col {
+    width: calc((100% - 352px) / 12 * 3 + 64px);
+    min-width: 260px;
+    max-width: 320px;
   }
-  .nav-btn-reserve {
-    font-size: 10.5px;
-    padding: 7px 12px;
-    letter-spacing: 0.02em;
+
+  /* Hero: Bloque inferior en Grilla de 12 Columnas */
+  .hero-bottom-area {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    column-gap: 32px !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-top: auto !important;
   }
-  .mobile-menu-btn {
-    width: 32px;
-    height: 32px;
-  }
+
   .hero-headline-wrap {
-    margin-left: -8px;
-    margin-right: -8px;
-    width: calc(100% + 16px);
+    grid-column: 1 / span 7 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
-  .hero-giant-heading {
-    font-size: clamp(2.35rem, 12.4vw, 3.4rem);
-    line-height: 0.86;
+
+  .hero-bajada-row {
+    grid-column: 8 / span 5 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    margin-top: clamp(-95px, -7vw, -60px) !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
+
   .hero-bajada-col {
-    padding: 16px 14px;
+    width: 468px !important;
+    max-width: 468px !important;
+    gap: 24px !important;
+    text-align: left !important;
   }
-  .hero-bajada-text {
-    font-size: 13px;
+
+  /* Cabeceras de Sección Desktop: 12 Columnas Asimétricas (Cols 1-4 Título, Cols 8-12 Bajada) */
+  .disciplinas-header,
+  .bento-header,
+  .instructores-header,
+  .faq-header,
+  .reviews-header,
+  .objetivo-header {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    column-gap: var(--grid-gutter, 32px) !important;
+    align-items: start !important;
+    margin-bottom: var(--section-header-mb, 48px) !important;
+    width: 100% !important;
   }
-  .disciplinas-header {
-    top: 60px;
-    margin-bottom: 10px;
+
+  .disciplinas-title-col,
+  .bento-header-title-col,
+  .instructores-title-col,
+  .faq-title-col,
+  .reviews-title-col,
+  .objetivo-title-col {
+    grid-column: 1 / span 4 !important;
+    text-align: left !important;
+    width: auto !important;
   }
-  .disciplinas-title-group h2,
-  .disciplinas-title-col h2 {
-    font-size: clamp(1.35rem, 6.6vw, 1.85rem);
-    white-space: nowrap;
+
+  .disciplinas-desc-col,
+  .bento-header-desc-col,
+  .instructores-desc-col,
+  .faq-desc-col,
+  .reviews-desc-col,
+  .objetivo-desc-col {
+    grid-column: 8 / span 5 !important;
+    text-align: left !important;
+    padding-top: 32px !important;
+    margin: 0 !important;
+    width: auto !important;
+  }
+
+  .disciplinas-title-col h2,
+  .bento-header-title-col h2,
+  .instructores-title-col h2,
+  .faq-title-col h2,
+  .reviews-title-col h2,
+  .objetivo-title-col h2,
+  .objetivo-title {
+    margin-top: 0;
     margin-bottom: 0;
+    font-family: var(--font-h2-family);
+    font-size: var(--font-h2-size);
+    line-height: var(--font-h2-lh);
+    letter-spacing: var(--font-h2-ls);
   }
-  .disciplinas-subtext {
-    display: none;
+
+  .disciplinas-subtext,
+  .bento-header-desc,
+  .instructores-subtext,
+  .faq-subtext,
+  .reviews-subtext,
+  .objetivo-subtext {
+    font-family: var(--font-body-family);
+    font-size: var(--font-body-size, 18px);
+    line-height: var(--font-body-lh, 28px);
+    letter-spacing: var(--font-body-ls, 0);
+    color: var(--ink);
+    opacity: 0.85;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: left;
+    display: block;
+    max-width: none;
   }
-  .scroll-stack-card {
-    top: calc(122px + var(--card-index, 0) * 6px);
-    margin-bottom: 12vh;
+
+  /* Disciplinas Stack Layout en Desktop: 12 columnas con side rail sticky */
+  .disciplinas-stack-layout {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    column-gap: 32px !important;
+    align-items: start !important;
+    width: 100% !important;
   }
-  .scroll-stack-card:last-child {
-    margin-bottom: 4vh;
+  .scroll-stack-container,
+  .disciplinas-cards-stack {
+    grid-column: 1 / span 11 !important;
+    width: 100% !important;
+  }
+  .disciplinas-side-rail {
+    display: flex !important;
+    justify-content: center !important;
+    grid-column: 12 / span 1 !important;
+    position: sticky !important;
+    top: 240px !important;
+    align-self: start !important;
   }
   .sport-card-stage {
-    padding: 16px 14px;
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    column-gap: 32px !important;
+    padding: 32px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   .sport-media-box {
-    height: 180px;
+    grid-column: 1 / span 5 !important;
+    height: 100% !important;
+    min-height: 420px !important;
   }
-  .sport-title-giant {
-    font-size: 24px;
+  .sport-details-box,
+  .sport-info-box {
+    grid-column: 6 / span 7 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
   }
-  .mapa-info-pane,
-  .spot-orange-card,
-  .spot-dark-camera-card {
-    padding: 20px 14px;
+
+  /* Objetivo Cards en Desktop */
+  .objetivo-cards-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    column-gap: 32px !important;
+    row-gap: 32px !important;
+    align-items: start !important;
+    width: 100% !important;
   }
-  .footer-floating-card {
-    padding: 28px 16px 0 16px;
+
+  /* Bento Grid: 12 columnas con gutters de 32px (Figma exacto) */
+  .bento-grid {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    grid-template-rows: 280px 280px !important;
+    gap: 32px !important;
+    width: 100% !important;
   }
-  .manifesto-big-quote {
-    font-size: clamp(1.15rem, 5.6vw, 1.65rem);
-    white-space: nowrap;
+  .bento-cell--wide      { grid-column: 1 / span 4 !important; grid-row: 1 !important; }
+  .bento-cell--dark      { grid-column: 5 / span 3 !important; grid-row: 1 !important; }
+  .bento-cell--tall      { grid-column: 8 / span 5 !important; grid-row: 1 / span 2 !important; min-height: auto !important; }
+  .bento-cell--sponsor,
+  .bento-cell--accent    { grid-column: 1 / span 3 !important; grid-row: 2 !important; }
+  .bento-cell--photo-alt { grid-column: 4 / span 4 !important; grid-row: 2 !important; display: block !important; }
+
+  /* Instructores Team: 4 cards de 3 columnas cada una */
+  .instructores-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 32px !important;
+    width: 100% !important;
   }
-  .bottom-parallax-bg {
-    background-position: 57% 10%;
+
+  /* Reseñas Masonry: 4 columnas con gutters de 32px */
+  .reviews-masonry-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 32px !important;
+    align-items: start !important;
+    width: 100% !important;
   }
-  .section-prefooter-banner {
-    padding: 38px 0 44px;
+
+  /* Spot y Ubicación en Desktop */
+  .spot-split-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+    width: 100% !important;
+  }
+  .mapa-card-white {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px !important;
+    width: 100% !important;
+  }
+  .prefooter-flex-row {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .footer-top-columns {
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 1.2fr !important;
+    gap: 32px !important;
+    width: 100% !important;
+  }
+
+  /* Tidescape Desktop */
+  .tidescape-container,
+  .tidescape-scatter-board {
+    min-height: 560px !important;
+  }
+  .tidescape-card-tl { --shift-x: -300px; --shift-y: -140px; }
+  .tidescape-card-tr { --shift-x: 320px; --shift-y: -120px; }
+  .tidescape-card-bl { --shift-x: -280px; --shift-y: 130px; }
+  .tidescape-card-br { --shift-x: 300px; --shift-y: 120px; }
+}
+
+@media (min-width: 1200px) {
+  .hero-bajada-row {
+    margin-top: -90px !important;
   }
 }
+
+/* =========================================================
+   SISTEMA DE ANIMACIONES Y FÍSICA FLUIDA (APPLE DESIGN & ANIMATE)
+   Transiciones directas, respuesta táctil y scroll reveals
+   ========================================================= */
+
+/* Microinteracciones táctiles universales (Active / Press instantáneo sin latencia) */
+.btn-pill-dark,
+.btn-pill-orange,
+.btn-pill-white,
+.nav-btn-reserve,
+.hero-cta-sports,
+.spot-btn-combo,
+.mobile-sport-pill,
+.dropdown-sport-item {
+  will-change: transform;
+}
+
+.btn-pill-dark:active,
+.btn-pill-orange:active,
+.btn-pill-white:active,
+.nav-btn-reserve:active,
+.hero-cta-sports:active,
+.spot-btn-combo:active,
+.mobile-sport-pill:active {
+  transform: scale(0.975) !important;
+  transition: transform 100ms var(--ease-press) !important;
+}
+
+/* Transiciones de elevación y profundidad en tarjetas interactivas */
+.scroll-stack-card .sport-card-stage {
+  transition: transform 0.35s var(--ease-apple), box-shadow 0.35s ease, border-color 0.25s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .scroll-stack-card:hover .sport-card-stage {
+    border-color: rgba(35, 31, 32, 0.16);
+    box-shadow: 0 24px 50px rgba(13, 21, 28, 0.08);
+  }
+}
+
+.bento-cell {
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple), border-color 0.3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .bento-cell:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08);
+  }
+}
+.bento-cell:active {
+  transform: scale(0.985);
+  transition: transform 100ms var(--ease-press);
+}
+
+.instructor-card {
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
+}
+@media (hover: hover) and (pointer: fine) {
+  .instructor-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(35, 31, 32, 0.16);
+  }
+}
+.instructor-card:active {
+  transform: scale(0.98);
+  transition: transform 100ms var(--ease-press);
+}
+
+.mapa-card-white {
+  transition: transform 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple);
+}
+@media (hover: hover) and (pointer: fine) {
+  .mapa-card-white:hover {
+    box-shadow: 0 24px 56px rgba(13, 21, 28, 0.09);
+  }
+}
+
+/* =========================================================
+   SCROLL REVEALS COORDINADOS (GPU TRANSFORM & OPACITY ONLY)
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* Cabeceras de sección */
+  html.js-motion-ready .disciplinas-header,
+  html.js-motion-ready .bento-header,
+  html.js-motion-ready .instructores-header,
+  html.js-motion-ready .faq-header,
+  html.js-motion-ready .reviews-header,
+  html.js-motion-ready .tidescape-center-wrap {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.65s var(--ease-apple), transform 0.65s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .disciplinas-header.is-in-view,
+  html.js-motion-ready .bento-header.is-in-view,
+  html.js-motion-ready .instructores-header.is-in-view,
+  html.js-motion-ready .faq-header.is-in-view,
+  html.js-motion-ready .reviews-header.is-in-view,
+  html.js-motion-ready .tidescape-center-wrap.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Bento Grid Celdas (Stagger progresivo) */
+  html.js-motion-ready .bento-cell {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+    transition: opacity 0.65s var(--ease-apple), transform 0.65s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+  html.js-motion-ready .bento-grid.is-in-view .bento-cell {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(1) { transition-delay: 0ms; }
+  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(2) { transition-delay: 80ms; }
+  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(3) { transition-delay: 160ms; }
+  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(4) { transition-delay: 240ms; }
+  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(5) { transition-delay: 320ms; }
+
+  /* Instructores Grid (Stagger fluido) */
+  html.js-motion-ready .instructor-card {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s var(--ease-apple), transform 0.65s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+  html.js-motion-ready .instructores-grid.is-in-view .instructor-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  html.js-motion-ready .instructores-grid.is-in-view .instructor-card:nth-child(1) { transition-delay: 0ms; }
+  html.js-motion-ready .instructores-grid.is-in-view .instructor-card:nth-child(2) { transition-delay: 90ms; }
+  html.js-motion-ready .instructores-grid.is-in-view .instructor-card:nth-child(3) { transition-delay: 180ms; }
+  html.js-motion-ready .instructores-grid.is-in-view .instructor-card:nth-child(4) { transition-delay: 270ms; }
+
+  /* Spot Split Grid & Mapa Card */
+  html.js-motion-ready .spot-split-grid,
+  html.js-motion-ready .mapa-card-white {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.7s var(--ease-apple), transform 0.7s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+  html.js-motion-ready .spot-split-grid.is-in-view,
+  html.js-motion-ready .mapa-card-white.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* FAQ Accordion Items (Stagger suave) */
+  html.js-motion-ready .motion-accordion-item {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s var(--ease-apple), transform 0.55s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+  html.js-motion-ready .motion-accordion.is-in-view .motion-accordion-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  html.js-motion-ready .motion-accordion.is-in-view .motion-accordion-item:nth-child(1) { transition-delay: 0ms; }
+  html.js-motion-ready .motion-accordion.is-in-view .motion-accordion-item:nth-child(2) { transition-delay: 70ms; }
+  html.js-motion-ready .motion-accordion.is-in-view .motion-accordion-item:nth-child(3) { transition-delay: 140ms; }
+  html.js-motion-ready .motion-accordion.is-in-view .motion-accordion-item:nth-child(4) { transition-delay: 210ms; }
+  html.js-motion-ready .motion-accordion.is-in-view .motion-accordion-item:nth-child(5) { transition-delay: 280ms; }
+  html.js-motion-ready .motion-accordion.is-in-view .motion-accordion-item:nth-child(6) { transition-delay: 350ms; }
+
+  /* =========================================================
+     REACT BITS MASONRY: ENTRADA Y SALIDA DIRECTION-AWARE
+     - Entrada: 50px desde abajo, opacity 0->1, blur 4px->0, 700ms, stagger 70ms
+     - Salida: opacity 1->0, blur 0->4px, desplazamiento hacia el borde de salida, 350ms, sin delay
+     - Sin hover
+     ========================================================= */
+  html.js-reviews-motion-ready .review-cell-card {
+    will-change: transform, opacity, filter;
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate3d(0, 50px, 0);
+    transition-property: transform, opacity, filter;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ENTRADA: Visible en pantalla */
+  html.js-reviews-motion-ready .review-cell-card.masonry-enter {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translate3d(0, 0, 0);
+    transition-duration: 700ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--masonry-delay, 0ms);
+  }
+
+  /* SALIDA: Hacia arriba al bajar por la página */
+  html.js-reviews-motion-ready .review-cell-card.masonry-exit-top {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate3d(0, -50px, 0);
+    transition-duration: 350ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0ms !important;
+  }
+
+  /* SALIDA: Hacia abajo al subir hacia el inicio */
+  html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate3d(0, 50px, 0);
+    transition-duration: 350ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0ms !important;
+  }
+
+  /* Pre-footer Banner & Floating Footer */
+  html.js-motion-ready .section-prefooter-banner,
+  html.js-motion-ready .footer-floating-card {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.75s var(--ease-apple), transform 0.75s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+  html.js-motion-ready .section-prefooter-banner.is-in-view,
+  html.js-motion-ready .footer-floating-card.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-motion-ready .disciplinas-header,
+  html.js-motion-ready .bento-header,
+  html.js-motion-ready .instructores-header,
+  html.js-motion-ready .faq-header,
+  html.js-motion-ready .reviews-header,
+  html.js-motion-ready .tidescape-center-wrap,
+  html.js-motion-ready .bento-cell,
+  html.js-motion-ready .instructor-card,
+  html.js-motion-ready .spot-split-grid,
+  html.js-motion-ready .mapa-card-white,
+  html.js-motion-ready .motion-accordion-item,
+  html.js-motion-ready .review-cell-card,
+  html.js-reviews-motion-ready .review-cell-card,
+  .review-cell-card {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  html.js-motion-ready .section-prefooter-banner,
+  html.js-motion-ready .footer-floating-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+

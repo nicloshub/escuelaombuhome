@@ -49,13 +49,13 @@ const sportsData = {
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
   if (window.innerWidth <= 480) {
-    return 122 + index * 6;
+    return 70;
   } else if (window.innerWidth <= 768) {
-    return 132 + index * 8;
+    return 72;
   } else if (window.innerWidth <= 1024) {
-    return 185 + index * 10;
+    return 84;
   }
-  return 255;
+  return 280;
 }
 
 // Navegación fluida por Scroll Stack
@@ -78,12 +78,24 @@ function switchSport(sportKey) {
 // Inicialización del efecto Scroll Stack con Rail Lateral Minimalista
 function initScrollStack() {
   const stackCards = document.querySelectorAll('.scroll-stack-card');
-  const railItems = document.querySelectorAll('.side-rail-item');
   const railThumb = document.getElementById('sideRailThumb');
+  const railTrack = document.getElementById('sideRailTrack');
   const mobileCounter = document.getElementById('mobileStackCounter');
   const disciplinasHeader = document.querySelector('.disciplinas-header');
-  const sideRailSticky = document.querySelector('.side-rail-sticky');
   if (!stackCards.length) return;
+
+  if (railTrack) {
+    railTrack.addEventListener('click', (e) => {
+      const rect = railTrack.getBoundingClientRect();
+      const clickY = e.clientY - rect.top;
+      const progress = Math.max(0, Math.min(1, clickY / rect.height));
+      const targetIndex = Math.min(stackCards.length - 1, Math.floor(progress * stackCards.length));
+      const sports = ['kitesurf', 'wingfoil', 'windsurf', 'sup'];
+      if (sports[targetIndex]) {
+        scrollToSport(sports[targetIndex]);
+      }
+    });
+  }
 
   const sportNames = ['KITESURF', 'WINGFOIL', 'WINDSURF', 'SUP PADDLE'];
   let ticking = false;
@@ -137,15 +149,14 @@ function initScrollStack() {
       }
     });
 
-    // Actualizar estados activos en el Rail Lateral
-    railItems.forEach((item, index) => {
-      item.classList.toggle('active', index === activeIndex);
-    });
-
-    // Desplazar suavemente el cursor indicador del rail
-    if (railThumb && railItems[activeIndex]) {
-      const itemTop = railItems[activeIndex].offsetTop;
-      railThumb.style.transform = `translateY(${itemTop}px)`;
+    // Desplazar suavemente el cursor indicador del rail (solo la línea activa)
+    if (railThumb) {
+      const track = railThumb.parentElement;
+      const trackH = track ? track.clientHeight : 180;
+      const thumbH = railThumb.clientHeight || 44;
+      const maxTravel = Math.max(0, trackH - thumbH);
+      const targetY = (activeIndex / Math.max(1, stackCards.length - 1)) * maxTravel;
+      railThumb.style.transform = `translateY(${targetY}px)`;
     }
 
     // Actualizar mini contador móvil
@@ -153,23 +164,19 @@ function initScrollStack() {
       mobileCounter.textContent = `0${activeIndex + 1} / 04 · ${sportNames[activeIndex] || ''}`;
     }
 
-    // Coordinar salida con la última card para que el título y el pill suban al mismo tiempo y nunca pasen por detrás
-    if (disciplinasHeader && stackCards.length > 0) {
+    // Coordinar salida con la última card para que el título suba al mismo tiempo y nunca pase por detrás
+    if (disciplinasHeader && stackCards.length > 0 && window.innerWidth > 1024) {
       const lastCard = stackCards[stackCards.length - 1];
       const lastRect = lastCard.getBoundingClientRect();
       const pinTop = getCardPinTop(stackCards.length - 1);
       if (lastRect.top < pinTop) {
         const exitDiff = pinTop - lastRect.top;
         disciplinasHeader.style.transform = `translateY(-${exitDiff}px)`;
-        if (sideRailSticky) {
-          sideRailSticky.style.transform = `translateY(-${exitDiff}px)`;
-        }
       } else {
         disciplinasHeader.style.transform = '';
-        if (sideRailSticky) {
-          sideRailSticky.style.transform = '';
-        }
       }
+    } else if (disciplinasHeader) {
+      disciplinasHeader.style.transform = '';
     }
 
     ticking = false;
@@ -527,12 +534,260 @@ function initTidescapeScatter() {
   section.style.setProperty('--tidescape-p', currentP.toFixed(4));
 }
 
+// =========================================================
+// GEOMETRÍA DINÁMICA DE CARDS: EL OBJETIVO
+// Trazo curvo continuo armónico que se adapta automáticamente
+// al ancho y alto real de cada tarjeta en Desktop, Tablet y Mobile
+// =========================================================
+function initObjetivoCardShapes() {
+  const cards = document.querySelectorAll('.objetivo-card');
+  if (!cards.length) return;
+
+  function updateCard(card) {
+    const svg = card.querySelector('.objetivo-card-shape');
+    const path = card.querySelector('.objetivo-card-path');
+    if (!svg || !path) return;
+
+    const w = Math.round(card.offsetWidth);
+    const h = Math.round(card.offsetHeight);
+    if (!w || !h) return;
+
+    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    const r = 24;
+    const xs = 81.58;
+    const xt = 62.16;
+    const yt = 15.24;
+    const d = `M 0 ${xs} A 20 20 0 0 1 ${yt} ${xt} A 64 64 0 0 0 ${xt} ${yt} A 20 20 0 0 1 ${xs} 0 L ${w - r} 0 A ${r} ${r} 0 0 1 ${w} ${r} L ${w} ${h - r} A ${r} ${r} 0 0 1 ${w - r} ${h} L ${r} ${h} A ${r} ${r} 0 0 1 0 ${h - r} Z`;
+    path.setAttribute('d', d);
+  }
+
+  // Actualización inicial
+  cards.forEach(card => updateCard(card));
+
+  // Observador reactivo de dimensiones
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        updateCard(entry.target);
+      }
+    });
+    cards.forEach(card => ro.observe(card));
+  } else {
+    window.addEventListener('resize', () => {
+      cards.forEach(card => updateCard(card));
+    }, { passive: true });
+  }
+
+  // Recalcular tras carga completa de fuentes tipográficas
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      cards.forEach(card => updateCard(card));
+    });
+  }
+}
+
+// Animación de entrada fluida y accesible para "El Objetivo"
+function initObjetivoMotion() {
+  const objetivoSection = document.getElementById('escuela');
+  if (!objetivoSection) return;
+
+  // Respetar preferencias de reducción de movimiento
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Prepara los elementos solo si JS está activo y funcionando
+  objetivoSection.classList.add('animate-ready');
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        objetivoSection.classList.add('is-in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  observer.observe(objetivoSection);
+}
+
+// =========================================================
+// SISTEMA DE ANIMACIONES Y FÍSICA FLUIDA (APPLE DESIGN & ANIMATE)
+// Revelado de secciones y componentes orquestado por IntersectionObserver
+// =========================================================
+// SISTEMA DE ANIMACIONES Y FÍSICA FLUIDA (APPLE DESIGN & ANIMATE)
+// Revelado de secciones y componentes orquestado por IntersectionObserver
+// =========================================================
+function initFluidScrollMotion() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Activa las reglas de transición solo cuando JS está listo y funcionando
+  document.documentElement.classList.add('js-motion-ready');
+
+  // Seleccionar contenedores y elementos a revelar
+  const revealTargets = [
+    '.disciplinas-header',
+    '.bento-header',
+    '.instructores-header',
+    '.faq-header',
+    '.reviews-header',
+    '.bento-grid',
+    '.instructores-grid',
+    '.tidescape-center-wrap',
+    '.spot-split-grid',
+    '.mapa-card-white',
+    '.motion-accordion',
+    '.section-prefooter-banner',
+    '.footer-floating-card'
+  ];
+
+  const elementsToObserve = document.querySelectorAll(revealTargets.join(', '));
+  if (!elementsToObserve.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  elementsToObserve.forEach(el => observer.observe(el));
+}
+
+// =========================================================
+// REACT BITS MASONRY: ANIMACIÓN DE ENTRADA Y SALIDA DIRECTION-AWARE
+// Entrada: 50px desde abajo, opacity 0->1, blur 4px->0, 700ms, stagger ~70ms
+// Salida: opacity 1->0, blur 0->4px, desplazamiento hacia borde de salida, 350ms, sin delay
+// Sin efectos al hacer hover
+// =========================================================
+function initMasonryReviewsMotion() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const cards = Array.from(document.querySelectorAll('.reviews-masonry-grid .review-cell-card'));
+  if (!cards.length) return;
+
+  // Detección de dirección de scroll para direccionar la salida
+  let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+  let scrollDirection = 'down';
+
+  window.addEventListener('scroll', () => {
+    const currentY = window.pageYOffset || document.documentElement.scrollTop;
+    const diff = currentY - lastScrollY;
+    if (Math.abs(diff) > 2) {
+      scrollDirection = diff > 0 ? 'down' : 'up';
+      lastScrollY = currentY;
+    }
+  }, { passive: true });
+
+  // Asignar estado inicial según posición antes de activar transiciones (evita animaciones al cargar si está fuera de pantalla)
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    if (rect.bottom < 0) {
+      // Arriba del viewport
+      card.classList.add('masonry-exit-top');
+    } else if (rect.top > viewportHeight) {
+      // Abajo del viewport
+      card.classList.add('masonry-exit-bottom');
+    } else {
+      // Ya en pantalla (ej. refresh con scroll a mitad de página)
+      card.classList.add('masonry-enter');
+    }
+  });
+
+  // Activar la clase de movimiento solo tras fijar estados iniciales
+  requestAnimationFrame(() => {
+    document.documentElement.classList.add('js-reviews-motion-ready');
+  });
+
+  // Gestor de stagger (~70ms entre cards que entran juntas)
+  let staggerIndex = 0;
+  let staggerTimer = null;
+
+  function nextStaggerDelay() {
+    const delay = staggerIndex * 70;
+    staggerIndex++;
+    clearTimeout(staggerTimer);
+    staggerTimer = setTimeout(() => {
+      staggerIndex = 0;
+    }, 120);
+    return `${delay}ms`;
+  }
+
+  // IntersectionObserver:
+  // - threshold: 0 para que la salida se ejecute cuando esté prácticamente fuera de pantalla.
+  // - rootMargin: '0px 0px 0px 0px' para evitar activaciones prematuras mientras se lee.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const card = entry.target;
+      const rect = entry.boundingClientRect;
+      const rootTop = entry.rootBounds ? entry.rootBounds.top : 0;
+      const rootBottom = entry.rootBounds ? entry.rootBounds.bottom : window.innerHeight;
+
+      if (entry.isIntersecting) {
+        // ENTRADA: La card entra al área visible
+        const delay = nextStaggerDelay();
+        card.style.setProperty('--masonry-delay', delay);
+        card.classList.remove('masonry-exit-top', 'masonry-exit-bottom');
+        card.classList.add('masonry-enter');
+      } else {
+        // SALIDA: La card abandonó prácticamente por completo el área visible
+        card.style.setProperty('--masonry-delay', '0ms');
+        card.classList.remove('masonry-enter');
+
+        // Determinar por qué borde salió
+        if (rect.bottom <= rootTop + 20) {
+          // Salió por arriba (scroll hacia abajo)
+          card.classList.remove('masonry-exit-bottom');
+          card.classList.add('masonry-exit-top');
+        } else if (rect.top >= rootBottom - 20) {
+          // Salió por abajo (scroll hacia arriba)
+          card.classList.remove('masonry-exit-top');
+          card.classList.add('masonry-exit-bottom');
+        } else {
+          // Fallback por dirección de scroll si está justo en el borde
+          if (scrollDirection === 'down') {
+            card.classList.remove('masonry-exit-bottom');
+            card.classList.add('masonry-exit-top');
+          } else {
+            card.classList.remove('masonry-exit-top');
+            card.classList.add('masonry-exit-bottom');
+          }
+        }
+      }
+    });
+  }, {
+    threshold: 0,
+    rootMargin: '0px 0px 0px 0px'
+  });
+
+  cards.forEach(card => observer.observe(card));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
   initTidescapeScatter();
   initAccordion();
+  initObjetivoCardShapes();
+  initObjetivoMotion();
+  initFluidScrollMotion();
+  initMasonryReviewsMotion();
   initMotionNav();
   initMobileMenu();
   setInterval(fetchLiveWind, 10 * 60 * 1000);
 });
+
+
