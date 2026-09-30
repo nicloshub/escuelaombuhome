@@ -1,0 +1,773 @@
+/* =========================================================
+   ESCUELA OMBÚ — SUBPÁGINAS DE DEPORTES (sports.css)
+   Estilos unificados para Kitesurf, Windsurf, Wingfoil y SUP
+   ========================================================= */
+
+/* --- 1. HERO DEL DEPORTE --- */
+.sport-hero {
+  position: relative;
+  min-height: 85vh;
+  min-height: 85dvh;
+  display: flex;
+  align-items: flex-end;
+  padding: 140px 0 64px;
+  background-color: var(--ink);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.sport-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.sport-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  filter: brightness(0.72) saturate(1.1);
+  transform: scale(1.02);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sport-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(35, 31, 32, 0.35) 0%,
+    rgba(35, 31, 32, 0.55) 45%,
+    rgba(35, 31, 32, 0.92) 100%
+  );
+  pointer-events: none;
+}
+
+.sport-hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 960px;
+}
+
+.sport-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(254, 254, 254, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(254, 254, 254, 0.2);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-family-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+
+.sport-category-badge span.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 10px var(--orange);
+}
+
+.sport-hero-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(3.75rem, 9vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0 0 24px;
+}
+
+.sport-hero-desc {
+  font-family: var(--font-family-body);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.55;
+  color: rgba(254, 254, 254, 0.88);
+  max-width: 680px;
+  margin-bottom: 32px;
+}
+
+/* Specs pills bar */
+.sport-specs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.sport-spec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(35, 31, 32, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(254, 254, 254, 0.18);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.sport-spec-pill svg {
+  color: var(--orange);
+  flex-shrink: 0;
+}
+
+/* Hero actions */
+.sport-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.sport-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  height: 46px;
+  border-radius: 100px;
+  background: rgba(254, 254, 254, 0.08);
+  border: 1px solid rgba(254, 254, 254, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--white);
+  font-family: var(--font-family-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.sport-btn-ghost:hover {
+  background: rgba(254, 254, 254, 0.18);
+  border-color: rgba(254, 254, 254, 0.45);
+  transform: translateY(-2px);
+  color: var(--white);
+}
+
+/* --- 2. SECCIONES COMUNES --- */
+.sport-section {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+.sport-section-dark {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.sport-section-sand {
+  background: var(--light-1);
+}
+
+.sport-section-header {
+  max-width: 720px;
+  margin-bottom: 56px;
+}
+
+.sport-section-badge {
+  display: inline-block;
+  font-family: var(--font-family-body);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.sport-section-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.sport-section-dark .sport-section-title {
+  color: var(--white);
+}
+
+.sport-section-desc {
+  font-family: var(--font-family-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.sport-section-dark .sport-section-desc {
+  color: var(--text-light-muted);
+}
+
+/* --- 3. BENTO HIGHLIGHTS (SEGURIDAD Y EQUIPAMIENTO) --- */
+.sport-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.sport-bento-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 36px 30px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sport-section-sand .sport-bento-card {
+  background: var(--white);
+}
+
+.sport-bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 82, 6, 0.3);
+}
+
+.sport-bento-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--shade);
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.sport-bento-card h3 {
+  font-family: var(--font-family-display);
+  font-size: 24px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.sport-bento-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* --- 4. ROADMAP DE CURSOS & NIVELES --- */
+.sport-levels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.sport-level-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.sport-level-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+}
+
+.sport-level-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sport-level-number {
+  font-family: var(--font-family-display);
+  font-size: 38px;
+  line-height: 1;
+  color: var(--orange);
+}
+
+.sport-level-tag {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--light-1);
+  color: var(--ink);
+}
+
+.sport-level-card h3 {
+  font-family: var(--font-family-display);
+  font-size: 26px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+
+.sport-level-card p.sport-level-summary {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.sport-level-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sport-level-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.sport-level-checklist li svg {
+  color: var(--orange);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sport-level-card .sport-level-footer {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* --- 5. TARIFAS Y PLANES --- */
+.sport-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.sport-pricing-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sport-pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.sport-pricing-card.featured {
+  border: 2px solid var(--orange);
+  box-shadow: 0 12px 32px rgba(255, 82, 6, 0.14);
+}
+
+.sport-pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 32px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+}
+
+.sport-pricing-title {
+  font-family: var(--font-family-display);
+  font-size: 26px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.sport-pricing-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.sport-pricing-value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sport-pricing-amount {
+  font-family: var(--font-family-display);
+  font-size: 42px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.sport-pricing-unit {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.sport-pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sport-pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.sport-pricing-features li svg {
+  color: var(--orange);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sport-pricing-btn-wrap {
+  margin-top: auto;
+}
+
+.sport-pricing-btn-wrap a {
+  width: 100%;
+}
+
+/* --- 6. SPOT CONDITIONS BANNER (ACASSUSO) --- */
+.sport-spot-box {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-card);
+  padding: 56px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.sport-spot-box::after {
+  content: "";
+  position: absolute;
+  right: -50px;
+  bottom: -50px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 82, 6, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.sport-spot-info h3 {
+  font-family: var(--font-family-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.sport-spot-info p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(254, 254, 254, 0.85);
+  margin-bottom: 24px;
+}
+
+.sport-spot-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sport-spot-item {
+  background: rgba(254, 254, 254, 0.06);
+  border: 1px solid rgba(254, 254, 254, 0.12);
+  border-radius: var(--radius-inner);
+  padding: 20px;
+}
+
+.sport-spot-item-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+
+.sport-spot-item-desc {
+  font-size: 14px;
+  color: rgba(254, 254, 254, 0.9);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* --- 7. INSTRUCTORES DEDICADOS --- */
+.sport-coaches-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 920px;
+}
+
+.sport-coach-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.sport-coach-img-wrap {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  background: var(--light-1);
+}
+
+.sport-coach-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sport-coach-card:hover .sport-coach-img-wrap img {
+  transform: scale(1.04);
+}
+
+.sport-coach-content {
+  padding: 28px;
+}
+
+.sport-coach-role {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+
+.sport-coach-name {
+  font-family: var(--font-family-display);
+  font-size: 26px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.sport-coach-bio {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* --- 8. PREGUNTAS FRECUENTES (FAQ) --- */
+.sport-faq-list {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sport-faq-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-inner);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sport-faq-item.is-open {
+  border-color: rgba(255, 82, 6, 0.4);
+  box-shadow: var(--shadow-card);
+}
+
+.sport-faq-question {
+  width: 100%;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: transparent;
+  border: none;
+  font-family: var(--font-family-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+.sport-faq-chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--orange);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.sport-faq-item.is-open .sport-faq-chevron {
+  transform: rotate(180deg);
+}
+
+.sport-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sport-faq-answer-inner {
+  padding: 0 24px 24px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* --- 9. PRE-FOOTER BANNER --- */
+.sport-prefooter-banner {
+  margin: 60px 0 0;
+}
+
+/* --- RESPONSIVE MOBILE-FIRST --- */
+@media (max-width: 1024px) {
+  .sport-bento-grid,
+  .sport-levels-grid,
+  .sport-pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sport-spot-box {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sport-hero {
+    min-height: 78vh;
+    min-height: 78dvh;
+    padding: 120px 0 48px;
+  }
+
+  .sport-hero-title {
+    font-size: 3.5rem;
+  }
+
+  .sport-hero-desc {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .sport-bento-grid,
+  .sport-levels-grid,
+  .sport-pricing-grid,
+  .sport-coaches-grid,
+  .sport-spot-items {
+    grid-template-columns: 1fr;
+  }
+
+  .sport-section {
+    padding: 64px 0;
+  }
+
+  .sport-pricing-card.featured {
+    order: -1;
+  }
+
+  .sport-spot-box {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sport-hero-title {
+    font-size: 2.85rem;
+  }
+
+  .sport-spec-pill {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .sport-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sport-btn-ghost,
+  .sport-hero-actions .btn-pill-orange {
+    width: 100%;
+    justify-content: center;
+  }
+}
