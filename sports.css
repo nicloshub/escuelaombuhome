@@ -1570,83 +1570,203 @@ nav.desktop-nav {
 }
 
 /* =========================================================
-   4. EQUIPO: NO COMPRES NADA. TRAÉ TOALLA.
+   4. EQUIPO: CON QUÉ VAS A NAVEGAR (SEGÚN MAQUETA FIGMA)
    ========================================================= */
-.equipo-single-block {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
+.equipo-header-wrap {
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .equipo-header-wrap {
+    margin-bottom: 40px;
+  }
 }
 
 @media (min-width: 1024px) {
-  .equipo-single-block {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .equipo-img-wrap {
-    grid-column: 1 / span 6;
-  }
-
-  .equipo-content-wrap {
-    grid-column: 7 / span 6;
-    padding: 64px 48px;
+  .equipo-header-wrap {
+    margin-bottom: 48px;
+    max-width: 580px;
   }
 }
 
-.equipo-img-wrap {
-  min-height: 320px;
-  background-color: var(--light-1);
+.equipo-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
 }
 
-.equipo-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.equipo-kicker-dot {
+  font-size: 10px;
+  line-height: 1;
 }
 
-.equipo-content-wrap {
-  padding: 32px 24px;
-}
-
-.equipo-content-wrap h3 {
+.equipo-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--ink);
   margin-bottom: 16px;
 }
 
-.equipo-shortlist {
-  list-style: none;
+.equipo-bajada {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .equipo-bajada {
+    font-size: 17px;
+  }
+}
+
+/* Grilla de 4 tarjetas de equipamiento */
+.equipo-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .equipo-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .equipo-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+.equipo-card-item {
+  background: var(--white);
+  border: 1.5px solid #E7E5E4;
+  border-radius: 20px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 24px 0 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.equipo-shortlist li {
+.equipo-card-item:hover {
+  transform: translateY(-3px);
+  border-color: #D6D3D1;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.equipo-card-visual {
+  background-color: #EAE6DF;
+  height: 180px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .equipo-card-visual {
+    height: 190px;
+  }
+}
+
+.equipo-visual-tag-group {
+  display: inline-flex;
+  align-items: center;
   gap: 12px;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--ink);
 }
 
-.equipo-shortlist li svg {
-  color: var(--orange);
+.equipo-dashed-badge {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #78716C;
+  border: 1px dashed rgba(120, 113, 108, 0.45);
+  background: rgba(255, 255, 255, 0.40);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
+.equipo-icon-contour {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  margin-top: 3px;
 }
 
-.equipo-note-box {
-  background: var(--light-1);
-  border-left: 3px solid var(--orange);
-  border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
-  padding: 16px 20px;
-  font-size: 14px;
-  line-height: 1.5;
+.equipo-card-body {
+  padding: 24px 20px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.equipo-card-title {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 700;
   color: var(--ink);
-  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.equipo-card-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #78716C;
+  margin: 0;
+}
+
+/* Banner inferior: ¿Tenés equipo propio? */
+.equipo-bottom-banner {
+  margin-top: 32px;
+  background-color: #FFF1EB;
+  border-radius: 16px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .equipo-bottom-banner {
+    margin-top: 40px;
+    padding: 20px 28px;
+  }
+}
+
+.equipo-banner-orange {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--orange);
+}
+
+.equipo-banner-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: #1C1917;
+  line-height: 1.4;
 }
 
 /* =========================================================
