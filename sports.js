@@ -1,137 +1,89 @@
 /**
  * Escuela Ombú - Subpáginas de Deportes (sports.js)
- * Manejo interactivo de FAQs, navegación móvil, dropdown y smooth scroll
+ * Interactividad limpia Mobile-First: Acordeón FAQ, Navegación Mobile y Smooth Scroll
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initSubpageMobileMenu();
-  initSubpageSportsDropdown();
-  initSubpageFaq();
+  initMobileDrawer();
+  initFaqAccordion();
 });
 
-// Dropdown de Deportes en Navbar
-function initSubpageSportsDropdown() {
-  const trigger = document.getElementById('navSportsTrigger');
-  const viewport = document.getElementById('navSportsViewport');
-  const dropdown = document.getElementById('navSportsDropdown');
-  const pill = document.getElementById('dropdownHoverPill');
-  const items = document.querySelectorAll('.dropdown-sport-item');
-
-  if (!trigger || !dropdown) return;
-
-  function openDropdown() {
-    trigger.setAttribute('aria-expanded', 'true');
-    dropdown.classList.add('is-open');
-  }
-
-  function closeDropdown() {
-    trigger.setAttribute('aria-expanded', 'false');
-    dropdown.classList.remove('is-open');
-    if (pill) pill.style.opacity = '0';
-  }
-
-  dropdown.addEventListener('mouseenter', openDropdown);
-  dropdown.addEventListener('mouseleave', closeDropdown);
-
-  trigger.addEventListener('click', (e) => {
-    // Si estamos en mobile o click manual
-    if (window.innerWidth <= 1024) {
-      e.preventDefault();
-      const isOpen = dropdown.classList.contains('is-open');
-      if (isOpen) closeDropdown();
-      else openDropdown();
-    }
-  });
-
-  // Microinteracción pill de fondo en dropdown
-  if (pill && items.length) {
-    items.forEach(item => {
-      item.addEventListener('mouseenter', () => {
-        const itemRect = item.getBoundingClientRect();
-        const menuRect = item.parentElement.getBoundingClientRect();
-        pill.style.top = `${itemRect.top - menuRect.top}px`;
-        pill.style.left = `${itemRect.left - menuRect.left}px`;
-        pill.style.width = `${itemRect.width}px`;
-        pill.style.height = `${itemRect.height}px`;
-        pill.style.opacity = '1';
-      });
-    });
-
-    const menuEl = document.querySelector('.nav-dropdown-menu');
-    if (menuEl) {
-      menuEl.addEventListener('mouseleave', () => {
-        pill.style.opacity = '0';
-      });
-    }
-  }
-}
-
 // Menú Drawer Mobile
-function initSubpageMobileMenu() {
+function initMobileDrawer() {
   const btn = document.getElementById('mobileMenuBtn');
   const drawer = document.getElementById('mobileNavDrawer');
   const header = document.querySelector('header.site-header');
-  if (!btn || !drawer || !header) return;
+  if (!btn || !drawer) return;
 
-  function toggleMenu(forceClose = false) {
-    const shouldOpen = forceClose ? false : !drawer.classList.contains('is-open');
-    drawer.classList.toggle('is-open', shouldOpen);
-    btn.classList.toggle('is-active', shouldOpen);
-    header.classList.toggle('menu-open', shouldOpen);
-    btn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
-    drawer.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+  function toggleDrawer(forceClose = false) {
+    const isOpen = drawer.classList.contains('is-open');
+    const nextState = forceClose ? false : !isOpen;
+
+    drawer.classList.toggle('is-open', nextState);
+    btn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', nextState ? 'false' : 'true');
+
+    if (header) {
+      header.classList.toggle('menu-active', nextState);
+    }
   }
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
-    toggleMenu();
+    toggleDrawer();
   });
 
+  // Cerrar al clickear cualquier link dentro del drawer
   drawer.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      toggleMenu(true);
+      toggleDrawer(true);
     });
   });
 
+  // Cerrar al clickear fuera
   document.addEventListener('click', (e) => {
-    if (!header.contains(e.target)) {
-      toggleMenu(true);
+    if (!drawer.contains(e.target) && !btn.contains(e.target)) {
+      toggleDrawer(true);
     }
   });
 
+  // Cerrar con Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-      toggleMenu(true);
+      toggleDrawer(true);
       btn.focus();
     }
   });
 }
 
 // Acordeón de FAQs
-function initSubpageFaq() {
-  const faqButtons = document.querySelectorAll('.sport-faq-question');
-  if (!faqButtons.length) return;
+function initFaqAccordion() {
+  const questions = document.querySelectorAll('.faq-question-btn');
+  if (!questions.length) return;
 
-  faqButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const item = button.closest('.sport-faq-item');
-      const answer = item.querySelector('.sport-faq-answer');
+  questions.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      if (!item) return;
+
+      const panel = item.querySelector('.faq-answer-panel');
       const isOpen = item.classList.contains('is-open');
 
-      // Cerrar otros abiertos (comportamiento acordeón limpio)
-      document.querySelectorAll('.sport-faq-item.is-open').forEach(openItem => {
+      // Cerrar otros acordeones abiertos
+      document.querySelectorAll('.faq-item.is-open').forEach(openItem => {
         if (openItem !== item) {
           openItem.classList.remove('is-open');
-          openItem.querySelector('.sport-faq-answer').style.maxHeight = null;
+          const openPanel = openItem.querySelector('.faq-answer-panel');
+          if (openPanel) openPanel.style.maxHeight = null;
         }
       });
 
-      if (!isOpen) {
+      if (!isOpen && panel) {
         item.classList.add('is-open');
-        answer.style.maxHeight = `${answer.scrollHeight + 20}px`;
-      } else {
+        panel.style.maxHeight = `${panel.scrollHeight + 16}px`;
+      } else if (panel) {
         item.classList.remove('is-open');
-        answer.style.maxHeight = null;
+        panel.style.maxHeight = null;
       }
     });
   });

@@ -1,19 +1,746 @@
 /* =========================================================
-   ESCUELA OMBÚ — SUBPÁGINAS DE DEPORTES (sports.css)
-   Estilos unificados para Kitesurf, Windsurf, Wingfoil y SUP
+   ESCUELA OMBÚ — SISTEMA DE DISEÑO BASE (DESIGN TOKENS)
+   Enfoque Estrictamente Mobile-First (8pt Grid System)
+   Breakpoints: Base Mobile (<768px) -> Tablet (>=768px) -> Desktop (>=1024px)
    ========================================================= */
 
-/* --- 1. HERO DEL DEPORTE --- */
-.sport-hero {
-  position: relative;
-  min-height: 85vh;
-  min-height: 85dvh;
-  display: flex;
-  align-items: flex-end;
-  padding: 140px 0 64px;
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* --- PALETA DE COLOR PRIMARIA --- */
+  --primary: #FF5206;
+  --orange: #FF5206;
+  --orange-hover: #E04500;
+  --shade: rgba(255, 82, 6, 0.10);
+  --dark: #231F20;
+  --ink: #231F20;
+  --white: #FEFEFE;
+  --paper: #FEFEFE;
+  --light-1: #F6F6F6;
+  --light-2: #A4A5A9;
+  --line: rgba(35, 31, 32, 0.10);
+  --line-dark: rgba(254, 254, 254, 0.16);
+  --text-muted: rgba(35, 31, 32, 0.72);
+  --text-light-muted: rgba(254, 254, 254, 0.75);
+
+  /* --- RADIOS (ARMONIZADOS EN MÚLTIPLOS DE 8) --- */
+  --radius-card: 24px;
+  --radius-inner: 16px;
+  --radius-sm: 8px;
+  --radius-pill: 9999px;
+
+  /* --- SOMBRAS --- */
+  --shadow-card: 0 4px 16px rgba(35, 31, 32, 0.06);
+  --shadow-lg: 0 16px 36px rgba(35, 31, 32, 0.10);
+
+  /* --- 1. TIPOGRAFÍA (ROLES) --- */
+  --font-display: 'Anton', Impact, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* --- 2. ESCALA TIPOGRÁFICA RESPONSIVA: BASE MOBILE (<= 767px) --- */
+  --h1-size: 64px;
+  --h1-lh: 72px;
+  --h1-ls: -0.02em;
+
+  --h2-size: 40px;
+  --h2-lh: 48px;
+  --h2-ls: -0.015em;
+
+  --h3-size: 24px;
+  --h3-lh: 32px;
+
+  --h4-size: 20px;
+  --h4-lh: 28px;
+
+  --body-size: 16px;
+  --body-lh: 24px;
+
+  --btn-size: 14px;
+  --btn-lh: 20px;
+
+  --caption-size: 14px;
+  --caption-lh: 20px;
+
+  /* --- 3. GRILLA Y LAYOUT: BASE MOBILE --- */
+  --container-max-width: 1440px;
+  --container-padding: 24px;
+  --grid-cols: 4;
+  --grid-gutter: 16px;
+
+  /* --- 4. MACRO-ESPACIADO: BASE MOBILE --- */
+  --section-padding-y: 64px;
+
+  /* --- NAVBAR: BASE MOBILE --- */
+  --nav-height: 64px;
+  --nav-margin-x: 16px;
+}
+
+/* TABLET (768px a 1023px) */
+@media (min-width: 768px) {
+  :root {
+    /* Escala Tipográfica Tablet */
+    --h1-size: 96px;
+    --h1-lh: 104px;
+
+    --h2-size: 48px;
+    --h2-lh: 56px;
+
+    --h3-size: 28px;
+    --h3-lh: 36px;
+
+    --h4-size: 24px;
+    --h4-lh: 32px;
+
+    --body-size: 18px;
+    --body-lh: 28px;
+
+    --btn-size: 16px;
+    --btn-lh: 24px;
+
+    --caption-size: 14px;
+    --caption-lh: 20px;
+
+    /* Grilla Tablet */
+    --container-padding: 64px;
+    --grid-cols: 12;
+    --grid-gutter: 24px;
+
+    /* Macro-espaciado Tablet */
+    --section-padding-y: 96px;
+
+    /* Navbar Tablet */
+    --nav-height: 72px;
+    --nav-margin-x: 64px;
+  }
+}
+
+/* DESKTOP (>= 1024px) */
+@media (min-width: 1024px) {
+  :root {
+    /* Escala Tipográfica Desktop */
+    --h1-size: 130px;
+    --h1-lh: 144px;
+    --h1-ls: -0.02em;
+
+    --h2-size: 60px;
+    --h2-lh: 72px;
+    --h2-ls: -0.015em;
+
+    --h3-size: 32px;
+    --h3-lh: 40px;
+
+    --h4-size: 24px;
+    --h4-lh: 32px;
+
+    --body-size: 18px;
+    --body-lh: 28px;
+
+    --btn-size: 16px;
+    --btn-lh: 24px;
+
+    --caption-size: 14px;
+    --caption-lh: 20px;
+
+    /* Grilla Desktop (1440px con 160px padding lateral) */
+    --container-padding: 160px;
+    --grid-cols: 12;
+    --grid-gutter: 32px;
+
+    /* Macro-espaciado Desktop */
+    --section-padding-y: 160px;
+
+    /* Navbar Desktop */
+    --nav-height: 80px;
+    --nav-margin-x: 160px;
+  }
+}
+
+/* =========================================================
+   RESETEO BASE Y TIPOGRAFÍA GLOBAL
+   ========================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  color: var(--ink);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+/* Títulos H1-H4 en Anton */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: var(--h1-size);
+  line-height: var(--h1-lh);
+  letter-spacing: var(--h1-ls);
+}
+
+h2 {
+  font-size: var(--h2-size);
+  line-height: var(--h2-lh);
+  letter-spacing: var(--h2-ls);
+}
+
+h3 {
+  font-size: var(--h3-size);
+  line-height: var(--h3-lh);
+}
+
+h4 {
+  font-size: var(--h4-size);
+  line-height: var(--h4-lh);
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  color: var(--text-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =========================================================
+   CONTENEDOR Y GRILLA (.container)
+   ========================================================= */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Macro-espaciado entre secciones */
+.section-macro {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+.section-sand {
+  background-color: var(--light-1);
+}
+
+.section-dark {
   background-color: var(--ink);
   color: var(--white);
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 {
+  color: var(--white);
+}
+
+.section-dark p {
+  color: var(--text-light-muted);
+}
+
+/* =========================================================
+   5. CABECERA EDITORIAL (H2 + BAJADA EN GRILLA)
+   ========================================================= */
+/* Mobile First Base: 1 sola columna vertical con gap 16px */
+.editorial-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.editorial-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
+  line-height: var(--caption-lh);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.editorial-title {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.editorial-lead {
+  width: 100%;
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  color: var(--text-muted);
+}
+
+/* TABLET (>= 768px): Grilla 12 cols (H2 en col 1/span 5, Bajada en col 6/span 7) */
+@media (min-width: 768px) {
+  .editorial-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
+    align-items: start;
+    margin-bottom: 64px;
+  }
+
+  .editorial-title-col {
+    grid-column: 1 / span 5;
+  }
+
+  .editorial-lead {
+    grid-column: 6 / span 7;
+    margin-top: 4px; /* Compensación óptica con el line-height del H2 */
+  }
+}
+
+/* DESKTOP (>= 1024px): Grilla 12 cols (H2 en col 1/span 4, Cols 5-7 vacías, Bajada en col 8/span 5) */
+@media (min-width: 1024px) {
+  .editorial-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
+    align-items: start;
+    margin-bottom: 80px;
+  }
+
+  .editorial-title-col {
+    grid-column: 1 / span 4;
+  }
+
+  .editorial-lead {
+    grid-column: 8 / span 5;
+    margin-top: 8px; /* Alineación top óptica exacta con la primera línea del H2 */
+  }
+}
+
+/* =========================================================
+   6. COMPONENTES: BOTONES (8pt Grid Padding)
+   ========================================================= */
+.btn-pill-orange,
+.btn-pill-dark,
+.btn-pill-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-size: var(--btn-size);
+  line-height: var(--btn-lh);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  padding: 12px 24px; /* Múltiplo de 8/4 */
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .btn-pill-orange,
+  .btn-pill-dark,
+  .btn-pill-white {
+    padding: 16px 32px; /* Múltiplo exacto de 8 en Tablet y Desktop */
+  }
+}
+
+.btn-pill-orange {
+  background-color: var(--orange);
+  color: var(--white);
+}
+
+.btn-pill-orange:hover {
+  background-color: var(--orange-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 82, 6, 0.28);
+}
+
+.btn-pill-dark {
+  background-color: var(--ink);
+  color: var(--white);
+}
+
+.btn-pill-dark:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(35, 31, 32, 0.22);
+}
+
+.btn-pill-white {
+  background-color: var(--white);
+  color: var(--ink);
+  border-color: rgba(35, 31, 32, 0.12);
+}
+
+.btn-pill-white:hover {
+  background-color: var(--light-1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+}
+
+.btn-pill-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-size: var(--btn-size);
+  line-height: var(--btn-lh);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  background-color: rgba(254, 254, 254, 0.10);
+  border: 1px solid rgba(254, 254, 254, 0.30);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--white);
+  transition: all 0.25s ease;
+}
+
+@media (min-width: 768px) {
+  .btn-pill-outline-light {
+    padding: 16px 32px;
+  }
+}
+
+.btn-pill-outline-light:hover {
+  background-color: rgba(254, 254, 254, 0.22);
+  border-color: rgba(254, 254, 254, 0.55);
+  transform: translateY(-2px);
+  color: var(--white);
+}
+
+/* Íconos circulares dentro de botones */
+.btn-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   6. NAVBAR Y HEADER
+   ========================================================= */
+header.site-header {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: calc(100% - (var(--nav-margin-x) * 2));
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  height: var(--nav-height);
+  background: rgba(254, 254, 254, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.80);
+  border-radius: var(--radius-pill);
+  padding: 0 16px;
+  box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08);
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  header.site-header {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  header.site-header {
+    top: 24px;
+    padding: 0 32px;
+  }
+}
+
+.header-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-disc-img {
+  height: 40px;
+  width: auto;
+}
+
+@media (min-width: 768px) {
+  .brand-disc-img {
+    height: 48px;
+  }
+}
+
+/* Desktop Nav links */
+nav.desktop-nav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  nav.desktop-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .desktop-nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 32px; /* Múltiplo de 8 */
+  }
+
+  .desktop-nav-link {
+    font-family: var(--font-body);
+    font-size: var(--btn-size);
+    line-height: var(--btn-lh);
+    font-weight: 500;
+    color: var(--ink);
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .desktop-nav-link:hover {
+    color: var(--orange);
+  }
+
+  /* Dropdown en desktop */
+  .desktop-dropdown {
+    position: relative;
+  }
+
+  .desktop-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: 260px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-inner);
+    padding: 8px;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .desktop-dropdown:hover .desktop-dropdown-menu,
+  .desktop-dropdown:focus-within .desktop-dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .desktop-dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .desktop-dropdown-item:hover,
+  .desktop-dropdown-item.is-active {
+    background-color: var(--light-1);
+    color: var(--orange);
+  }
+}
+
+/* Header CTAs */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-btn-reserve {
+  display: none;
+  background-color: var(--orange);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  transition: all 0.25s ease;
+}
+
+@media (min-width: 768px) {
+  .header-btn-reserve {
+    display: inline-flex;
+  }
+}
+
+.header-btn-reserve:hover {
+  background-color: var(--orange-hover);
+  transform: translateY(-2px);
+}
+
+.mobile-toggle-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .mobile-toggle-btn {
+    display: none;
+  }
+}
+
+.mobile-toggle-bar {
+  width: 24px;
+  height: 2px;
+  background-color: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Mobile Drawer */
+.mobile-nav-drawer {
+  display: none;
+  position: fixed;
+  top: calc(var(--nav-height) + 32px);
+  left: 16px;
+  right: 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+}
+
+.mobile-nav-drawer.is-open {
+  display: block;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-nav-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.mobile-sports-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.mobile-sport-pill {
+  display: block;
+  text-align: center;
+  padding: 10px 14px;
+  background: var(--light-1);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.mobile-sport-pill.is-active {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.mobile-nav-link {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+  padding: 6px 0;
+}
+
+/* =========================================================
+   SECCIÓN HERO DEL DEPORTE
+   ========================================================= */
+.sport-hero-section {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 144px;
+  padding-bottom: 64px;
+  background-color: var(--ink);
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .sport-hero-section {
+    padding-top: 176px;
+    padding-bottom: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sport-hero-section {
+    min-height: 90vh;
+    padding-top: 200px;
+    padding-bottom: 128px;
+  }
 }
 
 .sport-hero-bg {
@@ -26,10 +753,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
-  filter: brightness(0.72) saturate(1.1);
-  transform: scale(1.02);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  object-position: center 30%;
+  filter: brightness(0.68) saturate(1.1);
 }
 
 .sport-hero-overlay {
@@ -38,9 +763,9 @@
   z-index: 2;
   background: linear-gradient(
     180deg,
-    rgba(35, 31, 32, 0.35) 0%,
-    rgba(35, 31, 32, 0.55) 45%,
-    rgba(35, 31, 32, 0.92) 100%
+    rgba(35, 31, 32, 0.30) 0%,
+    rgba(35, 31, 32, 0.60) 50%,
+    rgba(35, 31, 32, 0.95) 100%
   );
   pointer-events: none;
 }
@@ -48,53 +773,45 @@
 .sport-hero-content {
   position: relative;
   z-index: 3;
-  width: 100%;
-  max-width: 960px;
 }
 
-.sport-category-badge {
+.sport-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 8px 16px;
   background: rgba(254, 254, 254, 0.12);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(254, 254, 254, 0.2);
+  border: 1px solid rgba(254, 254, 254, 0.20);
   border-radius: var(--radius-pill);
-  font-family: var(--font-family-body);
-  font-size: 11px;
+  font-family: var(--font-body);
+  font-size: var(--caption-size);
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--orange);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.sport-category-badge span.dot {
-  width: 6px;
-  height: 6px;
+.sport-hero-badge .dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--orange);
   box-shadow: 0 0 10px var(--orange);
 }
 
 .sport-hero-title {
-  font-family: var(--font-family-display);
-  font-size: clamp(3.75rem, 9vw, 7.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
   color: var(--white);
-  margin: 0 0 24px;
+  margin-bottom: 24px;
 }
 
 .sport-hero-desc {
-  font-family: var(--font-family-body);
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  line-height: 1.55;
-  color: rgba(254, 254, 254, 0.88);
   max-width: 680px;
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  color: rgba(254, 254, 254, 0.88);
   margin-bottom: 32px;
 }
 
@@ -102,8 +819,8 @@
 .sport-specs-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 36px;
+  gap: 12px;
+  margin-bottom: 40px;
 }
 
 .sport-spec-pill {
@@ -111,12 +828,12 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: rgba(35, 31, 32, 0.65);
+  background: rgba(35, 31, 32, 0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(254, 254, 254, 0.18);
   border-radius: var(--radius-pill);
-  font-size: 13px;
+  font-size: var(--caption-size);
   font-weight: 600;
   color: var(--white);
 }
@@ -126,133 +843,65 @@
   flex-shrink: 0;
 }
 
-/* Hero actions */
 .sport-hero-actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
   gap: 16px;
 }
 
-.sport-btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 24px;
-  height: 46px;
-  border-radius: 100px;
-  background: rgba(254, 254, 254, 0.08);
-  border: 1px solid rgba(254, 254, 254, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--white);
-  font-family: var(--font-family-body);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.25s ease;
+@media (min-width: 768px) {
+  .sport-hero-actions {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
-.sport-btn-ghost:hover {
-  background: rgba(254, 254, 254, 0.18);
-  border-color: rgba(254, 254, 254, 0.45);
-  transform: translateY(-2px);
-  color: var(--white);
-}
-
-/* --- 2. SECCIONES COMUNES --- */
-.sport-section {
-  padding: 100px 0;
-  background: var(--white);
-}
-
-.sport-section-dark {
-  background: var(--ink);
-  color: var(--white);
-}
-
-.sport-section-sand {
-  background: var(--light-1);
-}
-
-.sport-section-header {
-  max-width: 720px;
-  margin-bottom: 56px;
-}
-
-.sport-section-badge {
-  display: inline-block;
-  font-family: var(--font-family-body);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  color: var(--orange);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.sport-section-title {
-  font-family: var(--font-family-display);
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  line-height: 0.98;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 16px;
-}
-
-.sport-section-dark .sport-section-title {
-  color: var(--white);
-}
-
-.sport-section-desc {
-  font-family: var(--font-family-body);
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-
-.sport-section-dark .sport-section-desc {
-  color: var(--text-light-muted);
-}
-
-/* --- 3. BENTO HIGHLIGHTS (SEGURIDAD Y EQUIPAMIENTO) --- */
-.sport-bento-grid {
+/* =========================================================
+   SECCIÓN BENTO: SEGURIDAD Y EQUIPAMIENTO (12 COLS GRILLA)
+   ========================================================= */
+.bento-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
 }
 
-.sport-bento-card {
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .bento-card {
+    grid-column: span 4; /* 3 cards de 4 cols cada una */
+  }
+}
+
+.bento-card {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  padding: 36px 30px;
+  padding: 32px 24px;
   box-shadow: var(--shadow-card);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
-.sport-section-sand .sport-bento-card {
-  background: var(--white);
+@media (min-width: 1024px) {
+  .bento-card {
+    padding: 40px 32px;
+  }
 }
 
-.sport-bento-card:hover {
+.bento-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(255, 82, 6, 0.3);
+  border-color: rgba(255, 82, 6, 0.30);
 }
 
-.sport-bento-icon-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+.bento-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-inner);
   background: var(--shade);
   color: var(--orange);
   display: flex;
@@ -261,112 +910,113 @@
   margin-bottom: 24px;
 }
 
-.sport-bento-card h3 {
-  font-family: var(--font-family-display);
-  font-size: 24px;
-  line-height: 1.1;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 12px;
+.bento-card-title {
+  margin-bottom: 16px;
 }
 
-.sport-bento-card p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin: 0;
+.bento-card-desc {
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
 }
 
-/* --- 4. ROADMAP DE CURSOS & NIVELES --- */
-.sport-levels-grid {
+/* =========================================================
+   SECCIÓN NIVELES & CURSOS (12 COLS GRILLA)
+   ========================================================= */
+.levels-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
 }
 
-.sport-level-card {
+@media (min-width: 768px) {
+  .levels-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .level-card {
+    grid-column: span 4; /* 3 cards de 4 cols cada una */
+  }
+}
+
+.level-card {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  padding: 36px 32px;
+  padding: 32px 24px;
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  position: relative;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.sport-level-card:hover {
+@media (min-width: 1024px) {
+  .level-card {
+    padding: 40px 32px;
+  }
+}
+
+.level-card:hover {
   transform: translateY(-4px);
   border-color: var(--orange);
 }
 
-.sport-level-top {
+.level-card-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.sport-level-number {
-  font-family: var(--font-family-display);
-  font-size: 38px;
+.level-badge-num {
+  font-family: var(--font-display);
+  font-size: 40px;
   line-height: 1;
   color: var(--orange);
 }
 
-.sport-level-tag {
+.level-badge-tag {
   font-size: 11px;
   font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 5px 12px;
+  padding: 6px 12px;
   border-radius: var(--radius-pill);
   background: var(--light-1);
   color: var(--ink);
 }
 
-.sport-level-card h3 {
-  font-family: var(--font-family-display);
-  font-size: 26px;
-  line-height: 1.1;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 14px;
+.level-card-title {
+  margin-bottom: 16px;
 }
 
-.sport-level-card p.sport-level-summary {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--text-muted);
+.level-card-summary {
   margin-bottom: 24px;
 }
 
-.sport-level-checklist {
+.level-checklist {
   list-style: none;
-  padding: 0;
-  margin: 0 0 32px 0;
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.sport-level-checklist li {
+.level-checklist li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  line-height: 1.45;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--ink);
 }
 
-.sport-level-checklist li svg {
+.level-checklist li svg {
   color: var(--orange);
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
-.sport-level-card .sport-level-footer {
+.level-card-footer {
   margin-top: auto;
   padding-top: 20px;
   border-top: 1px solid var(--line);
@@ -378,19 +1028,107 @@
   color: var(--text-muted);
 }
 
-/* --- 5. TARIFAS Y PLANES --- */
-.sport-pricing-grid {
+/* =========================================================
+   SECCIÓN SPOT BOX: EL MOLINO ACASSUSO
+   ========================================================= */
+.spot-feature-box {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-card);
+  padding: 40px 24px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .spot-feature-box {
+    padding: 64px 48px;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
+    align-items: center;
+  }
+
+  .spot-feature-info {
+    grid-column: 1 / span 5;
+  }
+
+  .spot-feature-items-grid {
+    grid-column: 7 / span 6;
+  }
+}
+
+.spot-feature-info h3 {
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.spot-feature-info p {
+  color: var(--text-light-muted);
+  margin-bottom: 32px;
+}
+
+.spot-feature-items-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .spot-feature-items-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.spot-item-card {
+  background: rgba(254, 254, 254, 0.06);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius-inner);
+  padding: 24px;
+}
+
+.spot-item-tag {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.spot-item-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(254, 254, 254, 0.90);
+}
+
+/* =========================================================
+   SECCIÓN TARIFAS & PLANES (12 COLS GRILLA)
+   ========================================================= */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
   align-items: stretch;
 }
 
-.sport-pricing-card {
+@media (min-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .pricing-card {
+    grid-column: span 4; /* 3 cards de 4 cols cada una */
+  }
+}
+
+.pricing-card {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  padding: 40px 32px;
+  padding: 40px 24px;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-card);
@@ -398,180 +1136,119 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sport-pricing-card:hover {
+@media (min-width: 1024px) {
+  .pricing-card {
+    padding: 48px 32px;
+  }
+}
+
+.pricing-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 
-.sport-pricing-card.featured {
+.pricing-card.is-featured {
   border: 2px solid var(--orange);
-  box-shadow: 0 12px 32px rgba(255, 82, 6, 0.14);
+  box-shadow: 0 16px 36px rgba(255, 82, 6, 0.16);
 }
 
-.sport-pricing-badge {
+.pricing-badge-popular {
   position: absolute;
   top: -14px;
-  left: 32px;
+  left: 24px;
   background: var(--orange);
   color: var(--white);
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 4px 14px;
+  padding: 6px 14px;
   border-radius: var(--radius-pill);
 }
 
-.sport-pricing-title {
-  font-family: var(--font-family-display);
-  font-size: 26px;
-  line-height: 1.1;
-  text-transform: uppercase;
-  color: var(--ink);
+.pricing-title {
   margin-bottom: 8px;
 }
 
-.sport-pricing-desc {
+.pricing-desc {
   font-size: 14px;
-  color: var(--text-muted);
   line-height: 1.5;
   margin-bottom: 24px;
 }
 
-.sport-pricing-value {
+.pricing-amount-row {
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--line);
 }
 
-.sport-pricing-amount {
-  font-family: var(--font-family-display);
-  font-size: 42px;
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: 44px;
   line-height: 1;
   color: var(--ink);
 }
 
-.sport-pricing-unit {
+.pricing-unit {
   font-size: 13px;
   font-weight: 600;
   color: var(--text-muted);
 }
 
-.sport-pricing-features {
+.pricing-features-list {
   list-style: none;
-  padding: 0;
-  margin: 0 0 32px 0;
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
-.sport-pricing-features li {
+.pricing-features-list li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   font-size: 14px;
-  color: var(--ink);
   line-height: 1.45;
+  color: var(--ink);
 }
 
-.sport-pricing-features li svg {
+.pricing-features-list li svg {
   color: var(--orange);
   flex-shrink: 0;
   margin-top: 2px;
 }
 
-.sport-pricing-btn-wrap {
+.pricing-btn-box {
   margin-top: auto;
 }
 
-.sport-pricing-btn-wrap a {
+.pricing-btn-box a {
   width: 100%;
 }
 
-/* --- 6. SPOT CONDITIONS BANNER (ACASSUSO) --- */
-.sport-spot-box {
-  background: var(--ink);
-  color: var(--white);
-  border-radius: var(--radius-card);
-  padding: 56px 48px;
+/* =========================================================
+   SECCIÓN INSTRUCTORES (12 COLS GRILLA)
+   ========================================================= */
+.coaches-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
 }
 
-.sport-spot-box::after {
-  content: "";
-  position: absolute;
-  right: -50px;
-  bottom: -50px;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 82, 6, 0.18) 0%, transparent 70%);
-  pointer-events: none;
+@media (min-width: 768px) {
+  .coaches-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .coach-card {
+    grid-column: span 6; /* 2 cards de 6 cols cada una */
+  }
 }
 
-.sport-spot-info h3 {
-  font-family: var(--font-family-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1;
-  text-transform: uppercase;
-  color: var(--white);
-  margin-bottom: 16px;
-}
-
-.sport-spot-info p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(254, 254, 254, 0.85);
-  margin-bottom: 24px;
-}
-
-.sport-spot-items {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.sport-spot-item {
-  background: rgba(254, 254, 254, 0.06);
-  border: 1px solid rgba(254, 254, 254, 0.12);
-  border-radius: var(--radius-inner);
-  padding: 20px;
-}
-
-.sport-spot-item-title {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 6px;
-}
-
-.sport-spot-item-desc {
-  font-size: 14px;
-  color: rgba(254, 254, 254, 0.9);
-  line-height: 1.4;
-  margin: 0;
-}
-
-/* --- 7. INSTRUCTORES DEDICADOS --- */
-.sport-coaches-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  max-width: 920px;
-}
-
-.sport-coach-card {
+.coach-card {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
@@ -581,14 +1258,20 @@
   flex-direction: column;
 }
 
-.sport-coach-img-wrap {
+.coach-img-box {
   width: 100%;
   height: 320px;
+  background-color: var(--light-1);
   overflow: hidden;
-  background: var(--light-1);
 }
 
-.sport-coach-img-wrap img {
+@media (min-width: 1024px) {
+  .coach-img-box {
+    height: 380px;
+  }
+}
+
+.coach-img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -596,71 +1279,88 @@
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.sport-coach-card:hover .sport-coach-img-wrap img {
+.coach-card:hover .coach-img-box img {
   transform: scale(1.04);
 }
 
-.sport-coach-content {
-  padding: 28px;
+.coach-content {
+  padding: 32px 24px;
 }
 
-.sport-coach-role {
+@media (min-width: 1024px) {
+  .coach-content {
+    padding: 32px;
+  }
+}
+
+.coach-role-tag {
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--orange);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-.sport-coach-name {
-  font-family: var(--font-family-display);
-  font-size: 26px;
-  line-height: 1.1;
-  text-transform: uppercase;
-  color: var(--ink);
+.coach-name {
   margin-bottom: 12px;
 }
 
-.sport-coach-bio {
-  font-size: 14px;
+.coach-bio {
+  font-size: 15px;
   line-height: 1.6;
-  color: var(--text-muted);
-  margin: 0;
 }
 
-/* --- 8. PREGUNTAS FRECUENTES (FAQ) --- */
-.sport-faq-list {
-  max-width: 860px;
+/* =========================================================
+   SECCIÓN FAQ: ACORDEÓN INTERACTIVO
+   ========================================================= */
+.faq-container-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gutter);
+}
+
+@media (min-width: 1024px) {
+  .faq-container-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .faq-list-col {
+    grid-column: 1 / span 10;
+  }
+}
+
+.faq-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
-.sport-faq-item {
+.faq-item {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-inner);
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.sport-faq-item.is-open {
-  border-color: rgba(255, 82, 6, 0.4);
+.faq-item.is-open {
+  border-color: rgba(255, 82, 6, 0.40);
   box-shadow: var(--shadow-card);
 }
 
-.sport-faq-question {
+.faq-question-btn {
   width: 100%;
-  padding: 22px 24px;
+  padding: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   background: transparent;
   border: none;
-  font-family: var(--font-family-body);
+  font-family: var(--font-body);
   font-size: 16px;
+  line-height: 24px;
   font-weight: 700;
   color: var(--ink);
   text-align: left;
@@ -668,106 +1368,254 @@
   outline: none;
 }
 
-.sport-faq-chevron {
-  width: 18px;
-  height: 18px;
+.faq-chevron-icon {
+  width: 20px;
+  height: 20px;
   color: var(--orange);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 
-.sport-faq-item.is-open .sport-faq-chevron {
+.faq-item.is-open .faq-chevron-icon {
   transform: rotate(180deg);
 }
 
-.sport-faq-answer {
+.faq-answer-panel {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.sport-faq-answer-inner {
+.faq-answer-content {
   padding: 0 24px 24px;
   font-size: 15px;
   line-height: 1.65;
   color: var(--text-muted);
 }
 
-/* --- 9. PRE-FOOTER BANNER --- */
-.sport-prefooter-banner {
-  margin: 60px 0 0;
+/* =========================================================
+   SECCIÓN PRE-FOOTER CTA BANNER
+   ========================================================= */
+.prefooter-banner-section {
+  padding: 64px 0 96px;
 }
 
-/* --- RESPONSIVE MOBILE-FIRST --- */
-@media (max-width: 1024px) {
-  .sport-bento-grid,
-  .sport-levels-grid,
-  .sport-pricing-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .sport-spot-box {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 40px 32px;
+@media (min-width: 1024px) {
+  .prefooter-banner-section {
+    padding: 96px 0 128px;
   }
 }
 
-@media (max-width: 768px) {
-  .sport-hero {
-    min-height: 78vh;
-    min-height: 78dvh;
-    padding: 120px 0 48px;
-  }
+.prefooter-banner-card {
+  position: relative;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-card);
+  padding: 48px 24px;
+  text-align: center;
+  overflow: hidden;
+}
 
-  .sport-hero-title {
-    font-size: 3.5rem;
-  }
-
-  .sport-hero-desc {
-    font-size: 1rem;
-    margin-bottom: 24px;
-  }
-
-  .sport-bento-grid,
-  .sport-levels-grid,
-  .sport-pricing-grid,
-  .sport-coaches-grid,
-  .sport-spot-items {
-    grid-template-columns: 1fr;
-  }
-
-  .sport-section {
-    padding: 64px 0;
-  }
-
-  .sport-pricing-card.featured {
-    order: -1;
-  }
-
-  .sport-spot-box {
-    padding: 32px 24px;
+@media (min-width: 768px) {
+  .prefooter-banner-card {
+    padding: 80px 48px;
   }
 }
 
-@media (max-width: 480px) {
-  .sport-hero-title {
-    font-size: 2.85rem;
+.prefooter-banner-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 82, 6, 0.20) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.prefooter-tag-wrap {
+  margin-bottom: 24px;
+}
+
+.prefooter-headline {
+  color: var(--white);
+  margin-bottom: 24px;
+}
+
+.prefooter-banner-desc {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgba(254, 254, 254, 0.85);
+  margin-bottom: 40px;
+}
+
+/* =========================================================
+   FOOTER UNIFICADO (8pt Grid Layout)
+   ========================================================= */
+.site-footer-wrapper {
+  padding-bottom: 64px;
+}
+
+.footer-floating-card {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: var(--radius-card);
+  padding: 48px 24px 32px;
+}
+
+@media (min-width: 768px) {
+  .footer-floating-card {
+    padding: 64px 48px 40px;
+  }
+}
+
+.footer-top-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+@media (min-width: 768px) {
+  .footer-top-columns {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter);
   }
 
-  .sport-spec-pill {
-    font-size: 12px;
-    padding: 6px 12px;
+  .footer-col-brand {
+    grid-column: span 4;
   }
 
-  .sport-hero-actions {
-    flex-direction: column;
-    align-items: stretch;
+  .footer-col-nav {
+    grid-column: span 3;
   }
 
-  .sport-btn-ghost,
-  .sport-hero-actions .btn-pill-orange {
-    width: 100%;
-    justify-content: center;
+  .footer-col-sports {
+    grid-column: span 2;
   }
+
+  .footer-col-contact {
+    grid-column: span 3;
+  }
+}
+
+.footer-card-logo {
+  height: 48px;
+  width: auto;
+  margin-bottom: 16px;
+}
+
+.footer-brand-p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(254, 254, 254, 0.70);
+}
+
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.footer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links-list a {
+  font-size: 14px;
+  color: rgba(254, 254, 254, 0.70);
+  transition: color 0.2s ease;
+}
+
+.footer-links-list a:hover {
+  color: var(--orange);
+}
+
+.footer-sub-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-dark);
+  font-size: 13px;
+  color: rgba(254, 254, 254, 0.60);
+}
+
+@media (min-width: 768px) {
+  .footer-sub-row {
+    flex-direction: row;
+  }
+}
+
+.footer-social-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(254, 254, 254, 0.08);
+  border: 1px solid var(--line-dark);
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.footer-social-btn:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+.footer-horizontal-logo-wrap {
+  margin-top: 48px;
+  text-align: center;
+  opacity: 0.15;
+}
+
+.footer-horizontal-logo-wrap img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   BOTÓN FLOTANTE WHATSAPP (ACCESIBILIDAD Y TAP TARGET 56PX)
+   ========================================================= */
+.floating-wpp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25D366;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.floating-wpp-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.50);
 }
