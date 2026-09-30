@@ -638,7 +638,6 @@ function initFluidScrollMotion() {
     '.reviews-header',
     '.bento-grid',
     '.instructores-grid',
-    '.tidescape-center-wrap',
     '.spot-split-grid',
     '.mapa-card-white',
     '.motion-accordion',
