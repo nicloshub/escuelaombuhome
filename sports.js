@@ -2,7 +2,7 @@
  * Escuela Ombú - Subpáginas de Deportes (sports.js)
  * Interactividad Mobile-First:
  * 1. Telemetría de viento en tiempo real (Open-Meteo API en Acassuso - Widget oficial de la Home)
- * 2. Navegación por tabs de los 14 objetivos (El Camino)
+ * 2. Navegación por tabs de los 3 niveles con checklist "Lo que vas a poder hacer" (El Camino)
  * 3. Acordeón de FAQs
  * 4. Menú drawer mobile
  */
@@ -106,10 +106,10 @@ async function fetchLiveWind() {
   }
 }
 
-// 2. Tabs interactivos para los 14 objetivos en 3 niveles
+// 2. Tabs interactivos para los 3 niveles de "El Camino" (según diseño exacto Figma)
 function initCaminoTabs() {
-  const tabs = document.querySelectorAll('.camino-tab-btn');
-  const panels = document.querySelectorAll('.camino-level-panel');
+  const tabs = document.querySelectorAll('.camino-tab-card');
+  const panels = document.querySelectorAll('.camino-content-panel');
   if (!tabs.length || !panels.length) return;
 
   tabs.forEach(tab => {

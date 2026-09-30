@@ -204,152 +204,220 @@
          ========================================================= -->
     <section class="section-macro" id="camino">
       <div class="container">
-        <header class="editorial-header">
-          <h2 class="editorial-title">
-            CATORCE OBJETIVOS, TRES NIVELES, UN SOLO FINAL: NAVEGAR SOLO.
+        <!-- Cabecera de Niveles según Figma -->
+        <header class="camino-header-wrap">
+          <div class="camino-kicker">
+            <span class="camino-kicker-dot">●</span> EL CAMINO
+          </div>
+          <h2 class="camino-title">
+            ASÍ SE APRENDE,<br>SIN APURO
           </h2>
-          <p class="editorial-lead">
-            El kitesurf no se aprende al tanteo. Cada sesión tiene un propósito técnico medible: desde entender la ventana de viento con los pies en la arena hasta tu primera ceñida sin depender de nadie.
+          <p class="camino-bajada">
+            Cada nivel se apoya en el anterior. Tocá cada uno para ver qué vas a aprender.
           </p>
         </header>
 
-        <!-- Navegación por Tabs de Niveles -->
-        <div class="camino-tabs-nav" role="tablist">
-          <button class="camino-tab-btn is-active" data-level="1" role="tab" aria-selected="true">
-            Nivel 1: Tierra y Control (Objetivos 1 al 4)
+        <!-- Fila Superior de Tabs de Niveles -->
+        <div class="camino-tabs-grid" role="tablist" aria-label="Niveles de Kitesurf">
+          <button class="camino-tab-card is-active" data-level="1" role="tab" aria-selected="true">
+            <span class="camino-tab-badge">NIVEL 1</span>
+            <span class="camino-tab-name">Principiante</span>
           </button>
-          <button class="camino-tab-btn" data-level="2" role="tab" aria-selected="false">
-            Nivel 2: Agua y Tracción (Objetivos 5 al 9)
+
+          <button class="camino-tab-card" data-level="2" role="tab" aria-selected="false">
+            <span class="camino-tab-badge">NIVEL 2</span>
+            <span class="camino-tab-name">Intermedio</span>
           </button>
-          <button class="camino-tab-btn" data-level="3" role="tab" aria-selected="false">
-            Nivel 3: Autonomía y Planeo (Objetivos 10 al 14)
+
+          <button class="camino-tab-card" data-level="3" role="tab" aria-selected="false">
+            <span class="camino-tab-badge">NIVEL 3</span>
+            <span class="camino-tab-name">Autonomía</span>
           </button>
         </div>
 
-        <!-- Panel Nivel 1 -->
-        <div class="camino-level-panel is-active" data-level="1">
-          <div class="objectives-grid">
-            <article class="objective-card">
-              <span class="objective-num-box">01</span>
-              <div class="objective-body">
-                <h3>Teoría de la ventana de viento</h3>
-                <p>Identificación de zonas de potencia neutra, tracción media y máxima energía antes de armar la cometa.</p>
+        <!-- Panel Nivel 1: Principiante -->
+        <div class="camino-content-panel is-active" data-level="1">
+          <div class="camino-panel-grid">
+            <!-- Columna Izquierda: Tarjeta Oscura con Resplandor Ámbar -->
+            <div class="camino-stage-card">
+              <div class="camino-stage-glow"></div>
+              <div>
+                <span class="camino-stage-watermark">01</span>
+                <h3 class="camino-stage-title">Control de barrilete</h3>
+                <p class="camino-stage-desc">
+                  Todo arranca en tierra y en el agua, pero sin tabla. Manejo del barrilete, lectura de viento y la confianza de base antes de navegar.
+                </p>
               </div>
-            </article>
+              <div class="camino-stage-pill">
+                <span>Duración aprox.</span> <strong>3-4 hs</strong>
+              </div>
+            </div>
 
-            <article class="objective-card">
-              <span class="objective-num-box">02</span>
-              <div class="objective-body">
-                <h3>Armado autónomo de líneas y barra</h3>
-                <p>Conexión segura de las 4 líneas, bridas, chequeo de nudos y sistema de desenganche rápido en tierra.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">03</span>
-              <div class="objective-body">
-                <h3>Pilotaje con cometa trainer y despegue</h3>
-                <p>Control de barra con una y dos manos, estabilización del kite a las 12 y despegue asistido en la playa.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">04</span>
-              <div class="objective-body">
-                <h3>Eyección y auto-rescate en tierra</h3>
-                <p>Activación del quick release (suelta rápida), anulación total de potencia y protocolo de repliegue de líneas.</p>
-              </div>
-            </article>
+            <!-- Columna Derecha: Checklist de Logros -->
+            <div class="camino-checklist-col">
+              <h4 class="camino-checklist-eyebrow">LO QUE VAS A PODER HACER</h4>
+              <ul class="camino-checklist-list">
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Entender de dónde viene el viento y armar el kite sin arruinarte el día</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Saber cómo soltar todo si algo sale mal (el sistema de seguridad)</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Manejar el kite parado en la arena, con una mano y con las dos</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Volver a levantarlo vos mismo si se te cae en el agua</span>
+                </li>
+              </ul>
+              <p class="camino-footnote">
+                * Objetivos orientativos — se ajustan según el ritmo de cada alumno.
+              </p>
+            </div>
           </div>
         </div>
 
-        <!-- Panel Nivel 2 -->
-        <div class="camino-level-panel" data-level="2">
-          <div class="objectives-grid">
-            <article class="objective-card">
-              <span class="objective-num-box">05</span>
-              <div class="objective-body">
-                <h3>Body drag a favor del viento</h3>
-                <p>Primer ingreso al río: el cuerpo actúa como quilla deslizando en el agua mediante la tracción del kite.</p>
+        <!-- Panel Nivel 2: Intermedio -->
+        <div class="camino-content-panel" data-level="2">
+          <div class="camino-panel-grid">
+            <!-- Columna Izquierda: Tarjeta Oscura con Resplandor Ámbar -->
+            <div class="camino-stage-card">
+              <div class="camino-stage-glow"></div>
+              <div>
+                <span class="camino-stage-watermark">02</span>
+                <h3 class="camino-stage-title">Cuerpo al agua y primeros metros</h3>
+                <p class="camino-stage-desc">
+                  Entrás al río con el kite. Aprendés a traccionar con tu cuerpo (body drag), recuperar la tabla perdida y subirte para tus primeros metros de planeo.
+                </p>
               </div>
-            </article>
+              <div class="camino-stage-pill">
+                <span>Duración aprox.</span> <strong>3-4 hs</strong>
+              </div>
+            </div>
 
-            <article class="objective-card">
-              <span class="objective-num-box">06</span>
-              <div class="objective-body">
-                <h3>Body drag en ceñida (Upwind)</h3>
-                <p>Navegar con tu propio cuerpo en ángulo contra el viento para recuperar la tabla perdida sin ayuda.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">07</span>
-              <div class="objective-body">
-                <h3>Relanzamiento del kite desde el agua</h3>
-                <p>Técnica precisa para dar vuelta la cometa caída sobre el río y levantarla de nuevo al cenit sin esfuerzo.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">08</span>
-              <div class="objective-body">
-                <h3>Calzado de tabla y control de barra</h3>
-                <p>Sujeción de la tabla con los pies en los footstraps mientras mantenés la cometa estable en el cenit.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">09</span>
-              <div class="objective-body">
-                <h3>Primeros Waterstarts</h3>
-                <p>El golpe de potencia en la ventana (loop suave) que te saca del agua y te pone de pie sobre la tabla.</p>
-              </div>
-            </article>
+            <!-- Columna Derecha: Checklist de Logros -->
+            <div class="camino-checklist-col">
+              <h4 class="camino-checklist-eyebrow">LO QUE VAS A PODER HACER</h4>
+              <ul class="camino-checklist-list">
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Body drag a favor y en contra del viento (upwind para buscar tu tabla)</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Relanzamiento rápido y seguro del kite desde el agua profunda</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Calzado de la tabla con los pies en los footstraps manteniendo el cenit</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Primeros waterstarts y salida firme de pie sobre el río</span>
+                </li>
+              </ul>
+              <p class="camino-footnote">
+                * Objetivos orientativos — se ajustan según el ritmo de cada alumno.
+              </p>
+            </div>
           </div>
         </div>
 
-        <!-- Panel Nivel 3 -->
-        <div class="camino-level-panel" data-level="3">
-          <div class="objectives-grid">
-            <article class="objective-card">
-              <span class="objective-num-box">10</span>
-              <div class="objective-body">
-                <h3>Planeo sostenido en ambas amuras</h3>
-                <p>Navegación controlada hacia la derecha y hacia la izquierda manteniendo velocidad constante.</p>
+        <!-- Panel Nivel 3: Autonomía -->
+        <div class="camino-content-panel" data-level="3">
+          <div class="camino-panel-grid">
+            <!-- Columna Izquierda: Tarjeta Oscura con Resplandor Ámbar -->
+            <div class="camino-stage-card">
+              <div class="camino-stage-glow"></div>
+              <div>
+                <span class="camino-stage-watermark">03</span>
+                <h3 class="camino-stage-title">Navegación y ceñida autónoma</h3>
+                <p class="camino-stage-desc">
+                  El salto a la libertad total. Planeo continuo en ambas direcciones, ceñida para volver exactamente al punto de salida y navegación 100% independiente.
+                </p>
               </div>
-            </article>
+              <div class="camino-stage-pill">
+                <span>Duración aprox.</span> <strong>3-4 hs</strong>
+              </div>
+            </div>
 
-            <article class="objective-card">
-              <span class="objective-num-box">11</span>
-              <div class="objective-body">
-                <h3>Ceñida: volver al mismo punto</h3>
-                <p>Clavar el canto de la tabla contra el agua para ganar barlovento y regresar a la costa sin caminar río arriba.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">12</span>
-              <div class="objective-body">
-                <h3>Transiciones fluidas sin detenerse</h3>
-                <p>Cambiar de dirección en el agua sin frenar ni sumergirte, transfiriendo el peso y la cometa de lado.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">13</span>
-              <div class="objective-body">
-                <h3>Lectura de ráfagas y prioridades</h3>
-                <p>Reglas náuticas de paso en el spot, anticipación de pozos de viento y convivencia segura con otros kiters.</p>
-              </div>
-            </article>
-
-            <article class="objective-card">
-              <span class="objective-num-box">14</span>
-              <div class="objective-body">
-                <h3>Navegación autónoma 100%</h3>
-                <p>El objetivo cumplido: llegás a la playa, armás tu cometa, entrás al río, navegás a piacere y volvés solo.</p>
-              </div>
-            </article>
+            <!-- Columna Derecha: Checklist de Logros -->
+            <div class="camino-checklist-col">
+              <h4 class="camino-checklist-eyebrow">LO QUE VAS A PODER HACER</h4>
+              <ul class="camino-checklist-list">
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Planeo sostenido y control de velocidad en ambas amuras</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Ceñida técnica: volver a la costa sin caminar río arriba</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Transiciones fluidas de borde a borde sin frenarte ni caer al agua</span>
+                </li>
+                <li class="camino-checklist-item">
+                  <span class="camino-check-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                  <span class="camino-check-text">Lectura de ráfagas, reglas de paso náutico y navegación autónoma completa</span>
+                </li>
+              </ul>
+              <p class="camino-footnote">
+                * Objetivos orientativos — se ajustan según el ritmo de cada alumno.
+              </p>
+            </div>
           </div>
         </div>
       </div>
