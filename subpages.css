@@ -1,0 +1,479 @@
+/* =========================================================
+   SUBPÁGINAS DE DISCIPLINAS (KITESURF, WINDSURF, WINGFOIL)
+   Escuela Náutica Ombú - Estilos modulares para landing pages
+   ========================================================= */
+
+.subpage-main {
+  padding-top: clamp(104px, 12vw, 128px);
+  padding-bottom: 48px;
+}
+
+.subpage-hero {
+  padding: 24px 0 64px;
+}
+
+.subpage-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--grid-gutter, 32px);
+  align-items: center;
+}
+
+.subpage-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.subpage-breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subpage-breadcrumbs a:hover {
+  color: var(--orange);
+}
+
+.subpage-breadcrumbs .separator {
+  color: var(--line);
+}
+
+.subpage-breadcrumbs .current {
+  color: var(--orange);
+}
+
+.subpage-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.subpage-hero-desc {
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+.subpage-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.subpage-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subpage-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--orange);
+}
+
+.subpage-stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subpage-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.subpage-hero-media {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 3.6;
+}
+
+.subpage-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.subpage-hero-media-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(35, 31, 32, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--white);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.subpage-hero-price-tag {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 12px 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.subpage-hero-price-tag .p-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.subpage-hero-price-tag .p-amount {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--orange);
+  line-height: 1;
+}
+
+/* Roadmap / Fases */
+.subpage-section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px;
+}
+
+.subpage-section-header.text-left {
+  text-align: left;
+  margin-left: 0;
+}
+
+.subpage-roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gutter, 24px);
+}
+
+.subpage-roadmap-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.subpage-roadmap-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.subpage-step-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--orange);
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subpage-step-badge {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(35, 31, 32, 0.06);
+  color: var(--text-muted);
+}
+
+.subpage-step-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.subpage-step-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.subpage-step-bullets li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.subpage-step-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+  font-weight: bold;
+}
+
+.subpage-step-goal {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subpage-step-goal span {
+  color: var(--orange);
+  text-transform: uppercase;
+  font-size: 10px;
+  display: block;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+/* Pilares / Seguridad */
+.subpage-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gutter, 24px);
+}
+
+.subpage-feature-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.subpage-feature-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--shade);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.subpage-feature-icon-box img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.subpage-feature-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.subpage-feature-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Precios / Modalidades */
+.subpage-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--grid-gutter, 24px);
+  align-items: stretch;
+}
+
+.subpage-pricing-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(35, 31, 32, 0.04);
+}
+
+.subpage-pricing-card.featured {
+  background: var(--ink);
+  color: var(--white);
+  border: 2px solid var(--orange);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.subpage-pricing-card.featured .subpage-pcard-title,
+.subpage-pricing-card.featured .subpage-pcard-price {
+  color: var(--white);
+}
+
+.subpage-pricing-card.featured .subpage-pcard-desc,
+.subpage-pricing-card.featured .subpage-pcard-bullets {
+  color: var(--text-light-muted);
+}
+
+.subpage-pricing-featured-tag {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--orange);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.subpage-pcard-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.subpage-pcard-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.subpage-pcard-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.subpage-pcard-price-box {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.subpage-pricing-card.featured .subpage-pcard-price-box {
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.subpage-pcard-price {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.subpage-pcard-price-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.subpage-pricing-card.featured .subpage-pcard-price-note {
+  color: var(--text-light-muted);
+}
+
+.subpage-pcard-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
+.subpage-pcard-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.subpage-pcard-bullets svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--orange);
+}
+
+/* Responsividad Subpáginas */
+@media (max-width: 1024px) {
+  .subpage-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .subpage-roadmap-grid,
+  .subpage-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .subpage-pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .subpage-pricing-card.featured {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .subpage-roadmap-grid,
+  .subpage-features-grid,
+  .subpage-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .subpage-hero-media {
+    aspect-ratio: 16 / 11;
+  }
+}

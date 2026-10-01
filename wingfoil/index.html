@@ -3,64 +3,697 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wingfoil | Escuela Ombú — Acassuso, San Isidro</title>
+  <title>Clases y Cursos de Wingfoil en Acassuso | Escuela Ombú — San Isidro</title>
+  <meta name="description" content="Aprendé Wingfoil en Acassuso, San Isidro. Vuelo asistido en lancha, alas ultralivianas, foils de carbono estables, radiocasco VHF y lancha permanente.">
+  <link rel="icon" type="image/png" href="../assets/logo-ombu-footer.png">
+  <link rel="apple-touch-icon" href="../assets/logo-ombu-footer.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  <style>
-    .placeholder-stage {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 24px;
-      background: var(--white);
+  <link rel="stylesheet" href="../subpages.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Curso de Wingfoil en Acassuso",
+    "description": "Curso integral de iniciación, vuelo asistido y autonomía en Wingfoil en la Escuela Náutica Ombú, San Isidro.",
+    "provider": {
+      "@type": "SportsActivityLocation",
+      "name": "Escuela Náutica Ombú",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Sebastián Elcano 994",
+        "addressLocality": "Acassuso",
+        "addressRegion": "Buenos Aires",
+        "addressCountry": "AR"
+      },
+      "telephone": "+54 9 11 3004-1100"
     }
-    .placeholder-badge {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .placeholder-title {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw, 6rem);
-      line-height: .95;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      color: var(--ink);
-    }
-    .placeholder-desc {
-      max-width: 540px;
-      font-size: 16px;
-      color: rgba(35, 31, 32, 0.75);
-      line-height: 1.6;
-      margin-bottom: 32px;
-    }
-  </style>
+  }
+  </script>
 </head>
 <body>
-  <div class="placeholder-stage">
-    <span class="placeholder-badge">// Disciplina · Escuela Ombú</span>
-    <h1 class="placeholder-title">WINGFOIL</h1>
-    <p class="placeholder-desc">
-      Página oficial de la disciplina en construcción. Vuelo hidrodinámico y manejo del ala inflable con instructores especializados en Acassuso.
-    </p>
-    <a href="/" class="btn-pill-orange">
-      VOLVER AL INICIO
-      <div class="icon">
-        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-        </svg>
+
+  <!-- =========================================================
+       HEADER / NAVBAR
+       ========================================================= -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-brand" aria-label="Inicio - Escuela Ombú">
+        <img src="../assets/logo-ombu-navbar.png" alt="Logo Escuela Ombú" class="brand-disc-img">
+      </a>
+
+      <nav id="main-navigation" aria-label="Navegación principal">
+        <ul class="header-nav">
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+              <span>Deportes</span>
+              <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/kitesurf/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">1</span>
+                <span class="dropdown-sport-name">Kitesurf</span>
+              </a>
+              <a href="/windsurf/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">2</span>
+                <span class="dropdown-sport-name">Windsurf</span>
+              </a>
+              <a href="/wingfoil/" class="dropdown-sport-item" style="color:var(--orange);">
+                <span class="dropdown-sport-icon">3</span>
+                <span class="dropdown-sport-name">Wingfoil ●</span>
+              </a>
+              <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">4</span>
+                <span class="dropdown-sport-name">Stand Up Paddle</span>
+              </a>
+            </div>
+          </li>
+          <li><a href="/#disciplinas">Aprendizaje</a></li>
+          <li><a href="/#instructores">Nosotros</a></li>
+          <li><a href="/#alquileres">Alquileres</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="/#spot">Ubicación</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-cta-wrap">
+        <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Wingfoil." target="_blank" class="nav-btn-reserve" rel="noopener noreferrer">
+          RESERVÁ TU CLASE
+        </a>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNavDrawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
       </div>
-    </a>
-  </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-label">// Deportes</li>
+        <li class="mobile-sports-grid">
+          <a href="/kitesurf/" class="mobile-sport-pill">Kitesurf</a>
+          <a href="/windsurf/" class="mobile-sport-pill">Windsurf</a>
+          <a href="/wingfoil/" class="mobile-sport-pill" style="background:var(--orange); color:var(--white);">Wingfoil</a>
+          <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="mobile-sport-pill">SUP Paddle</a>
+        </li>
+        <li class="mobile-nav-divider"></li>
+        <li><a href="/#disciplinas" class="mobile-nav-link">Aprendizaje</a></li>
+        <li><a href="/#instructores" class="mobile-nav-link">Nosotros</a></li>
+        <li><a href="/#alquileres" class="mobile-nav-link">Alquileres</a></li>
+        <li><a href="#faq" class="mobile-nav-link">Preguntas frecuentes</a></li>
+        <li><a href="/#spot" class="mobile-nav-link">Ubicación</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="subpage-main">
+    <!-- =========================================================
+         HERO SECTION: WINGFOIL
+         ========================================================= -->
+    <section class="subpage-hero">
+      <div class="container">
+        <div class="subpage-hero-grid">
+          <div>
+            <div class="subpage-breadcrumbs">
+              <a href="/">Inicio</a>
+              <span class="separator">/</span>
+              <span>Deportes</span>
+              <span class="separator">/</span>
+              <span class="current">Wingfoil</span>
+            </div>
+
+            <span class="section-label">// Disciplina · Escuela Ombú</span>
+            <h1 class="subpage-hero-title">WINGFOIL<br><span class="accent">ACASSUSO</span></h1>
+
+            <p class="subpage-hero-desc">
+              Un ala inflable ultraliviana en tus manos y un hidroala (foil) bajo la tabla que te eleva 80 cm sobre el agua. Sensación de vuelo silencioso, cero impacto contra el oleaje y libertad tridimensional en el Río de la Plata.
+            </p>
+
+            <div class="subpage-stats-grid">
+              <div class="subpage-stat-card">
+                <span class="subpage-stat-label">⏱ Curva de aprendizaje</span>
+                <span class="subpage-stat-value">Rápida en vela / Técnica en foil</span>
+              </div>
+              <div class="subpage-stat-card">
+                <span class="subpage-stat-label">🪁 Equipamiento</span>
+                <span class="subpage-stat-value">Ala inflable + Foil carbono + casco</span>
+              </div>
+              <div class="subpage-stat-card">
+                <span class="subpage-stat-label">🚤 Innovación Ombú</span>
+                <span class="subpage-stat-value">Vuelo asistido con lancha</span>
+              </div>
+              <div class="subpage-stat-card">
+                <span class="subpage-stat-label">📻 Comunicación</span>
+                <span class="subpage-stat-value">Radiocasco VHF en el agua</span>
+              </div>
+            </div>
+
+            <div class="subpage-hero-ctas">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Wingfoil." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+                RESERVÁ TU CLASE
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+              <a href="#programa" class="btn-pill-dark">
+                VER EL PROGRAMA
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="subpage-hero-media">
+            <img src="../assets/deporte-wingfoil.jpg" alt="Clase de Wingfoil en Escuela Ombú Acassuso">
+            <div class="subpage-hero-media-badge">Spot Oficial · San Isidro</div>
+            <div class="subpage-hero-price-tag">
+              <span class="p-label">Clase individual desde</span>
+              <span class="p-amount">$48.000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PROGRAMA DE APRENDIZAJE: ROADMAP 4 PASOS
+         ========================================================= -->
+    <section class="section-padding" id="programa" style="background:var(--white);">
+      <div class="container">
+        <div class="subpage-section-header">
+          <span class="section-label">// El Método Ombú</span>
+          <h2 class="display-title">CÓMO ES EL CURSO: DE 0 A VOLAR</h2>
+          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
+            Separamos el aprendizaje en dos habilidades clave: primero dominás el ala y el vuelo asistido por separado, y luego los unís para volar sin esfuerzo.
+          </p>
+        </div>
+
+        <div class="subpage-roadmap-grid">
+          <!-- Paso 01 -->
+          <div class="subpage-roadmap-card">
+            <div class="subpage-step-num">
+              <span>01</span>
+              <span class="subpage-step-badge">En Tierra & SUP</span>
+            </div>
+            <h3 class="subpage-step-title">CONTROL DEL ALA</h3>
+            <ul class="subpage-step-bullets">
+              <li>Manejo y orientación del ala inflable con respecto al viento.</li>
+              <li>Generación de potencia, neutro y freno inmediato.</li>
+              <li>Navegación de rodillas y primeros bordes sobre tabla grande.</li>
+              <li>Subir y bajar viento sin foil para ganar criterio espacial.</li>
+            </ul>
+            <div class="subpage-step-goal">
+              <span>Objetivo</span>
+              Dominar el ala con naturalidad sin mirar las manos.
+            </div>
+          </div>
+
+          <!-- Paso 02 -->
+          <div class="subpage-roadmap-card">
+            <div class="subpage-step-num">
+              <span>02</span>
+              <span class="subpage-step-badge">Vuelo Asistido</span>
+            </div>
+            <h3 class="subpage-step-title">REMOLQUE EN LANCHA</h3>
+            <ul class="subpage-step-bullets">
+              <li>Método exclusivo Ombú para acelerar el aprendizaje.</li>
+              <li>Te remolcamos a velocidad suave y constante detrás de la lancha.</li>
+              <li>Descubrís el punto de despegue y control de altura del foil.</li>
+              <li>Aprender a amortiguar el foil sin la distracción del viento.</li>
+            </ul>
+            <div class="subpage-step-goal">
+              <span>Objetivo</span>
+              Sentir la sustentación y equilibrio en foil durante minutos continuos.
+            </div>
+          </div>
+
+          <!-- Paso 03 -->
+          <div class="subpage-roadmap-card">
+            <div class="subpage-step-num">
+              <span>03</span>
+              <span class="subpage-step-badge">En el Agua</span>
+            </div>
+            <h3 class="subpage-step-title">DESPEGUE CON EL ALA</h3>
+            <ul class="subpage-step-bullets">
+              <li>Pumping rítmico coordinado de ala y piernas.</li>
+              <li>Aceleración sobre el agua hasta alcanzar velocidad de sustentación.</li>
+              <li>Transferencia de peso sutil hacia el pie delantero para estabilizar.</li>
+              <li>Primeros 200 metros de vuelo continuo sobre el río.</li>
+            </ul>
+            <div class="subpage-step-goal">
+              <span>Objetivo</span>
+              Despegar por tu cuenta con la fuerza del viento y volar estable.
+            </div>
+          </div>
+
+          <!-- Paso 04 -->
+          <div class="subpage-roadmap-card">
+            <div class="subpage-step-num">
+              <span>04</span>
+              <span class="subpage-step-badge">Autonomía</span>
+            </div>
+            <h3 class="subpage-step-title">RUMBO & GYBE EN VUELO</h3>
+            <ul class="subpage-step-bullets">
+              <li>Ceñida profunda en vuelo para remontar el río a gran velocidad.</li>
+              <li>Cambio de pies (feet switch) con fluidez.</li>
+              <li>Gybe (trasluchada) en vuelo sin que la tabla toque el agua.</li>
+              <li>Navegación en oleaje y downwind aprovechando las ondulaciones.</li>
+            </ul>
+            <div class="subpage-step-goal">
+              <span>Objetivo</span>
+              Piloto autónomo: volás en ambas amuras y hacés transiciones en el aire.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         QUÉ INCLUYE / SEGURIDAD OMBÚ
+         ========================================================= -->
+    <section class="section-padding" style="background:var(--light-1);">
+      <div class="container">
+        <div class="subpage-section-header">
+          <span class="section-label">// La Experiencia Ombú</span>
+          <h2 class="display-title">MÁXIMA TECNOLOGÍA EN CADA SESIÓN</h2>
+          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
+            El wingfoil es el deporte más joven y tecnológico del agua. En Ombú contamos con material de última generación y lancha para acortar tu curva a la mitad.
+          </p>
+        </div>
+
+        <div class="subpage-features-grid">
+          <div class="subpage-feature-card">
+            <div class="subpage-feature-icon-box">
+              <img src="../assets/wind.svg" alt="Vuelo asistido">
+            </div>
+            <h3 class="subpage-feature-title">VUELO ASISTIDO EN LANCHA</h3>
+            <p class="subpage-feature-desc">
+              Exclusivo de Ombú: sesiones de remolque suave para entender el foil en 1 clase en vez de 5, ahorrándote golpes y frustraciones.
+            </p>
+          </div>
+
+          <div class="subpage-feature-card">
+            <div class="subpage-feature-icon-box">
+              <img src="../assets/seguridad.svg" alt="Foils de alta sustentación">
+            </div>
+            <h3 class="subpage-feature-title">FOILS DE ALTA FLOTABILIDAD</h3>
+            <p class="subpage-feature-desc">
+              Alas delanteras grandes (1800 a 2000 cm²) y mástiles intermedios que despegan a muy baja velocidad con total estabilidad y suavidad.
+            </p>
+          </div>
+
+          <div class="subpage-feature-card">
+            <div class="subpage-feature-icon-box">
+              <img src="../assets/autonomia.svg" alt="Radiocasco VHF">
+            </div>
+            <h3 class="subpage-feature-title">COACHING POR RADIOCASCO</h3>
+            <p class="subpage-feature-desc">
+              Instrucción directa y sin delay mientras estás en el aire: peso al pie de adelante, bombeo de piernas y altura controlada.
+            </p>
+          </div>
+
+          <div class="subpage-feature-card">
+            <div class="subpage-feature-icon-box">
+              <img src="../assets/lectura.svg" alt="Seguridad y rescate">
+            </div>
+            <h3 class="subpage-feature-title">SEGURIDAD PERMANENTE</h3>
+            <p class="subpage-feature-desc">
+              Cascos náuticos certificados, chalecos de impacto con flotabilidad extra y lancha de apoyo siempre en el agua lista para asistirte.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         MODALIDADES & TARIFAS
+         ========================================================= -->
+    <section class="section-padding" id="tarifas" style="background:var(--white);">
+      <div class="container">
+        <div class="subpage-section-header">
+          <span class="section-label">// Formatos y Tarifas</span>
+          <h2 class="display-title">CLASES PARTICULARES Y CLÍNICAS</h2>
+          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
+            Avanzá con atención 1 a 1 de la mano de instructores experimentados y el equipamiento más seguro del mercado.
+          </p>
+        </div>
+
+        <div class="subpage-pricing-grid">
+          <!-- Opción 1: Bautismo / 1ra Sesión -->
+          <div class="subpage-pricing-card">
+            <span class="subpage-pcard-label">Bautismo / Iniciación</span>
+            <h3 class="subpage-pcard-title">CLASE INDIVIDUAL</h3>
+            <p class="subpage-pcard-desc">Ideal para probar la sensación del ala y dar tus primeros pasos en el deporte.</p>
+            <div class="subpage-pcard-price-box">
+              <span class="subpage-pcard-price">$48.000</span>
+              <div class="subpage-pcard-price-note">por sesión de 2 horas (1 a 1)</div>
+            </div>
+            <ul class="subpage-pcard-bullets">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Instructor exclusivo (1 a 1)</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Ala inflable + tabla de escuela + foil</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Chaleco de impacto y casco</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Radiocasco VHF en el agua</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20de%20Wingfoil." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+              RESERVAR CLASE
+              <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
+
+          <!-- Opción 2: Curso Autonomía (Destacado) -->
+          <div class="subpage-pricing-card featured">
+            <span class="subpage-pricing-featured-tag">MÁS ELEGIDO</span>
+            <span class="subpage-pcard-label">De 0 a Vuelo Continuo</span>
+            <h3 class="subpage-pcard-title">CURSO AUTONOMÍA</h3>
+            <p class="subpage-pcard-desc">El programa integral definitivo con sesiones de ala y vuelo asistido en lancha para aprender a volar con soltura.</p>
+            <div class="subpage-pcard-price-box">
+              <span class="subpage-pcard-price">PACK 6 CLASES</span>
+              <div class="subpage-pcard-price-note">Incluye remolque en lancha / Financiación</div>
+            </div>
+            <ul class="subpage-pcard-bullets">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>6 sesiones intensivas de 2 horas</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Módulo de remolque en lancha para balance de foil</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Equipamiento moderno 100% provisto</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Técnica de bombeo (pumping) para viento suave</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Asesoramiento experto para configurar tu equipo</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20el%20Pack%20de%20Wingfoil." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+              CONSULTAR PACK
+              <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
+
+          <!-- Opción 3: Perfeccionamiento -->
+          <div class="subpage-pricing-card">
+            <span class="subpage-pcard-label">Ya volás el foil</span>
+            <h3 class="subpage-pcard-title">COACHING FOIL</h3>
+            <p class="subpage-pcard-desc">Para wingers que quieren clavar el gybe en vuelo, empezar a saltar o aprender a navegar en swell del río.</p>
+            <div class="subpage-pcard-price-box">
+              <span class="subpage-pcard-price">CLÍNICA AVANZADA</span>
+              <div class="subpage-pcard-price-note">Corrección en video y radio VHF</div>
+            </div>
+            <ul class="subpage-pcard-bullets">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Tack y Gybe sin tocar el agua</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Transición a tablas más chicas (sinkers)</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Navegación de downwind con olas</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Optimización de mástiles y alas high aspect</span>
+              </li>
+            </ul>
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20sobre%20coaching%20avanzado%20de%20Wingfoil." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+              CONSULTAR COACHING
+              <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         INSTRUCTORES DE WINGFOIL
+         ========================================================= -->
+    <section class="section-padding" style="background:var(--light-1);">
+      <div class="container">
+        <div class="subpage-section-header">
+          <span class="section-label">// Pioneros en Foil</span>
+          <h2 class="display-title">INSTRUCTORES ESPECIALIZADOS</h2>
+          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
+            Pioneros en la enseñanza de hidroalas en la zona norte de Buenos Aires. Metodología segura y progresión garantizada.
+          </p>
+        </div>
+
+        <div class="instructores-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+          <div class="instructor-card">
+            <div class="instructor-photo-wrap">
+              <img src="../assets/instructor-ezequiel.jpg" alt="Ezequiel - Instructor de Wingfoil" class="instructor-photo">
+            </div>
+            <div class="instructor-info">
+              <h3 class="instructor-name">EZEQUIEL</h3>
+              <span class="instructor-role">Head Coach Wingfoil</span>
+              <p class="instructor-bio">
+                Especialista en foil y remolque asistido. Desarrolló el método de lancha para acelerar el despegue en menos sesiones.
+              </p>
+            </div>
+          </div>
+
+          <div class="instructor-card">
+            <div class="instructor-photo-wrap">
+              <img src="../assets/instructor-nicolas.jpg" alt="Nicolás - Instructor de Wingfoil" class="instructor-photo">
+            </div>
+            <div class="instructor-info">
+              <h3 class="instructor-name">NICOLÁS</h3>
+              <span class="instructor-role">Instructor de Wingfoil</span>
+              <p class="instructor-bio">
+                Enfoque pedagógico y calma total. Te guía paso a paso para que cada intento de despegue sea controlado y sin miedo.
+              </p>
+            </div>
+          </div>
+
+          <div class="instructor-card">
+            <div class="instructor-photo-wrap">
+              <img src="../assets/instructor-ramiro.jpg" alt="Ramiro - Rescate y Lancha" class="instructor-photo">
+            </div>
+            <div class="instructor-info">
+              <h3 class="instructor-name">RAMIRO</h3>
+              <span class="instructor-role">Piloto de Remolque & Rescate</span>
+              <p class="instructor-bio">
+                Precisión absoluta en la lancha de remolque para que el hidroala se eleve con la velocidad justa y óptima.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PREGUNTAS FRECUENTES (FAQ) DE WINGFOIL
+         ========================================================= -->
+    <section class="section-padding section-faq" id="faq" style="background:var(--white);">
+      <div class="container" style="max-width: 900px;">
+        <div class="subpage-section-header">
+          <span class="section-label">// Dudas Frecuentes</span>
+          <h2 class="display-title">PREGUNTAS SOBRE EL WINGFOIL</h2>
+        </div>
+
+        <div class="motion-accordion" data-accordion>
+          <!-- Item 1 -->
+          <div class="motion-accordion-item is-open">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="true" aria-controls="faq-wing-1" id="faq-wing-btn-1">
+              <span class="motion-accordion-question">¿Es más difícil aprender Wingfoil que Kitesurf o Windsurf?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-wing-1" role="region" aria-labelledby="faq-wing-btn-1">
+              <p>
+                El ala (wing) es sumamente fácil e intuitiva: no tiene líneas de 25 metros como el kite ni mástiles rígidos pesados como el windsurf. Si soltás la mano de atrás, el ala se desinfla de potencia al instante y flota en el aire. La única parte técnica es el balance sobre el hidroala (foil), y justamente por eso en Ombú usamos nuestro método de <strong>vuelo asistido en lancha</strong>, con lo que dominás el foil mucho más rápido que en cualquier otra escuela.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wing-2" id="faq-wing-btn-2">
+              <span class="motion-accordion-question">¿En qué consiste el vuelo asistido detrás de la lancha?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-wing-2" role="region" aria-labelledby="faq-wing-btn-2">
+              <p>
+                Te remolcamos a velocidad suave y controlada (unos 16 a 18 km/h) con un cabo desde nuestra embarcación. Al no tener que preocuparte por el viento ni por el ala, tu cerebro se enfoca al 100% en sentir cómo reacciona el foil a la presión de tus pies y aprende a mantener la tabla en el aire de forma estable y sin esfuerzo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wing-3" id="faq-wing-btn-3">
+              <span class="motion-accordion-question">¿El hidroala corta o puede ser peligroso en una caída?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-wing-3" role="region" aria-labelledby="faq-wing-btn-3">
+              <p>
+                Los foils de iniciación que utilizamos están construidos con bordes romos y perfiles gruesos de seguridad, no tienen filo cortante como los de regata extrema. Además, en todas las clases es obligatorio el uso de <strong>chaleco de impacto de alta densidad y casco homologado</strong> provistos por la escuela.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wing-4" id="faq-wing-btn-4">
+              <span class="motion-accordion-question">¿Se necesita experiencia previa en otros deportes?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-wing-4" role="region" aria-labelledby="faq-wing-btn-4">
+              <p>
+                No es requisito. Si tenés experiencia en skate, snowboard, surf o windsurf vas a transferir el equilibrio más rápido, pero personas sin ningún historial en deportes de tabla aprenden perfectamente gracias a la estabilidad de las tablas grandes de escuela (110 a 140 litros).
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wing-5" id="faq-wing-btn-5">
+              <span class="motion-accordion-question">¿Qué viento mínimo se necesita para hacer Wingfoil?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-wing-5" role="region" aria-labelledby="faq-wing-btn-5">
+              <p>
+                El wingfoil necesita menos viento que casi cualquier otro deporte de planeo: con apenas 10 a 12 nudos (viento suave en el Río de la Plata) el foil ya puede elevarse y sustentarte en el aire. Esto multiplica las posibilidades de navegar durante todo el año.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         PRE-FOOTER CTA
+         ========================================================= -->
+    <section class="section-prefooter-banner">
+      <div class="container prefooter-flex-row">
+        <h2 class="prefooter-heading">
+          Listo para volar sobre el río?
+        </h2>
+        <div>
+          <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Wingfoil." target="_blank" class="btn-pill-orange" style="font-size:16px;" rel="noopener noreferrer">
+            RESERVÁ TU CLASE DE WINGFOIL
+            <div class="icon">
+              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       FOOTER CON TARJETA FLOTANTE
+       ========================================================= -->
+  <footer class="site-footer-wrapper">
+    <div class="container footer-card-container">
+      <div class="footer-floating-card">
+        <div class="footer-top-columns">
+          <div class="footer-brand-info">
+            <img src="../assets/logo-ombu-footer.png" alt="Escuela Ombú" class="footer-card-logo">
+            <p class="footer-brand-p">
+              Escuela de kitesurf, windsurf, wingfoil y SUP en Acassuso, San Isidro. Más de 15 años enseñando a leer el río y el viento.
+            </p>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Deportes</div>
+            <ul class="footer-links-list">
+              <li><a href="/kitesurf/">Kitesurf</a></li>
+              <li><a href="/windsurf/">Windsurf</a></li>
+              <li><a href="/wingfoil/">Wingfoil</a></li>
+              <li><a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer">Stand Up Paddle</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Navegación</div>
+            <ul class="footer-links-list">
+              <li><a href="/#disciplinas">Aprendizaje</a></li>
+              <li><a href="/#instructores">Nosotros</a></li>
+              <li><a href="/#alquileres">Alquileres</a></li>
+              <li><a href="/#faq">Preguntas frecuentes</a></li>
+              <li><a href="/#spot">Ubicación</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Contacto</div>
+            <ul class="footer-links-list">
+              <li><span style="color:var(--text-light-muted);">Sebastián Elcano 994, Acassuso</span></li>
+              <li><a href="mailto:ombuescuela@gmail.com">ombuescuela@gmail.com</a></li>
+              <li><a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer">+54 9 11 3004 1100</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-sub-row">
+          <div>
+            © 2026 Escuela Ombú. Todos los derechos reservados.
+          </div>
+          <div class="footer-social-icons">
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="footer-social-btn" rel="noopener noreferrer">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" aria-label="YouTube" class="footer-social-btn" rel="noopener noreferrer">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+            </a>
+            <a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="footer-social-btn">
+              <svg width="15" height="15" viewBox="0 0 737.509 740.824" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/></svg>
+    </svg>
+  </a>
+
+  <script src="../main.js"></script>
 </body>
 </html>
