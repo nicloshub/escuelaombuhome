@@ -1,51 +1,3 @@
-// Datos de las 4 disciplinas según diseño Figma
-const sportsData = {
-  kitesurf: {
-    title: "KITESURF",
-    desc: "Deslizamiento veloz y sensación de vuelo propulsado por cometa y arnés. Te enseñamos a dominar la ventana de viento en tierra, el control del cuerpo en agua y la navegación autónoma ceñida.",
-    image: "./assets/deporte-kitesurf.jpg",
-    curve: "6 a 8 clases (autonomía)",
-    gear: "100% provisto por Ombú",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$45.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Kitesurf."
-  },
-  wingfoil: {
-    title: "WINGFOIL",
-    desc: "Un ala inflable ultraliviana en tus manos y un foil bajo la tabla que te eleva 80 cm sobre el agua. Sensación de vuelo silencioso y suave, sin impacto contra el oleaje del río.",
-    image: "./assets/deporte-wingfoil.jpg",
-    curve: "Rápida en vela / Técnica en foil",
-    gear: "Ala, tabla foil, chaleco y casco",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$48.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Wingfoil."
-  },
-  windsurf: {
-    title: "WINDSURF",
-    desc: "La escuela madre de la navegación a vela. Sentí la fuerza pura del viento en tus manos y disfrutá el planeo con tablas anchas modernas diseñadas para aprender desde la primera sesión.",
-    image: "./assets/deporte-windsurf.jpg",
-    curve: "Inmediata desde 1ra clase",
-    gear: "Vela liviana y tabla de escuela",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$38.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Windsurf."
-  },
-  sup: {
-    title: "SUP PADDLE",
-    desc: "Remo de pie sobre tabla touring. Sin depender del viento. Perfecto para entrenar el equilibrio, desconectar después del trabajo y disfrutar de travesías grupales guiadas al atardecer.",
-    image: "./assets/deporte-sup.jpg",
-    curve: "Sin experiencia previa",
-    gear: "Tabla touring, remo y chaleco",
-    comm: "Guía e instructor en grupo",
-    safety: "Embarcación de apoyo",
-    price: "$25.000",
-    wppMessage: "Hola Ombú! Quiero info sobre salidas y alquiler de SUP Paddle."
-  }
-};
-
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
   if (window.innerWidth <= 480) {
@@ -71,16 +23,11 @@ function scrollToSport(sportKey) {
   });
 }
 
-function switchSport(sportKey) {
-  scrollToSport(sportKey);
-}
-
 // Inicialización del efecto Scroll Stack con Rail Lateral Minimalista
 function initScrollStack() {
   const stackCards = document.querySelectorAll('.scroll-stack-card');
   const railThumb = document.getElementById('sideRailThumb');
   const railTrack = document.getElementById('sideRailTrack');
-  const mobileCounter = document.getElementById('mobileStackCounter');
   const disciplinasHeader = document.querySelector('.disciplinas-header');
   const sideRailSticky = document.querySelector('.side-rail-sticky');
   if (!stackCards.length) return;
@@ -154,21 +101,18 @@ function initScrollStack() {
       railThumb.style.transform = `translateY(${targetY}px)`;
     }
 
-    // Actualizar mini contador móvil
-    if (mobileCounter) {
-      mobileCounter.textContent = `0${activeIndex + 1} / 04 · ${sportNames[activeIndex] || ''}`;
-    }
-
-    // Coordinar salida con la última card para que el título y el rail suban al mismo tiempo y nunca pasen por detrás
+    // Coordinar salida con la última card para que el título y el rail suban al mismo tiempo y nunca pasen por detrás ni reboten
     if (disciplinasHeader && stackCards.length > 0) {
       const lastCard = stackCards[stackCards.length - 1];
       const lastRect = lastCard.getBoundingClientRect();
       const pinTop = getCardPinTop(stackCards.length - 1);
       if (lastRect.top < pinTop) {
-        const exitDiff = pinTop - lastRect.top;
-        disciplinasHeader.style.transform = `translateY(-${exitDiff}px)`;
+        const exitDiff = Math.max(0, pinTop - lastRect.top);
+        disciplinasHeader.style.setProperty('transition', 'none', 'important');
+        disciplinasHeader.style.transform = `translate3d(0, -${exitDiff}px, 0)`;
         if (sideRailSticky) {
-          sideRailSticky.style.transform = `translateY(-${exitDiff}px)`;
+          sideRailSticky.style.setProperty('transition', 'none', 'important');
+          sideRailSticky.style.transform = `translate3d(0, -${exitDiff}px, 0)`;
         }
       } else {
         disciplinasHeader.style.transform = '';
@@ -200,80 +144,134 @@ function initScrollStack() {
 
 // Telemetría en tiempo real desde Open-Meteo para Acassuso (Ombú)
 async function fetchLiveWind() {
+  const speedEl = document.getElementById('heroWindSpeed');
+  const knotsEl = document.getElementById('heroWindKnots');
+  const dirTextEl = document.getElementById('heroWindDirText');
+  const compassDial = document.getElementById('heroCompassDial');
+  const captionEl = document.getElementById('heroWindCaption');
+  const suitabilityEl = document.getElementById('heroSpotSuitability');
+  const barEl = document.getElementById('heroWindBar');
+  const cardEl = document.querySelector('.hero-weather-card');
+  const liveDot = document.querySelector('.weather-live-dot');
+  const liveText = document.querySelector('.weather-live-text');
+  const radarPing = document.querySelector('.weather-radar-ping');
+
+  function showWeatherError() {
+    if (cardEl) {
+      cardEl.classList.add('has-weather-error');
+      cardEl.setAttribute('title', 'Datos inaccesibles en este momento. Escribinos para consultar condiciones.');
+    }
+    if (speedEl) speedEl.textContent = '--';
+    if (knotsEl) knotsEl.textContent = 'Escribinos';
+    if (radarPing) radarPing.style.display = 'none';
+    if (liveDot) {
+      liveDot.style.backgroundColor = '#9CA3AF';
+      liveDot.style.boxShadow = 'none';
+    }
+    if (liveText) liveText.textContent = 'SIN DATOS';
+
+    if (barEl) {
+      barEl.style.width = '0%';
+      barEl.style.background = 'rgba(35, 31, 32, 0.15)';
+    }
+
+    if (captionEl) {
+      captionEl.textContent = 'Datos inaccesibles,';
+    }
+    if (suitabilityEl) {
+      suitabilityEl.innerHTML = '<a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quer%C3%ADa%20consultar%20por%20las%20condiciones%20del%20viento%20hoy." target="_blank" rel="noopener noreferrer" class="weather-error-cta">escribinos ↗</a>';
+    }
+  }
+
   try {
-    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh');
-    if (!res.ok) return;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh', {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      throw new Error(`Open-Meteo HTTP error ${res.status}`);
+    }
     const data = await res.json();
-    if (data && data.current) {
-      const speedKm = Math.round(data.current.wind_speed_10m ?? 0);
-      const knots = Math.round(speedKm / 1.852);
-      const deg = Math.round(data.current.wind_direction_10m ?? 0);
-      
-      // Rumbos náuticos oficiales en español
-      const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
-      const dirIndex = Math.round(deg / 45) % 8;
-      const dirStr = dirs[dirIndex];
+    if (!data || !data.current || data.current.wind_speed_10m === undefined || data.current.wind_direction_10m === undefined) {
+      throw new Error('Open-Meteo: formato de datos inválido o incompleto');
+    }
 
-      const speedEl = document.getElementById('heroWindSpeed');
-      const knotsEl = document.getElementById('heroWindKnots');
-      const dirTextEl = document.getElementById('heroWindDirText');
-      const compassDial = document.getElementById('heroCompassDial');
-      const captionEl = document.getElementById('heroWindCaption');
-      const suitabilityEl = document.getElementById('heroSpotSuitability');
-      const barEl = document.getElementById('heroWindBar');
+    // Limpiar estado de error si la respuesta fue exitosa
+    if (cardEl) {
+      cardEl.classList.remove('has-weather-error');
+      cardEl.removeAttribute('title');
+    }
+    if (radarPing) radarPing.style.display = '';
+    if (liveDot) {
+      liveDot.style.backgroundColor = '';
+      liveDot.style.boxShadow = '';
+    }
+    if (liveText) liveText.textContent = 'EN VIVO';
 
-      if (speedEl) speedEl.textContent = speedKm;
-      if (knotsEl) knotsEl.textContent = `${knots} nudos`;
-      if (dirTextEl) dirTextEl.textContent = dirStr;
+    const speedKm = Math.round(data.current.wind_speed_10m ?? 0);
+    const knots = Math.round(speedKm / 1.852);
+    const deg = Math.round(data.current.wind_direction_10m ?? 0);
+    
+    // Rumbos náuticos oficiales en español
+    const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
+    const dirIndex = Math.round(deg / 45) % 8;
+    const dirStr = dirs[dirIndex];
 
-      // La punta naranja de la brújula apunta con precisión náutica a la procedencia real del viento
-      if (compassDial) {
-        compassDial.style.transform = `rotate(${deg}deg)`;
-      }
+    if (speedEl) speedEl.textContent = speedKm;
+    if (knotsEl) knotsEl.textContent = `${knots} nudos`;
+    if (dirTextEl) dirTextEl.textContent = dirStr;
 
-      // Iluminar en naranja la letra cardinal activa del cuadrante (N, E, S, O)
-      const markerN = document.querySelector('.compass-marker.n');
-      const markerE = document.querySelector('.compass-marker.e');
-      const markerS = document.querySelector('.compass-marker.s');
-      const markerO = document.querySelector('.compass-marker.o');
+    // La punta naranja de la brújula apunta con precisión náutica a la procedencia real del viento
+    if (compassDial) {
+      compassDial.style.transform = `rotate(${deg}deg)`;
+    }
 
-      [markerN, markerE, markerS, markerO].forEach(m => m && m.classList.remove('is-active'));
+    // Iluminar en naranja la letra cardinal activa del cuadrante (N, E, S, O)
+    const markerN = document.querySelector('.compass-marker.n');
+    const markerE = document.querySelector('.compass-marker.e');
+    const markerS = document.querySelector('.compass-marker.s');
+    const markerO = document.querySelector('.compass-marker.o');
 
-      if (deg >= 315 || deg < 45) {
-        markerN?.classList.add('is-active');
-      } else if (deg >= 45 && deg < 135) {
-        markerE?.classList.add('is-active');
-      } else if (deg >= 135 && deg < 225) {
-        markerS?.classList.add('is-active');
-      } else if (deg >= 225 && deg < 315) {
-        markerO?.classList.add('is-active');
-      }
+    [markerN, markerE, markerS, markerO].forEach(m => m && m.classList.remove('is-active'));
 
-      if (barEl) {
-        // Escala normalizada de 0 a 45 km/h
-        const percent = Math.min(100, Math.max(12, Math.round((speedKm / 45) * 100)));
-        barEl.style.width = `${percent}%`;
-        barEl.style.background = 'var(--orange)';
-      }
+    if (deg >= 315 || deg < 45) {
+      markerN?.classList.add('is-active');
+    } else if (deg >= 45 && deg < 135) {
+      markerE?.classList.add('is-active');
+    } else if (deg >= 135 && deg < 225) {
+      markerS?.classList.add('is-active');
+    } else if (deg >= 225 && deg < 315) {
+      markerO?.classList.add('is-active');
+    }
 
-      if (captionEl && suitabilityEl) {
-        if (knots >= 14 && knots <= 26) {
-          captionEl.textContent = 'Condición óptima de planeo';
-          suitabilityEl.textContent = 'Ideal Kite & Wing';
-        } else if (knots >= 8 && knots < 14) {
-          captionEl.textContent = 'Viento moderado';
-          suitabilityEl.textContent = 'Ideal Wing & Wind';
-        } else if (knots < 8) {
-          captionEl.textContent = 'Agua calma sin viento';
-          suitabilityEl.textContent = 'Ideal SUP & Kayak';
-        } else {
-          captionEl.textContent = 'Viento fuerte en el spot';
-          suitabilityEl.textContent = 'Kite & Wind Pro';
-        }
+    if (barEl) {
+      // Escala normalizada de 0 a 45 km/h
+      const percent = Math.min(100, Math.max(12, Math.round((speedKm / 45) * 100)));
+      barEl.style.width = `${percent}%`;
+      barEl.style.background = 'var(--orange)';
+    }
+
+    if (captionEl && suitabilityEl) {
+      if (knots >= 14 && knots <= 26) {
+        captionEl.textContent = 'Condición óptima de planeo';
+        suitabilityEl.textContent = 'Ideal Kite & Wing';
+      } else if (knots >= 8 && knots < 14) {
+        captionEl.textContent = 'Viento moderado';
+        suitabilityEl.textContent = 'Ideal Wing & Wind';
+      } else if (knots < 8) {
+        captionEl.textContent = 'Agua calma sin viento';
+        suitabilityEl.textContent = 'Ideal SUP & Kayak';
+      } else {
+        captionEl.textContent = 'Viento fuerte en el spot';
+        suitabilityEl.textContent = 'Kite & Wind Pro';
       }
     }
   } catch (err) {
     console.warn("Telemetría meteorológica (modo fallback):", err);
+    showWeatherError();
   }
 }
 
@@ -313,6 +311,23 @@ function initMotionNav() {
   const trigger = document.getElementById('navSportsTrigger');
   const viewport = document.getElementById('navSportsViewport');
   const dropdownHoverPill = document.getElementById('dropdownHoverPill');
+
+  const brandLink = document.querySelector('.header-brand');
+  if (brandLink) {
+    brandLink.addEventListener('click', (e) => {
+      const isAnchorHome = brandLink.getAttribute('href') === '#inicio' || brandLink.getAttribute('href') === '#';
+      if (isAnchorHome) {
+        e.preventDefault();
+        const heroEl = document.getElementById('inicio');
+        if (heroEl) {
+          heroEl.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        history.pushState(null, '', '#inicio');
+      }
+    });
+  }
 
   if (!navList || !highlightPill) return;
 
@@ -450,114 +465,6 @@ function initMobileMenu() {
       btn.focus();
     }
   });
-}
-
-// Slider interactivo de la tarjeta de alquileres (Kayaks, SUP, Windsurf)
-function initKayakSlider() {
-  const slider = document.getElementById('kayakSlider');
-  if (!slider) return;
-
-  const slides = slider.querySelectorAll('.kayak-slide');
-  const dots = slider.querySelectorAll('.kayak-dot');
-  const prevBtn = slider.querySelector('.kayak-slider-arrow.prev');
-  const nextBtn = slider.querySelector('.kayak-slider-arrow.next');
-
-  if (!slides.length || !dots.length) return;
-
-  let currentIndex = 0;
-  let timer = null;
-  const intervalTime = 4200;
-
-  function goToSlide(index) {
-    currentIndex = (index + slides.length) % slides.length;
-
-    slides.forEach((slide, i) => {
-      const isActive = i === currentIndex;
-      slide.classList.toggle('is-active', isActive);
-      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-    });
-
-    dots.forEach((dot, i) => {
-      const isActive = i === currentIndex;
-      dot.classList.toggle('is-active', isActive);
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-  }
-
-  function nextSlide() {
-    goToSlide(currentIndex + 1);
-  }
-
-  function prevSlide() {
-    goToSlide(currentIndex - 1);
-  }
-
-  function startAutoplay() {
-    stopAutoplay();
-    timer = setInterval(nextSlide, intervalTime);
-  }
-
-  function stopAutoplay() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
-    }
-  }
-
-  // Clic en los 3 puntitos
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetIndex = parseInt(dot.getAttribute('data-slide'), 10);
-      goToSlide(targetIndex);
-      startAutoplay();
-    });
-  });
-
-  // Flechas de navegación
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      prevSlide();
-      startAutoplay();
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      nextSlide();
-      startAutoplay();
-    });
-  }
-
-  // Pausar en hover en desktop
-  slider.addEventListener('mouseenter', stopAutoplay);
-  slider.addEventListener('mouseleave', startAutoplay);
-
-  // Soporte táctil / swipe en móviles
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  slider.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    stopAutoplay();
-  }, { passive: true });
-
-  slider.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 40) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-    }
-    startAutoplay();
-  }, { passive: true });
-
-  startAutoplay();
 }
 
 // Mapa interactivo oficial de Escuela Ombú (Google Maps API limpio, nítido y sin UI molesta)
@@ -1101,9 +1008,11 @@ function initFluidScrollMotion() {
   // Activa las reglas de transición solo cuando JS está listo y funcionando
   document.documentElement.classList.add('js-motion-ready');
 
-  // Seleccionar contenedores y elementos a revelar
+  const isMobile = window.innerWidth <= 768;
+
+  // Seleccionar contenedores y elementos a revelar (cada tarjeta del bento se observa individualmente)
   const revealTargets = [
-    '.disciplinas-header',
+    ...(isMobile ? [] : ['.disciplinas-header']),
     '.scroll-stack-card[data-index="0"]',
     '.side-rail-sticky',
     '.bento-header',
@@ -1112,7 +1021,7 @@ function initFluidScrollMotion() {
     '.faq-title-wrap',
     '.faq-header',
     '.reviews-header',
-    '.bento-grid',
+    '.bento-cell',
     '.spot-split-grid',
     '.mapa-card-white',
     '.motion-accordion',
@@ -1124,7 +1033,7 @@ function initFluidScrollMotion() {
   if (!elementsToObserve.length) return;
 
   const vh = window.innerHeight || 800;
-  const bottomMargin = vh < 750 ? '-130px' : '-180px';
+  const bottomMargin = isMobile ? '-40px' : (vh < 750 ? '-130px' : '-180px');
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
@@ -1140,6 +1049,14 @@ function initFluidScrollMotion() {
             el.style.transition = 'none';
           }, { once: true });
         }
+
+        if (el.matches && (el.matches('.disciplinas-header') || el.matches('.side-rail-sticky'))) {
+          el.addEventListener('transitionend', (e) => {
+            if (e.propertyName === 'transform' || e.propertyName === 'opacity') {
+              el.style.transition = 'none';
+            }
+          }, { once: true });
+        }
       }
     });
   }, {
@@ -1151,33 +1068,41 @@ function initFluidScrollMotion() {
 }
 
 // =========================================================
-// CTA FLOTANTE WHATSAPP: APARICIÓN FLUIDA CON SCROLL
-// Permanece oculto en el hero inicial de mobile y aparece con
-// animación elástica al scrollear hacia abajo (> 80px)
+// INTERACCIÓN SCROLL DEL HERO: WEATHER WIDGET & CTA FLOTANTE
+// Oculta el widget meteorológico y despliega el botón flotante
+// de WhatsApp al scrollear hacia abajo (> 80px)
 // =========================================================
-function initFloatingCtaScroll() {
+function initHeroFloatingScroll() {
   const wppBtn = document.querySelector('.floating-wpp-btn');
-  if (!wppBtn) return;
+  const weatherCard = document.querySelector('.hero-weather-card');
+  if (!wppBtn && !weatherCard) return;
 
   const threshold = 80;
 
-  function updateWppVisibility() {
+  function updateHeroScroll() {
     const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollY > threshold) {
-      wppBtn.classList.add('is-visible');
-    } else {
-      wppBtn.classList.remove('is-visible');
+    const isPast = scrollY > threshold;
+
+    if (wppBtn) {
+      wppBtn.classList.toggle('is-visible', isPast);
+    }
+    if (weatherCard) {
+      if (isPast) {
+        weatherCard.style.animation = 'none';
+        weatherCard.classList.add('is-scrolled-hidden');
+      } else {
+        weatherCard.classList.remove('is-scrolled-hidden');
+      }
     }
   }
 
-  window.addEventListener('scroll', updateWppVisibility, { passive: true });
-  updateWppVisibility();
+  window.addEventListener('scroll', updateHeroScroll, { passive: true });
+  updateHeroScroll();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
-  initKayakSlider();
   initAccordion();
   initMotionNav();
   initMobileMenu();
@@ -1188,6 +1113,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initMasonryReviewsMotion();
   initTidescapeScatter();
   initTidescapeMotion();
-  initFloatingCtaScroll();
+  initHeroFloatingScroll();
   setInterval(fetchLiveWind, 10 * 60 * 1000);
 });

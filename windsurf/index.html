@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clases y Cursos de Windsurf en Acassuso | Escuela Ombú — San Isidro</title>
-  <meta name="description" content="Aprendé Windsurf en Acassuso, San Isidro. Tablas anchas modernas, velas ultralivianas, radiocasco VHF y lancha de apoyo. Navegás desde tu primera clase.">
+  <meta name="description" content="Aprendé Windsurf en el Río de la Plata, Acassuso. Tablas anchas de iniciación, velas livianas, radiocasco VHF y lancha de rescate en guardia permanente.">
   <link rel="icon" type="image/png" href="../assets/logo-ombu-footer.png">
   <link rel="apple-touch-icon" href="../assets/logo-ombu-footer.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
     "@context": "https://schema.org",
     "@type": "Course",
     "name": "Curso de Windsurf en Acassuso",
-    "description": "Clases de iniciación, perfeccionamiento y alquiler de equipos de Windsurf en la Escuela Náutica Ombú, San Isidro.",
+    "description": "Curso completo de iniciación y perfeccionamiento en Windsurf en la Escuela Náutica Ombú, San Isidro.",
     "provider": {
       "@type": "SportsActivityLocation",
       "name": "Escuela Náutica Ombú",
@@ -34,10 +34,10 @@
   }
   </script>
 </head>
-<body>
+<body class="is-subpage">
 
   <!-- =========================================================
-       HEADER / NAVBAR
+       HEADER / NAVBAR (ALINEACIÓN MATEMÁTICA CON CONTENEDOR 1120PX)
        ========================================================= -->
   <header class="site-header">
     <div class="header-inner">
@@ -45,39 +45,68 @@
         <img src="../assets/logo-ombu-navbar.png" alt="Logo Escuela Ombú" class="brand-disc-img">
       </a>
 
-      <nav id="main-navigation" aria-label="Navegación principal">
-        <ul class="header-nav">
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+      <nav id="main-navigation" class="motion-nav-root" aria-label="Navegación principal">
+        <ul class="header-nav" id="headerNavList">
+          <!-- Pill highlight flotante de Motion Navigation -->
+          <li class="nav-highlight-pill" id="navHighlightPill" aria-hidden="true"></li>
+
+          <!-- Dropdown Deportes -->
+          <li class="nav-item nav-dropdown" id="navSportsDropdown">
+            <a href="#programa" class="nav-dropdown-trigger nav-link" aria-expanded="false" aria-haspopup="true" id="navSportsTrigger">
               <span>Deportes</span>
               <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-            </button>
-            <div class="nav-dropdown-menu">
-              <a href="/kitesurf/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">1</span>
-                <span class="dropdown-sport-name">Kitesurf</span>
-              </a>
-              <a href="/windsurf/" class="dropdown-sport-item" style="color:var(--orange);">
-                <span class="dropdown-sport-icon">2</span>
-                <span class="dropdown-sport-name">Windsurf ●</span>
-              </a>
-              <a href="/wingfoil/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">3</span>
-                <span class="dropdown-sport-name">Wingfoil</span>
-              </a>
-              <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">4</span>
-                <span class="dropdown-sport-name">Stand Up Paddle</span>
-              </a>
+            </a>
+
+            <!-- Viewport flotante de Motion Navigation -->
+            <div class="nav-dropdown-viewport" id="navSportsViewport">
+              <div class="nav-dropdown-caret" aria-hidden="true"></div>
+
+              <div class="nav-dropdown-menu">
+                <div class="dropdown-hover-pill" id="dropdownHoverPill" aria-hidden="true"></div>
+
+                <a href="/kitesurf/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Kitesurf</span>
+                    <span class="dropdown-sport-desc">Saltos, giros y autonomía</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="/windsurf/" class="dropdown-sport-item is-active">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Windsurf ●</span>
+                    <span class="dropdown-sport-desc">Velocidad, equilibrio y planeo</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="/wingfoil/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Wingfoil</span>
+                    <span class="dropdown-sport-desc">Ala inflable y vuelo sobre foil</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Stand Up Paddle</span>
+                    <span class="dropdown-sport-desc">Remo de pie y travesías</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </li>
-          <li><a href="/#disciplinas">Aprendizaje</a></li>
-          <li><a href="/#instructores">Nosotros</a></li>
-          <li><a href="/#alquileres">Alquileres</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="/#spot">Ubicación</a></li>
+
+          <li class="nav-item"><a href="#programa" class="nav-link">Programa</a></li>
+          <li class="nav-item"><a href="#seguridad" class="nav-link">Seguridad</a></li>
+          <li class="nav-item"><a href="#tarifas" class="nav-link">Tarifas</a></li>
+          <li class="nav-item"><a href="#spot" class="nav-link">Spot</a></li>
+          <li class="nav-item"><a href="#instructores" class="nav-link">Instructores</a></li>
+          <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
         </ul>
       </nav>
 
@@ -104,23 +133,26 @@
           <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="mobile-sport-pill">SUP Paddle</a>
         </li>
         <li class="mobile-nav-divider"></li>
-        <li><a href="/#disciplinas" class="mobile-nav-link">Aprendizaje</a></li>
-        <li><a href="/#instructores" class="mobile-nav-link">Nosotros</a></li>
-        <li><a href="/#alquileres" class="mobile-nav-link">Alquileres</a></li>
+        <li><a href="#programa" class="mobile-nav-link">El Programa</a></li>
+        <li><a href="#seguridad" class="mobile-nav-link">Seguridad & Equipo</a></li>
+        <li><a href="#tarifas" class="mobile-nav-link">Tarifas</a></li>
+        <li><a href="#spot" class="mobile-nav-link">El Spot</a></li>
+        <li><a href="#instructores" class="mobile-nav-link">Instructores</a></li>
         <li><a href="#faq" class="mobile-nav-link">Preguntas frecuentes</a></li>
-        <li><a href="/#spot" class="mobile-nav-link">Ubicación</a></li>
+        <li class="mobile-nav-divider"></li>
+        <li><a href="/" class="mobile-nav-link">← Volver al Inicio</a></li>
       </ul>
     </div>
   </header>
 
   <main class="subpage-main">
     <!-- =========================================================
-         HERO SECTION: WINDSURF
+         1. HERO SECTION: WINDSURF EN ACASSUSO
          ========================================================= -->
     <section class="subpage-hero">
       <div class="container">
         <div class="subpage-hero-grid">
-          <div>
+          <div class="subpage-hero-content">
             <div class="subpage-breadcrumbs">
               <a href="/">Inicio</a>
               <span class="separator">/</span>
@@ -129,21 +161,21 @@
               <span class="current">Windsurf</span>
             </div>
 
-            <span class="section-label">// Disciplina · Escuela Ombú</span>
+            <span class="section-label">// Disciplina Oficial · Escuela Ombú</span>
             <h1 class="subpage-hero-title">WINDSURF<br><span class="accent">ACASSUSO</span></h1>
 
             <p class="subpage-hero-desc">
-              La escuela madre de la navegación a vela. Sentí la fuerza pura del viento en tus manos y disfrutá el planeo con tablas anchas modernas diseñadas para aprender y navegar desde tu primera sesión en el Río de la Plata.
+              La escuela madre de la navegación a vela. Sentí la fuerza pura del viento en tus manos y disfrutá el planeo con tablas anchas modernas diseñadas para aprender desde la primera sesión en el Río de la Plata.
             </p>
 
             <div class="subpage-stats-grid">
               <div class="subpage-stat-card">
                 <span class="subpage-stat-label">⏱ Curva de aprendizaje</span>
-                <span class="subpage-stat-value">Navegación desde la 1ª clase</span>
+                <span class="subpage-stat-value">Inmediata desde 1ra clase</span>
               </div>
               <div class="subpage-stat-card">
-                <span class="subpage-stat-label">⛵ Equipamiento</span>
-                <span class="subpage-stat-value">Tablas anchas & velas ultralivianas</span>
+                <span class="subpage-stat-label">🎽 Equipamiento</span>
+                <span class="subpage-stat-value">Vela liviana y tabla de escuela</span>
               </div>
               <div class="subpage-stat-card">
                 <span class="subpage-stat-label">📻 Comunicación</span>
@@ -177,12 +209,14 @@
             </div>
           </div>
 
-          <div class="subpage-hero-media">
-            <img src="../assets/deporte-windsurf.jpg" alt="Clase de Windsurf en Escuela Ombú Acassuso">
-            <div class="subpage-hero-media-badge">Spot Oficial · San Isidro</div>
-            <div class="subpage-hero-price-tag">
-              <span class="p-label">Clase individual desde</span>
-              <span class="p-amount">$38.000</span>
+          <div class="subpage-hero-media-wrap">
+            <div class="subpage-hero-media">
+              <img src="../assets/deporte-windsurf.jpg" alt="Clase de Windsurf en Escuela Ombú Acassuso">
+              <div class="subpage-hero-media-badge">Spot Oficial · San Isidro</div>
+              <div class="subpage-hero-price-tag">
+                <span class="p-label">Clase individual desde</span>
+                <span class="p-amount">$38.000</span>
+              </div>
             </div>
           </div>
         </div>
@@ -190,16 +224,20 @@
     </section>
 
     <!-- =========================================================
-         PROGRAMA DE APRENDIZAJE: ROADMAP 4 PASOS
+         2. PROGRAMA DE APRENDIZAJE: ROADMAP 4 PASOS
          ========================================================= -->
-    <section class="section-padding" id="programa" style="background:var(--white);">
+    <section class="subpage-section" id="programa" style="background:var(--white);">
       <div class="container">
         <div class="subpage-section-header">
-          <span class="section-label">// El Método Ombú</span>
-          <h2 class="display-title">CÓMO ES EL CURSO: DE 0 A PLANEAR</h2>
-          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
-            Olvidate del cansancio físico innecesario. Con velas ultralivianas Dacron y tablas estables de 200 litros, aprendés la técnica pura de balance y timoneo desde la primera sesión.
-          </p>
+          <div class="subpage-header-title-col">
+            <span class="section-label">// El Método Ombú</span>
+            <h2 class="subpage-title">DE CERO A NAVEGAR SOLO</h2>
+          </div>
+          <div class="subpage-header-desc-col">
+            <p>
+              Progresión paso a paso con tablas estables y velas adaptadas a tu contextura. Navegás desde tu primer día en el agua con instructor dedicado y radiocasco VHF.
+            </p>
+          </div>
         </div>
 
         <div class="subpage-roadmap-grid">
@@ -207,18 +245,18 @@
           <div class="subpage-roadmap-card">
             <div class="subpage-step-num">
               <span>01</span>
-              <span class="subpage-step-badge">1ª Sesión</span>
+              <span class="subpage-step-badge">En Tierra</span>
             </div>
-            <h3 class="subpage-step-title">BAUTISMO & EQUILIBRIO</h3>
+            <h3 class="subpage-step-title">APAREJO & POSICIÓN EN T</h3>
             <ul class="subpage-step-bullets">
-              <li>Posición básica de seguridad y balance sobre la tabla.</li>
-              <li>Izado de vela con driza sin esfuerzo lumbar.</li>
-              <li>Cierre de vela al través y primeros metros navegados.</li>
-              <li>Giro en 180° por redondo para volver a la playa.</li>
+              <li>Lectura del viento y puntos cardinales de navegación.</li>
+              <li>Partes del aparejo: mástil, botavara, pie de mástil y cabo de driza.</li>
+              <li>Postura en T sobre la tabla y levantamiento suave (uphaul).</li>
+              <li>Puntos de seguridad y orientación relativa al viento.</li>
             </ul>
             <div class="subpage-step-goal">
-              <span>Objetivo</span>
-              Navegar de ida y vuelta en tus primeros 30 minutos de agua.
+              <span>Objetivo de Fase</span>
+              Subir la vela sin esfuerzo físico y mantener el equilibrio neutro.
             </div>
           </div>
 
@@ -226,18 +264,18 @@
           <div class="subpage-roadmap-card">
             <div class="subpage-step-num">
               <span>02</span>
-              <span class="subpage-step-badge">Maniobras</span>
+              <span class="subpage-step-badge">En el Agua</span>
             </div>
-            <h3 class="subpage-step-title">CEÑIDA & VIRADA</h3>
+            <h3 class="subpage-step-title">PRIMEROS BORDOS & RUMBO</h3>
             <ul class="subpage-step-bullets">
-              <li>Inclinación del mástil hacia popa para ceñir contra el viento.</li>
-              <li>Ganar barlovento y subir al spot deseado.</li>
-              <li>Virada por avante (tack): cambio de amura por proa.</li>
-              <li>Lectura de rachas y control de la velocidad.</li>
+              <li>Cierre de vela con mano de escota y comienzo del avance.</li>
+              <li>Navegación al través (perpendicular al viento).</li>
+              <li>Inclinación del mástil para timonear (orzar y arribar).</li>
+              <li>Virada básica por avante para cambiar de sentido.</li>
             </ul>
             <div class="subpage-step-goal">
-              <span>Objetivo</span>
-              Subir viento y elegir con exactitud tu punto de llegada.
+              <span>Objetivo de Fase</span>
+              Ir y volver al mismo punto de partida sin derivar río abajo.
             </div>
           </div>
 
@@ -245,18 +283,18 @@
           <div class="subpage-roadmap-card">
             <div class="subpage-step-num">
               <span>03</span>
-              <span class="subpage-step-badge">Viento Medio</span>
+              <span class="subpage-step-badge">En el Agua</span>
             </div>
-            <h3 class="subpage-step-title">TRASLUCHADA & VELOCIDAD</h3>
+            <h3 class="subpage-step-title">VIRADA RÁPIDA & TRASLUCHADA</h3>
             <ul class="subpage-step-bullets">
-              <li>Manejo de velas más grandes con viento de 12 a 18 nudos.</li>
-              <li>Trasluchada (gybe): giro rápido a favor del viento sin detenerte.</li>
-              <li>Corrección de postura dinámica para aguas con oleaje.</li>
-              <li>Reglas de navegación y seguridad náutica en el río.</li>
+              <li>Transición fluida de pies alrededor del pie de mástil.</li>
+              <li>Trasluchada con viento a favor (cambio de amura dinámico).</li>
+              <li>Postura de navegación con viento medio y velas mayores.</li>
+              <li>Primer contacto con arnés de cintura para descansar brazos.</li>
             </ul>
             <div class="subpage-step-goal">
-              <span>Objetivo</span>
-              Transiciones dinámicas y navegación fluida con viento sostenido.
+              <span>Objetivo de Fase</span>
+              Maniobras ágiles y navegación continua sin perder velocidad.
             </div>
           </div>
 
@@ -264,18 +302,18 @@
           <div class="subpage-roadmap-card">
             <div class="subpage-step-num">
               <span>04</span>
-              <span class="subpage-step-badge">Avanzado</span>
+              <span class="subpage-step-badge">Autonomía</span>
             </div>
-            <h3 class="subpage-step-title">PLANEO & ARNÉS</h3>
+            <h3 class="subpage-step-title">PLANEO & FOOTSTRAPS</h3>
             <ul class="subpage-step-bullets">
-              <li>Regulación y enganche del arnés al cabo de botavara.</li>
-              <li>Descarga total de fuerza en brazos hacia el cuerpo.</li>
-              <li>Entrada al planeo con tablas cortas y footstraps.</li>
-              <li>Sensación de velocidad máxima sobre el agua.</li>
+              <li>Enganche al arnés y descarga del peso corporal en la botavara.</li>
+              <li>Despegue al planeo: la tabla patina sobre la superficie.</li>
+              <li>Calce de pies en los footstraps a máxima velocidad.</li>
+              <li>Waterstart con viento fuerte para iniciar sin drizar.</li>
             </ul>
             <div class="subpage-step-goal">
-              <span>Objetivo</span>
-              Planeo sostenido a alta velocidad con total relajación física.
+              <span>Objetivo de Fase</span>
+              Planeo total y autonomía completa en cualquier spot del mundo.
             </div>
           </div>
         </div>
@@ -283,36 +321,30 @@
     </section>
 
     <!-- =========================================================
-         QUÉ INCLUYE / SEGURIDAD OMBÚ
+         3. SEGURIDAD & EQUIPAMIENTO (4 PILARES)
          ========================================================= -->
-    <section class="section-padding" style="background:var(--light-1);">
+    <section class="subpage-section" id="seguridad" style="background:var(--light-1);">
       <div class="container">
         <div class="subpage-section-header">
-          <span class="section-label">// Garantía Ombú</span>
-          <h2 class="display-title">MATERIAL MODERNO Y ASISTENCIA PERMANENTE</h2>
-          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
-            Atrás quedaron las tablas pesadas y resbalosas de décadas pasadas. En Ombú enseñamos con tecnología moderna para que aprender sea placentero.
-          </p>
+          <div class="subpage-header-title-col">
+            <span class="section-label">// Garantía de Seguridad</span>
+            <h2 class="subpage-title">EQUIPO Y RESPALDO TOTAL</h2>
+          </div>
+          <div class="subpage-header-desc-col">
+            <p>
+              No necesitás comprar equipo para empezar. En Ombú te equipamos con tablas anchas modernas y velas ultralivianas para aprender con máxima facilidad.
+            </p>
+          </div>
         </div>
 
         <div class="subpage-features-grid">
           <div class="subpage-feature-card">
             <div class="subpage-feature-icon-box">
-              <img src="../assets/seguridad.svg" alt="Tablas de escuela anchas">
+              <img src="../assets/seguridad.svg" alt="Equipamiento seguro">
             </div>
-            <h3 class="subpage-feature-title">TABLAS WIDE BODY</h3>
+            <h3 class="subpage-feature-title">TABLAS ANCHAS ESTABLES</h3>
             <p class="subpage-feature-desc">
-              Tablas con orza rebatible, 85 cm de manga y cubierta completa de goma EVA antideslizante para caídas suaves y estabilidad extrema.
-            </p>
-          </div>
-
-          <div class="subpage-feature-card">
-            <div class="subpage-feature-icon-box">
-              <img src="../assets/wind.svg" alt="Velas ultralivianas">
-            </div>
-            <h3 class="subpage-feature-title">VELAS LIVIANAS DACRON</h3>
-            <p class="subpage-feature-desc">
-              Aparejos ligeros de escuela que no absorben agua, con botavaras de diámetro reducido pensadas para una sujeción cómoda y sin fatiga.
+              Tablas de escuela con orza retráctil y volumen generoso (180 a 220 L) que garantizan equilibrio absoluto desde los primeros minutos.
             </p>
           </div>
 
@@ -320,19 +352,29 @@
             <div class="subpage-feature-icon-box">
               <img src="../assets/autonomia.svg" alt="Radiocasco VHF">
             </div>
-            <h3 class="subpage-feature-title">COMUNICACIÓN VHF</h3>
+            <h3 class="subpage-feature-title">RADIOCASCO VHF EN VIVO</h3>
             <p class="subpage-feature-desc">
-              Tu profe te indica en el momento exacto cómo mover los pies, abrir la vela o inclinar el mástil para corregir tu navegación en vivo.
+              Tu instructor te guía en tiempo real directo a tu oído mientras navegás. Corrección instantánea de postura de brazos y pies en el río.
             </p>
           </div>
 
           <div class="subpage-feature-card">
             <div class="subpage-feature-icon-box">
-              <img src="../assets/lectura.svg" alt="Lancha de rescate">
+              <img src="../assets/wind.svg" alt="Lancha de rescate">
             </div>
-            <h3 class="subpage-feature-title">LANCHA EN EL AGUA</h3>
+            <h3 class="subpage-feature-title">LANCHA DE RESCATE</h3>
             <p class="subpage-feature-desc">
-              Seguridad total: lancha a motor en el agua durante todas las clases para remolcar o asistir si te cansás o cambia la corriente.
+              Embarcación a motor dedicada en el agua en todo momento. Si el viento rota, cae o te cansás, te asistimos y regresamos a la costa.
+            </p>
+          </div>
+
+          <div class="subpage-feature-card">
+            <div class="subpage-feature-icon-box">
+              <img src="../assets/lectura.svg" alt="Club e infraestructura">
+            </div>
+            <h3 class="subpage-feature-title">SPOT & INSTALACIONES</h3>
+            <p class="subpage-feature-desc">
+              Acceso a vestuarios con duchas de agua caliente, lockers seguros, guardería, cafetería y rampa náutica con salida directa al río.
             </p>
           </div>
         </div>
@@ -340,47 +382,51 @@
     </section>
 
     <!-- =========================================================
-         MODALIDADES & TARIFAS
+         4. MODALIDADES & TARIFAS
          ========================================================= -->
-    <section class="section-padding" id="tarifas" style="background:var(--white);">
+    <section class="subpage-section" id="tarifas" style="background:var(--white);">
       <div class="container">
         <div class="subpage-section-header">
-          <span class="section-label">// Formatos y Tarifas</span>
-          <h2 class="display-title">CLASES PARTICULARES Y ABONOS</h2>
-          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
-            Elegí la modalidad que mejor se adapte a tu objetivo: desde una primera experiencia hasta convertirte en un windsurfista completo.
-          </p>
+          <div class="subpage-header-title-col">
+            <span class="section-label">// Formatos de Clase</span>
+            <h2 class="subpage-title">ELEGÍ TU FORMA DE EMPEZAR</h2>
+          </div>
+          <div class="subpage-header-desc-col">
+            <p>
+              Clases 100% personalizadas. Reservás por sesión coordinando día y horario según el pronóstico de viento óptimo en el Río de la Plata.
+            </p>
+          </div>
         </div>
 
         <div class="subpage-pricing-grid">
-          <!-- Opción 1: Bautismo -->
+          <!-- Opción 1: Clase Individual -->
           <div class="subpage-pricing-card">
-            <span class="subpage-pcard-label">Primera Sesión</span>
+            <span class="subpage-pcard-label">Iniciación / Sesión Suelta</span>
             <h3 class="subpage-pcard-title">CLASE INDIVIDUAL</h3>
-            <p class="subpage-pcard-desc">Perfecto para tu primer contacto con el windsurf o retomar luego de años sin navegar.</p>
+            <p class="subpage-pcard-desc">Ideal para probar el deporte o tomar clases sueltas adaptadas a tu nivel actual.</p>
             <div class="subpage-pcard-price-box">
-              <span class="subpage-pcard-price">$38.000</span>
-              <div class="subpage-pcard-price-note">por sesión de 1h 30m (1 a 1)</div>
+              <span class="subpage-pcard-price is-accessible">$38.000</span>
+              <div class="subpage-pcard-price-note">por sesión de 2 horas (1 a 1)</div>
             </div>
             <ul class="subpage-pcard-bullets">
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Instructor personal exclusivo</span>
+                <span>Instructor exclusivo dedicado (1 a 1)</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Tabla de escuela + vela Dacron</span>
+                <span>Tabla de escuela, vela liviana, chaleco y traje</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Chaleco salvavidas y radiocasco</span>
+                <span>Radiocasco VHF bidireccional permanente</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Uso de vestuarios y duchas</span>
+                <span>Apoyo activo de lancha de rescate en el agua</span>
               </li>
             </ul>
-            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20de%20Windsurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20individual%20de%20Windsurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
               RESERVAR CLASE
               <div class="icon">
                 <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -391,39 +437,39 @@
             </a>
           </div>
 
-          <!-- Opción 2: Pack Autonomía (Destacado) -->
+          <!-- Opción 2: Curso Integral (Destacado) -->
           <div class="subpage-pricing-card featured">
-            <span class="subpage-pricing-featured-tag">RECOMENDADO</span>
-            <span class="subpage-pcard-label">Curso Completo</span>
-            <h3 class="subpage-pcard-title">PACK NAVEGANTE</h3>
-            <p class="subpage-pcard-desc">El curso integral para dominar todos los rumbos, maniobras y navegar con soltura e independencia.</p>
+            <span class="subpage-pricing-featured-tag">MÁS ELEGIDO · DE CERO A NAVEGAR SOLO</span>
+            <span class="subpage-pcard-label">Curso Integral</span>
+            <h3 class="subpage-pcard-title">CURSO AUTONOMÍA</h3>
+            <p class="subpage-pcard-desc">El programa completo para aprender todo el proceso hasta navegar y maniobrar con seguridad sin asistencia.</p>
             <div class="subpage-pcard-price-box">
               <span class="subpage-pcard-price">PACK 5 CLASES</span>
-              <div class="subpage-pcard-price-note">Tarifa bonificada / Cuotas disponibles</div>
+              <div class="subpage-pcard-price-note">Tarifa bonificada / Planes de cuotas disponibles</div>
             </div>
             <ul class="subpage-pcard-bullets">
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>5 clases personalizadas de 1h 30m</span>
+                <span>5 sesiones intensivas de 2 horas (10h de instrucción)</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Equipamiento de progresión progresivo</span>
+                <span>Todo el equipamiento 100% provisto en cada clase</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Introducción al uso del arnés</span>
+                <span>Seguimiento pedagógico continuo de objetivos</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Habilitación para alquilar equipo en Ombú</span>
+                <span>Certificación de nivel y asesoría de compra o alquiler</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Asesoramiento para elección de equipo propio</span>
+                <span>Acceso preferencial a flota de alquiler Ombú</span>
               </li>
             </ul>
-            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20el%20Pack%20de%20Windsurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20el%20Pack%20de%20Autonom%C3%ADa%20de%20Windsurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
               CONSULTAR PACK
               <div class="icon">
                 <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -434,35 +480,35 @@
             </a>
           </div>
 
-          <!-- Opción 3: Alquiler / Práctica Libre -->
+          <!-- Opción 3: Perfeccionamiento / Alquiler -->
           <div class="subpage-pricing-card">
-            <span class="subpage-pcard-label">Para navegantes</span>
-            <h3 class="subpage-pcard-title">ALQUILER & CLINIC</h3>
-            <p class="subpage-pcard-desc">Para quienes ya saben navegar y buscan navegar periódicamente sin tener que trasladar ni comprar equipo.</p>
+            <span class="subpage-pcard-label">Ya sabés navegar</span>
+            <h3 class="subpage-pcard-title">PERFECCIONAMIENTO</h3>
+            <p class="subpage-pcard-desc">Para navegantes que quieren dominar el planeo, arnés, footstraps y waterstart con viento fuerte.</p>
             <div class="subpage-pcard-price-box">
-              <span class="subpage-pcard-price">POR HORA / ABONO</span>
-              <div class="subpage-pcard-price-note">Tablas freeride y aparejos armados</div>
+              <span class="subpage-pcard-price is-accessible">COACHING</span>
+              <div class="subpage-pcard-price-note">Con radio VHF y análisis de técnica</div>
             </div>
             <ul class="subpage-pcard-bullets">
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Tablas de 115 a 160 litros freeride</span>
+                <span>Técnica de planeo y postura de máxima aceleración</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Aparejos completos de monofilm (4.5 a 7.5m)</span>
+                <span>Calce en footstraps y postura en arnés largo/corto</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Supervisión y rescate en el agua</span>
+                <span>Trasluchada en velocidad (carve jibe)</span>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Opción de guardar tu propio equipo</span>
+                <span>Waterstart en aguas abiertas</span>
               </li>
             </ul>
-            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20alquiler%20de%20Windsurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
-              CONSULTAR ALQUILER
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20sobre%20cl%C3%ADnicas%20de%20perfeccionamiento%20de%20Windsurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+              CONSULTAR COACHING
               <div class="icon">
                 <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M0 0h24v24H0z" fill="none"></path>
@@ -476,55 +522,65 @@
     </section>
 
     <!-- =========================================================
-         INSTRUCTORES DE WINDSURF
+         5. EL SPOT: ACASSUSO, SAN ISIDRO
          ========================================================= -->
-    <section class="section-padding" style="background:var(--light-1);">
+    <section class="subpage-section" id="spot" style="background:var(--light-1);">
       <div class="container">
         <div class="subpage-section-header">
-          <span class="section-label">// Instructores Especialistas</span>
-          <h2 class="display-title">PASIÓN POR EL VIENTO Y EL RÍO</h2>
-          <p style="color:var(--text-muted); font-size:16px; margin-top:14px;">
-            Nuestros profes combinan docencia moderna con miles de horas de navegación en el Río de la Plata.
-          </p>
+          <div class="subpage-header-title-col">
+            <span class="section-label">// El Spot</span>
+            <h2 class="subpage-title">EL BANCO DE ACASSUSO</h2>
+          </div>
+          <div class="subpage-header-desc-col">
+            <p>
+              Ubicada en Sebastián Elcano 994, nuestra escuela cuenta con el mejor spot del Río de la Plata: banco de arena poco profundo, viento franco y un entorno seguro para navegar.
+            </p>
+          </div>
         </div>
 
-        <div class="instructores-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-          <div class="instructor-card">
-            <div class="instructor-photo-wrap">
-              <img src="../assets/instructor-nicolas.jpg" alt="Nicolás - Instructor de Windsurf" class="instructor-photo">
-            </div>
-            <div class="instructor-info">
-              <h3 class="instructor-name">NICOLÁS</h3>
-              <span class="instructor-role">Director de Escuela & Profe</span>
-              <p class="instructor-bio">
-                Navegante de alma y docente náutico. Te transmite la lectura del río con calma y claridad desde el minuto uno.
-              </p>
+        <div class="subpage-spot-grid">
+          <div class="subpage-spot-info-col">
+            <div class="subpage-spot-features">
+              <div class="subpage-spot-feature-item">
+                <h3 class="subpage-spot-feature-title">BANCO DE ARENA POCO PROFUNDO</h3>
+                <p class="subpage-spot-feature-desc">
+                  Hacer pie con agua a la cintura facilita levantar la vela y reiniciar tus bordos tantas veces como necesites sin cansancio.
+                </p>
+              </div>
+
+              <div class="subpage-spot-feature-item">
+                <h3 class="subpage-spot-feature-title">VIENTOS PREDOMINANTES LIMPIOS</h3>
+                <p class="subpage-spot-feature-desc">
+                  Los vientos del Sudeste (SE), Este (E) y Noreste (NE) entran directos sobre la costa de San Isidro sin turbulencias de tierra.
+                </p>
+              </div>
+
+              <div class="subpage-spot-feature-item">
+                <h3 class="subpage-spot-feature-title">CLUB E INSTALACIONES NÁUTICAS</h3>
+                <p class="subpage-spot-feature-desc">
+                  Guardería de tablas, vestuarios con duchas calientes, estacionamiento interno, cafetería frente al río y rampa protegida al agua.
+                </p>
+              </div>
             </div>
           </div>
 
-          <div class="instructor-card">
-            <div class="instructor-photo-wrap">
-              <img src="../assets/instructor-silvina.jpg" alt="Chivi - Instructora de Windsurf" class="instructor-photo">
-            </div>
-            <div class="instructor-info">
-              <h3 class="instructor-name">CHIVI</h3>
-              <span class="instructor-role">Instructora Náutica</span>
-              <p class="instructor-bio">
-                Especialista en iniciación y postura. Hace que el equilibrio y el izado de la vela parezcan un juego natural.
-              </p>
-            </div>
-          </div>
-
-          <div class="instructor-card">
-            <div class="instructor-photo-wrap">
-              <img src="../assets/instructor-ramiro.jpg" alt="Ramiro - Rescate y Soporte" class="instructor-photo">
-            </div>
-            <div class="instructor-info">
-              <h3 class="instructor-name">RAMIRO</h3>
-              <span class="instructor-role">Instructor & Apoyo Náutico</span>
-              <p class="instructor-bio">
-                Atento a cada marea, racha y alumno en el agua. Garantiza que siempre tengas el viento y la seguridad a favor.
-              </p>
+          <div class="subpage-spot-media-col">
+            <div class="subpage-spot-media-card">
+              <img src="../assets/mosaico-tablas.jpg" alt="Tablas de windsurf en Escuela Ombú Acassuso">
+              <div class="subpage-spot-badge-box">
+                <div class="subpage-spot-badge-item">
+                  <span class="subpage-spot-badge-label">UBICACIÓN</span>
+                  <span class="subpage-spot-badge-val">Elcano 994, Acassuso</span>
+                </div>
+                <div class="subpage-spot-badge-item">
+                  <span class="subpage-spot-badge-label">VIENTOS</span>
+                  <span class="subpage-spot-badge-val">SE · E · NE · S</span>
+                </div>
+                <div class="subpage-spot-badge-item">
+                  <span class="subpage-spot-badge-label">FONDO</span>
+                  <span class="subpage-spot-badge-val">Banco de arena seguro</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -532,77 +588,58 @@
     </section>
 
     <!-- =========================================================
-         PREGUNTAS FRECUENTES (FAQ) DE WINDSURF
+         6. INSTRUCTORES DE WINDSURF
          ========================================================= -->
-    <section class="section-padding section-faq" id="faq" style="background:var(--white);">
-      <div class="container" style="max-width: 900px;">
+    <section class="subpage-section" id="instructores" style="background:var(--white);">
+      <div class="container">
         <div class="subpage-section-header">
-          <span class="section-label">// Dudas Frecuentes</span>
-          <h2 class="display-title">PREGUNTAS SOBRE EL WINDSURF</h2>
+          <div class="subpage-header-title-col">
+            <span class="section-label">// El Equipo Docente</span>
+            <h2 class="subpage-title">INSTRUCTORES CERTIFICADOS</h2>
+          </div>
+          <div class="subpage-header-desc-col">
+            <p>
+              Años de experiencia en el Río de la Plata y en los mejores spots del mundo. Te cuidan, te exigen y te motivan en cada bordo con paciencia y comunicación permanente.
+            </p>
+          </div>
         </div>
 
-        <div class="motion-accordion" data-accordion>
-          <!-- Item 1 -->
-          <div class="motion-accordion-item is-open">
-            <button type="button" class="motion-accordion-trigger" aria-expanded="true" aria-controls="faq-wind-1" id="faq-wind-btn-1">
-              <span class="motion-accordion-question">¿Es difícil mantener el equilibrio arriba de la tabla?</span>
-              <span class="motion-accordion-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="motion-accordion-panel" id="faq-wind-1" role="region" aria-labelledby="faq-wind-btn-1">
-              <p>
-                No con el material actual. En Ombú usamos tablas modernas de escuela con <strong>más de 200 litros de volumen y 85 cm de ancho</strong>. Son plataformas sumamente estables que te permiten pararte, caminar y equivocarte sin caerte al agua. El 95% de los alumnos navega parado en su primer intento.
+        <div class="subpage-instructores-grid">
+          <div class="subpage-instructor-card">
+            <div class="subpage-instructor-photo-wrap">
+              <img src="../assets/instructor-ezequiel.jpg" alt="Ezequiel - Instructor de Windsurf" class="subpage-instructor-photo">
+            </div>
+            <div class="subpage-instructor-info">
+              <h3 class="subpage-instructor-name">EZEQUIEL</h3>
+              <span class="subpage-instructor-role">Director de Escuela & Coach</span>
+              <p class="subpage-instructor-bio">
+                Navegante de alma con más de 15 años guiando a alumnos en el Río de la Plata. Especialista en corrección postural y planeo en velocidad.
               </p>
             </div>
           </div>
 
-          <!-- Item 2 -->
-          <div class="motion-accordion-item">
-            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-2" id="faq-wind-btn-2">
-              <span class="motion-accordion-question">¿Me van a doler los brazos por levantar la vela?</span>
-              <span class="motion-accordion-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="motion-accordion-panel" id="faq-wind-2" role="region" aria-labelledby="faq-wind-btn-2">
-              <p>
-                No. Las velas de escuela que utilizamos son de materiales ultralivianos (Dacron) que pesan menos de 2 kilos y no absorben agua al caerse. Además, te enseñamos a usar el <strong>peso del cuerpo y las piernas</strong> para levantar la vela mediante el cabo de driza, sin hacer fuerza con la espalda ni los brazos.
+          <div class="subpage-instructor-card">
+            <div class="subpage-instructor-photo-wrap">
+              <img src="../assets/instructor-silvina.jpg" alt="Silvina - Instructora de Windsurf" class="subpage-instructor-photo">
+            </div>
+            <div class="subpage-instructor-info">
+              <h3 class="subpage-instructor-name">SILVINA</h3>
+              <span class="subpage-instructor-role">Instructora de Windsurf</span>
+              <p class="subpage-instructor-bio">
+                Pedagogía empática, técnica de equilibrio y lectura del río. Logra que cada alumno gane seguridad y disfrute del agua desde su primera sesión.
               </p>
             </div>
           </div>
 
-          <!-- Item 3 -->
-          <div class="motion-accordion-item">
-            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-3" id="faq-wind-btn-3">
-              <span class="motion-accordion-question">¿Qué pasa si me canso o derivo hacia adentro del río?</span>
-              <span class="motion-accordion-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="motion-accordion-panel" id="faq-wind-3" role="region" aria-labelledby="faq-wind-btn-3">
-              <p>
-                Contás con radiocasco en todo momento para hablar con tu instructor y nuestra <strong>lancha a motor de rescate está en el agua de forma permanente</strong>. Si te cansás o la corriente te aleja, te remolcamos de regreso a la playa en un minuto.
-              </p>
+          <div class="subpage-instructor-card">
+            <div class="subpage-instructor-photo-wrap">
+              <img src="../assets/instructor-ramiro.jpg" alt="Ramiro - Instructor de Windsurf" class="subpage-instructor-photo">
             </div>
-          </div>
-
-          <!-- Item 4 -->
-          <div class="motion-accordion-item">
-            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-4" id="faq-wind-btn-4">
-              <span class="motion-accordion-question">¿Una vez que aprendo puedo alquilar el equipo en Ombú?</span>
-              <span class="motion-accordion-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="motion-accordion-panel" id="faq-wind-4" role="region" aria-labelledby="faq-wind-btn-4">
-              <p>
-                ¡Sí! Esa es una de las grandes ventajas de nuestra escuela. Una vez que alcanzás la autonomía básica, podés venir a alquilar tablas y aparejos armados por hora o mediante abonos mensuales, sin necesidad de comprar ni transportar un equipo propio.
-              </p>
-            </div>
-          </div>
-
-          <!-- Item 5 -->
-          <div class="motion-accordion-item">
-            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-5" id="faq-wind-btn-5">
-              <span class="motion-accordion-question">¿Se puede aprender en cualquier época del año?</span>
-              <span class="motion-accordion-icon" aria-hidden="true">+</span>
-            </button>
-            <div class="motion-accordion-panel" id="faq-wind-5" role="region" aria-labelledby="faq-wind-btn-5">
-              <p>
-                Sí, funcionamos todo el año. Durante los meses más frescos te proveemos traje de neoprene térmico de 4/3 mm y botas, además de contar con vestuarios calefaccionados y duchas con agua caliente para cuando salgas del río.
+            <div class="subpage-instructor-info">
+              <h3 class="subpage-instructor-name">RAMIRO</h3>
+              <span class="subpage-instructor-role">Instructor & Rescate</span>
+              <p class="subpage-instructor-bio">
+                Conocedor milimétrico de las mareas y corrientes de San Isidro. Siempre atento en el agua para que navegues con respaldo y tranquilidad total.
               </p>
             </div>
           </div>
@@ -611,23 +648,153 @@
     </section>
 
     <!-- =========================================================
-         PRE-FOOTER CTA
+         7. PREGUNTAS FRECUENTES (FAQ) DE WINDSURF
          ========================================================= -->
-    <section class="section-prefooter-banner">
-      <div class="container prefooter-flex-row">
-        <h2 class="prefooter-heading">
-          Listo para sentir el viento?
-        </h2>
-        <div>
-          <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Windsurf." target="_blank" class="btn-pill-orange" style="font-size:16px;" rel="noopener noreferrer">
-            RESERVÁ TU CLASE DE WINDSURF
-            <div class="icon">
-              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-              </svg>
+    <section class="subpage-section" id="faq" style="background:var(--light-1);">
+      <div class="container">
+        <div class="subpage-section-header">
+          <div class="subpage-header-title-col">
+            <span class="section-label">// Dudas Frecuentes</span>
+            <h2 class="subpage-title">PREGUNTAS SOBRE EL WINDSURF</h2>
+          </div>
+          <div class="subpage-header-desc-col">
+            <p>
+              Todo lo que necesitás saber antes de tu primera clase. Si tenés otra pregunta puntual, consultanos directamente por WhatsApp y te orientamos.
+            </p>
+          </div>
+        </div>
+
+        <div class="subpage-faq-wrap">
+          <div class="motion-accordion" data-accordion>
+            <!-- Item 1 -->
+            <div class="motion-accordion-item is-open">
+              <button type="button" class="motion-accordion-trigger" aria-expanded="true" aria-controls="faq-wind-1" id="faq-wind-btn-1">
+                <span class="motion-accordion-question">¿Se necesita mucha fuerza para levantar y sostener la vela?</span>
+                <span class="motion-accordion-icon" aria-hidden="true">
+                  <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+              <div class="motion-accordion-panel" id="faq-wind-1" role="region" aria-labelledby="faq-wind-btn-1">
+                <div class="motion-accordion-content">
+                  <div class="motion-accordion-content-inner">
+                    <p>
+                      No. El equipamiento moderno de escuela utiliza mástiles de carbono y velas de materiales ultralivianos dimensionados según tu peso y altura. Te enseñamos a usar el <strong>peso de tu cuerpo y las piernas</strong> para levantar la vela en vez de forzar los brazos y la espalda.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </a>
+
+            <!-- Item 2 -->
+            <div class="motion-accordion-item">
+              <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-2" id="faq-wind-btn-2">
+                <span class="motion-accordion-question">¿Es difícil mantener el equilibrio en la tabla?</span>
+                <span class="motion-accordion-icon" aria-hidden="true">
+                  <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+              <div class="motion-accordion-panel" id="faq-wind-2" role="region" aria-labelledby="faq-wind-btn-2">
+                <div class="motion-accordion-content">
+                  <div class="motion-accordion-content-inner">
+                    <p>
+                      Las tablas de escuela actuales son muy anchas (hasta 85 cm) y tienen más de 200 litros de volumen, lo que las hace prácticamente imposibles de volcar. Te podés parar cómodamente sin que la tabla tambalee mientras aprendés la postura inicial.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="motion-accordion-item">
+              <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-3" id="faq-wind-btn-3">
+                <span class="motion-accordion-question">¿Qué pasa si no hay viento o cambia el clima?</span>
+                <span class="motion-accordion-icon" aria-hidden="true">
+                  <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+              <div class="motion-accordion-panel" id="faq-wind-3" role="region" aria-labelledby="faq-wind-btn-3">
+                <div class="motion-accordion-content">
+                  <div class="motion-accordion-content-inner">
+                    <p>
+                      Monitoreamos las estaciones meteorológicas constantemente. Si las condiciones no son propicias para una clase segura y rendidora, te avisamos con anticipación y la clase se <strong>reprograma automáticamente sin ningún costo</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="motion-accordion-item">
+              <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-4" id="faq-wind-btn-4">
+                <span class="motion-accordion-question">¿Qué indumentaria tengo que llevar a la primera clase?</span>
+                <span class="motion-accordion-icon" aria-hidden="true">
+                  <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+              <div class="motion-accordion-panel" id="faq-wind-4" role="region" aria-labelledby="faq-wind-btn-4">
+                <div class="motion-accordion-content">
+                  <div class="motion-accordion-content-inner">
+                    <p>
+                      Solo malla o traje de baño, toalla y protector solar. La escuela te provee todo el equipamiento técnico necesario: tabla, vela, botavara, chaleco salvavidas, casco con intercomunicador VHF y traje de neoprene si la temperatura del agua lo requiere.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="motion-accordion-item">
+              <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-wind-5" id="faq-wind-btn-5">
+                <span class="motion-accordion-question">¿A partir de qué edad se puede comenzar a aprender Windsurf?</span>
+                <span class="motion-accordion-icon" aria-hidden="true">
+                  <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>
+              </button>
+              <div class="motion-accordion-panel" id="faq-wind-5" role="region" aria-labelledby="faq-wind-btn-5">
+                <div class="motion-accordion-content">
+                  <div class="motion-accordion-content-inner">
+                    <p>
+                      Contamos con equipamiento especial para chicos desde los 8 años (velas ultrachicas de 1.5 a 2.5 m²) y enseñamos a adultos de todas las edades. El único requisito es saber nadar y tener entusiasmo por estar en el río.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         8. PRE-FOOTER BANNER CTA
+         ========================================================= -->
+    <section class="subpage-section" style="background:var(--white);">
+      <div class="container">
+        <div class="subpage-prefooter-banner">
+          <div>
+            <h2 class="subpage-prefooter-heading">
+              ¿LISTO PARA NAVEGAR EL RÍO?
+            </h2>
+            <p class="subpage-prefooter-desc">
+              Reservá hoy tu clase individual o consultá por el curso de autonomía de Windsurf. Cupos reducidos por instructor.
+            </p>
+          </div>
+          <div>
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Windsurf." target="_blank" class="btn-pill-orange" rel="noopener noreferrer">
+              RESERVÁ TU LUGAR EN WHATSAPP
+              <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -663,7 +830,7 @@
               <li><a href="/#disciplinas">Aprendizaje</a></li>
               <li><a href="/#instructores">Nosotros</a></li>
               <li><a href="/#alquileres">Alquileres</a></li>
-              <li><a href="/#faq">Preguntas frecuentes</a></li>
+              <li><a href="#faq">Preguntas frecuentes</a></li>
               <li><a href="/#spot">Ubicación</a></li>
             </ul>
           </div>
@@ -690,14 +857,14 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
             </a>
             <a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="footer-social-btn">
-              <svg width="15" height="15" viewBox="0 0 737.509 740.824" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/></svg>
-            </a>
-          </div>
+              <svg width="15" height="15" viewBox="0 0 737.509 740.824" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/>
+            </svg>
+          </a>
         </div>
+      </div>
 
-        <div class="footer-horizontal-logo-wrap">
-          <img src="../assets/logo-ombu-horizontal.png" alt="OMBU'">
-        </div>
+      <div class="footer-horizontal-logo-wrap">
+        <img src="../assets/logo-ombu-horizontal.png" alt="OMBU'">
       </div>
     </div>
   </footer>
@@ -705,7 +872,7 @@
   <!-- Botón Flotante CTA WhatsApp -->
   <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20hacer%20una%20consulta%20sobre%20Windsurf." target="_blank" rel="noopener noreferrer" class="floating-wpp-btn" aria-label="Contactar por WhatsApp">
     <svg width="28" height="28" viewBox="0 0 737.509 740.824" fill="currentColor">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/></svg>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/>
     </svg>
   </a>
 

@@ -320,7 +320,7 @@ h4 {
   }
   .section-desc-col {
     grid-column: 6 / span 7;
-    padding-top: 6px;
+    padding-top: 36px;
   }
 }
 
@@ -338,7 +338,7 @@ h4 {
   /* Columnas 5, 6 y 7 quedan totalmente libres para respiro visual suizo */
   .section-desc-col {
     grid-column: 8 / span 5;
-    padding-top: 8px;
+    padding-top: 36px;
   }
 }
 
@@ -920,14 +920,15 @@ header.site-header:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 9px 12px;
+  padding: 9px 8px;
   background: var(--light-1);
   border: 1px solid rgba(35, 31, 32, 0.06);
   border-radius: 10px;
   color: var(--ink);
   text-decoration: none;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
+  white-space: nowrap;
   transition: background-color 0.18s, color 0.18s;
 }
 
@@ -1008,6 +1009,7 @@ header.site-header:hover {
 .hero-weather-col {
   width: 100%;
   max-width: 320px;
+  min-height: 168px;
 }
 
 /* Div 2: Fila central (Bajada + Botones alineados a la derecha) */
@@ -1126,8 +1128,11 @@ header.site-header:hover {
    Alineado estrictamente a la Grilla de 8 puntos
    ========================================================= */
 .hero-weather-card {
-  position: relative;
-  width: 100%;
+  position: fixed;
+  top: 108px;
+  left: calc(50% - (min(100% - (var(--grid-margin, 160px) * 2), var(--container-content-max, 1440px)) / 2));
+  z-index: 990;
+  width: 304px;
   max-width: 304px;
   background: rgba(254, 254, 254, 0.88);
   backdrop-filter: blur(24px) saturate(180%);
@@ -1140,9 +1145,22 @@ header.site-header:hover {
               inset 0 1px 0 rgba(255, 255, 255, 0.95);
   color: var(--ink);
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-  animation: heroCardFadeIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.65s both;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s ease;
+  animation: heroCardFadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
   will-change: transform, opacity;
+}
+
+.hero-weather-card.is-scrolled-hidden {
+  opacity: 0;
+  transform: translateY(-16px);
+  pointer-events: none;
+}
+
+header.site-header.menu-open ~ main .hero-weather-card {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .hero-weather-card:hover {
@@ -1349,14 +1367,6 @@ header.site-header:hover {
   fill: rgba(35, 31, 32, 0.28);
 }
 
-.weather-dir-code {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-}
-
 /* Barra de progreso de viento (Siempre Naranja de Marca Ombú) */
 .weather-progress-bar-wrap {
   position: relative;
@@ -1414,13 +1424,40 @@ header.site-header:hover {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.weather-suitability-pill.is-optimal,
-.weather-suitability-pill.is-moderate,
-.weather-suitability-pill.is-calm,
-.weather-suitability-pill.is-strong {
+/* Estado de Fallback / Error de datos meteorológicos */
+.hero-weather-card.has-weather-error .weather-caption {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.hero-weather-card.has-weather-error .weather-suitability-pill {
+  border: none !important;
+  padding: 0 !important;
   background: transparent !important;
-  color: var(--orange);
-  border-color: var(--orange);
+}
+
+.weather-error-cta {
+  background: var(--orange, #FF5206) !important;
+  color: #FEFEFE !important;
+  border: 1px solid var(--orange, #FF5206) !important;
+  border-radius: 100px;
+  padding: 3px 9px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  box-shadow: 0 2px 6px rgba(255, 82, 6, 0.25);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.weather-error-cta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 /* H1 Monumental en la parte inferior izquierda */
@@ -1444,8 +1481,7 @@ header.site-header:hover {
   width: 100%;
 }
 
-.hero-title-line-1,
-.hero-title-line-black {
+.hero-title-line-1 {
   color: var(--ink);
   display: inline-flex;
   align-items: center;
@@ -1487,8 +1523,7 @@ header.site-header:hover {
   display: block;
 }
 
-.hero-title-line-2,
-.hero-title-line-orange {
+.hero-title-line-2 {
   color: var(--orange);
   display: block;
   white-space: nowrap;
@@ -1543,11 +1578,9 @@ header.site-header:hover {
   pointer-events: none;
   padding: 4px 0 8px;
   width: 100%;
+  will-change: transform;
 }
 
-.disciplinas-title-col .section-label {
-  margin-bottom: 12px;
-}
 
 .disciplinas-title {
   font-family: var(--font-display);
@@ -1669,10 +1702,6 @@ header.site-header:hover {
   transform-origin: top center;
   transition: transform 0.1s ease-out, filter 0.1s ease-out, box-shadow 0.2s ease;
   will-change: transform, filter;
-}
-
-.sport-tag-pill {
-  display: none;
 }
 
 .sport-media-box {
@@ -1833,6 +1862,11 @@ header.site-header:hover {
   transform: scale(1.04);
 }
 
+.bento-cell--tall img {
+  object-position: right center;
+  transform-origin: right center;
+}
+
 .bento-cell--wide      { grid-column: 1 / span 4; grid-row: 1; }
 .bento-cell--dark      { grid-column: 5 / span 3; grid-row: 1; }
 .bento-cell--tall      { grid-column: 8 / span 5; grid-row: 1 / span 2; }
@@ -1876,20 +1910,11 @@ header.site-header:hover {
   padding: 28px;
 }
 
-.bento-sponsor-label {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--white);
-}
-
 .bento-sponsor-logo-wrap {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: auto;
+  margin-top: 0;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
@@ -1902,10 +1927,23 @@ header.site-header:hover {
 
 .bento-sponsor-logo {
   max-width: 100%;
-  width: 215px;
+  width: 200px;
   height: auto;
   display: block;
   object-fit: contain;
+}
+
+.bento-sponsor-desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--white);
+  margin: 0;
+  max-width: 24ch;
+}
+
+.bento-sponsor-desc strong {
+  font-weight: 700;
 }
 
 /* =========================================================
@@ -1982,19 +2020,26 @@ header.site-header:hover {
 
 .tidescape-support-line {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--orange, #FF5206);
-  border: 1.5px solid var(--orange, #FF5206);
+  font-size: 15px;
+  font-weight: 700;
+  color: #FEFEFE;
   background: transparent;
-  border-radius: 999px;
-  padding: 8px 22px;
+  border: none;
+  padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   margin: 0 auto 32px;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
   text-align: center;
+}
+
+.tidescape-check-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--orange, #FF5206);
+  flex-shrink: 0;
 }
 
 .tidescape-cta-action {
@@ -2212,9 +2257,9 @@ header.site-header:hover {
 /* Título: H3 Anton */
 .objetivo-card-title {
   font-family: var(--font-display, 'Anton', sans-serif);
-  font-size: clamp(22px, 1.8vw, 28px);
-  line-height: 1.05;
-  letter-spacing: 0;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: var(--h2-ls, -0.015em);
   color: var(--ink);
   text-transform: uppercase;
   margin: 0 0 16px 0;
@@ -2512,44 +2557,6 @@ header.site-header:hover {
   margin-bottom: 36px;
   max-width: 440px;
   opacity: 0.95;
-}
-
-/* Botón estilo píldora + círculo adjunto */
-.spot-btn-combo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
-.spot-btn-pill-part {
-  background: var(--white);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  padding: 13px 24px;
-  border-radius: 100px;
-  display: inline-flex;
-  align-items: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.spot-btn-circle-part {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--white);
-  color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.spot-btn-combo:hover .spot-btn-pill-part,
-.spot-btn-combo:hover .spot-btn-circle-part {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(35, 31, 32, 0.18);
 }
 
 /* Tarjeta de Cámara Oscura */
@@ -2886,14 +2893,15 @@ header.site-header:hover {
   scroll-margin-top: 88px;
 }
 
-.faq-title-wrap {
-  margin-bottom: 36px;
+.faq-title-wrap,
+.faq-header {
+  margin-bottom: var(--section-header-mb, 48px);
 }
 
 .motion-accordion {
   width: 100%;
   max-width: 100%;
-  margin-top: 36px;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -3273,12 +3281,11 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
 
 .prefooter-heading {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 4.6vw, 5.2rem);
-  font-weight: 400;
-  line-height: 0.95;
+  font-size: 84px;
+  line-height: 88px;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--ink);
-  letter-spacing: -0.01em;
   white-space: nowrap;
   margin: 0;
   flex-shrink: 0;
@@ -3404,13 +3411,13 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
   justify-content: center;
   color: var(--paper);
   text-decoration: none;
-  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .footer-social-btn:hover {
   background: var(--orange);
   border-color: var(--orange);
-  color: var(--ink);
+  color: #FEFEFE;
   transform: translateY(-2px);
 }
 
@@ -3609,10 +3616,13 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     padding: 72px 18px 24px 18px;
   }
   .objetivo-card-title {
-    font-size: 20px;
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: var(--h2-ls);
   }
   .objetivo-card-desc {
-    font-size: 13.5px;
+    font-size: 13px;
+    line-height: 1.6;
   }
   /* Instructores Tablet */
   .instructores-grid { grid-template-columns: repeat(2, 1fr); }
@@ -3625,6 +3635,13 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
   .reviews-masonry-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .reviews-masonry-col { gap: 20px; }
   .footer-top-columns { grid-template-columns: 1fr 1fr; }
+
+  /* Prefooter CTA Tablet (768px a 1024px) */
+  .prefooter-heading {
+    font-size: 72px;
+    line-height: 76px;
+    letter-spacing: -0.02em;
+  }
 }
 
 /* --- MOBILE GENERAL (max-width: 768px) --- */
@@ -3670,9 +3687,116 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     flex: 1;
     box-sizing: border-box;
   }
-  .hero-top-row,
+  /* Mini Widget de Viento en Mobile: compacto, solo intensidad y brújula */
+  .hero-top-row {
+    display: block;
+    width: 100%;
+    order: 0;
+    margin-bottom: auto;
+    z-index: 10;
+  }
   .hero-weather-col {
+    display: block;
+    width: auto;
+    max-width: fit-content;
+    min-height: 58px;
+  }
+  .hero-weather-card {
+    position: fixed;
+    top: 82px;
+    left: var(--grid-margin, 24px);
+    z-index: 990;
+    display: inline-flex;
+    flex-direction: column;
+    width: auto;
+    max-width: none;
+    padding: 12px 14px;
+    border-radius: 20px;
+    background: rgba(254, 254, 254, 0.80);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.70);
+    box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08),
+                0 2px 8px rgba(13, 21, 28, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    animation: none;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.3s ease;
+  }
+  .hero-weather-card .weather-title-label,
+  .hero-weather-card .weather-progress-bar-wrap,
+  .hero-weather-card .weather-status-footer {
     display: none !important;
+  }
+  .hero-weather-card.has-weather-error .weather-status-footer {
+    display: flex !important;
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(35, 31, 32, 0.08);
+    gap: 6px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hero-weather-card.has-weather-error .weather-caption {
+    font-size: 9.5px;
+    font-weight: 600;
+  }
+  .hero-weather-card.has-weather-error .weather-error-cta {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+  .hero-weather-card .weather-header-stack {
+    margin-bottom: 2px;
+    gap: 0;
+  }
+  .hero-weather-card .weather-live-badge {
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    gap: 5px;
+  }
+  .hero-weather-card .weather-live-dot {
+    width: 5px;
+    height: 5px;
+  }
+  .hero-weather-card .weather-radar-ping {
+    width: 9px;
+    height: 9px;
+  }
+  .hero-weather-card .weather-main-grid {
+    margin-top: 0;
+    gap: 12px;
+    align-items: center;
+  }
+  .hero-weather-card .weather-speed-cluster {
+    gap: 5px;
+  }
+  .hero-weather-card .weather-speed-num {
+    font-size: 28px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .hero-weather-card .weather-speed-units {
+    gap: 1px;
+  }
+  .hero-weather-card .speed-unit-kmh {
+    font-size: 10px;
+    font-weight: 800;
+  }
+  .hero-weather-card .speed-unit-knots {
+    font-size: 9px;
+    font-weight: 600;
+  }
+  .hero-weather-card .compass-dial {
+    width: 36px;
+    height: 36px;
+  }
+  .hero-weather-card .compass-needle-svg {
+    width: 16px;
+    height: 16px;
+  }
+  .hero-weather-card .compass-marker {
+    font-size: 6px;
   }
   .hero-bottom-row {
     order: 1;
@@ -3751,6 +3875,10 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     margin-bottom: 14px;
     padding: 0;
   }
+  html.js-motion-ready .disciplinas-header {
+    opacity: 1;
+    transition: none;
+  }
   .disciplinas-title-col,
   .disciplinas-title-group {
     width: 100%;
@@ -3763,6 +3891,7 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
   .tidescape-title,
   .spot-card-title,
   .faq-title-wrap h2,
+  .faq-title,
   .section-faq h2,
   .mapa-title,
   .reviews-title {
@@ -3837,25 +3966,74 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     line-height: 1.55;
     margin-bottom: 20px;
   }
+  /* Bento Grid Mobile (Distribución editorial inspirada en layout de referencia) */
   .bento-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
-  .bento-cell--wide,
-  .bento-cell--dark,
-  .bento-cell--tall,
-  .bento-cell--sponsor,
+  /* Foto horizontal superior a ancho completo */
+  .bento-cell--wide {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    height: 180px;
+    border-radius: 20px;
+  }
+  /* Card +15 arriba a la izquierda (como el 10+ de la imagen de referencia) */
+  .bento-cell--dark {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 165px;
+    height: 100%;
+    border-radius: 20px;
+  }
+  .bento-cell--dark .bento-stat-number {
+    font-size: clamp(38px, 10vw, 44px);
+    line-height: 0.95;
+    margin-bottom: 6px;
+  }
+  .bento-cell--dark .bento-stat-text {
+    font-size: 13px;
+    line-height: 1.35;
+    color: rgba(254, 254, 254, 0.82);
+    max-width: none;
+  }
+  /* Foto inferior izquierda (debajo del +15, como la foto de la chica) */
   .bento-cell--photo-alt {
     grid-column: 1;
-    grid-row: auto;
+    grid-row: 3;
+    height: 165px;
+    border-radius: 20px;
   }
+  /* Foto alta a la derecha ocupando las dos filas 2 y 3 (como el celular en la referencia) */
   .bento-cell--tall {
-    height: 320px;
-    min-height: 320px;
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    height: 100%;
+    min-height: calc(165px * 2 + 12px);
+    border-radius: 20px;
   }
-  .bento-cell--wide,
-  .bento-cell--photo-alt {
-    height: 220px;
+  /* Sponsor HARD WIND abajo a ancho completo (como el bloque inferior en la referencia) */
+  .bento-cell--sponsor {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    padding: 22px 18px;
+    min-height: 150px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bento-cell--sponsor .bento-sponsor-logo {
+    width: 200px;
+  }
+  .bento-cell--sponsor .bento-sponsor-desc {
+    font-size: 13.5px;
+    line-height: 1.35;
+    max-width: 32ch;
   }
 
   /* Tidescape Alquileres Mobile: 2 fotos arriba, contenido al centro, 2 fotos abajo */
@@ -3908,12 +4086,18 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     line-height: 1.55;
   }
   .tidescape-support-line {
-    font-size: 12.5px;
-    padding: 7px 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 0;
     margin: 0 auto 24px;
-    border-width: 1.5px;
-    line-height: 1.35;
+    border: none;
+    line-height: 1.4;
     white-space: normal;
+    gap: 8px;
+  }
+  .tidescape-check-icon {
+    width: 16px;
+    height: 16px;
   }
   .tidescape-card-bl {
     order: 4;
@@ -4001,48 +4185,6 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     transition-delay: 400ms;
   }
 
-  /* Mosaico & Cita Manifiesto */
-  .section-mosaic-quote {
-    padding: 18px 0 48px;
-  }
-  .mosaic-stage-wrap {
-    padding: 0;
-    gap: 38px;
-  }
-  .mosaic-center-quote {
-    padding: 0 18px;
-  }
-  .manifesto-big-quote {
-    font-size: clamp(1.3rem, 4.8vw, 2.3rem);
-    line-height: 0.98;
-    white-space: normal;
-    text-wrap: balance;
-  }
-  .mosaic-slider-track {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 14px;
-    padding: 8px 18px 20px;
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .mosaic-slider-track::-webkit-scrollbar {
-    display: none;
-  }
-  .mosaic-card-thumb {
-    flex: 0 0 76%;
-    scroll-snap-align: center;
-    border-radius: 16px;
-    box-shadow: 0 8px 22px rgba(35, 31, 32, 0.10);
-  }
-  .mosaic-card-thumb img {
-    height: 200px;
-    border-radius: 16px;
-  }
-
   /* Filosofía / Objetivo Mobile */
   .section-objetivo {
     padding: 0 0 80px;
@@ -4074,6 +4216,10 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
   }
   .objetivo-card-content {
     padding: 76px 24px 28px 24px;
+  }
+  .objetivo-card-title {
+    font-size: 24px;
+    line-height: 32px;
   }
 
   /* Instructores */
@@ -4270,7 +4416,9 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     gap: 20px;
   }
   .prefooter-heading {
-    font-size: clamp(1.75rem, 7.8vw, 3.2rem);
+    font-size: 60px;
+    line-height: 64px;
+    letter-spacing: -0.02em;
     white-space: normal;
   }
   .prefooter-flex-row .btn-pill-orange {
@@ -4348,13 +4496,14 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     padding-top: calc(80px + env(safe-area-inset-top, 0px));
     padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   }
-  .hero-bottom-area {
-    gap: 10px;
-  }
   header.site-header {
     width: calc(100% - 16px);
     top: 8px;
     padding: 5px 10px;
+  }
+  .hero-weather-card {
+    top: 76px;
+    left: 8px;
   }
   .brand-disc-img {
     width: 32px;
@@ -4412,7 +4561,6 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
   .sport-title-giant {
     font-size: 24px;
   }
-  .kayak-content,
   .mapa-info-pane,
   .spot-orange-card,
   .spot-dark-camera-card {
@@ -4420,11 +4568,6 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
   }
   .footer-floating-card {
     padding: 28px 16px 0 16px;
-  }
-  .manifesto-big-quote {
-    font-size: clamp(0.95rem, 4.8vw, 1.45rem);
-    white-space: normal;
-    text-wrap: balance;
   }
   .bottom-parallax-bg {
     background-position: 57% 10%;
@@ -4438,8 +4581,7 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
    SCROLL REVEALS COORDINADOS (GPU TRANSFORM & OPACITY ONLY)
    ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
-  /* Cabeceras de sección */
-  html.js-motion-ready .disciplinas-header,
+  /* Cabeceras de sección generales */
   html.js-motion-ready .bento-header,
   html.js-motion-ready .objetivo-header,
   html.js-motion-ready .instructores-header,
@@ -4452,7 +4594,6 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     will-change: opacity, transform;
   }
 
-  html.js-motion-ready .disciplinas-header.is-in-view,
   html.js-motion-ready .bento-header.is-in-view,
   html.js-motion-ready .objetivo-header.is-in-view,
   html.js-motion-ready .instructores-header.is-in-view,
@@ -4461,6 +4602,21 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
   html.js-motion-ready .reviews-header.is-in-view {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Cabecera de Disciplinas (Aprendé con nosotros): Animación de entrada activa SOLO en pantallas mayores a mobile (>= 769px) */
+  @media (min-width: 769px) {
+    html.js-motion-ready .disciplinas-header {
+      opacity: 0;
+      transform: translateY(38px);
+      transition: opacity 0.95s var(--ease-apple), transform 0.95s var(--ease-apple);
+      will-change: opacity, transform;
+    }
+
+    html.js-motion-ready .disciplinas-header.is-in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Entrada fluida de la primera card de Disciplinas (Kitesurf) y Rail Lateral */
@@ -4488,22 +4644,26 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     transform: translateY(0);
   }
 
-  /* Bento Grid Celdas (Stagger progresivo) */
+  /* Bento Grid Celdas (Animación individual por cada card) */
   html.js-motion-ready .bento-cell {
     opacity: 0;
-    transform: translateY(40px) scale(0.97);
-    transition: opacity 0.95s var(--ease-apple), transform 0.95s var(--ease-apple);
+    transform: translateY(32px) scale(0.97);
+    transition: opacity 0.8s var(--ease-apple), transform 0.8s var(--ease-apple);
     will-change: opacity, transform;
   }
-  html.js-motion-ready .bento-grid.is-in-view .bento-cell {
+
+  html.js-motion-ready .bento-cell.is-in-view {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(1) { transition-delay: 0ms; }
-  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(2) { transition-delay: 120ms; }
-  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(3) { transition-delay: 240ms; }
-  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(4) { transition-delay: 360ms; }
-  html.js-motion-ready .bento-grid.is-in-view .bento-cell:nth-child(5) { transition-delay: 480ms; }
+
+  @media (min-width: 1024px) {
+    html.js-motion-ready .bento-cell:nth-child(1).is-in-view { transition-delay: 0ms; }
+    html.js-motion-ready .bento-cell:nth-child(2).is-in-view { transition-delay: 80ms; }
+    html.js-motion-ready .bento-cell:nth-child(3).is-in-view { transition-delay: 160ms; }
+    html.js-motion-ready .bento-cell:nth-child(4).is-in-view { transition-delay: 80ms; }
+    html.js-motion-ready .bento-cell:nth-child(5).is-in-view { transition-delay: 160ms; }
+  }
 
   /* Instructores Grid (Animación por tarjeta individual y Stagger fluido en Desktop) */
   html.js-motion-ready .instructor-card {
