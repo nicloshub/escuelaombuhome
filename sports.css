@@ -2062,6 +2062,165 @@ nav.desktop-nav {
 }
 
 /* =========================================================
+   6.5 GALERÍA: DÍAS DE RÍO Y VIENTO EN ACASSUSO
+   ========================================================= */
+.galeria-header-wrap {
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .galeria-header-wrap {
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .galeria-header-wrap {
+    margin-bottom: 48px;
+    max-width: 650px;
+  }
+}
+
+.galeria-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+.galeria-kicker-dot {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.galeria-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.galeria-bajada {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .galeria-bajada {
+    font-size: 17px;
+  }
+}
+
+.galeria-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .galeria-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .galeria-bento-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+
+  .galeria-item--main {
+    grid-column: span 7;
+    height: 380px;
+  }
+
+  .galeria-item--tall {
+    grid-column: span 5;
+    height: 380px;
+  }
+
+  .galeria-item--half-1 {
+    grid-column: span 4;
+    height: 280px;
+  }
+
+  .galeria-item--half-2 {
+    grid-column: span 4;
+    height: 280px;
+  }
+
+  .galeria-item--half-3 {
+    grid-column: span 4;
+    height: 280px;
+  }
+}
+
+.galeria-item {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  height: 240px;
+  background-color: #E2E0D8;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .galeria-item {
+    height: 300px;
+  }
+}
+
+.galeria-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.galeria-item:hover img {
+  transform: scale(1.04);
+}
+
+.galeria-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(20, 18, 16, 0.75) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  pointer-events: none;
+}
+
+.galeria-tag {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+}
+
+/* =========================================================
    7. INSTRUCTORES: CON QUIÉN VAS A APRENDER
    ========================================================= */
 .coaches-editorial-grid {
