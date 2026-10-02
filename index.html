@@ -10,9 +10,20 @@
   <!-- Open Graph / Redes Sociales & WhatsApp -->
   <meta property="og:title" content="Escuela Náutica Ombú | Deportes Náuticos en San Isidro">
   <meta property="og:description" content="Escuela de kitesurf, windsurf, wingfoil y Stand Up Paddle en Acassuso, San Isidro. Clases por nivel, instructores con más de 10 años de experiencia y bajada náutica propia.">
-  <meta property="og:image" content="https://escuelaombu.com.ar/assets/hero-bg-kitesurf.png">
+  <meta property="og:image" content="https://escuelaombu.com.ar/assets/og-image.jpg">
+  <meta property="og:image:secure_url" content="https://escuelaombu.com.ar/assets/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo Escuela Náutica Ombú">
   <meta property="og:url" content="https://escuelaombu.com.ar/">
   <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Escuela Náutica Ombú | Deportes Náuticos en San Isidro">
+  <meta name="twitter:description" content="Escuela de kitesurf, windsurf, wingfoil y Stand Up Paddle en Acassuso, San Isidro.">
+  <meta name="twitter:image" content="https://escuelaombu.com.ar/assets/og-image.jpg">
 
   <link rel="icon" type="image/png" href="./assets/logo-ombu-footer.png">
   <link rel="apple-touch-icon" href="./assets/logo-ombu-footer.png">
@@ -159,7 +170,11 @@
          ========================================================= -->
     <section class="hero-section" id="inicio">
       <div class="hero-bg-layer">
-        <img src="./assets/hero-bg-kitesurf.png" alt="Escuela Náutica Ombú - Kitesurf en el Río de la Plata" fetchpriority="high" loading="eager" decoding="async">
+        <picture>
+          <source media="(max-width: 768px)" srcset="./assets/hero-bg-kitesurf-mobile.webp" type="image/webp">
+          <source srcset="./assets/hero-bg-kitesurf.webp" type="image/webp">
+          <img src="./assets/hero-bg-kitesurf.webp" alt="Escuela Náutica Ombú - Kitesurf en el Río de la Plata" fetchpriority="high" loading="eager" decoding="async" width="2506" height="1411">
+        </picture>
       </div>
 
       <div class="container hero-content-wrap">
