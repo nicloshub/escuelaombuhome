@@ -1,59 +1,11 @@
-// Datos de las 4 disciplinas según diseño Figma
-const sportsData = {
-  kitesurf: {
-    title: "KITESURF",
-    desc: "Deslizamiento veloz y sensación de vuelo propulsado por cometa y arnés. Te enseñamos a dominar la ventana de viento en tierra, el control del cuerpo en agua y la navegación autónoma ceñida.",
-    image: "./assets/deporte-kitesurf.jpg",
-    curve: "6 a 8 clases (autonomía)",
-    gear: "100% provisto por Ombú",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$45.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Kitesurf."
-  },
-  wingfoil: {
-    title: "WINGFOIL",
-    desc: "Un ala inflable ultraliviana en tus manos y un foil bajo la tabla que te eleva 80 cm sobre el agua. Sensación de vuelo silencioso y suave, sin impacto contra el oleaje del río.",
-    image: "./assets/deporte-wingfoil.jpg",
-    curve: "Rápida en vela / Técnica en foil",
-    gear: "Ala, tabla foil, chaleco y casco",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$48.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Wingfoil."
-  },
-  windsurf: {
-    title: "WINDSURF",
-    desc: "La escuela madre de la navegación a vela. Sentí la fuerza pura del viento en tus manos y disfrutá el planeo con tablas anchas modernas diseñadas para aprender desde la primera sesión.",
-    image: "./assets/deporte-windsurf.jpg",
-    curve: "Inmediata desde 1ra clase",
-    gear: "Vela liviana y tabla de escuela",
-    comm: "Radiocasco VHF en el agua",
-    safety: "Lancha de rescate en guardia",
-    price: "$38.000",
-    wppMessage: "Hola Ombú! Quiero consultar disponibilidad para clases de Windsurf."
-  },
-  sup: {
-    title: "SUP PADDLE",
-    desc: "Remo de pie sobre tabla touring. Sin depender del viento. Perfecto para entrenar el equilibrio, desconectar después del trabajo y disfrutar de travesías grupales guiadas al atardecer.",
-    image: "./assets/deporte-sup.jpg",
-    curve: "Sin experiencia previa",
-    gear: "Tabla touring, remo y chaleco",
-    comm: "Guía e instructor en grupo",
-    safety: "Embarcación de apoyo",
-    price: "$25.000",
-    wppMessage: "Hola Ombú! Quiero info sobre salidas y alquiler de SUP Paddle."
-  }
-};
-
 // Cálculo dinámico del punto de fijación (desktop vs mobile)
 function getCardPinTop(index) {
   if (window.innerWidth <= 480) {
-    return 70;
+    return 144;
   } else if (window.innerWidth <= 768) {
-    return 72;
+    return 152;
   } else if (window.innerWidth <= 1024) {
-    return 84;
+    return 185;
   }
   return 280;
 }
@@ -71,17 +23,13 @@ function scrollToSport(sportKey) {
   });
 }
 
-function switchSport(sportKey) {
-  scrollToSport(sportKey);
-}
-
 // Inicialización del efecto Scroll Stack con Rail Lateral Minimalista
 function initScrollStack() {
   const stackCards = document.querySelectorAll('.scroll-stack-card');
   const railThumb = document.getElementById('sideRailThumb');
   const railTrack = document.getElementById('sideRailTrack');
-  const mobileCounter = document.getElementById('mobileStackCounter');
   const disciplinasHeader = document.querySelector('.disciplinas-header');
+  const sideRailSticky = document.querySelector('.side-rail-sticky');
   if (!stackCards.length) return;
 
   if (railTrack) {
@@ -101,7 +49,8 @@ function initScrollStack() {
   let ticking = false;
 
   function updateStack() {
-    const isDesktop = window.innerWidth > 1024;
+    const isMobile = window.innerWidth <= 768;
+    const travelDist = isMobile ? 260 : 320;
 
     stackCards.forEach((card, index) => {
       const inner = card.querySelector('.sport-card-stage');
@@ -116,7 +65,6 @@ function initScrollStack() {
         const nextPinTop = getCardPinTop(j);
         
         // Rango de aproximación de la siguiente tarjeta
-        const travelDist = 320;
         const progress = Math.min(1, Math.max(0, (nextPinTop + travelDist - nextRect.top) / travelDist));
         totalOverlap += progress;
       }
@@ -128,15 +76,9 @@ function initScrollStack() {
 
       inner.style.transform = `scale(${scale})`;
       inner.style.filter = `brightness(${brightness})`;
-      if (isDesktop) {
-        card.style.opacity = `${opacity}`;
-        card.style.visibility = opacity <= 0.01 ? 'hidden' : 'visible';
-        card.style.pointerEvents = totalOverlap >= 0.75 ? 'none' : 'auto';
-      } else {
-        card.style.opacity = '1';
-        card.style.visibility = 'visible';
-        card.style.pointerEvents = 'auto';
-      }
+      card.style.opacity = `${opacity}`;
+      card.style.visibility = opacity <= 0.01 ? 'hidden' : 'visible';
+      card.style.pointerEvents = totalOverlap >= 0.75 ? 'none' : 'auto';
     });
 
     // Detectar qué tarjeta está activa al frente
@@ -159,24 +101,25 @@ function initScrollStack() {
       railThumb.style.transform = `translateY(${targetY}px)`;
     }
 
-    // Actualizar mini contador móvil
-    if (mobileCounter) {
-      mobileCounter.textContent = `0${activeIndex + 1} / 04 · ${sportNames[activeIndex] || ''}`;
-    }
-
-    // Coordinar salida con la última card para que el título suba al mismo tiempo y nunca pase por detrás
-    if (disciplinasHeader && stackCards.length > 0 && window.innerWidth > 1024) {
+    // Coordinar salida con la última card para que el título y el rail suban al mismo tiempo y nunca pasen por detrás ni reboten
+    if (disciplinasHeader && stackCards.length > 0) {
       const lastCard = stackCards[stackCards.length - 1];
       const lastRect = lastCard.getBoundingClientRect();
       const pinTop = getCardPinTop(stackCards.length - 1);
       if (lastRect.top < pinTop) {
-        const exitDiff = pinTop - lastRect.top;
-        disciplinasHeader.style.transform = `translateY(-${exitDiff}px)`;
+        const exitDiff = Math.max(0, pinTop - lastRect.top);
+        disciplinasHeader.style.setProperty('transition', 'none', 'important');
+        disciplinasHeader.style.transform = `translate3d(0, -${exitDiff}px, 0)`;
+        if (sideRailSticky) {
+          sideRailSticky.style.setProperty('transition', 'none', 'important');
+          sideRailSticky.style.transform = `translate3d(0, -${exitDiff}px, 0)`;
+        }
       } else {
         disciplinasHeader.style.transform = '';
+        if (sideRailSticky) {
+          sideRailSticky.style.transform = '';
+        }
       }
-    } else if (disciplinasHeader) {
-      disciplinasHeader.style.transform = '';
     }
 
     ticking = false;
@@ -201,80 +144,134 @@ function initScrollStack() {
 
 // Telemetría en tiempo real desde Open-Meteo para Acassuso (Ombú)
 async function fetchLiveWind() {
+  const speedEl = document.getElementById('heroWindSpeed');
+  const knotsEl = document.getElementById('heroWindKnots');
+  const dirTextEl = document.getElementById('heroWindDirText');
+  const compassDial = document.getElementById('heroCompassDial');
+  const captionEl = document.getElementById('heroWindCaption');
+  const suitabilityEl = document.getElementById('heroSpotSuitability');
+  const barEl = document.getElementById('heroWindBar');
+  const cardEl = document.querySelector('.hero-weather-card');
+  const liveDot = document.querySelector('.weather-live-dot');
+  const liveText = document.querySelector('.weather-live-text');
+  const radarPing = document.querySelector('.weather-radar-ping');
+
+  function showWeatherError() {
+    if (cardEl) {
+      cardEl.classList.add('has-weather-error');
+      cardEl.setAttribute('title', 'Datos inaccesibles en este momento. Escribinos para consultar condiciones.');
+    }
+    if (speedEl) speedEl.textContent = '--';
+    if (knotsEl) knotsEl.textContent = 'Escribinos';
+    if (radarPing) radarPing.style.display = 'none';
+    if (liveDot) {
+      liveDot.style.backgroundColor = '#9CA3AF';
+      liveDot.style.boxShadow = 'none';
+    }
+    if (liveText) liveText.textContent = 'SIN DATOS';
+
+    if (barEl) {
+      barEl.style.width = '0%';
+      barEl.style.background = 'rgba(35, 31, 32, 0.15)';
+    }
+
+    if (captionEl) {
+      captionEl.textContent = 'Datos inaccesibles,';
+    }
+    if (suitabilityEl) {
+      suitabilityEl.innerHTML = '<a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quer%C3%ADa%20consultar%20por%20las%20condiciones%20del%20viento%20hoy." target="_blank" rel="noopener noreferrer" class="weather-error-cta">escribinos ↗</a>';
+    }
+  }
+
   try {
-    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh');
-    if (!res.ok) return;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh', {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      throw new Error(`Open-Meteo HTTP error ${res.status}`);
+    }
     const data = await res.json();
-    if (data && data.current) {
-      const speedKm = Math.round(data.current.wind_speed_10m ?? 0);
-      const knots = Math.round(speedKm / 1.852);
-      const deg = Math.round(data.current.wind_direction_10m ?? 0);
-      
-      // Rumbos náuticos oficiales en español
-      const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
-      const dirIndex = Math.round(deg / 45) % 8;
-      const dirStr = dirs[dirIndex];
+    if (!data || !data.current || data.current.wind_speed_10m === undefined || data.current.wind_direction_10m === undefined) {
+      throw new Error('Open-Meteo: formato de datos inválido o incompleto');
+    }
 
-      const speedEl = document.getElementById('heroWindSpeed');
-      const knotsEl = document.getElementById('heroWindKnots');
-      const dirTextEl = document.getElementById('heroWindDirText');
-      const compassDial = document.getElementById('heroCompassDial');
-      const captionEl = document.getElementById('heroWindCaption');
-      const suitabilityEl = document.getElementById('heroSpotSuitability');
-      const barEl = document.getElementById('heroWindBar');
+    // Limpiar estado de error si la respuesta fue exitosa
+    if (cardEl) {
+      cardEl.classList.remove('has-weather-error');
+      cardEl.removeAttribute('title');
+    }
+    if (radarPing) radarPing.style.display = '';
+    if (liveDot) {
+      liveDot.style.backgroundColor = '';
+      liveDot.style.boxShadow = '';
+    }
+    if (liveText) liveText.textContent = 'EN VIVO';
 
-      if (speedEl) speedEl.textContent = speedKm;
-      if (knotsEl) knotsEl.textContent = `${knots} nudos`;
-      if (dirTextEl) dirTextEl.textContent = dirStr;
+    const speedKm = Math.round(data.current.wind_speed_10m ?? 0);
+    const knots = Math.round(speedKm / 1.852);
+    const deg = Math.round(data.current.wind_direction_10m ?? 0);
+    
+    // Rumbos náuticos oficiales en español
+    const dirs = ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO'];
+    const dirIndex = Math.round(deg / 45) % 8;
+    const dirStr = dirs[dirIndex];
 
-      // La punta naranja de la brújula apunta con precisión náutica a la procedencia real del viento
-      if (compassDial) {
-        compassDial.style.transform = `rotate(${deg}deg)`;
-      }
+    if (speedEl) speedEl.textContent = speedKm;
+    if (knotsEl) knotsEl.textContent = `${knots} nudos`;
+    if (dirTextEl) dirTextEl.textContent = dirStr;
 
-      // Iluminar en naranja la letra cardinal activa del cuadrante (N, E, S, O)
-      const markerN = document.querySelector('.compass-marker.n');
-      const markerE = document.querySelector('.compass-marker.e');
-      const markerS = document.querySelector('.compass-marker.s');
-      const markerO = document.querySelector('.compass-marker.o');
+    // La punta naranja de la brújula apunta con precisión náutica a la procedencia real del viento
+    if (compassDial) {
+      compassDial.style.transform = `rotate(${deg}deg)`;
+    }
 
-      [markerN, markerE, markerS, markerO].forEach(m => m && m.classList.remove('is-active'));
+    // Iluminar en naranja la letra cardinal activa del cuadrante (N, E, S, O)
+    const markerN = document.querySelector('.compass-marker.n');
+    const markerE = document.querySelector('.compass-marker.e');
+    const markerS = document.querySelector('.compass-marker.s');
+    const markerO = document.querySelector('.compass-marker.o');
 
-      if (deg >= 315 || deg < 45) {
-        markerN?.classList.add('is-active');
-      } else if (deg >= 45 && deg < 135) {
-        markerE?.classList.add('is-active');
-      } else if (deg >= 135 && deg < 225) {
-        markerS?.classList.add('is-active');
-      } else if (deg >= 225 && deg < 315) {
-        markerO?.classList.add('is-active');
-      }
+    [markerN, markerE, markerS, markerO].forEach(m => m && m.classList.remove('is-active'));
 
-      if (barEl) {
-        // Escala normalizada de 0 a 45 km/h
-        const percent = Math.min(100, Math.max(12, Math.round((speedKm / 45) * 100)));
-        barEl.style.width = `${percent}%`;
-        barEl.style.background = 'var(--orange)';
-      }
+    if (deg >= 315 || deg < 45) {
+      markerN?.classList.add('is-active');
+    } else if (deg >= 45 && deg < 135) {
+      markerE?.classList.add('is-active');
+    } else if (deg >= 135 && deg < 225) {
+      markerS?.classList.add('is-active');
+    } else if (deg >= 225 && deg < 315) {
+      markerO?.classList.add('is-active');
+    }
 
-      if (captionEl && suitabilityEl) {
-        if (knots >= 14 && knots <= 26) {
-          captionEl.textContent = 'Condición óptima de planeo';
-          suitabilityEl.textContent = 'Ideal Kite & Wing';
-        } else if (knots >= 8 && knots < 14) {
-          captionEl.textContent = 'Viento moderado';
-          suitabilityEl.textContent = 'Ideal Wing & Wind';
-        } else if (knots < 8) {
-          captionEl.textContent = 'Agua calma sin viento';
-          suitabilityEl.textContent = 'Ideal SUP & Kayak';
-        } else {
-          captionEl.textContent = 'Viento fuerte en el spot';
-          suitabilityEl.textContent = 'Kite & Wind Pro';
-        }
+    if (barEl) {
+      // Escala normalizada de 0 a 45 km/h
+      const percent = Math.min(100, Math.max(12, Math.round((speedKm / 45) * 100)));
+      barEl.style.width = `${percent}%`;
+      barEl.style.background = 'var(--orange)';
+    }
+
+    if (captionEl && suitabilityEl) {
+      if (knots >= 14 && knots <= 26) {
+        captionEl.textContent = 'Condición óptima de planeo';
+        suitabilityEl.textContent = 'Ideal Kite & Wing';
+      } else if (knots >= 8 && knots < 14) {
+        captionEl.textContent = 'Viento moderado';
+        suitabilityEl.textContent = 'Ideal Wing & Wind';
+      } else if (knots < 8) {
+        captionEl.textContent = 'Agua calma sin viento';
+        suitabilityEl.textContent = 'Ideal SUP & Kayak';
+      } else {
+        captionEl.textContent = 'Viento fuerte en el spot';
+        suitabilityEl.textContent = 'Kite & Wind Pro';
       }
     }
   } catch (err) {
     console.warn("Telemetría meteorológica (modo fallback):", err);
+    showWeatherError();
   }
 }
 
@@ -314,6 +311,23 @@ function initMotionNav() {
   const trigger = document.getElementById('navSportsTrigger');
   const viewport = document.getElementById('navSportsViewport');
   const dropdownHoverPill = document.getElementById('dropdownHoverPill');
+
+  const brandLink = document.querySelector('.header-brand');
+  if (brandLink) {
+    brandLink.addEventListener('click', (e) => {
+      const isAnchorHome = brandLink.getAttribute('href') === '#inicio' || brandLink.getAttribute('href') === '#';
+      if (isAnchorHome) {
+        e.preventDefault();
+        const heroEl = document.getElementById('inicio');
+        if (heroEl) {
+          heroEl.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        history.pushState(null, '', '#inicio');
+      }
+    });
+  }
 
   if (!navList || !highlightPill) return;
 
@@ -453,86 +467,185 @@ function initMobileMenu() {
   });
 }
 
-// Animación de dispersión (Scatter) al hacer scroll - Sección Alquileres (estilo TideScape)
-function initTidescapeScatter() {
-  const section = document.querySelector('.section-tidescape-cta');
-  if (!section) return;
+// Mapa interactivo oficial de Escuela Ombú (Google Maps API limpio, nítido y sin UI molesta)
+window.initGoogleMap = function() {
+  const mapElement = document.getElementById('ombuMap');
+  if (!mapElement || typeof google === 'undefined' || !google.maps) return;
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    section.style.setProperty('--tidescape-p', '1');
-    return;
-  }
+  const ombuLocation = { lat: -34.4735386, lng: -58.4901005 };
 
-  let targetP = 0;
-  let currentP = 0;
-  let rafId = null;
-  let isVisible = false;
+  const defaultZoom = 15;
 
-  function calculateTarget() {
+  // Cálculo del centro compensado: En mobile (mapa de 300px), desplazamos
+  // exactamente 55px hacia el norte para que el conjunto (cartel + pin)
+  // quede perfectamente equilibrado en cualquier nivel de zoom sin cortar el cartel
+  function getMapCenter(zoomLevel) {
     if (window.innerWidth <= 768) {
-      targetP = 1;
-      return;
+      const z = typeof zoomLevel === 'number' ? zoomLevel : defaultZoom;
+      const shiftPixels = 55;
+      const scale = 256 * Math.pow(2, z);
+      const lat = ombuLocation.lat;
+      const sin = Math.sin(lat * Math.PI / 180);
+      const y0 = (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * scale;
+      const targetY = y0 - shiftPixels;
+      const n = (targetY / scale) - 0.5;
+      const targetLat = (2 * Math.atan(Math.exp(-n * 2 * Math.PI)) - Math.PI / 2) * 180 / Math.PI;
+      return { lat: targetLat, lng: ombuLocation.lng };
     }
-    const rect = section.getBoundingClientRect();
-    const windowH = window.innerHeight;
-
-    // Inicia cuando el tope de la sección entra a 88% del viewport
-    // Llega a su dispersión plena (1.0) cuando la sección queda en el tercio central
-    const startY = windowH * 0.88;
-    const endY = windowH * 0.32;
-
-    const raw = (startY - rect.top) / (startY - endY);
-    targetP = Math.max(0, Math.min(1, raw));
+    return ombuLocation;
   }
 
-  function loop() {
-    const diff = targetP - currentP;
-    if (Math.abs(diff) > 0.001) {
-      currentP += diff * 0.14; // Lerp suave que emula la física de resorte de Framer
-      section.style.setProperty('--tidescape-p', currentP.toFixed(4));
-      rafId = requestAnimationFrame(loop);
-    } else {
-      currentP = targetP;
-      section.style.setProperty('--tidescape-p', currentP.toFixed(4));
-      rafId = null;
+  // Estilos a medida: Warm Sand & River para Escuela Ombú
+  const ombuMapStyles = [
+    // 1. Ocultar comercios y puntos de interés ajenos para mantener el mapa limpio
+    {
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [{ visibility: "off" }]
+    },
+    {
+      featureType: "poi.business",
+      stylers: [{ visibility: "off" }]
+    },
+    // 2. Río de la Plata: agua suave, limpia y serena en tono pizarra celeste
+    {
+      featureType: "water",
+      elementType: "geometry",
+      stylers: [{ color: "#c2d6e3" }]
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.fill",
+      stylers: [{ color: "#5d7b8c" }]
+    },
+    // 3. Tierra / Manzanas: tono crema/arena a juego con el diseño
+    {
+      featureType: "landscape",
+      elementType: "geometry",
+      stylers: [{ color: "#f7f5f0" }]
+    },
+    // 4. Calles y accesos en blanco puro con borde suave
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [{ color: "#fefefe" }]
+    },
+    {
+      featureType: "road",
+      elementType: "geometry.stroke",
+      stylers: [{ color: "#e5e0d6" }]
+    },
+    {
+      featureType: "road",
+      elementType: "labels.text.fill",
+      stylers: [{ color: "#666666" }]
+    },
+    // 5. Nombres administrativos en gris oscuro legible
+    {
+      featureType: "administrative",
+      elementType: "labels.text.fill",
+      stylers: [{ color: "#3a3a3a" }]
     }
-  }
+  ];
 
-  function triggerUpdate() {
-    calculateTarget();
-    if (!rafId) {
-      rafId = requestAnimationFrame(loop);
+  const map = new google.maps.Map(mapElement, {
+    center: getMapCenter(defaultZoom),
+    zoom: defaultZoom,
+    styles: ombuMapStyles,
+    disableDefaultUI: true, // Desactiva toda la UI invasiva por default
+    zoomControl: true,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.RIGHT_BOTTOM
+    },
+    gestureHandling: "cooperative"
+  });
+
+  // Asegurar renderizado perfecto al terminar de cargar estilos
+  google.maps.event.addListenerOnce(map, 'idle', () => {
+    google.maps.event.trigger(map, 'resize');
+    map.setCenter(getMapCenter(map.getZoom()));
+  });
+
+  // Re-equilibrar ante cambios de zoom en mobile para mantener centrado el conjunto
+  map.addListener('zoom_changed', () => {
+    if (window.innerWidth <= 768) {
+      map.setCenter(getMapCenter(map.getZoom()));
     }
-  }
+  });
 
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) {
-          triggerUpdate();
-        }
-      });
-    }, { rootMargin: '150px 0px' });
+  // Marcador oficial en Naranja Ombú (#FF5206)
+  const markerIcon = {
+    path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+    fillColor: "#FF5206",
+    fillOpacity: 1,
+    strokeColor: "#FEFEFE",
+    strokeWeight: 2,
+    scale: 2,
+    anchor: new google.maps.Point(12, 22)
+  };
 
-    observer.observe(section);
-  } else {
-    isVisible = true;
-  }
+  const marker = new google.maps.Marker({
+    position: ombuLocation,
+    map: map,
+    title: "Escuela Náutica Ombú",
+    icon: markerIcon,
+    animation: google.maps.Animation.DROP
+  });
 
-  window.addEventListener('scroll', () => {
-    if (isVisible || window.innerWidth > 768) {
-      triggerUpdate();
+  // Ventana flotante interactiva
+  const infoWindowContent = `
+    <div class="ombu-infowindow-body">
+      <div class="ombu-iw-header">
+        <strong class="ombu-iw-title">ESCUELA OMBÚ</strong>
+        <button type="button" class="ombu-iw-close" id="ombuIwCloseBtn" aria-label="Cerrar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <span class="ombu-iw-sub">Sebastián Elcano 994, Acassuso</span>
+      <a href="https://maps.app.goo.gl/duhdkxUzUEPQsZHx5" target="_blank" rel="noopener noreferrer" class="btn-pill-orange ombu-iw-btn-pill">
+        CÓMO LLEGAR
+        <div class="icon">
+          <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+          </svg>
+        </div>
+      </a>
+    </div>
+  `;
+
+  const infoWindow = new google.maps.InfoWindow({
+    content: infoWindowContent,
+    disableAutoPan: true
+  });
+
+  // Mostrar el cartelito flotante abierto por defecto sin desplazar el centro del mapa
+  infoWindow.open(map, marker);
+
+  marker.addListener("click", () => {
+    infoWindow.open(map, marker);
+  });
+
+  // Cerrar InfoWindow con el botón X del header compartido
+  document.addEventListener("click", (e) => {
+    if (e.target.closest("#ombuIwCloseBtn")) {
+      infoWindow.close();
     }
-  }, { passive: true });
+  });
 
-  window.addEventListener('resize', triggerUpdate, { passive: true });
-
-  // Inicialización
-  calculateTarget();
-  currentP = targetP;
-  section.style.setProperty('--tidescape-p', currentP.toFixed(4));
-}
+  // Mantener el pin perfectamente centrado ante cambios de orientación o resize en mobile
+  let mapResizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(mapResizeTimer);
+    mapResizeTimer = setTimeout(() => {
+      google.maps.event.trigger(map, 'resize');
+      map.setCenter(getMapCenter(map.getZoom()));
+    }, 150);
+  });
+};
 
 // =========================================================
 // GEOMETRÍA DINÁMICA DE CARDS: EL OBJETIVO
@@ -586,88 +699,10 @@ function initObjetivoCardShapes() {
   }
 }
 
-// Animación de entrada fluida y accesible para "El Objetivo"
-function initObjetivoMotion() {
-  const objetivoSection = document.getElementById('escuela');
-  if (!objetivoSection) return;
-
-  // Respetar preferencias de reducción de movimiento
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  // Prepara los elementos solo si JS está activo y funcionando
-  objetivoSection.classList.add('animate-ready');
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        objetivoSection.classList.add('is-in-view');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -40px 0px'
-  });
-
-  observer.observe(objetivoSection);
-}
-
 // =========================================================
-// SISTEMA DE ANIMACIONES Y FÍSICA FLUIDA (APPLE DESIGN & ANIMATE)
-// Revelado de secciones y componentes orquestado por IntersectionObserver
-// =========================================================
-// SISTEMA DE ANIMACIONES Y FÍSICA FLUIDA (APPLE DESIGN & ANIMATE)
-// Revelado de secciones y componentes orquestado por IntersectionObserver
-// =========================================================
-function initFluidScrollMotion() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    return;
-  }
-
-  // Activa las reglas de transición solo cuando JS está listo y funcionando
-  document.documentElement.classList.add('js-motion-ready');
-
-  // Seleccionar contenedores y elementos a revelar
-  const revealTargets = [
-    '.disciplinas-header',
-    '.bento-header',
-    '.instructores-header',
-    '.faq-header',
-    '.reviews-header',
-    '.bento-grid',
-    '.instructores-grid',
-    '.spot-split-grid',
-    '.mapa-card-white',
-    '.motion-accordion',
-    '.section-prefooter-banner',
-    '.footer-floating-card'
-  ];
-
-  const elementsToObserve = document.querySelectorAll(revealTargets.join(', '));
-  if (!elementsToObserve.length) return;
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-in-view');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -40px 0px'
-  });
-
-  elementsToObserve.forEach(el => observer.observe(el));
-}
-
-// =========================================================
-// REACT BITS MASONRY: ANIMACIÓN DE ENTRADA Y SALIDA DIRECTION-AWARE
-// Entrada: 50px desde abajo, opacity 0->1, blur 4px->0, 700ms, stagger ~70ms
+// MOVIMIENTO MASONRY: ENTRADA Y SALIDA COORDINADA DE RESEÑAS
+// Entrada: opacity 0->1, blur 4px->0, translateY(50px->0), 700ms, stagger 70ms
 // Salida: opacity 1->0, blur 0->4px, desplazamiento hacia borde de salida, 350ms, sin delay
-// Sin efectos al hacer hover
 // =========================================================
 function initMasonryReviewsMotion() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -690,18 +725,15 @@ function initMasonryReviewsMotion() {
     }
   }, { passive: true });
 
-  // Asignar estado inicial según posición antes de activar transiciones (evita animaciones al cargar si está fuera de pantalla)
+  // Asignar estado inicial según posición antes de activar transiciones
   const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
   cards.forEach(card => {
     const rect = card.getBoundingClientRect();
     if (rect.bottom < 0) {
-      // Arriba del viewport
       card.classList.add('masonry-exit-top');
     } else if (rect.top > viewportHeight) {
-      // Abajo del viewport
       card.classList.add('masonry-exit-bottom');
     } else {
-      // Ya en pantalla (ej. refresh con scroll a mitad de página)
       card.classList.add('masonry-enter');
     }
   });
@@ -716,18 +748,15 @@ function initMasonryReviewsMotion() {
   let staggerTimer = null;
 
   function nextStaggerDelay() {
-    const delay = staggerIndex * 70;
+    const delay = staggerIndex * 110;
     staggerIndex++;
     clearTimeout(staggerTimer);
     staggerTimer = setTimeout(() => {
       staggerIndex = 0;
-    }, 120);
+    }, 160);
     return `${delay}ms`;
   }
 
-  // IntersectionObserver:
-  // - threshold: 0 para que la salida se ejecute cuando esté prácticamente fuera de pantalla.
-  // - rootMargin: '0px 0px 0px 0px' para evitar activaciones prematuras mientras se lee.
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       const card = entry.target;
@@ -746,17 +775,13 @@ function initMasonryReviewsMotion() {
         card.style.setProperty('--masonry-delay', '0ms');
         card.classList.remove('masonry-enter');
 
-        // Determinar por qué borde salió
         if (rect.bottom <= rootTop + 20) {
-          // Salió por arriba (scroll hacia abajo)
           card.classList.remove('masonry-exit-bottom');
           card.classList.add('masonry-exit-top');
         } else if (rect.top >= rootBottom - 20) {
-          // Salió por abajo (scroll hacia arriba)
           card.classList.remove('masonry-exit-top');
           card.classList.add('masonry-exit-bottom');
         } else {
-          // Fallback por dirección de scroll si está justo en el borde
           if (scrollDirection === 'down') {
             card.classList.remove('masonry-exit-bottom');
             card.classList.add('masonry-exit-top');
@@ -768,25 +793,343 @@ function initMasonryReviewsMotion() {
       }
     });
   }, {
-    threshold: 0,
-    rootMargin: '0px 0px 0px 0px'
+    threshold: 0.1,
+    rootMargin: `0px 0px ${window.innerHeight < 750 ? '-100px' : '-160px'} 0px`
   });
 
   cards.forEach(card => observer.observe(card));
 }
 
+// =========================================================
+// TIDESCAPE SCROLL-SCATTER (DISPERSIÓN ORGÁNICA REACTIVA AL SCROLL)
+// Las 4 fotos en las esquinas se abren orgánicamente hacia sus esquinas
+// conforme la sección se centra en la pantalla, con física lerp suave
+// =========================================================
+function initTidescapeScatter() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const section = document.getElementById('alquileres');
+  const container = section ? section.querySelector('.tidescape-container') : null;
+  if (!section || !container) return;
+
+  let currentP = 0;
+  let targetP = 0;
+  let isTicking = false;
+
+  function calculateTargetProgress() {
+    if (window.innerWidth < 768) {
+      return 1;
+    }
+
+    const rect = section.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+
+    if (rect.top >= vh) {
+      return 0;
+    }
+    if (rect.bottom <= 0) {
+      return 1;
+    }
+
+    const startY = vh * 0.90;
+    const targetY = vh * 0.45;
+    const currentCenter = rect.top + (rect.height * 0.35);
+
+    const progress = (startY - currentCenter) / (startY - targetY);
+    return Math.max(0, Math.min(1, progress));
+  }
+
+  function updatePhysics() {
+    currentP += (targetP - currentP) * 0.12;
+
+    if (Math.abs(targetP - currentP) < 0.001) {
+      currentP = targetP;
+      isTicking = false;
+    } else {
+      requestAnimationFrame(updatePhysics);
+    }
+
+    container.style.setProperty('--tidescape-p', currentP.toFixed(4));
+  }
+
+  function onScroll() {
+    targetP = calculateTargetProgress();
+    if (!isTicking) {
+      isTicking = true;
+      requestAnimationFrame(updatePhysics);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  targetP = calculateTargetProgress();
+  currentP = targetP;
+  container.style.setProperty('--tidescape-p', currentP.toFixed(4));
+}
+
+// =========================================================
+// OBJETIVO: Animación de entrada fluida y accesible por tarjeta
+// =========================================================
+function initObjetivoMotion() {
+  const objetivoSection = document.getElementById('escuela');
+  if (!objetivoSection) return;
+
+  // Respetar preferencias de reducción de movimiento
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const cards = objetivoSection.querySelectorAll('.objetivo-card');
+  if (!cards.length) return;
+
+  // Prepara los elementos solo si JS está activo y funcionando
+  objetivoSection.classList.add('animate-ready');
+
+  // Observamos individualmente cada tarjeta con un margen de entrada preciso:
+  // no se dispara a ciegas cuando apenas asoma el encabezado de la sección,
+  // sino exactamente cuando el usuario hace scroll y la tarjeta ingresa al viewport.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in-view');
+      } else {
+        // Si la tarjeta sale por debajo del viewport al hacer scroll hacia arriba,
+        // se resetea para volver a animar con suavidad cuando el usuario vuelva a bajar
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        if (entry.boundingClientRect.top > vh) {
+          entry.target.classList.remove('is-in-view');
+        }
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  cards.forEach(card => observer.observe(card));
+}
+
+// =========================================================
+// INSTRUCTORES: Animación de entrada fluida e individual por tarjeta
+// =========================================================
+function initInstructoresMotion() {
+  const instructoresSection = document.getElementById('instructores');
+  if (!instructoresSection) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const cards = instructoresSection.querySelectorAll('.instructor-card');
+  if (!cards.length) return;
+
+  // Observamos individualmente cada tarjeta con un margen de entrada preciso:
+  // en mobile y tablet cada una entra con su animación una por una al llegar a ella,
+  // y en desktop se orquestan con stagger secuencial al ingresar al viewport.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in-view');
+      } else {
+        // Si la tarjeta sale por debajo del viewport al hacer scroll hacia arriba,
+        // se resetea para volver a animar con suavidad al volver a bajar
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        if (entry.boundingClientRect.top > vh) {
+          entry.target.classList.remove('is-in-view');
+        }
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  cards.forEach(card => observer.observe(card));
+}
+
+// =========================================================
+// TIDESCAPE ALQUILERES: Animación secuencial (Texto primero, fotos desde los costados)
+// =========================================================
+function initTidescapeMotion() {
+  const section = document.getElementById('alquileres');
+  if (!section) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const container = section.querySelector('.tidescape-container');
+  const centerWrap = section.querySelector('.tidescape-center-wrap');
+  if (!container) return;
+
+  function setInView(active) {
+    if (active) {
+      section.classList.add('is-in-view');
+      container.classList.add('is-in-view');
+      if (centerWrap) centerWrap.classList.add('is-in-view');
+    } else {
+      section.classList.remove('is-in-view');
+      container.classList.remove('is-in-view');
+      if (centerWrap) centerWrap.classList.remove('is-in-view');
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setInView(true);
+      } else {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        if (entry.boundingClientRect.top > vh) {
+          setInView(false);
+        }
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -20px 0px'
+  });
+
+  observer.observe(section);
+}
+
+// =========================================================
+// SISTEMA DE ANIMACIONES Y FÍSICA FLUIDA (APPLE DESIGN & ANIMATE)
+// Revelado de secciones y componentes orquestado por IntersectionObserver
+// =========================================================
+function initFluidScrollMotion() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Activa las reglas de transición solo cuando JS está listo y funcionando
+  document.documentElement.classList.add('js-motion-ready');
+
+  const isMobile = window.innerWidth <= 768;
+
+  // Seleccionar contenedores y elementos a revelar (cada tarjeta del bento se observa individualmente)
+  const revealTargets = [
+    ...(isMobile ? [] : ['.disciplinas-header']),
+    '.scroll-stack-card[data-index="0"]',
+    '.side-rail-sticky',
+    '.bento-header',
+    '.objetivo-header',
+    '.instructores-header',
+    '.faq-title-wrap',
+    '.faq-header',
+    '.reviews-header',
+    '.bento-cell',
+    '.spot-split-grid',
+    '.mapa-card-white',
+    '.motion-accordion',
+    '.section-prefooter-banner',
+    '.footer-floating-card'
+  ];
+
+  const elementsToObserve = document.querySelectorAll(revealTargets.join(', '));
+  if (!elementsToObserve.length) return;
+
+  const vh = window.innerHeight || 800;
+  const bottomMargin = isMobile ? '-40px' : (vh < 750 ? '-130px' : '-180px');
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        el.classList.add('is-in-view');
+        obs.unobserve(el);
+
+        // Si es la primera tarjeta del stack, una vez terminada la transición liberamos transform para el sticky nativo
+        if (el.matches && el.matches('.scroll-stack-card[data-index="0"]')) {
+          el.addEventListener('transitionend', () => {
+            el.style.transform = 'none';
+            el.style.transition = 'none';
+          }, { once: true });
+        }
+
+        if (el.matches && (el.matches('.disciplinas-header') || el.matches('.side-rail-sticky'))) {
+          el.addEventListener('transitionend', (e) => {
+            if (e.propertyName === 'transform' || e.propertyName === 'opacity') {
+              el.style.transition = 'none';
+            }
+          }, { once: true });
+        }
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: `0px 0px ${bottomMargin} 0px`
+  });
+
+  elementsToObserve.forEach(el => observer.observe(el));
+}
+
+// =========================================================
+// INTERACCIÓN SCROLL DEL HERO: WEATHER WIDGET & CTA FLOTANTE
+// Oculta el widget meteorológico y despliega el botón flotante
+// de WhatsApp al scrollear hacia abajo (> 80px)
+// =========================================================
+function initHeroFloatingScroll() {
+  const wppBtn = document.querySelector('.floating-wpp-btn');
+  const weatherCard = document.querySelector('.hero-weather-card');
+  if (!wppBtn && !weatherCard) return;
+
+  const threshold = 80;
+
+  function updateHeroScroll() {
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const isPast = scrollY > threshold;
+
+    if (wppBtn) {
+      wppBtn.classList.toggle('is-visible', isPast);
+    }
+    if (weatherCard) {
+      if (isPast) {
+        weatherCard.style.animation = 'none';
+        weatherCard.classList.add('is-scrolled-hidden');
+      } else {
+        weatherCard.classList.remove('is-scrolled-hidden');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', updateHeroScroll, { passive: true });
+  updateHeroScroll();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initScrollStack();
-  initTidescapeScatter();
   initAccordion();
-  initObjetivoCardShapes();
-  initObjetivoMotion();
-  initFluidScrollMotion();
-  initMasonryReviewsMotion();
   initMotionNav();
   initMobileMenu();
+  initObjetivoCardShapes();
+  initObjetivoMotion();
+  initInstructoresMotion();
+  initFluidScrollMotion();
+  initMasonryReviewsMotion();
+  initTidescapeScatter();
+  initTidescapeMotion();
+  initHeroFloatingScroll();
+  initWhatsAppConversionTracking();
   setInterval(fetchLiveWind, 10 * 60 * 1000);
 });
 
-
+// Seguimiento de conversiones de Google Ads al hacer clic en WhatsApp
+function initWhatsAppConversionTracking() {
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
+    if (link && typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18489977345/axdJCKmZ7pAdEIHU2vBE'
+      });
+      window.gtag('event', 'generate_lead', {
+        'event_category': 'Contact',
+        'event_label': link.getAttribute('href') || 'WhatsApp'
+      });
+    }
+  });
+}

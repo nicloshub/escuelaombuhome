@@ -1,0 +1,206 @@
+/* =========================================================
+   PÁGINA TEMPORAL DE DISCIPLINA (ESCUELA NÁUTICA OMBÚ)
+   Estética de marca: Anton + Inter, Paleta Ombú, 8pt Grid
+   ========================================================= */
+
+.temp-stage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--paper, #F9F9FB);
+  color: var(--ink, #0D151C);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.temp-hero-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.temp-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(13, 21, 28, 0.08);
+  border-radius: 28px;
+  padding: 48px 40px;
+  max-width: 640px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(13, 21, 28, 0.08), 
+              0 4px 16px rgba(13, 21, 28, 0.03);
+  text-align: center;
+  position: relative;
+}
+
+.temp-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.temp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 75, 17, 0.08);
+  color: var(--orange, #FF4B11);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 75, 17, 0.20);
+}
+
+.temp-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--orange, #FF4B11);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--orange, #FF4B11);
+}
+
+.temp-title {
+  font-family: var(--font-display, 'Anton', sans-serif);
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink, #0D151C);
+  margin-bottom: 20px;
+}
+
+.temp-desc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(13, 21, 28, 0.72);
+  margin-bottom: 32px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.temp-features-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+  text-align: left;
+}
+
+.temp-feature-item {
+  background: rgba(249, 249, 251, 0.85);
+  border: 1px solid rgba(13, 21, 28, 0.05);
+  border-radius: 14px;
+  padding: 14px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.temp-feature-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--orange, #FF4B11);
+  flex-shrink: 0;
+}
+
+.temp-feature-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink, #0D151C);
+  line-height: 1.25;
+}
+
+.temp-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.temp-btn-wpp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--orange, #FF4B11);
+  color: #FFFFFF !important;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 16px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 12px 28px rgba(255, 75, 17, 0.32);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.temp-btn-wpp:hover {
+  background: #E03E0A;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(255, 75, 17, 0.40);
+}
+
+.temp-btn-wpp svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.temp-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(13, 21, 28, 0.60);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 100px;
+  transition: color 0.2s ease;
+}
+
+.temp-btn-back:hover {
+  color: var(--ink, #0D151C);
+}
+
+.temp-footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  color: rgba(13, 21, 28, 0.45);
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .temp-card {
+    padding: 36px 20px;
+    border-radius: 22px;
+  }
+  .temp-features-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .temp-feature-item {
+    padding: 10px 14px;
+  }
+}
