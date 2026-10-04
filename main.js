@@ -1124,7 +1124,7 @@ function initWhatsAppConversionTracking() {
     const link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
     if (link && typeof window.gtag === 'function') {
       window.gtag('event', 'conversion', {
-        'send_to': 'AW-18489977345'
+        'send_to': 'AW-18489977345/axdJCKmZ7pAdEIHU2vBE'
       });
       window.gtag('event', 'generate_lead', {
         'event_category': 'Contact',
