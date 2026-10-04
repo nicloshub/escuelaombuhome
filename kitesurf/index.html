@@ -4,8 +4,15 @@
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18489977345"></script>
   <script>
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.')) {
+      window['ga-disable-AW-18489977345'] = true;
+      window['ga-disable-G-7X7M1YDKR4'] = true;
+    }
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.')) return;
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'AW-18489977345');
