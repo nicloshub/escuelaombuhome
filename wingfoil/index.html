@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18489977345"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-18489977345');
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clases de Wingfoil en Acassuso | Escuela Náutica Ombú</title>
@@ -91,5 +101,14 @@
     </footer>
   </div>
 
+  <script>
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
+      if (link && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', { 'send_to': 'AW-18489977345' });
+        window.gtag('event', 'generate_lead', { 'event_category': 'Contact', 'event_label': 'WhatsApp Subpage' });
+      }
+    });
+  </script>
 </body>
 </html>

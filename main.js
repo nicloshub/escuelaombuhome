@@ -1114,5 +1114,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initTidescapeScatter();
   initTidescapeMotion();
   initHeroFloatingScroll();
+  initWhatsAppConversionTracking();
   setInterval(fetchLiveWind, 10 * 60 * 1000);
 });
+
+// Seguimiento de conversiones de Google Ads al hacer clic en WhatsApp
+function initWhatsAppConversionTracking() {
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
+    if (link && typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18489977345'
+      });
+      window.gtag('event', 'generate_lead', {
+        'event_category': 'Contact',
+        'event_label': link.getAttribute('href') || 'WhatsApp'
+      });
+    }
+  });
+}
