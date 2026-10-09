@@ -40,7 +40,10 @@ const server = http.createServer((req, res) => {
   }
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-    filePath = path.join(filePath, 'index.html');
+    const indexPath = path.join(filePath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      filePath = indexPath;
+    }
   }
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
