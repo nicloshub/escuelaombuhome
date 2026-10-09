@@ -1,66 +1,122 @@
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18489977345"></script>
+  <script>
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.')) {
+      window['ga-disable-AW-18489977345'] = true;
+      window['ga-disable-G-7X7M1YDKR4'] = true;
+    }
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.')) return;
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'AW-18489977345');
+    gtag('config', 'G-7X7M1YDKR4');
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wingfoil | Escuela Ombú — Acassuso, San Isidro</title>
+  <title>Clases de Wingfoil en Acassuso | Escuela Náutica Ombú</title>
+  <meta name="description" content="Descubrí la sensación de volar sobre el río sin impacto de olas. Cursos personalizados de wingfoil con ala inflable, atención 100% personalizada y bajada náutica propia en Acassuso.">
+  <meta property="og:title" content="Clases de Wingfoil en Acassuso | Escuela Náutica Ombú">
+  <meta property="og:description" content="Descubrí la sensación de volar sobre el río sin impacto de olas. Cursos personalizados de wingfoil en Acassuso.">
+  <meta property="og:image" content="https://escuelaombu.com.ar/assets/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="icon" type="image/png" href="../assets/logo-ombu-footer.png">
+  <link rel="apple-touch-icon" href="../assets/logo-ombu-footer.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
-  <style>
-    .placeholder-stage {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 24px;
-      background: var(--white);
-    }
-    .placeholder-badge {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      color: var(--orange);
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .placeholder-title {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw, 6rem);
-      line-height: .95;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      color: var(--ink);
-    }
-    .placeholder-desc {
-      max-width: 540px;
-      font-size: 16px;
-      color: rgba(35, 31, 32, 0.75);
-      line-height: 1.6;
-      margin-bottom: 32px;
-    }
-  </style>
+  <link rel="stylesheet" href="../subpage-temp.css">
 </head>
-<body>
-  <div class="placeholder-stage">
-    <span class="placeholder-badge">// Disciplina · Escuela Ombú</span>
-    <h1 class="placeholder-title">WINGFOIL</h1>
-    <p class="placeholder-desc">
-      Página oficial de la disciplina en construcción. Vuelo hidrodinámico y manejo del ala inflable con instructores especializados en Acassuso.
-    </p>
-    <a href="/" class="btn-pill-orange">
-      VOLVER AL INICIO
-      <div class="icon">
-        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-        </svg>
+<body class="is-subpage">
+
+  <div class="temp-stage">
+    <!-- Header / Navbar Mínimo Flotante -->
+    <header class="site-header" style="top: 20px;">
+      <div class="header-inner">
+        <a href="/" class="header-brand" aria-label="Inicio - Escuela Ombú">
+          <img src="../assets/logo-ombu-navbar.webp" alt="Logo Escuela Ombú" class="brand-disc-img" width="40" height="40">
+        </a>
+        <a href="/" class="temp-btn-back" style="font-weight: 700; color: var(--ink);">
+          ← VOLVER AL INICIO
+        </a>
       </div>
-    </a>
+    </header>
+
+    <!-- Contenido Central Hero -->
+    <main class="temp-hero-wrap">
+      <div class="temp-card">
+        <div class="temp-badge-row">
+          <span class="temp-badge">
+            <span class="temp-badge-dot"></span>
+            DISCIPLINA NÁUTICA
+          </span>
+        </div>
+
+        <h1 class="temp-title">WINGFOIL</h1>
+
+        <p class="temp-desc">
+          Descubrí la sensación de volar sobre el río sin impacto de olas. Cursos personalizados de wingfoil con ala inflable, atención 100% personalizada y bajada náutica propia en Acassuso.
+        </p>
+
+        <div class="temp-features-list">
+          <div class="temp-feature-item">
+            <svg class="temp-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span class="temp-feature-text">Vuelo suave sobre foil</span>
+          </div>
+          <div class="temp-feature-item">
+            <svg class="temp-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span class="temp-feature-text">Instrucción 1 a 1 dedicada</span>
+          </div>
+          <div class="temp-feature-item">
+            <svg class="temp-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/>
+            </svg>
+            <span class="temp-feature-text">Apoyo náutico permanente</span>
+          </div>
+        </div>
+
+        <div class="temp-cta-group">
+          <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20clases%20de%20Wingfoil." target="_blank" rel="noopener noreferrer" class="temp-btn-wpp">
+            <svg viewBox="0 0 737.509 740.824" fill="currentColor">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/>
+            </svg>
+            CONSULTAR POR WHATSAPP
+          </a>
+          <a href="/" class="temp-btn-back">
+            O volver al sitio principal
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Mínimo -->
+    <footer class="temp-footer">
+      © 2026 Escuela Náutica Ombú · Sebastián Elcano 994, Acassuso · Todos los derechos reservados.
+    </footer>
   </div>
+
+  <script>
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
+      if (link && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', { 'send_to': 'AW-18489977345/axdJCKmZ7pAdEIHU2vBE' });
+        window.gtag('event', 'generate_lead', { 'event_category': 'Contact', 'event_label': 'WhatsApp Subpage' });
+      }
+    });
+  </script>
 </body>
 </html>
