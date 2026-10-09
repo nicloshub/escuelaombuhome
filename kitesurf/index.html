@@ -35,11 +35,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../sports.css">
+  <link rel="stylesheet" href="./kitesurf.css">
 </head>
 <body>
 
   <!-- =========================================================
-       HEADER / NAVBAR (ALINEADO A LA GRILLA)
+       HEADER / NAVBAR (SIN MODIFICACIONES)
        ========================================================= -->
   <header class="site-header">
     <div class="header-inner">
@@ -65,10 +66,11 @@
             </div>
           </li>
           <li><a href="#camino" class="desktop-nav-link">El Camino</a></li>
+          <li><a href="#dia-de-clase" class="desktop-nav-link">Un Día de Clase</a></li>
           <li><a href="#seguridad" class="desktop-nav-link">Seguridad</a></li>
           <li><a href="#equipo" class="desktop-nav-link">Equipo</a></li>
-          <li><a href="#instructores" class="desktop-nav-link">Instructores</a></li>
           <li><a href="#precios" class="desktop-nav-link">Precios</a></li>
+          <li><a href="#instructores" class="desktop-nav-link">Instructores</a></li>
           <li><a href="#faq" class="desktop-nav-link">FAQ</a></li>
         </ul>
       </nav>
@@ -96,10 +98,11 @@
           <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="mobile-sport-pill">SUP Paddle</a>
         </li>
         <li><a href="#camino" class="mobile-nav-link">El Camino en 14 Objetivos</a></li>
+        <li><a href="#dia-de-clase" class="mobile-nav-link">Cómo es un Día de Clase</a></li>
         <li><a href="#seguridad" class="mobile-nav-link">Seguridad y Bote de Apoyo</a></li>
         <li><a href="#equipo" class="mobile-nav-link">Equipo Incluido</a></li>
-        <li><a href="#instructores" class="mobile-nav-link">Instructores</a></li>
         <li><a href="#precios" class="mobile-nav-link">Precios y Duración</a></li>
+        <li><a href="#instructores" class="mobile-nav-link">Instructores</a></li>
         <li><a href="#faq" class="mobile-nav-link">Antes de Anotarte (FAQ)</a></li>
         <li><a href="/" class="mobile-nav-link">← Volver al Inicio</a></li>
       </ul>
@@ -108,12 +111,12 @@
 
   <main>
     <!-- =========================================================
-         1. HERO: COMPOSICIÓN SEGÚN MAQUETA FIGMA + COMPONENTES HOME
+         1. HERO DESPEJADO: TÍTULO, BAJADA, CTAS Y WIDGET DE VIENTO
          ========================================================= -->
     <section class="hero-split-section" id="inicio">
       <div class="container">
         <div class="hero-split-grid">
-          <!-- Columna Izquierda: Título en Anton, Bajada y CTAs -->
+          <!-- Columna Izquierda: Título en Anton, Bajada, CTAs y Microcopy -->
           <div class="hero-content-col">
             <h1 class="hero-split-title">
               EL VIENTO NO<br>
@@ -122,23 +125,27 @@
             </h1>
 
             <p class="hero-split-bajada">
-              Escuela de kitesurf, windsurf, wingfoil y SUP a 20 minutos de Capital. Clases por nivel, sin atajos, con lancha de apoyo y equipo incluido.
+              Por eso acá nunca improvisás: tenés un plan por niveles, un bote de rescate detrás tuyo y el equipo completo incluido. 15 años enseñando a leer el viento en el Río de la Plata.
             </p>
 
             <div class="hero-split-actions">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
-                RESERVÁ TU CLASE
-                <span class="btn-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </span>
-              </a>
+              <div class="hero-primary-cta-group">
+                <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+                  Reservá tu clase
+                  <span class="btn-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  </span>
+                </a>
+                <p class="hero-microcopy">Clase particular desde $120.000 · Equipo incluido</p>
+              </div>
+
               <a href="#camino" class="hero-secondary-link">
                 Ver los 14 objetivos →
               </a>
             </div>
           </div>
 
-          <!-- Columna Derecha: Foto de Kitesurf + 3 Badges Flotantes -->
+          <!-- Columna Derecha: Foto de Kitesurf Despejada (Solo Viento + Calificación) -->
           <div class="hero-visual-col">
             <div class="hero-stage-container">
               <!-- Frame Principal con Foto de Kitesurf -->
@@ -146,30 +153,18 @@
                 <img src="../assets/deporte-kitesurf.jpg" alt="Kitesurf en el Río de la Plata - Escuela Ombú Acassuso" fetchpriority="high">
               </div>
 
-              <!-- Badge Flotante 1: "+15 AÑOS DE EXPERIENCIA" (Top Left Naranja) -->
-              <aside class="badge-experience-card" aria-label="Trayectoria de la escuela">
-                <span class="badge-experience-num">+15</span>
-                <span class="badge-experience-text">AÑOS DE<br>EXPERIENCIA</span>
-              </aside>
-
-              <!-- Badge Flotante 2: "4.9/5" Reseñas & Avatares (Bottom Left Celeste/Agua) -->
+              <!-- Badge 4.9/5 Reseñas (Limpio, sin avatares que tapen la imagen) -->
               <aside class="badge-rating-card" aria-label="Calificación de alumnos">
                 <div class="badge-rating-top">
                   <span class="badge-rating-score">4.9/5</span>
                   <span class="badge-rating-stars">★★★★★</span>
                 </div>
                 <p class="badge-rating-caption">
-                  Más de 1.200 alumnos formados con seguridad y técnica en el río.
+                  Alumnos formados con seguridad y técnica en el río.
                 </p>
-                <div class="badge-avatars-cluster">
-                  <img src="../assets/instructores_nico.jpg" alt="Alumno Ombú" class="badge-avatar-img">
-                  <img src="../assets/instructores_ramiro.jpg" alt="Alumno Ombú" class="badge-avatar-img">
-                  <img src="../assets/instructores_chivi.jpeg" alt="Alumno Ombú" class="badge-avatar-img">
-                  <div class="badge-avatar-plus">+</div>
-                </div>
               </aside>
 
-              <!-- Badge Flotante 3: Widget Oficial de Viento de la Home (Right Overlapping) -->
+              <!-- Widget Oficial de Viento en Vivo (Intacto) -->
               <aside class="hero-weather-card" aria-label="Condición del viento en vivo">
                 <div class="weather-header-stack">
                   <div class="weather-live-badge">
@@ -226,9 +221,11 @@
     <!-- =========================================================
          2. EL CAMINO: 14 OBJETIVOS EN 3 NIVELES
          ========================================================= -->
+    <!-- =========================================================
+         2. EL CAMINO: NIVELES EXPANDIBLES (DISEÑO ACCORDION CARDS)
+         ========================================================= -->
     <section class="section-macro" id="camino">
       <div class="container">
-        <!-- Cabecera de Niveles según Figma -->
         <header class="camino-header-wrap">
           <div class="camino-kicker">
             <span class="camino-kicker-dot">●</span> EL CAMINO
@@ -237,218 +234,291 @@
             ASÍ SE APRENDE,<br>SIN APURO
           </h2>
           <p class="camino-bajada">
-            Cada nivel se apoya en el anterior. Tocá cada uno para ver qué vas a aprender.
+            Cada nivel se apoya en el anterior. Tocá cada tarjeta para explorar los objetivos.
           </p>
         </header>
 
-        <!-- Fila Superior de Tabs de Niveles -->
-        <div class="camino-tabs-grid" role="tablist" aria-label="Niveles de Kitesurf">
-          <button class="camino-tab-card is-active" data-level="1" role="tab" aria-selected="true">
-            <span class="camino-tab-badge">NIVEL 1</span>
-            <span class="camino-tab-name">Principiante</span>
-          </button>
+        <!-- Acordeón Interactivo de Niveles según Referencia -->
+        <div class="niveles-accordion-container" aria-label="Niveles de aprendizaje de Kitesurf">
+          <div class="niveles-accordion-row">
 
-          <button class="camino-tab-card" data-level="2" role="tab" aria-selected="false">
-            <span class="camino-tab-badge">NIVEL 2</span>
-            <span class="camino-tab-name">Intermedio</span>
-          </button>
+            <!-- Card 01: Nivel 1 (Principiante) -->
+            <article class="nivel-acc-card" id="nivelCard1" data-level="1" tabindex="0" role="region" aria-expanded="false" aria-label="Nivel 01: Conocé tu equipo y control de barrilete">
+              <!-- Vista Colapsada (Pill con texto vertical +) -->
+              <div class="acc-collapsed-view">
+                <div class="acc-collapsed-left">
+                  <span class="acc-num-collapsed">01</span>
+                  <span class="acc-title-collapsed">Conocé tu equipo y el viento</span>
+                </div>
+                <span class="acc-plus-collapsed" aria-hidden="true">+</span>
+              </div>
 
-          <button class="camino-tab-card" data-level="3" role="tab" aria-selected="false">
-            <span class="camino-tab-badge">NIVEL 3</span>
-            <span class="camino-tab-name">Autonomía</span>
-          </button>
-        </div>
-
-        <!-- Panel Nivel 1: Principiante -->
-        <div class="camino-content-panel is-active" data-level="1">
-          <div class="camino-panel-grid">
-            <!-- Columna Izquierda: Tarjeta Oscura con Resplandor Ámbar -->
-            <div class="camino-stage-card">
-              <div class="camino-stage-glow"></div>
-              <div>
-                <span class="camino-stage-watermark">01</span>
-                <h3 class="camino-stage-title">Control de barrilete</h3>
-                <p class="camino-stage-desc">
-                  Todo arranca en tierra y en el agua, pero sin tabla. Manejo del barrilete, lectura de viento y la confianza de base antes de navegar.
+              <!-- Vista Expandida (Fondo Dark con naranja y flecha ↗) -->
+              <div class="acc-expanded-view">
+                <div class="acc-expanded-top">
+                  <span class="acc-num-expanded">01</span>
+                  <button type="button" class="acc-minus-btn" aria-label="Cerrar nivel 1">—</button>
+                </div>
+                <span class="acc-kicker-expanded">TIERRA Y AGUA SIN TABLA · 3-4 HS</span>
+                <h3 class="acc-title-expanded">Control de barrilete</h3>
+                <p class="acc-desc-expanded">
+                  Todo arranca sin tabla. Manejo del barrilete, lectura del viento y la confianza de base antes de navegar en el río.
                 </p>
+                <ul class="acc-checklist-expanded">
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Armado y lectura de ventana de viento</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Sistema de seguridad y suelta rápida</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Manejo en la arena con una y dos manos</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Relanzamiento autónomo en el agua</span>
+                  </li>
+                </ul>
+                <a href="#precios" class="acc-corner-cta" aria-label="Ver opciones de clase para Nivel 1">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
               </div>
-              <div class="camino-stage-pill">
-                <span>Duración aprox.</span> <strong>3-4 hs</strong>
+            </article>
+
+            <!-- Card 02: Nivel 2 (Intermedio - Expandido por defecto según referencia) -->
+            <article class="nivel-acc-card is-expanded" id="nivelCard2" data-level="2" tabindex="0" role="region" aria-expanded="true" aria-label="Nivel 02: Entendé el entorno, cuerpo al agua y tabla">
+              <!-- Vista Colapsada -->
+              <div class="acc-collapsed-view">
+                <div class="acc-collapsed-left">
+                  <span class="acc-num-collapsed">02</span>
+                  <span class="acc-title-collapsed">Entendé el entorno y la tabla</span>
+                </div>
+                <span class="acc-plus-collapsed" aria-hidden="true">+</span>
               </div>
-            </div>
 
-            <!-- Columna Derecha: Checklist de Logros -->
-            <div class="camino-checklist-col">
-              <h4 class="camino-checklist-eyebrow">LO QUE VAS A PODER HACER</h4>
-              <ul class="camino-checklist-list">
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Entender de dónde viene el viento y armar el kite sin arruinarte el día</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Saber cómo soltar todo si algo sale mal (el sistema de seguridad)</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Manejar el kite parado en la arena, con una mano y con las dos</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Volver a levantarlo vos mismo si se te cae en el agua</span>
-                </li>
-              </ul>
-              <p class="camino-footnote">
-                * Objetivos orientativos — se ajustan según el ritmo de cada alumno.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel Nivel 2: Intermedio -->
-        <div class="camino-content-panel" data-level="2">
-          <div class="camino-panel-grid">
-            <!-- Columna Izquierda: Tarjeta Oscura con Resplandor Ámbar -->
-            <div class="camino-stage-card">
-              <div class="camino-stage-glow"></div>
-              <div>
-                <span class="camino-stage-watermark">02</span>
-                <h3 class="camino-stage-title">Cuerpo al agua y primeros metros</h3>
-                <p class="camino-stage-desc">
-                  Entrás al río con el kite. Aprendés a traccionar con tu cuerpo (body drag), recuperar la tabla perdida y subirte para tus primeros metros de planeo.
+              <!-- Vista Expandida -->
+              <div class="acc-expanded-view">
+                <div class="acc-expanded-top">
+                  <span class="acc-num-expanded">02</span>
+                  <button type="button" class="acc-minus-btn" aria-label="Cerrar nivel 2">—</button>
+                </div>
+                <span class="acc-kicker-expanded">MIRÁ MÁS ALLÁ DE LA TABLA · BODY DRAG Y WATERSTART · 3-4 HS</span>
+                <h3 class="acc-title-expanded">Entendé el entorno</h3>
+                <p class="acc-desc-expanded">
+                  Interpretá el viento, la corriente y el pronóstico para entender las condiciones del día. Entrás al río, traccionás con tu cuerpo (body drag) y lográs tus primeros metros de planeo sobre la tabla.
                 </p>
+                <ul class="acc-checklist-expanded">
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Body drag upwind para recuperar tu tabla</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Relanzamiento seguro en agua profunda</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Calzado de la tabla manteniendo el cenit</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Primeros waterstarts y salida de pie</span>
+                  </li>
+                </ul>
+                <a href="#precios" class="acc-corner-cta" aria-label="Ver opciones de clase para Nivel 2">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
               </div>
-              <div class="camino-stage-pill">
-                <span>Duración aprox.</span> <strong>3-4 hs</strong>
+            </article>
+
+            <!-- Card 03: Nivel 3 (Autonomía) -->
+            <article class="nivel-acc-card" id="nivelCard3" data-level="3" tabindex="0" role="region" aria-expanded="false" aria-label="Nivel 03: Decidí con confianza y navegación autónoma">
+              <!-- Vista Colapsada -->
+              <div class="acc-collapsed-view">
+                <div class="acc-collapsed-left">
+                  <span class="acc-num-collapsed">03</span>
+                  <span class="acc-title-collapsed">Decidí con confianza en el río</span>
+                </div>
+                <span class="acc-plus-collapsed" aria-hidden="true">+</span>
               </div>
-            </div>
 
-            <!-- Columna Derecha: Checklist de Logros -->
-            <div class="camino-checklist-col">
-              <h4 class="camino-checklist-eyebrow">LO QUE VAS A PODER HACER</h4>
-              <ul class="camino-checklist-list">
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Body drag a favor y en contra del viento (upwind para buscar tu tabla)</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Relanzamiento rápido y seguro del kite desde el agua profunda</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Calzado de la tabla con los pies en los footstraps manteniendo el cenit</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Primeros waterstarts y salida firme de pie sobre el río</span>
-                </li>
-              </ul>
-              <p class="camino-footnote">
-                * Objetivos orientativos — se ajustan según el ritmo de cada alumno.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel Nivel 3: Autonomía -->
-        <div class="camino-content-panel" data-level="3">
-          <div class="camino-panel-grid">
-            <!-- Columna Izquierda: Tarjeta Oscura con Resplandor Ámbar -->
-            <div class="camino-stage-card">
-              <div class="camino-stage-glow"></div>
-              <div>
-                <span class="camino-stage-watermark">03</span>
-                <h3 class="camino-stage-title">Navegación y ceñida autónoma</h3>
-                <p class="camino-stage-desc">
-                  El salto a la libertad total. Planeo continuo en ambas direcciones, ceñida para volver exactamente al punto de salida y navegación 100% independiente.
+              <!-- Vista Expandida -->
+              <div class="acc-expanded-view">
+                <div class="acc-expanded-top">
+                  <span class="acc-num-expanded">03</span>
+                  <button type="button" class="acc-minus-btn" aria-label="Cerrar nivel 3">—</button>
+                </div>
+                <span class="acc-kicker-expanded">LIBERTAD TOTAL EN EL RÍO · 3-4 HS</span>
+                <h3 class="acc-title-expanded">Decidí con confianza</h3>
+                <p class="acc-desc-expanded">
+                  El salto a la independencia total. Planeo continuo en ambas direcciones, ceñida técnica para volver exactamente a la playa y navegación 100% autónoma.
                 </p>
+                <ul class="acc-checklist-expanded">
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Planeo continuo y control de velocidad</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Ceñida técnica: volver a la costa solo</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Transiciones fluidas de borde a borde</span>
+                  </li>
+                  <li class="acc-check-item">
+                    <span class="acc-check-icon" aria-hidden="true">✓</span>
+                    <span>Reglas de paso y autonomía completa</span>
+                  </li>
+                </ul>
+                <a href="#precios" class="acc-corner-cta" aria-label="Ver opciones de clase para Nivel 3">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
               </div>
-              <div class="camino-stage-pill">
-                <span>Duración aprox.</span> <strong>3-4 hs</strong>
-              </div>
-            </div>
+            </article>
 
-            <!-- Columna Derecha: Checklist de Logros -->
-            <div class="camino-checklist-col">
-              <h4 class="camino-checklist-eyebrow">LO QUE VAS A PODER HACER</h4>
-              <ul class="camino-checklist-list">
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Planeo sostenido y control de velocidad en ambas amuras</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Ceñida técnica: volver a la costa sin caminar río arriba</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Transiciones fluidas de borde a borde sin frenarte ni caer al agua</span>
-                </li>
-                <li class="camino-checklist-item">
-                  <span class="camino-check-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </span>
-                  <span class="camino-check-text">Lectura de ráfagas, reglas de paso náutico y navegación autónoma completa</span>
-                </li>
-              </ul>
-              <p class="camino-footnote">
-                * Objetivos orientativos — se ajustan según el ritmo de cada alumno.
-              </p>
-            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =========================================================
-         3. SEGURIDAD: SIEMPRE HAY UN BOTE DETRÁS TUYO
+         3. SECCIÓN NUEVA: CÓMO ES UN DÍA DE CLASE (TIMELINE VERTICAL)
+         ========================================================= -->
+    <section class="section-macro section-light" id="dia-de-clase">
+      <div class="container">
+        <header class="editorial-header" style="text-align: center; margin-bottom: 24px;">
+          <div class="camino-kicker" style="justify-content: center;">
+            <span class="camino-kicker-dot">●</span> PASO A PASO
+          </div>
+          <h2 class="editorial-title">
+            CÓMO ES UN DÍA DE CLASE.
+          </h2>
+          <p class="editorial-lead" style="margin: 0 auto; max-width: 620px;">
+            Una rutina clara y predecible desde que llegás hasta que salís del agua.
+          </p>
+        </header>
+
+        <div class="timeline-section-wrap">
+          <ol class="timeline-vertical-list">
+            <li class="timeline-step-item">
+              <span class="timeline-step-bullet" aria-hidden="true">1</span>
+              <div class="timeline-step-card">
+                <h3 class="timeline-step-title">Llegada y chequeo de condiciones</h3>
+                <p class="timeline-step-desc">Nos encontramos en la guardería, leemos el viento del spot y definimos el plan de la sesión.</p>
+              </div>
+            </li>
+            <li class="timeline-step-item">
+              <span class="timeline-step-bullet" aria-hidden="true">2</span>
+              <div class="timeline-step-card">
+                <h3 class="timeline-step-title">Charla de seguridad</h3>
+                <p class="timeline-step-desc">Repasamos protocolos, soltada rápida del kite y las señales que vas a usar en el agua.</p>
+              </div>
+            </li>
+            <li class="timeline-step-item">
+              <span class="timeline-step-bullet" aria-hidden="true">3</span>
+              <div class="timeline-step-card">
+                <h3 class="timeline-step-title">Práctica en tierra</h3>
+                <p class="timeline-step-desc">Ajustamos arnés, practicamos el trim de la barra y memorizamos la maniobra antes de mojar el equipo.</p>
+              </div>
+            </li>
+            <li class="timeline-step-item">
+              <span class="timeline-step-bullet" aria-hidden="true">4</span>
+              <div class="timeline-step-card">
+                <h3 class="timeline-step-title">Agua con instructor y bote</h3>
+                <p class="timeline-step-desc">Entramos al río con comunicación permanente al oído y la lancha de custodia a metros tuyo.</p>
+              </div>
+            </li>
+            <li class="timeline-step-item">
+              <span class="timeline-step-bullet" aria-hidden="true">5</span>
+              <div class="timeline-step-card">
+                <h3 class="timeline-step-title">Cierre y próximos pasos</h3>
+                <p class="timeline-step-desc">Bajamos el equipo, repasamos los logros del día y coordinamos tu próxima ventana de viento.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. SECCIÓN NUEVA: PARA QUIÉN ES (3 ÍTEMS CON SVG CONSISTENTE)
+         ========================================================= -->
+    <section class="section-macro" id="para-quien">
+      <div class="container">
+        <header class="editorial-header">
+          <div class="camino-kicker">
+            <span class="camino-kicker-dot">●</span> REQUISITOS CLAROS
+          </div>
+          <h2 class="editorial-title">
+            PARA QUIÉN ES.
+          </h2>
+          <p class="editorial-lead">
+            Sin barreras raras. Lo que de verdad necesitás para empezar kitesurf en Ombú.
+          </p>
+        </header>
+
+        <div class="para-quien-grid">
+          <!-- Ítem 1: Edad -->
+          <article class="para-quien-card">
+            <div class="para-quien-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <h3 class="para-quien-card-title">Edad mínima 16 años</h3>
+            <p class="para-quien-card-desc">
+              A partir de los 16 años cumplidos con autorización firmada por padres o madres. Es el peso necesario para dominar el barrilete con comodidad.
+            </p>
+          </article>
+
+          <!-- Ítem 2: Natación -->
+          <article class="para-quien-card">
+            <div class="para-quien-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h20"></path>
+                <path d="M6 8c2-2 4-2 6 0s4 2 6 0"></path>
+                <path d="M6 16c2-2 4-2 6 0s4 2 6 0"></path>
+              </svg>
+            </div>
+            <h3 class="para-quien-card-title">No hace falta saber nadar</h3>
+            <p class="para-quien-card-desc">
+              <!-- TODO: confirmar requisitos de natación con el dueño [Texto provisorio según consigna] -->
+              Navegás con chaleco homologado de flotación obligatoria, traje de neoprene y custodia permanente de lancha en el banco de arena.
+            </p>
+          </article>
+
+          <!-- Ítem 3: Experiencia previa -->
+          <article class="para-quien-card">
+            <div class="para-quien-icon-wrap" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="para-quien-card-title">Sin experiencia previa</h3>
+            <p class="para-quien-card-desc">
+              Arrancamos desde cero absoluto. No necesitás conocimientos de viento, deportes de tabla ni fuerza física desmedida.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         5. SEGURIDAD: SIEMPRE HAY UN BOTE DETRÁS TUYO
          ========================================================= -->
     <section class="section-macro section-sand" id="seguridad">
       <div class="container">
@@ -457,7 +527,7 @@
             SIEMPRE HAY UN BOTE DETRÁS TUYO.
           </h2>
           <p class="editorial-lead">
-            El mayor freno para arrancar kitesurf es el miedo a perder el control en el río. En Ombú la seguridad no es un folleto: es un semirrígido con motor en guardia continua, un radiocasco que te guía en cada metro y un protocolo estricto antes de mojar el equipo.
+            El mayor freno para arrancar kitesurf es el miedo a perder el control en el río. En Ombú la seguridad no es un folleto: es un semirrígido con motor en guardia continua, comunicación técnica que te guía en cada metro y un protocolo estricto antes de mojar el equipo.
           </p>
         </header>
 
@@ -478,7 +548,7 @@
 
           <div class="seguridad-pillars-col">
             <div class="seguridad-pillar-item">
-              <h3>Radiocasco BbTalkin al oído</h3>
+              <h3>Comunicación directa al oído</h3>
               <p>El instructor te habla en tiempo real mientras estás en el agua. Corrección de postura al segundo y tranquilidad mental absoluta.</p>
             </div>
 
@@ -497,11 +567,10 @@
     </section>
 
     <!-- =========================================================
-         4. EQUIPO: CON QUÉ VAS A NAVEGAR
+         6. EQUIPO: CON QUÉ VAS A NAVEGAR (SIN PLACEHOLDERS "FOTO:")
          ========================================================= -->
     <section class="section-macro" id="equipo">
       <div class="container">
-        <!-- Cabecera Editorial Equipo según Figma -->
         <header class="equipo-header-wrap">
           <div class="equipo-kicker">
             <span class="equipo-kicker-dot">●</span> EL EQUIPO
@@ -514,20 +583,15 @@
           </p>
         </header>
 
-        <!-- Grilla de 4 Tarjetas de Equipamiento -->
+        <!-- Grilla de 4 Tarjetas de Equipamiento con <figure> -->
         <div class="equipo-cards-grid">
           <!-- Tarjeta 1: Kite -->
           <article class="equipo-card-item">
             <div class="equipo-card-visual">
-              <div class="equipo-visual-tag-group">
-                <span class="equipo-dashed-badge">FOTO: KITE</span>
-                <span class="equipo-icon-contour" aria-hidden="true">
-                  <svg width="28" height="24" viewBox="0 0 32 26" fill="none" stroke="#F25722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 18 C 6 6, 26 6, 30 18 C 22 14, 10 14, 2 18 Z" />
-                    <path d="M16 8 L 16 15" />
-                  </svg>
-                </span>
-              </div>
+              <!-- TODO: Subir foto real de kite de escuela en ../assets/kitesurf-equipo-kite.jpg -->
+              <figure class="equipo-figure">
+                <img src="../assets/kitesurf-equipo-kite.jpg" alt="Kite de escuela adaptado a las condiciones de viento" loading="lazy" width="400" height="300">
+              </figure>
             </div>
             <div class="equipo-card-body">
               <h3 class="equipo-card-title">Kite</h3>
@@ -540,16 +604,10 @@
           <!-- Tarjeta 2: Tabla -->
           <article class="equipo-card-item">
             <div class="equipo-card-visual">
-              <div class="equipo-visual-tag-group">
-                <span class="equipo-dashed-badge">FOTO: TABLA</span>
-                <span class="equipo-icon-contour" aria-hidden="true">
-                  <svg width="30" height="18" viewBox="0 0 36 20" fill="none" stroke="#F25722" stroke-width="2" stroke-linecap="round">
-                    <ellipse cx="18" cy="10" rx="16" ry="7" />
-                    <line x1="8" y1="10" x2="11" y2="10" />
-                    <line x1="25" y1="10" x2="28" y2="10" />
-                  </svg>
-                </span>
-              </div>
+              <!-- TODO: Subir foto real de tabla de iniciación en ../assets/kitesurf-equipo-tabla.jpg -->
+              <figure class="equipo-figure">
+                <img src="../assets/kitesurf-equipo-tabla.jpg" alt="Tabla de iniciación ancha para kitesurf" loading="lazy" width="400" height="300">
+              </figure>
             </div>
             <div class="equipo-card-body">
               <h3 class="equipo-card-title">Tabla</h3>
@@ -562,16 +620,10 @@
           <!-- Tarjeta 3: Arnés -->
           <article class="equipo-card-item">
             <div class="equipo-card-visual">
-              <div class="equipo-visual-tag-group">
-                <span class="equipo-dashed-badge">FOTO: ARNÉS</span>
-                <span class="equipo-icon-contour" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F25722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 10 C6 6 9 3 12 3 C15 3 18 6 18 10" />
-                    <rect x="4" y="10" width="16" height="11" rx="3" />
-                    <line x1="9" y1="15" x2="15" y2="15" />
-                  </svg>
-                </span>
-              </div>
+              <!-- TODO: Subir foto real de arnés ergonómico en ../assets/kitesurf-equipo-arnes.jpg -->
+              <figure class="equipo-figure">
+                <img src="../assets/kitesurf-equipo-arnes.jpg" alt="Arnés de cintura ergonómico para kitesurf" loading="lazy" width="400" height="300">
+              </figure>
             </div>
             <div class="equipo-card-body">
               <h3 class="equipo-card-title">Arnés</h3>
@@ -584,15 +636,10 @@
           <!-- Tarjeta 4: Chaleco -->
           <article class="equipo-card-item">
             <div class="equipo-card-visual">
-              <div class="equipo-visual-tag-group">
-                <span class="equipo-dashed-badge">FOTO: CHALECO</span>
-                <span class="equipo-icon-contour" aria-hidden="true">
-                  <svg width="24" height="26" viewBox="0 0 26 28" fill="none" stroke="#F25722" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M7 2 L3 8 L6 13 L6 26 L20 26 L20 13 L23 8 L19 2 L15 5 C14 6 12 6 11 5 Z" />
-                    <line x1="13" y1="5" x2="13" y2="26" stroke-dasharray="2 2" />
-                  </svg>
-                </span>
-              </div>
+              <!-- TODO: Subir foto real de chaleco homologado en ../assets/kitesurf-equipo-chaleco.jpg -->
+              <figure class="equipo-figure">
+                <img src="../assets/kitesurf-equipo-chaleco.jpg" alt="Chaleco de flotación e impacto homologado" loading="lazy" width="400" height="300">
+              </figure>
             </div>
             <div class="equipo-card-body">
               <h3 class="equipo-card-title">Chaleco</h3>
@@ -612,7 +659,121 @@
     </section>
 
     <!-- =========================================================
-         5. CONDICIONES: SABÉS CUÁNDO VENIR ANTES DE VENIR
+         7. PRECIO Y FORMATO (MOVIDA AQUÍ: JUSTO DESPUÉS DE EQUIPO)
+         ========================================================= -->
+    <section class="section-macro section-light" id="precios">
+      <div class="container">
+        <header class="editorial-header">
+          <div class="camino-kicker">
+            <span class="camino-kicker-dot">●</span> TRANSPARENCIA TOTAL
+          </div>
+          <h2 class="editorial-title">
+            CUÁNTO CUESTA Y CUÁNTO LLEVA.
+          </h2>
+          <p class="editorial-lead">
+            Sin letras chicas ni paquetes confusos. Podés tomar clases particulares sueltas o comprometerte con el curso hacia la autonomía completa.
+          </p>
+        </header>
+
+        <div class="pricing-editorial-grid">
+          <!-- Tarjeta 1: Clase Particular -->
+          <article class="pricing-card">
+            <h3 class="pricing-title">CLASE PARTICULAR</h3>
+            <p class="pricing-desc">Sesión individual de 2 horas con instructor 100% dedicado a vos.</p>
+            <div class="pricing-amount-row">
+              <span class="pricing-amount">Desde $120.000</span>
+              <span class="pricing-unit">/ sesión 2 hs</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                1 instructor exclusivo en todo momento
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Todo el equipamiento incluido (cometa, tabla, arnés, chaleco y traje)
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Comunicación directa al oído durante toda la práctica
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Asistencia y custodia de lancha de rescate en el agua
+              </li>
+            </ul>
+            <div class="pricing-btn-box">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20particular%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+                RESERVAR CLASE PARTICULAR
+                <span class="btn-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Tarjeta 2: Curso Hacia la Autonomía -->
+          <article class="pricing-card is-featured">
+            <h3 class="pricing-title">CURSO HACIA LA AUTONOMÍA</h3>
+            <p class="pricing-desc">El plan integral de 8 a 10 horas totales para completar los 14 objetivos.</p>
+            <div class="pricing-amount-row">
+              <!-- TODO: confirmar precio del curso completo con el dueño -->
+              <span class="pricing-amount">Desde $[A CONFIRMAR]</span>
+              <span class="pricing-unit">/ 8 a 10 hs (4 a 5 clases)</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Progreso ordenado desde tierra hasta tu primera ceñida
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Coordinación flexible clase a clase según los mejores días de viento
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Asesoramiento honesto post-curso para adquirir o alquilar tu equipo
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Acceso a la comunidad de navegantes y bajadas guiadas de Ombú
+              </li>
+            </ul>
+            <div class="pricing-btn-box">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20el%20curso%20completo%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+                RESERVAR CURSO COMPLETO
+                <span class="btn-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         8. SECCIÓN NUEVA: ¿Y SI NO HAY VIENTO? (FRANJA CLARA)
+         ========================================================= -->
+    <section class="section-reprogramacion" id="sin-viento">
+      <div class="container">
+        <div class="reprogramacion-card-centered">
+          <!-- TODO: Confirmar con el dueño que la política sea efectivamente sin costo -->
+          <span class="reprogramacion-badge">// POLÍTICA DE CLIMA</span>
+          <h2 class="reprogramacion-title">¿Y SI NO HAY VIENTO?</h2>
+          <p class="reprogramacion-text">
+            Si el día no es el indicado, te lo decimos antes y reprogramamos sin costo. Revisá la cámara en vivo o escribinos y te confirmamos.
+          </p>
+          <div class="reprogramacion-links">
+            <a href="#condiciones" class="btn-pill-dark">Ver cámara en vivo</a>
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20el%20estado%20del%20viento%20hoy." target="_blank" rel="noopener noreferrer" class="btn-pill-white">Consultar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         9. CONDICIONES: SABÉS CUÁNDO VENIR ANTES DE VENIR
          ========================================================= -->
     <section class="section-macro section-sand" id="condiciones">
       <div class="container">
@@ -664,11 +825,21 @@
     </section>
 
     <!-- =========================================================
-         6. HISTORIAS REALES: ALUMNOS QUE YA NAVEGAN SOLOS
+         10. SECCIÓN CON FOTO A ANCHO COMPLETO (RITMO VISUAL)
+         ========================================================= -->
+    <section class="section-full-photo" aria-label="Navegando kitesurf en el Río de la Plata">
+      <img src="../assets/deporte-kitesurf.jpg" alt="Vista panorámica de navegación de kitesurf en el Río de la Plata, Acassuso" loading="lazy" width="1600" height="700">
+      <div class="full-photo-overlay-content">
+        <h2 class="full-photo-title">EL RÍO DE LA PLATA ES NUESTRO LUGAR.</h2>
+        <p class="full-photo-sub">A 20 minutos de la ciudad, con banco de arena seguro y viento franco de río abierto.</p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         11. HISTORIAS REALES (SIN FOTO DE KAYAK, CON FIGURE Y ALT)
          ========================================================= -->
     <section class="section-macro" id="testimonios">
       <div class="container">
-        <!-- Cabecera de Historias Reales según Figma -->
         <header class="historias-header-wrap">
           <div class="historias-kicker">
             <span class="historias-kicker-dot">●</span> HISTORIAS REALES
@@ -678,21 +849,22 @@
           </h2>
         </header>
 
-        <!-- Grilla de 3 Tarjetas de Historias -->
         <div class="historias-cards-grid">
-          <!-- Tarjeta 1: Santiago Muñoz (JP en maqueta) -->
+          <!-- Tarjeta 1: Santiago Muñoz -->
           <article class="historias-card-item">
             <div class="historias-card-photo">
-              <img src="../assets/mosaico-kitesurf.jpg" alt="Alumno de Kitesurf navegando solo en el Río de la Plata" loading="lazy">
-              <div class="historias-photo-gradient"></div>
-              <span class="historias-photo-badge">FOTO: ALUMNO EN EL AGUA</span>
+              <!-- TODO: Subir foto real de Santiago Muñoz en ../assets/kitesurf-alumno-1.jpg -->
+              <figure class="historias-figure">
+                <img src="../assets/kitesurf-alumno-1.jpg" alt="Santiago Muñoz navegando solo en kitesurf en Acassuso" loading="lazy" width="600" height="380">
+              </figure>
             </div>
             <div class="historias-card-body">
               <p class="historias-card-quote">
+                <!-- TODO: confirmar testimonio real de Santiago Muñoz -->
                 "Empecé sin saber nada del viento y en un par de meses ya estaba saliendo solo los fines de semana."
               </p>
               <div class="historias-author-row">
-                <div class="historias-avatar-disc" aria-hidden="true">JP</div>
+                <div class="historias-avatar-disc" aria-hidden="true">SM</div>
                 <div class="historias-author-meta">
                   <span class="historias-author-name">Santiago Muñoz</span>
                   <span class="historias-author-sub">Nivel 3 · Navegación autónoma</span>
@@ -701,19 +873,21 @@
             </div>
           </article>
 
-          <!-- Tarjeta 2: Agustín Romero (MG en maqueta) -->
+          <!-- Tarjeta 2: Agustín Romero (Sin kayak, foto kitesurf) -->
           <article class="historias-card-item">
             <div class="historias-card-photo">
-              <img src="../assets/mosaico-alumnos.jpg" alt="Alumnos aprendiendo kitesurf en la escuela Ombú" loading="lazy">
-              <div class="historias-photo-gradient"></div>
-              <span class="historias-photo-badge">FOTO: ALUMNO EN EL AGUA</span>
+              <!-- TODO: Subir foto real de Agustín Romero en ../assets/kitesurf-alumno-2.jpg (sin kayak) -->
+              <figure class="historias-figure">
+                <img src="../assets/kitesurf-alumno-2.jpg" alt="Agustín Romero en práctica de kitesurf en la escuela Ombú" loading="lazy" width="600" height="380">
+              </figure>
             </div>
             <div class="historias-card-body">
               <p class="historias-card-quote">
+                <!-- TODO: confirmar testimonio real de Agustín Romero -->
                 "Lo que más valoro es que no te apuran de nivel — vas a tu ritmo, pero siempre progresando."
               </p>
               <div class="historias-author-row">
-                <div class="historias-avatar-disc" aria-hidden="true">MG</div>
+                <div class="historias-avatar-disc" aria-hidden="true">AR</div>
                 <div class="historias-author-meta">
                   <span class="historias-author-name">Agustín Romero</span>
                   <span class="historias-author-sub">Nivel 2 · Cuerpo + tabla</span>
@@ -722,15 +896,17 @@
             </div>
           </article>
 
-          <!-- Tarjeta 3: Federico López (FL en maqueta) -->
+          <!-- Tarjeta 3: Federico López -->
           <article class="historias-card-item">
             <div class="historias-card-photo">
-              <img src="../assets/mosaico-clase.jpg" alt="Alumno de kitesurf en práctica en el agua" loading="lazy">
-              <div class="historias-photo-gradient"></div>
-              <span class="historias-photo-badge">FOTO: ALUMNO EN EL AGUA</span>
+              <!-- TODO: Subir foto real de Federico López en ../assets/kitesurf-alumno-3.jpg -->
+              <figure class="historias-figure">
+                <img src="../assets/kitesurf-alumno-3.jpg" alt="Federico López navegando con barrilete en el Río de la Plata" loading="lazy" width="600" height="380">
+              </figure>
             </div>
             <div class="historias-card-body">
               <p class="historias-card-quote">
+                <!-- TODO: confirmar testimonio real de Federico López -->
                 "Arranqué con miedo al barrilete y hoy salgo a navegar solo, sin depender de nadie."
               </p>
               <div class="historias-author-row">
@@ -747,7 +923,7 @@
     </section>
 
     <!-- =========================================================
-         7. INSTRUCTORES: CON QUIÉN VAS A APRENDER
+         12. INSTRUCTORES: CON QUIÉN VAS A APRENDER
          ========================================================= -->
     <section class="section-macro section-sand" id="instructores">
       <div class="container">
@@ -766,6 +942,7 @@
               <img src="../assets/instructores_nico.jpg" alt="Nicolás Cloos - Director Escuela Ombú" loading="lazy">
             </div>
             <div class="coach-content">
+              <!-- TODO: confirmar años de experiencia y cita textual de Nicolás Cloos -->
               <div class="coach-role-meta">DIRECTOR & COACH NÁUTICO · +15 AÑOS EN EL RÍO</div>
               <h3 class="coach-name">NICOLÁS CLOOS</h3>
               <div class="coach-quote-box">
@@ -779,6 +956,7 @@
               <img src="../assets/instructores_ramiro.jpg" alt="Ramiro Oreiro - Head Coach Kitesurf Ombú" loading="lazy">
             </div>
             <div class="coach-content">
+              <!-- TODO: confirmar certificación y cita textual de Ramiro Oreiro -->
               <div class="coach-role-meta">HEAD COACH KITESURF · CERTIFICACIÓN IKO · +12 AÑOS</div>
               <h3 class="coach-name">RAMIRO OREIRO</h3>
               <div class="coach-quote-box">
@@ -791,95 +969,97 @@
     </section>
 
     <!-- =========================================================
-         8. PRECIO Y FORMATO: CUÁNTO CUESTA Y CUÁNTO LLEVA
+         13. SECCIÓN NUEVA: RESERVÁ EN 3 PASOS
          ========================================================= -->
-    <section class="section-macro" id="precios">
+    <section class="section-macro section-light" id="reserva-pasos">
       <div class="container">
-        <header class="editorial-header">
+        <header class="editorial-header" style="text-align: center;">
+          <div class="camino-kicker" style="justify-content: center;">
+            <span class="camino-kicker-dot">●</span> SIMPLE Y DIRECTO
+          </div>
           <h2 class="editorial-title">
-            CUÁNTO CUESTA Y CUÁNTO LLEVA.
+            RESERVÁ EN 3 PASOS.
           </h2>
-          <p class="editorial-lead">
-            Sin letras chicas ni paquetes confusos. Podés tomar clases particulares sueltas o comprometerte con el curso hacia la autonomía completa.
+          <p class="editorial-lead" style="margin: 0 auto; max-width: 580px;">
+            Coordinamos todo por mensaje para que no des vueltas.
           </p>
         </header>
 
-        <div class="pricing-editorial-grid">
-          <article class="pricing-card">
-            <h3 class="pricing-title">CLASE PARTICULAR</h3>
-            <p class="pricing-desc">Sesión individual de 2 horas con instructor 100% dedicado a vos.</p>
-            <div class="pricing-amount-row">
-              <span class="pricing-amount">Desde $120.000</span>
-              <span class="pricing-unit">/ sesión 2 hs</span>
-            </div>
-            <ul class="pricing-features-list">
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                1 instructor exclusivo en todo momento
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Todo el equipamiento incluido (cometa, tabla, arnés, chaleco y traje)
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Radiocasco BbTalkin al oído durante toda la práctica
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Asistencia y custodia de lancha de rescate en el agua
-              </li>
-            </ul>
-            <div class="pricing-btn-box">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20particular%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
-                RESERVAR CLASE PARTICULAR
-                <span class="btn-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </span>
-              </a>
-            </div>
+        <div class="pasos-reserva-grid">
+          <article class="paso-reserva-card">
+            <span class="paso-number-display">01</span>
+            <h3 class="paso-title">Escribinos por WhatsApp</h3>
+            <p class="paso-desc">Contanos tu disponibilidad y si tenés alguna experiencia previa en deportes de tabla.</p>
           </article>
 
-          <article class="pricing-card is-featured">
-            <h3 class="pricing-title">CURSO HACIA LA AUTONOMÍA</h3>
-            <p class="pricing-desc">El plan integral de 8 a 10 horas totales para completar los 14 objetivos.</p>
-            <div class="pricing-amount-row">
-              <span class="pricing-amount">8 a 10 hs</span>
-              <span class="pricing-unit">/ 4 a 5 clases particulares</span>
-            </div>
-            <ul class="pricing-features-list">
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Progreso ordenado desde tierra hasta tu primera ceñida
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Coordinación flexible clase a clase según los mejores días de viento
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Asesoramiento honesto post-curso para adquirir o alquilar tu equipo
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Acceso a la comunidad de navegantes y bajadas guiadas de Ombú
-              </li>
-            </ul>
-            <div class="pricing-btn-box">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20sobre%20el%20curso%20completo%20de%20Kitesurf%20de%208%20a%2010%20horas." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
-                CONSULTAR POR EL CURSO COMPLETO
-                <span class="btn-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </span>
-              </a>
-            </div>
+          <article class="paso-reserva-card">
+            <span class="paso-number-display">02</span>
+            <h3 class="paso-title">Te avisamos qué días hay buenas condiciones</h3>
+            <p class="paso-desc">Monitoreamos el pronóstico y elegimos juntos la ventana de viento más favorable para tu clase.</p>
           </article>
+
+          <article class="paso-reserva-card">
+            <span class="paso-number-display">03</span>
+            <h3 class="paso-title">Entrás al agua</h3>
+            <p class="paso-desc">Llegás a la guardería en Acassuso, te equipamos con todo incluido y arrancamos tu sesión.</p>
+          </article>
+        </div>
+
+        <div class="pasos-cta-wrap">
+          <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20coordinar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+            Escribinos por WhatsApp
+            <span class="btn-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </a>
         </div>
       </div>
     </section>
 
     <!-- =========================================================
-         9. FAQ: ANTES DE ANOTARTE
+         14. SECCIÓN NUEVA: DESPUÉS DEL CURSO (ALQUILER & GUARDERÍA)
+         ========================================================= -->
+    <section class="section-macro" id="despues-del-curso">
+      <div class="container">
+        <article class="despues-curso-card">
+          <div>
+            <div class="camino-kicker">
+              <span class="camino-kicker-dot">●</span> COMUNIDAD OMBÚ
+            </div>
+            <h2 class="despues-curso-title">DESPUÉS DEL CURSO</h2>
+            <p class="despues-curso-text">
+              Cuando completás el curso y ya navegás solo, no hace falta que cargues el equipo en el auto. En la guardería de Ombú tenés vestuarios, bajada directa al río, lancha de apoyo permanente y alquiler de tablas y cometas para que sigas en el agua sin complicaciones.
+            </p>
+          </div>
+          <div>
+            <a href="/#kayaks" class="btn-pill-dark" style="white-space: nowrap;">
+              Ver guardería y alquileres →
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         15. CRUCE FINAL: ¿DUDÁS ENTRE KITE Y WINGFOIL?
+         ========================================================= -->
+    <section class="section-cruce" id="cruce-disciplinas">
+      <div class="container">
+        <div class="cruce-card-centered">
+          <h2 class="cruce-title">¿DUDÁS ENTRE KITE Y WINGFOIL?</h2>
+          <p class="cruce-text">
+            Las dos disciplinas tienen sensaciones únicas sobre el Río de la Plata. Conocé qué propone cada una antes de decidir.
+          </p>
+          <div class="cruce-buttons-row">
+            <a href="/wingfoil/" class="btn-pill-dark">Conocé Wingfoil →</a>
+            <a href="/windsurf/" class="btn-pill-white">Conocé Windsurf →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         16. FAQ: ANTES DE ANOTARTE
          ========================================================= -->
     <section class="section-macro section-sand" id="faq">
       <div class="container">
@@ -896,11 +1076,11 @@
           <div class="faq-list-col">
             <div class="faq-list">
               <div class="faq-item is-open">
-                <button class="faq-question-btn" type="button">
+                <button class="faq-question-btn" type="button" aria-expanded="true" aria-controls="faq-ans-1">
                   <span>¿A partir de qué edad se puede aprender?</span>
                   <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="faq-answer-panel" style="max-height: 200px;">
+                <div class="faq-answer-panel" id="faq-ans-1" style="max-height: 200px;">
                   <div class="faq-answer-content">
                     La edad mínima sugerida es de 16 años cumplidos con autorización firmada por padres o tutores. Es necesario tener el peso y desarrollo físico adecuado para dominar de forma segura la tracción del arnés.
                   </div>
@@ -908,23 +1088,23 @@
               </div>
 
               <div class="faq-item">
-                <button class="faq-question-btn" type="button">
+                <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-ans-2">
                   <span>¿Hace falta saber nadar?</span>
                   <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="faq-answer-panel">
+                <div class="faq-answer-panel" id="faq-ans-2">
                   <div class="faq-answer-content">
-                    Es fundamental saber nadar y sentirse cómodo en el agua. Aunque navegás siempre con chaleco de flotación homologado, traje de neoprene (que brinda flotabilidad natural) y en el banco de arena donde hacés pie asistido por el gomón, no admitimos alumnos que no sepan flotar y desplazarse con soltura en el agua.
+                    Navegás siempre con chaleco de flotación homologado, traje de neoprene que suma flotabilidad natural y en el banco de arena asistido por el gomón de rescate.
                   </div>
                 </div>
               </div>
 
               <div class="faq-item">
-                <button class="faq-question-btn" type="button">
+                <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-ans-3">
                   <span>¿Qué estado físico se necesita?</span>
                   <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="faq-answer-panel">
+                <div class="faq-answer-panel" id="faq-ans-3">
                   <div class="faq-answer-content">
                     No necesitás una fuerza descomunal en los brazos: el arnés que va a tu cintura es el que sostiene el 90% de la fuerza del kite. Solo necesitás movilidad general, flexibilidad y ganas de aprender. El deporte exige equilibrio y postura, no fuerza bruta.
                   </div>
@@ -932,23 +1112,23 @@
               </div>
 
               <div class="faq-item">
-                <button class="faq-question-btn" type="button">
+                <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-ans-4">
                   <span>¿Qué pasa si el día reservado no hay viento?</span>
                   <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="faq-answer-panel">
+                <div class="faq-answer-panel" id="faq-ans-4">
                   <div class="faq-answer-content">
-                    No perdés la clase ni tu dinero. Monitoreamos los modelos meteorológicos con 24 a 48 hs de antelación. Si el viento no cumple las condiciones de seguridad óptimas para tu nivel, nos comunicamos previamente y reprogramamos para el próximo día favorable.
+                    No perdés la clase ni tu dinero. Monitoreamos los modelos meteorológicos con 24 a 48 hs de antelación. Si el viento no cumple las condiciones de seguridad óptimas para tu nivel, nos comunicamos previamente y reprogramamos sin costo para el próximo día favorable.
                   </div>
                 </div>
               </div>
 
               <div class="faq-item">
-                <button class="faq-question-btn" type="button">
+                <button class="faq-question-btn" type="button" aria-expanded="false" aria-controls="faq-ans-5">
                   <span>¿Qué ropa tengo que llevar a la clase?</span>
                   <svg class="faq-chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
-                <div class="faq-answer-panel">
+                <div class="faq-answer-panel" id="faq-ans-5">
                   <div class="faq-answer-content">
                     Únicamente traje de baño / malla para poner debajo del neoprene, una toalla, protector solar y una muda seca de abrigo para cuando termines. Todo el equipamiento técnico te lo entregamos nosotros en la guardería.
                   </div>
@@ -961,7 +1141,7 @@
     </section>
 
     <!-- =========================================================
-         10. MANIFIESTO Y CIERRE
+         17. MANIFIESTO Y CIERRE
          ========================================================= -->
     <section class="prefooter-banner-section" id="cierre">
       <div class="container">
@@ -992,7 +1172,7 @@
   </main>
 
   <!-- =========================================================
-       FOOTER UNIFICADO
+       FOOTER UNIFICADO (SIN MODIFICACIONES)
        ========================================================= -->
   <footer class="site-footer-wrapper">
     <div class="container">
@@ -1012,8 +1192,8 @@
               <li><a href="#camino">El Camino en 14 Objetivos</a></li>
               <li><a href="#seguridad">Seguridad</a></li>
               <li><a href="#equipo">Equipo</a></li>
-              <li><a href="#instructores">Instructores</a></li>
               <li><a href="#precios">Precios</a></li>
+              <li><a href="#instructores">Instructores</a></li>
               <li><a href="#faq">Preguntas frecuentes</a></li>
             </ul>
           </div>
@@ -1062,14 +1242,60 @@
     </div>
   </footer>
 
-  <!-- Botón Flotante CTA WhatsApp (56px) -->
+  <!-- Botón Flotante CTA WhatsApp (Desktop) -->
   <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20clases%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="floating-wpp-btn" aria-label="Contactar por WhatsApp">
     <svg width="28" height="28" viewBox="0 0 737.509 740.824" fill="currentColor">
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/></svg>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M630.056 107.658C560.727 38.271 468.525.039 370.294 0 167.891 0 3.16 164.668 3.079 367.072c-.027 64.699 16.883 127.855 49.016 183.523L0 740.824l194.666-51.047c53.634 29.244 114.022 44.656 175.481 44.682h.151c202.382 0 367.128-164.689 367.21-367.094.039-98.088-38.121-190.32-107.452-259.707m-259.758 564.8h-.125c-54.766-.021-108.483-14.729-155.343-42.529l-11.146-6.613-115.516 30.293 30.834-112.592-7.258-11.543c-30.552-48.58-46.689-104.729-46.665-162.379C65.146 198.865 202.065 62 370.419 62c81.521.031 158.154 31.81 215.779 89.482s89.342 134.332 89.311 215.859c-.07 168.242-136.987 305.117-305.211 305.117m167.415-228.514c-9.176-4.591-54.286-26.782-62.697-29.843-8.41-3.061-14.526-4.591-20.644 4.592-6.116 9.182-23.7 29.843-29.054 35.964-5.351 6.122-10.703 6.888-19.879 2.296-9.175-4.591-38.739-14.276-73.786-45.526-27.275-24.32-45.691-54.36-51.043-63.542-5.352-9.183-.569-14.148 4.024-18.72 4.127-4.11 9.175-10.713 13.763-16.07 4.587-5.356 6.116-9.182 9.174-15.303 3.059-6.122 1.53-11.479-.764-16.07-2.294-4.591-20.643-49.739-28.29-68.104-7.447-17.886-15.012-15.466-20.644-15.746-5.346-.266-11.469-.323-17.585-.323-6.117 0-16.057 2.296-24.468 11.478-8.41 9.183-32.112 31.374-32.112 76.521s32.877 88.763 37.465 94.885c4.587 6.122 64.699 98.771 156.741 138.502 21.891 9.45 38.982 15.093 52.307 19.323 21.981 6.979 41.983 5.994 57.793 3.633 17.628-2.633 54.285-22.19 61.932-43.616 7.646-21.426 7.646-39.791 5.352-43.617-2.293-3.826-8.41-6.122-17.585-10.714"/>
+    </svg>
   </a>
+
+  <!-- Barra Fija Inferior Mobile (<= 768px) -->
+  <aside class="mobile-bottom-bar" aria-label="Reserva rápida mobile">
+    <div class="mobile-bottom-bar-info">
+      <span class="mobile-bottom-bar-price">Desde $120.000</span>
+      <span class="mobile-bottom-bar-sub">Equipo 100% incluido</span>
+    </div>
+    <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+      Reservá tu clase
+    </a>
+  </aside>
 
   <script src="../sports.js"></script>
   <script>
+    // Interacción Accordion Niveles (Cards expandibles según referencia)
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.nivel-acc-card');
+      if (!cards.length) return;
+
+      cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.acc-corner-cta')) return;
+
+          if (e.target.closest('.acc-minus-btn')) {
+            e.stopPropagation();
+            return;
+          }
+
+          if (!card.classList.contains('is-expanded')) {
+            cards.forEach(c => {
+              c.classList.remove('is-expanded');
+              c.setAttribute('aria-expanded', 'false');
+            });
+            card.classList.add('is-expanded');
+            card.setAttribute('aria-expanded', 'true');
+          }
+        });
+
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            if (e.target.closest('.acc-corner-cta') || e.target.closest('.acc-minus-btn')) return;
+            e.preventDefault();
+            card.click();
+          }
+        });
+      });
+    });
+
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
       if (link && typeof window.gtag === 'function') {

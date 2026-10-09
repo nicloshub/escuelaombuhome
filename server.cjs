@@ -31,12 +31,21 @@ const server = http.createServer((req, res) => {
     reqPath = '/index.html';
   }
 
-  const filePath = path.join(ROOT_DIR, reqPath);
+  let filePath = path.join(ROOT_DIR, reqPath);
 
   if (!filePath.startsWith(ROOT_DIR)) {
     res.writeHead(403);
     res.end('Acceso denegado');
     return;
+  }
+
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    const indexPath = path.join(filePath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      filePath = indexPath;
+    }
+  } else if (!fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
+    filePath = filePath + '.html';
   }
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
