@@ -437,7 +437,13 @@ img {
 
 .btn-pill-orange {
   background-color: var(--orange);
-  color: var(--white);
+  color: #FFFFFF;
+  border: 1px solid var(--orange);
+}
+
+.btn-pill-orange .icon {
+  background-color: #FFFFFF;
+  color: var(--orange);
 }
 
 .btn-pill-orange:hover {
@@ -446,9 +452,23 @@ img {
   box-shadow: 0 8px 24px rgba(255, 82, 6, 0.28);
 }
 
+.btn-pill-orange:hover .icon {
+  background-color: #FFFFFF;
+  color: var(--orange);
+}
+
+.btn-pill-orange:hover .icon svg {
+  transform: rotate(-35deg);
+}
+
 .btn-pill-dark {
   background-color: var(--ink);
   color: var(--white);
+}
+
+.btn-pill-dark .icon {
+  background-color: #FFFFFF;
+  color: var(--ink);
 }
 
 .btn-pill-dark:hover {
@@ -463,10 +483,38 @@ img {
   border-color: rgba(35, 31, 32, 0.12);
 }
 
+.btn-pill-white .icon {
+  background-color: var(--ink);
+  color: #FFFFFF;
+}
+
 .btn-pill-white:hover {
   background-color: var(--light-1);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+}
+
+/* Icon disc de alto impacto para botones píldora (UI Kit Ombú) */
+.btn-pill-dark .icon,
+.btn-pill-orange .icon,
+.btn-pill-white .icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.btn-pill-dark .icon svg,
+.btn-pill-orange .icon svg,
+.btn-pill-white .icon svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-icon {

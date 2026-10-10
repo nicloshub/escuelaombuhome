@@ -237,281 +237,413 @@
   }
 }
 
-/* --- 4.1. COMPONENTE: NIVELES EXPANDING CARDS ACCORDION (REFERENCIA FIGMA) --- */
-.niveles-accordion-container {
-  width: 100%;
-  margin-top: 36px;
+/* --- 4.1. COMPONENTE: ACORDEÓN HORIZONTAL DE 3 NIVELES (LEVEL ACCORDION) --- */
+.level-meta-line {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 24px;
 }
 
-.niveles-accordion-row {
+.level-accordion {
+  display: flex;
+  gap: 16px;
+  height: 520px;
+  width: 100%;
+}
+
+/* Tarjeta individual */
+.level-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  overflow: hidden;
+  background-color: var(--light-1);
+  transition: flex-basis 450ms cubic-bezier(0.23, 1, 0.32, 1),
+              border-radius 450ms cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: flex-basis, border-radius;
 }
 
-.nivel-acc-card {
+/* Tarjeta cerrada (Pastilla vertical) */
+.level-card:not(.is-open) {
+  flex: 0 0 96px;
+  border-radius: 48px;
+  cursor: pointer;
+}
+
+/* Tarjeta abierta */
+.level-card.is-open {
+  flex: 1 1 0%;
   border-radius: 28px;
-  background-color: var(--light-1);
+  cursor: default;
+}
+
+/* Botón Trigger / Pastilla */
+.level-trigger {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.level-trigger:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.level-card.is-open .level-trigger {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Fondo y degradé de la pastilla cerrada */
+.level-pill-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+.level-pill-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(35, 31, 32, 0.55) 0%, rgba(35, 31, 32, 0.70) 100%);
+  z-index: 2;
+}
+
+.level-pill-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  pointer-events: none;
+}
+
+.level-pill-num {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.level-pill-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  white-space: nowrap;
+  margin: auto 0;
+}
+
+/* Botón "+" circular */
+.level-pill-plus {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
   color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+}
+
+.level-pill-plus svg {
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .level-trigger:hover .level-pill-plus {
+    background-color: var(--orange);
+    color: #FFFFFF;
+    transform: scale(1.1);
+  }
+  .level-trigger:hover .level-pill-plus svg {
+    transform: rotate(90deg);
+  }
+}
+
+/* Panel expandido */
+.level-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.level-card:not(.is-open) .level-panel {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.level-photo-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--line);
-  transition: flex 350ms cubic-bezier(0.23, 1, 0.32, 1),
-              background-color 250ms ease,
-              border-color 250ms ease,
-              box-shadow 250ms ease,
-              transform 200ms ease;
-  user-select: none;
+  background-color: var(--light-1);
 }
 
-/* Estado Colapsado (Mobile) */
-.nivel-acc-card:not(.is-expanded) {
-  padding: 18px 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nivel-acc-card:not(.is-expanded) .acc-collapsed-view {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.level-photo-img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.nivel-acc-card:not(.is-expanded) .acc-expanded-view {
-  display: none;
-}
-
-.acc-collapsed-left {
+/* Botón flotante esquina superior derecha sobre la foto */
+.level-photo-badge-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(254, 254, 254, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   display: flex;
   align-items: center;
-  gap: 16px;
-}
-
-.acc-num-collapsed {
-  font-family: var(--font-display);
-  font-size: 22px;
-  line-height: 1;
+  justify-content: center;
   color: var(--ink);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  z-index: 10;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
 }
 
-.acc-title-collapsed {
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--ink);
+@media (hover: hover) and (pointer: fine) {
+  .level-photo-badge-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--orange);
+    color: var(--white);
+    border-color: var(--orange);
+  }
 }
 
-.acc-plus-collapsed {
-  font-size: 24px;
-  line-height: 1;
-  color: var(--ink);
-  font-weight: 400;
-}
-
-/* Estado Expandido (Común) */
-.nivel-acc-card.is-expanded {
-  background-color: var(--ink);
+/* Panel inferior con color naranja y contraste impecable UI Kit */
+.level-info-panel {
+  flex: 0 0 auto;
+  background-color: var(--orange);
+  padding: 24px 32px 28px;
   color: var(--white);
-  border-color: rgba(254, 254, 254, 0.12);
-  box-shadow: 0 16px 36px rgba(35, 31, 32, 0.20);
-  padding: 28px 24px 36px;
-  position: relative;
-}
-
-.nivel-acc-card.is-expanded .acc-collapsed-view {
-  display: none;
-}
-
-.nivel-acc-card.is-expanded .acc-expanded-view {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  height: 100%;
+  transform: translateY(12px);
+  opacity: 0;
+  transition: opacity 350ms cubic-bezier(0.23, 1, 0.32, 1) 120ms,
+              transform 350ms cubic-bezier(0.23, 1, 0.32, 1) 120ms;
+  will-change: transform, opacity;
 }
 
-.acc-expanded-top {
-  display: flex;
+.level-card.is-open .level-info-panel {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Micro-badge oscuro de alto contraste según UI Kit */
+.level-meta {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.acc-num-expanded {
-  font-family: var(--font-display);
-  font-size: 28px;
-  line-height: 1;
-  color: var(--orange);
-}
-
-.acc-minus-btn {
-  background: none;
-  border: none;
-  color: rgba(254, 254, 254, 0.6);
-  font-size: 24px;
-  line-height: 1;
-  cursor: pointer;
-  padding: 4px 8px;
-  transition: color 150ms ease;
-}
-
-.acc-minus-btn:hover {
+  background: var(--ink);
   color: var(--white);
-}
-
-.acc-kicker-expanded {
-  font-size: 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: rgba(254, 254, 254, 0.6);
   text-transform: uppercase;
-  margin-top: 4px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 8px;
+  align-self: flex-start;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.acc-title-expanded {
+.level-title {
   font-family: var(--font-display);
-  font-size: clamp(26px, 3.5vw, 36px);
-  line-height: 1.05;
-  color: var(--white);
+  font-size: clamp(28px, 3.4vw, 38px);
+  line-height: 0.96;
   text-transform: uppercase;
-  margin: 0;
-  letter-spacing: -0.01em;
+  color: var(--white);
+  margin: 0 0 8px;
+  letter-spacing: 0.01em;
 }
 
-.acc-desc-expanded {
+.level-desc {
+  font-family: var(--font-body);
   font-size: 15px;
-  line-height: 23px;
-  color: rgba(254, 254, 254, 0.85);
+  line-height: 1.48;
+  color: var(--white);
+  margin: 0 0 14px;
+  max-width: 720px;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* Grilla de Chips de Objetivos (15.4:1 contraste WCAG AAA) */
+.level-points-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.level-point-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(35, 31, 32, 0.92);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  padding: 6px 14px;
+  border-radius: 100px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  letter-spacing: 0.01em;
+}
+
+.level-point-chip::before {
+  content: '●';
+  color: var(--orange);
+  font-size: 8px;
+  line-height: 1;
+}
+
+/* Footer de la sección */
+.level-footer {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .level-footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.level-footer-note {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ink);
+  opacity: 0.85;
   margin: 0;
   max-width: 580px;
 }
 
-.acc-checklist-expanded {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.acc-check-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: rgba(254, 254, 254, 0.9);
-}
-
-.acc-check-icon {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: rgba(255, 82, 6, 0.2);
-  color: var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-/* Botón característico esquina inferior derecha con flecha ↗ */
-.acc-corner-cta {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 64px;
-  height: 60px;
-  background-color: var(--orange);
-  border-top-left-radius: 24px;
-  border-bottom-right-radius: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  text-decoration: none;
-  transition: background-color 200ms ease, transform 150ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .acc-corner-cta:hover {
-    background-color: var(--orange-hover);
-    transform: scale(1.05);
-  }
-}
-
-/* --- ADAPTACIÓN DESKTOP: HORIZONTAL EXPANDING FLEX CARDS (>=768px) --- */
-@media (min-width: 768px) {
-  .niveles-accordion-row {
-    flex-direction: row;
-    height: 480px;
-    align-items: stretch;
-    gap: 16px;
+/* --- MOBILE (<=768px) --- */
+@media (max-width: 768px) {
+  .level-accordion {
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
   }
 
-  .nivel-acc-card:not(.is-expanded) {
+  .level-card:not(.is-open) {
     flex: 0 0 96px;
-    padding: 24px 16px;
-    flex-direction: column;
+    height: 96px;
+    min-height: 96px;
+    width: 100%;
+    border-radius: 48px;
+  }
+
+  .level-card.is-open {
+    flex: 0 0 auto;
+    min-height: 560px;
+    width: 100%;
+    border-radius: 28px;
+  }
+
+  .level-pill-content {
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 0 24px;
   }
 
-  .nivel-acc-card:not(.is-expanded) .acc-collapsed-view {
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    align-items: center;
+  .level-pill-num {
+    font-size: 22px;
   }
 
-  .acc-collapsed-left {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    height: 80%;
+  .level-pill-title {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 13.5px;
+    text-align: left;
+    margin: 0 14px;
+    white-space: normal;
   }
 
-  .acc-num-collapsed {
-    font-size: 24px;
+  .level-pill-plus {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    flex-shrink: 0;
   }
 
-  .acc-title-collapsed {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    font-size: 16px;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
-    text-transform: uppercase;
-    color: var(--ink);
+  .level-photo-wrap {
+    height: 240px;
+    flex: 0 0 240px;
   }
 
-  .acc-plus-collapsed {
-    font-size: 26px;
+  .level-info-panel {
+    padding: 22px 20px 26px;
   }
 
-  .nivel-acc-card.is-expanded {
-    flex: 1 1 auto;
-    padding: 40px 48px;
+  .level-desc {
+    font-size: 14px;
   }
 
-  .acc-checklist-expanded {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px 24px;
-  }
-
-  .acc-corner-cta {
-    width: 72px;
-    height: 68px;
-    border-top-left-radius: 28px;
+  .level-points {
+    font-size: 12.5px;
   }
 }
 
-@media (min-width: 1024px) {
-  .niveles-accordion-row {
-    gap: var(--grid-gutter, 32px);
+/* prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .level-card,
+  .level-trigger,
+  .level-pill-plus,
+  .level-info-panel {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }
 

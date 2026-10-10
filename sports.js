@@ -9,6 +9,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
+  initLevelAccordion();
   initCaminoTabs();
   initFaqAccordion();
   initDropdown();
@@ -107,7 +108,54 @@ async function fetchLiveWind() {
   }
 }
 
-// 2. Tabs interactivos para los 3 niveles de "El Camino" (según diseño exacto Figma)
+// 2. Acordeón horizontal de 3 niveles (Kitesurf)
+function initLevelAccordion() {
+  const accordion = document.querySelector('.level-accordion');
+  if (!accordion) return;
+
+  const cards = Array.from(accordion.querySelectorAll('.level-card'));
+  const buttons = cards.map(c => c.querySelector('.level-trigger')).filter(Boolean);
+
+  function openCard(targetCard) {
+    if (targetCard.classList.contains('is-open')) return;
+
+    cards.forEach(card => {
+      const isOpen = card === targetCard;
+      card.classList.toggle('is-open', isOpen);
+      const btn = card.querySelector('.level-trigger');
+      if (btn) {
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+    });
+  }
+
+  buttons.forEach((btn, index) => {
+    btn.addEventListener('click', (e) => {
+      const card = btn.closest('.level-card');
+      if (card) openCard(card);
+    });
+
+    btn.addEventListener('keydown', (e) => {
+      let targetIndex = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        targetIndex = (index + 1) % buttons.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        targetIndex = (index - 1 + buttons.length) % buttons.length;
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const card = btn.closest('.level-card');
+        if (card) openCard(card);
+      }
+
+      if (targetIndex !== null) {
+        e.preventDefault();
+        buttons[targetIndex].focus();
+      }
+    });
+  });
+}
+
+// 2.1. Tabs interactivos para los 3 niveles de "El Camino" (según diseño exacto Figma)
 function initCaminoTabs() {
   const tabs = document.querySelectorAll('.camino-tab-card');
   const panels = document.querySelectorAll('.camino-content-panel');

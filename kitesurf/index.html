@@ -231,6 +231,9 @@
     <!-- =========================================================
          2. EL CAMINO: NIVELES EXPANDIBLES (DISEÑO ACCORDION CARDS)
          ========================================================= -->
+    <!-- =========================================================
+         2. EL CAMINO: 14 OBJETIVOS EN 3 NIVELES (ACORDEÓN HORIZONTAL)
+         ========================================================= -->
     <section class="section-macro" id="camino">
       <div class="container">
         <header class="editorial-header">
@@ -247,158 +250,174 @@
           </div>
         </header>
 
-        <!-- Acordeón Interactivo de Niveles según Referencia -->
-        <div class="niveles-accordion-container" aria-label="Niveles de aprendizaje de Kitesurf">
-          <div class="niveles-accordion-row">
+        <!-- TODO: unificar duración total (¿8-10 o 9-12 hs?) -->
+        <p class="level-meta-line">3 niveles · 14 objetivos · 8 a 10 horas en total</p>
 
-            <!-- Card 01: Nivel 1 (Principiante) -->
-            <article class="nivel-acc-card" id="nivelCard1" data-level="1" tabindex="0" role="region" aria-expanded="false" aria-label="Nivel 01: Conocé tu equipo y control de barrilete">
-              <!-- Vista Colapsada (Pill con texto vertical +) -->
-              <div class="acc-collapsed-view">
-                <div class="acc-collapsed-left">
-                  <span class="acc-num-collapsed">01</span>
-                  <span class="acc-title-collapsed">Conocé tu equipo y el viento</span>
-                </div>
-                <span class="acc-plus-collapsed" aria-hidden="true">+</span>
+        <!-- Acordeón Horizontal de 3 Niveles -->
+        <div class="level-accordion" role="region" aria-label="Niveles de aprendizaje de Kitesurf">
+
+          <!-- Nivel 01 (Abierto por defecto) -->
+          <article class="level-card is-open" id="levelCard1" data-level="1">
+            <button type="button" 
+                    class="level-trigger" 
+                    id="levelBtn1" 
+                    aria-expanded="true" 
+                    aria-controls="levelPanel1" 
+                    aria-label="Abrir Nivel 01: Conocé tu equipo y el viento">
+              <img src="../assets/nivel-1.jpg" alt="Alumno practicando control de barrilete en la arena" class="level-pill-photo" loading="lazy">
+              <div class="level-pill-overlay"></div>
+              <div class="level-pill-content">
+                <span class="level-pill-num">01</span>
+                <span class="level-pill-title">Conocé tu equipo y el viento</span>
+                <span class="level-pill-plus" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M7 1.5V12.5M1.5 7H12.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
               </div>
+            </button>
 
-              <!-- Vista Expandida (Fondo Dark con naranja y flecha ↗) -->
-              <div class="acc-expanded-view">
-                <div class="acc-expanded-top">
-                  <span class="acc-num-expanded">01</span>
-                  <button type="button" class="acc-minus-btn" aria-label="Cerrar nivel 1">—</button>
-                </div>
-                <span class="acc-kicker-expanded">TIERRA Y AGUA SIN TABLA · 3-4 HS</span>
-                <h3 class="acc-title-expanded">Control de barrilete</h3>
-                <p class="acc-desc-expanded">
-                  Todo arranca sin tabla. Manejo del barrilete, lectura del viento y la confianza de base antes de navegar en el río.
-                </p>
-                <ul class="acc-checklist-expanded">
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Armado y lectura de ventana de viento</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Sistema de seguridad y suelta rápida</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Manejo en la arena con una y dos manos</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Relanzamiento autónomo en el agua</span>
-                  </li>
-                </ul>
-                <a href="#precios" class="acc-corner-cta" aria-label="Ver opciones de clase para Nivel 1">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
+            <div class="level-panel" id="levelPanel1" role="region" aria-labelledby="levelBtn1">
+              <div class="level-photo-wrap">
+                <img src="../assets/nivel-1.jpg" alt="Nivel 1: Alumno con barrilete en la arena" class="level-photo-img" loading="lazy">
+                <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20del%20Nivel%201%20de%20Kitesurf." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="level-photo-badge-btn" 
+                   aria-label="Consultar Nivel 01 por WhatsApp">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </a>
               </div>
-            </article>
-
-            <!-- Card 02: Nivel 2 (Intermedio - Expandido por defecto según referencia) -->
-            <article class="nivel-acc-card is-expanded" id="nivelCard2" data-level="2" tabindex="0" role="region" aria-expanded="true" aria-label="Nivel 02: Entendé el entorno, cuerpo al agua y tabla">
-              <!-- Vista Colapsada -->
-              <div class="acc-collapsed-view">
-                <div class="acc-collapsed-left">
-                  <span class="acc-num-collapsed">02</span>
-                  <span class="acc-title-collapsed">Entendé el entorno y la tabla</span>
+              <div class="level-info-panel">
+                <div class="level-meta">TIERRA Y AGUA SIN TABLA · 3-4 HS</div>
+                <h3 class="level-title">Control de barrilete</h3>
+                <p class="level-desc">Todo arranca sin tabla. Manejo del barrilete, lectura del viento y la confianza de base antes de navegar en el río.</p>
+                <div class="level-points-grid">
+                  <span class="level-point-chip">Armado y lectura de ventana de viento</span>
+                  <span class="level-point-chip">Manejo en la arena con una y dos manos</span>
+                  <span class="level-point-chip">Sistema de seguridad y suelta rápida</span>
+                  <span class="level-point-chip">Relanzamiento autónomo en el agua</span>
                 </div>
-                <span class="acc-plus-collapsed" aria-hidden="true">+</span>
               </div>
+            </div>
+          </article>
 
-              <!-- Vista Expandida -->
-              <div class="acc-expanded-view">
-                <div class="acc-expanded-top">
-                  <span class="acc-num-expanded">02</span>
-                  <button type="button" class="acc-minus-btn" aria-label="Cerrar nivel 2">—</button>
-                </div>
-                <span class="acc-kicker-expanded">MIRÁ MÁS ALLÁ DE LA TABLA · BODY DRAG Y WATERSTART · 3-4 HS</span>
-                <h3 class="acc-title-expanded">Entendé el entorno</h3>
-                <p class="acc-desc-expanded">
-                  Interpretá el viento, la corriente y el pronóstico para entender las condiciones del día. Entrás al río, traccionás con tu cuerpo (body drag) y lográs tus primeros metros de planeo sobre la tabla.
-                </p>
-                <ul class="acc-checklist-expanded">
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Body drag upwind para recuperar tu tabla</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Relanzamiento seguro en agua profunda</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Calzado de la tabla manteniendo el cenit</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Primeros waterstarts y salida de pie</span>
-                  </li>
-                </ul>
-                <a href="#precios" class="acc-corner-cta" aria-label="Ver opciones de clase para Nivel 2">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
+          <!-- Nivel 02 -->
+          <article class="level-card" id="levelCard2" data-level="2">
+            <button type="button" 
+                    class="level-trigger" 
+                    id="levelBtn2" 
+                    aria-expanded="false" 
+                    aria-controls="levelPanel2" 
+                    aria-label="Abrir Nivel 02: Entendé el entorno y la tabla">
+              <img src="../assets/nivel-2.jpg" alt="Body drag en el agua" class="level-pill-photo" loading="lazy">
+              <div class="level-pill-overlay"></div>
+              <div class="level-pill-content">
+                <span class="level-pill-num">02</span>
+                <span class="level-pill-title">Entendé el entorno y la tabla</span>
+                <span class="level-pill-plus" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M7 1.5V12.5M1.5 7H12.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </div>
+            </button>
+
+            <div class="level-panel" id="levelPanel2" role="region" aria-labelledby="levelBtn2">
+              <div class="level-photo-wrap">
+                <img src="../assets/nivel-2.jpg" alt="Nivel 2: Body drag en el agua" class="level-photo-img" loading="lazy">
+                <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20del%20Nivel%202%20de%20Kitesurf." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="level-photo-badge-btn" 
+                   aria-label="Consultar Nivel 02 por WhatsApp">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </a>
               </div>
-            </article>
-
-            <!-- Card 03: Nivel 3 (Autonomía) -->
-            <article class="nivel-acc-card" id="nivelCard3" data-level="3" tabindex="0" role="region" aria-expanded="false" aria-label="Nivel 03: Decidí con confianza y navegación autónoma">
-              <!-- Vista Colapsada -->
-              <div class="acc-collapsed-view">
-                <div class="acc-collapsed-left">
-                  <span class="acc-num-collapsed">03</span>
-                  <span class="acc-title-collapsed">Decidí con confianza en el río</span>
+              <div class="level-info-panel">
+                <div class="level-meta">MIRÁ MÁS ALLÁ DE LA TABLA · BODY DRAG Y WATERSTART · 3-4 HS</div>
+                <h3 class="level-title">Entendé el entorno</h3>
+                <p class="level-desc">Interpretá el viento, la corriente y el pronóstico para entender las condiciones del día. Entrás al río, traccionás con tu cuerpo (body drag) y lográs tus primeros metros de planeo sobre la tabla.</p>
+                <div class="level-points-grid">
+                  <span class="level-point-chip">Body drag upwind para recuperar tu tabla</span>
+                  <span class="level-point-chip">Calzado de la tabla manteniendo el cenit</span>
+                  <span class="level-point-chip">Relanzamiento seguro en agua profunda</span>
+                  <span class="level-point-chip">Primeros waterstarts y salida de pie</span>
                 </div>
-                <span class="acc-plus-collapsed" aria-hidden="true">+</span>
               </div>
+            </div>
+          </article>
 
-              <!-- Vista Expandida -->
-              <div class="acc-expanded-view">
-                <div class="acc-expanded-top">
-                  <span class="acc-num-expanded">03</span>
-                  <button type="button" class="acc-minus-btn" aria-label="Cerrar nivel 3">—</button>
-                </div>
-                <span class="acc-kicker-expanded">LIBERTAD TOTAL EN EL RÍO · 3-4 HS</span>
-                <h3 class="acc-title-expanded">Decidí con confianza</h3>
-                <p class="acc-desc-expanded">
-                  El salto a la independencia total. Planeo continuo en ambas direcciones, ceñida técnica para volver exactamente a la playa y navegación 100% autónoma.
-                </p>
-                <ul class="acc-checklist-expanded">
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Planeo continuo y control de velocidad</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Ceñida técnica: volver a la costa solo</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Transiciones fluidas de borde a borde</span>
-                  </li>
-                  <li class="acc-check-item">
-                    <span class="acc-check-icon" aria-hidden="true">✓</span>
-                    <span>Reglas de paso y autonomía completa</span>
-                  </li>
-                </ul>
-                <a href="#precios" class="acc-corner-cta" aria-label="Ver opciones de clase para Nivel 3">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
+          <!-- Nivel 03 -->
+          <article class="level-card" id="levelCard3" data-level="3">
+            <button type="button" 
+                    class="level-trigger" 
+                    id="levelBtn3" 
+                    aria-expanded="false" 
+                    aria-controls="levelPanel3" 
+                    aria-label="Abrir Nivel 03: Decidí con confianza">
+              <img src="../assets/nivel-3.jpg" alt="Rider navegando solo" class="level-pill-photo" loading="lazy">
+              <div class="level-pill-overlay"></div>
+              <div class="level-pill-content">
+                <span class="level-pill-num">03</span>
+                <span class="level-pill-title">Decidí con confianza</span>
+                <span class="level-pill-plus" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M7 1.5V12.5M1.5 7H12.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                  </svg>
+                </span>
+              </div>
+            </button>
+
+            <div class="level-panel" id="levelPanel3" role="region" aria-labelledby="levelBtn3">
+              <div class="level-photo-wrap">
+                <img src="../assets/nivel-3.jpg" alt="Nivel 3: Rider navegando solo" class="level-photo-img" loading="lazy">
+                <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20del%20Nivel%203%20de%20Kitesurf." 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="level-photo-badge-btn" 
+                   aria-label="Consultar Nivel 03 por WhatsApp">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3.5 12.5L12.5 3.5M12.5 3.5H5.5M12.5 3.5V10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </a>
               </div>
-            </article>
+              <div class="level-info-panel">
+                <div class="level-meta">LIBERTAD TOTAL EN EL RÍO · 3-4 HS</div>
+                <h3 class="level-title">Decidí con confianza</h3>
+                <p class="level-desc">El salto a la independencia total. Planeo continuo en ambas direcciones, ceñida técnica para volver exactamente a la playa y navegación 100% autónoma.</p>
+                <div class="level-points-grid">
+                  <span class="level-point-chip">Planeo continuo y control de velocidad</span>
+                  <span class="level-point-chip">Ceñida técnica: volver a la costa solo</span>
+                  <span class="level-point-chip">Transiciones fluidas de borde a borde</span>
+                  <span class="level-point-chip">Reglas de paso y autonomía completa</span>
+                </div>
+              </div>
+            </div>
+          </article>
 
-          </div>
+        </div>
+
+        <!-- Cierre de sección con disclaimer y CTA a WhatsApp -->
+        <div class="level-footer">
+          <p class="level-footer-note">
+            Los tiempos son orientativos. Cada persona avanza a su ritmo y ajustamos según el viento del día.
+          </p>
+          <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20empezar%20por%20el%20Nivel%201%20de%20Kitesurf." 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn-pill-orange">
+            <span>Empezá por el nivel 1</span>
+            <span class="icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
         </div>
       </div>
     </section>
@@ -1306,40 +1325,6 @@
 
   <script src="../sports.js"></script>
   <script>
-    // Interacción Accordion Niveles (Cards expandibles según referencia)
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.nivel-acc-card');
-      if (!cards.length) return;
-
-      cards.forEach(card => {
-        card.addEventListener('click', function(e) {
-          if (e.target.closest('.acc-corner-cta')) return;
-
-          if (e.target.closest('.acc-minus-btn')) {
-            e.stopPropagation();
-            return;
-          }
-
-          if (!card.classList.contains('is-expanded')) {
-            cards.forEach(c => {
-              c.classList.remove('is-expanded');
-              c.setAttribute('aria-expanded', 'false');
-            });
-            card.classList.add('is-expanded');
-            card.setAttribute('aria-expanded', 'true');
-          }
-        });
-
-        card.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            if (e.target.closest('.acc-corner-cta') || e.target.closest('.acc-minus-btn')) return;
-            e.preventDefault();
-            card.click();
-          }
-        });
-      });
-    });
-
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
       if (link && typeof window.gtag === 'function') {
