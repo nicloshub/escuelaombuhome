@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /app/api/
+Disallow: /app/admin/
+
+Sitemap: https://escuelaombu.com.ar/sitemap.xml

@@ -1,0 +1,69 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Escuela Náutica Ombú",
+    "identifier": "urn:air:escuelaombu.com.ar:host"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:escuelaombu.com.ar:kitesurf",
+      "displayName": "Clases de Kitesurf",
+      "type": "text/html",
+      "url": "https://escuelaombu.com.ar/kitesurf/",
+      "description": "Cursos de kitesurf para todos los niveles con instructores certificados, equipos de última generación y lancha de apoyo permanente en el Río de la Plata.",
+      "representativeQueries": [
+        "clases de kitesurf en buenos aires",
+        "aprender kitesurf acassuso rio de la plata",
+        "precio curso kitesurf ombu"
+      ]
+    },
+    {
+      "identifier": "urn:air:escuelaombu.com.ar:windsurf",
+      "displayName": "Clases de Windsurf",
+      "type": "text/html",
+      "url": "https://escuelaombu.com.ar/windsurf/",
+      "description": "Cursos de windsurf con metodología progresiva y equipos adaptados para aprendizaje seguro y navegación libre en Acassuso.",
+      "representativeQueries": [
+        "clases de windsurf zona norte",
+        "aprender windsurf acassuso",
+        "alquiler equipos windsurf escuela ombu"
+      ]
+    },
+    {
+      "identifier": "urn:air:escuelaombu.com.ar:wingfoil",
+      "displayName": "Clases de Wingfoil",
+      "type": "text/html",
+      "url": "https://escuelaombu.com.ar/wingfoil/",
+      "description": "Aprende la nueva disciplina náutica de deslizamiento sobre hydrofoil con inflables modernos y lancha de apoyo en el Río de la Plata.",
+      "representativeQueries": [
+        "clases de wingfoil buenos aires",
+        "aprender wingfoil acassuso",
+        "curso wing foil rio de la plata"
+      ]
+    },
+    {
+      "identifier": "urn:air:escuelaombu.com.ar:sup",
+      "displayName": "Stand Up Paddle (SUP)",
+      "type": "text/html",
+      "url": "https://www.supombu.com.ar/",
+      "description": "Travesías guiadas, clases de iniciación y alquiler de tablas de stand up paddle en la costa de Acassuso.",
+      "representativeQueries": [
+        "stand up paddle acassuso",
+        "clases sup escuela ombu",
+        "alquiler tabla sup buenos aires"
+      ]
+    },
+    {
+      "identifier": "urn:air:escuelaombu.com.ar:booking",
+      "displayName": "Reserva de Clases y Consulta",
+      "type": "text/html",
+      "url": "https://wa.me/5491130041100",
+      "description": "Atención directa por WhatsApp para coordinar fechas, horarios según el viento y disponibilidad de instructores.",
+      "representativeQueries": [
+        "reservar clase escuela ombu",
+        "contacto whatsapp escuela ombu",
+        "horarios y viento kitesurf acassuso"
+      ]
+    }
+  ]
+}

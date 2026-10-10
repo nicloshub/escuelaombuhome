@@ -1,0 +1,53 @@
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. No interferir con la carpeta /app/ (donde vive la App de Reservas y el subdominio app.)
+  RewriteRule ^app(/.*)?$ - [L]
+
+  # 2. Redirección 301 de SUP a su dominio propio oficial
+  RewriteRule ^sup(/.*)?$ https://www.supombu.com.ar/ [R=301,L]
+
+  # 3. Servir archivos físicos reales (imágenes, favicons, robots.txt, etc.)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 3. Fallback de la Home institucional: enviar al index.html estático
+  RewriteRule ^.*$ /index.html [L]
+</IfModule>
+
+# Proteger archivos sensibles si existieran
+<FilesMatch "(\.env|\.git|\.sql|\.sqlite|\.db|composer\.(json|lock)|package(-lock)?\.json)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Compresión GZIP
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Control de caché para el index.html
+<Files "index.html">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires 0
+  </IfModule>
+</Files>
+
+# Caché eficiente de recursos estáticos (CSS, JS, imágenes, fuentes)
+AddType font/woff2 .woff2
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

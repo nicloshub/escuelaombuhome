@@ -10,12 +10,17 @@ const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
+  '.xml': 'application/xml; charset=utf-8',
+  '.txt': 'text/plain; charset=utf-8',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.svg': 'image/svg+xml',
   '.webp': 'image/webp',
-  '.ico': 'image/x-icon'
+  '.ico': 'image/x-icon',
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.ttf': 'font/ttf'
 };
 
 const server = http.createServer((req, res) => {
@@ -26,12 +31,19 @@ const server = http.createServer((req, res) => {
     reqPath = '/index.html';
   }
 
-  const filePath = path.join(ROOT_DIR, reqPath);
+  let filePath = path.join(ROOT_DIR, reqPath);
 
   if (!filePath.startsWith(ROOT_DIR)) {
     res.writeHead(403);
     res.end('Acceso denegado');
     return;
+  }
+
+  // Si es un directorio, buscar index.html dentro
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    filePath = path.join(filePath, 'index.html');
+  } else if (!fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
+    filePath = filePath + '.html';
   }
 
   if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
@@ -47,7 +59,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n========================================`);
-  console.log(`🚀 Servidor Nueva Home (Figma Replica)`);
+  console.log(`🚀 Servidor Escuela Náutica Ombú (Home & Subpáginas)`);
   console.log(`👉 http://localhost:${PORT}`);
   console.log(`========================================\n`);
 });
