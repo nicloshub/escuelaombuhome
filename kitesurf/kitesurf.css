@@ -853,33 +853,36 @@
   margin: auto 0;
 }
 
-/* Botón "+" circular */
-.level-pill-plus {
-  width: 42px;
-  height: 42px;
+/* Botón flecha circular en pastilla */
+.level-pill-arrow {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: #FFFFFF;
-  color: var(--ink);
+  background-color: var(--ink);
+  color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  margin-top: auto;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.level-pill-plus svg {
+.level-pill-arrow svg {
   display: block;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .level-trigger:hover .level-pill-plus {
+  .level-trigger:hover .level-pill-arrow {
     background-color: var(--orange);
     color: #FFFFFF;
     transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(255, 82, 6, 0.35);
   }
-  .level-trigger:hover .level-pill-plus svg {
-    transform: rotate(90deg);
+  .level-trigger:hover .level-pill-arrow svg {
+    transform: translateX(3px);
   }
 }
 
@@ -890,6 +893,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  border-radius: 28px;
   z-index: 1;
 }
 
@@ -914,34 +919,82 @@
   display: block;
 }
 
-/* Botón flotante esquina superior derecha sobre la foto */
-.level-photo-badge-btn {
+/* Notch de esquina cóncava invertida según referencia Dribbble */
+.level-corner-notch {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(254, 254, 254, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  bottom: 0;
+  right: 0;
+  width: 68px;
+  height: 68px;
+  background-color: var(--white);
+  border-top-left-radius: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ink);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
   z-index: 10;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease;
+  pointer-events: auto;
+}
+
+/* Curva cóncava superior (inverted fillet) */
+.level-corner-notch::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border-bottom-right-radius: 24px;
+  box-shadow: 6px 6px 0 6px var(--white);
+  pointer-events: none;
+}
+
+/* Curva cóncava izquierda (inverted fillet) */
+.level-corner-notch::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -24px;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border-bottom-right-radius: 24px;
+  box-shadow: 6px 6px 0 6px var(--white);
+  pointer-events: none;
+}
+
+.level-notch-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.2s ease, 
+              color 0.2s ease,
+              box-shadow 0.2s ease;
   text-decoration: none;
 }
 
+.level-notch-btn svg {
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @media (hover: hover) and (pointer: fine) {
-  .level-photo-badge-btn:hover {
-    transform: scale(1.1);
+  .level-notch-btn:hover {
+    transform: scale(1.08);
     background-color: var(--orange);
-    color: var(--white);
-    border-color: var(--orange);
+    color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(255, 82, 6, 0.4);
+  }
+
+  .level-notch-btn:hover svg {
+    transform: translateX(3px);
   }
 }
 
@@ -949,7 +1002,7 @@
 .level-info-panel {
   flex: 0 0 auto;
   background-color: var(--orange);
-  padding: 24px 32px 28px;
+  padding: 24px 84px 28px 32px;
   color: var(--white);
   display: flex;
   flex-direction: column;
@@ -1118,10 +1171,10 @@
     white-space: normal;
   }
 
-  .level-pill-plus {
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
+  .level-pill-arrow {
+    width: 38px;
+    height: 38px;
+    margin-top: 0;
     flex-shrink: 0;
   }
 
@@ -1131,7 +1184,18 @@
   }
 
   .level-info-panel {
-    padding: 22px 20px 26px;
+    padding: 22px 72px 24px 20px;
+  }
+
+  .level-corner-notch {
+    width: 60px;
+    height: 60px;
+    border-top-left-radius: 24px;
+  }
+
+  .level-notch-btn {
+    width: 42px;
+    height: 42px;
   }
 
   .level-desc {
