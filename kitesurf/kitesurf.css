@@ -866,68 +866,233 @@
   }
 }
 
-/* --- 5. SECCIÓN NUEVA: "PARA QUIÉN ES" (3 ÍTEMS CON SVG CONSISTENTE) --- */
-.para-quien-grid {
+/* --- 5. SECCIÓN BENTO GRID: COMUNIDAD & ESCUELA (12 COLUMNAS FIGMA) --- */
+.section-bento {
+  position: relative;
+}
+
+.bento-header {
+  margin-bottom: clamp(32px, 3.5vw, 48px);
+}
+
+.bento-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 3.8vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+
+.bento-header-desc {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  opacity: 0.85;
+  margin: 0;
+  max-width: 587px;
+}
+
+.bento-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
-  margin-top: 36px;
+  width: 100%;
 }
 
-.para-quien-card {
-  background-color: var(--white);
-  border-radius: var(--radius-card);
-  padding: 24px;
-  box-shadow: var(--shadow-card);
+.bento-cell {
+  border-radius: var(--radius-card, 24px);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.4s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)), 
+              box-shadow 0.4s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bento-cell:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08);
+  }
+}
+
+.bento-cell:active {
+  transform: scale(0.985);
+}
+
+.bento-cell--photo {
+  height: 240px;
+}
+
+.bento-cell--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bento-cell--photo:hover img {
+    transform: scale(1.04);
+  }
+}
+
+.bento-cell--tall {
+  height: 320px;
+}
+
+.bento-cell--dark {
+  background-color: var(--ink);
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  border: 1px solid var(--line);
+  justify-content: space-between;
+  min-height: 200px;
 }
 
-.para-quien-icon-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-inner);
-  background-color: var(--shade);
+.bento-stat-number {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 0.9;
   color: var(--orange);
+  margin: 0;
+}
+
+.bento-stat-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(254, 254, 254, 0.75);
+  max-width: 28ch;
+  margin: 0;
+}
+
+/* Sponsor Oficial HARD WIND */
+.bento-cell--sponsor {
+  background: var(--orange);
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px;
+  min-height: 200px;
+}
+
+.bento-sponsor-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.bento-sponsor-logo-wrap {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  justify-content: flex-start;
+  margin-top: auto;
 }
 
-.para-quien-card-title {
-  font-family: var(--font-body);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--ink);
-  margin: 0;
-  text-transform: none;
+.bento-sponsor-logo {
+  max-width: 100%;
+  width: 215px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
-.para-quien-card-desc {
-  font-size: 15px;
-  line-height: 22px;
-  color: var(--text-muted);
-  margin: 0;
-}
-
+/* Bento Grid en Tablet (2 columnas) */
 @media (min-width: 768px) {
-  .para-quien-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
     gap: 24px;
   }
-}
 
-@media (min-width: 1024px) {
-  .para-quien-grid {
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--grid-gutter, 32px);
+  .bento-cell--wide {
+    grid-column: span 2;
+    height: 280px;
   }
 
-  .para-quien-card {
-    grid-column: span 4;
+  .bento-cell--dark {
+    grid-column: 1;
+    min-height: 220px;
+  }
+
+  .bento-cell--sponsor {
+    grid-column: 2;
+    min-height: 220px;
+  }
+
+  .bento-cell--photo-alt {
+    grid-column: 1;
+    height: 280px;
+  }
+
+  .bento-cell--tall {
+    grid-column: 2;
+    height: 280px;
+  }
+}
+
+/* Bento Grid en Desktop: 12 columnas con gutters de 32px (Figma exacto) */
+@media (min-width: 1024px) {
+  .bento-grid {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    grid-template-rows: 280px 280px !important;
+    gap: var(--grid-gutter, 32px) !important;
+    width: 100% !important;
+  }
+
+  .bento-cell--photo,
+  .bento-cell--tall,
+  .bento-cell--wide,
+  .bento-cell--photo-alt {
+    height: 100% !important;
+  }
+
+  .bento-cell--wide {
+    grid-column: 1 / span 4 !important;
+    grid-row: 1 !important;
+  }
+
+  .bento-cell--dark {
+    grid-column: 5 / span 3 !important;
+    grid-row: 1 !important;
+    min-height: auto !important;
+  }
+
+  .bento-cell--tall {
+    grid-column: 8 / span 5 !important;
+    grid-row: 1 / span 2 !important;
+    min-height: auto !important;
+  }
+
+  .bento-cell--sponsor {
+    grid-column: 1 / span 3 !important;
+    grid-row: 2 !important;
+    min-height: auto !important;
+  }
+
+  .bento-cell--photo-alt {
+    grid-column: 4 / span 4 !important;
+    grid-row: 2 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-cell,
+  .bento-cell--photo img {
+    transition: none !important;
+    transform: none !important;
   }
 }
 
