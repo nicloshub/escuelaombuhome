@@ -300,35 +300,324 @@
   white-space: nowrap;
 }
 
-/* --- 3. COMPONENTE FIGURE PARA ELIMINAR PLACEHOLDERS "FOTO: ..." --- */
-.equipo-card-visual {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background-color: var(--light-1);
-  border-radius: var(--radius-inner);
-  overflow: hidden;
+/* --- 3. SECCIÓN EQUIPAMIENTO: INTERACTIVE GEAR EXPLODED VIEW --- */
+.gear-interactive-stage {
   position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+/* Centro: Rider Image & Hotspots */
+.gear-stage-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.gear-rider-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  border-radius: var(--radius-card, 24px);
+  overflow: hidden;
+  background-color: #FDFDFD;
+  box-shadow: 0 12px 36px rgba(35, 31, 32, 0.06);
+  border: 1px solid rgba(35, 31, 32, 0.06);
+}
+
+.gear-rider-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+/* Hotspots interactivos con pulso y dot central */
+.gear-hotspot {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: manipulation;
+  outline: none;
 }
 
-.equipo-figure {
+.gear-hotspot-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: var(--orange);
+  box-shadow: 0 0 0 3px #FFFFFF, 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)), 
+              background-color 0.25s ease, 
+              box-shadow 0.25s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.gear-hotspot-pulse {
+  position: absolute;
   width: 100%;
   height: 100%;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--light-1);
+  border-radius: 50%;
+  background-color: rgba(255, 82, 6, 0.35);
+  animation: gear-pulse-animation 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
 }
 
-.equipo-figure img {
+@keyframes gear-pulse-animation {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.gear-hotspot:hover .gear-hotspot-dot,
+.gear-hotspot:focus-visible .gear-hotspot-dot,
+.gear-hotspot.is-active .gear-hotspot-dot {
+  transform: scale(1.35);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px var(--orange), 0 4px 12px rgba(255, 82, 6, 0.6);
+}
+
+/* Columnas y Tarjetas de cada elemento */
+.gear-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  width: 100%;
+  z-index: 3;
+}
+
+.gear-card {
+  background-color: var(--white);
+  border: 1px solid rgba(35, 31, 32, 0.08);
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 16px rgba(35, 31, 32, 0.04);
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)), 
+              box-shadow 0.3s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)), 
+              border-color 0.25s ease,
+              background-color 0.25s ease;
+  text-align: left;
+  user-select: none;
+  outline: none;
+}
+
+.gear-card-thumb-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--light-1);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(35, 31, 32, 0.06);
+  border: 1px solid rgba(35, 31, 32, 0.06);
+}
+
+.gear-card-thumb {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  background-color: var(--light-1);
+  transition: transform 0.4s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.gear-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.gear-card-tag {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.gear-card-title {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.gear-card-desc {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Hover & Active en Tarjetas */
+@media (hover: hover) and (pointer: fine) {
+  .gear-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(35, 31, 32, 0.09);
+    border-color: rgba(255, 82, 6, 0.45);
+  }
+
+  .gear-card:hover .gear-card-thumb {
+    transform: scale(1.08);
+  }
+}
+
+.gear-card.is-active,
+.gear-card:focus-visible {
+  border-color: var(--orange);
+  background-color: #FFFFFF;
+  box-shadow: 0 12px 32px rgba(255, 82, 6, 0.16);
+  transform: translateY(-2px);
+}
+
+.gear-card.is-active .gear-card-thumb {
+  transform: scale(1.06);
+}
+
+.gear-card.is-active .gear-card-title {
+  color: var(--orange);
+}
+
+/* SVG Leader Lines (desktop) */
+.gear-connectors-svg {
+  display: none;
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gear-interactive-stage {
+    gap: 28px;
+  }
+
+  .gear-column {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .gear-column--left {
+    order: 2;
+  }
+
+  .gear-stage-center {
+    order: 1;
+  }
+
+  .gear-column--right {
+    order: 3;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop (>= 1024px): Exploded View con flechas y columnas laterales */
+@media (min-width: 1024px) {
+  .gear-interactive-stage {
+    display: grid;
+    grid-template-columns: 310px 1fr 310px;
+    align-items: center;
+    gap: 0;
+    min-height: 640px;
+    margin-top: 48px;
+  }
+
+  .gear-stage-center {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .gear-rider-wrapper {
+    max-width: 420px;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  .gear-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 560px;
+    z-index: 4;
+  }
+
+  .gear-card {
+    padding: 14px 16px;
+    min-height: 104px;
+  }
+
+  .gear-connectors-svg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .gear-connector-line {
+    fill: none;
+    stroke: rgba(35, 31, 32, 0.22);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 4 4;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease, stroke-dasharray 0.3s ease;
+  }
+
+  .marker-dot {
+    fill: rgba(35, 31, 32, 0.35);
+    transition: fill 0.3s ease;
+  }
+
+  /* Línea activa conectando al elemento */
+  .gear-connector-line.is-active {
+    stroke: var(--orange);
+    stroke-width: 2.5;
+    stroke-dasharray: none;
+    filter: drop-shadow(0 0 4px rgba(255, 82, 6, 0.45));
+  }
+
+  .gear-connector-line.is-active .marker-dot {
+    fill: var(--orange);
+  }
 }
 
 .historias-card-photo {

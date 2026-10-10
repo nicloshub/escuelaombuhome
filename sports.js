@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initLevelAccordion();
   initCaminoTabs();
+  initGearExplodedView();
   initFaqAccordion();
   initDropdown();
   initMobileMenu();
@@ -273,5 +274,68 @@ function initMobileMenu() {
       toggleMenu(true);
       btn.focus();
     }
+  });
+}
+
+// 5. Interacción del Escenario de Equipamiento (Exploded View con Flechas)
+function initGearExplodedView() {
+  const stage = document.getElementById('gearStage');
+  if (!stage) return;
+
+  const cards = stage.querySelectorAll('.gear-card');
+  const hotspots = stage.querySelectorAll('.gear-hotspot');
+  const lines = stage.querySelectorAll('.gear-connector-line');
+
+  function setActiveGear(gearId) {
+    cards.forEach(card => {
+      const match = card.getAttribute('data-gear') === gearId;
+      card.classList.toggle('is-active', match);
+    });
+    hotspots.forEach(hotspot => {
+      const match = hotspot.getAttribute('data-gear') === gearId;
+      hotspot.classList.toggle('is-active', match);
+    });
+    lines.forEach(line => {
+      const match = line.getAttribute('data-gear') === gearId;
+      line.classList.toggle('is-active', match);
+    });
+  }
+
+  function clearActiveGear() {
+    cards.forEach(card => card.classList.remove('is-active'));
+    hotspots.forEach(hotspot => hotspot.classList.remove('is-active'));
+    lines.forEach(line => line.classList.remove('is-active'));
+  }
+
+  // Interacción en Tarjetas (Hover, Focus, Click)
+  cards.forEach(card => {
+    const gearId = card.getAttribute('data-gear');
+    card.addEventListener('mouseenter', () => setActiveGear(gearId));
+    card.addEventListener('focus', () => setActiveGear(gearId));
+    card.addEventListener('mouseleave', () => clearActiveGear());
+    card.addEventListener('click', () => setActiveGear(gearId));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setActiveGear(gearId);
+      }
+    });
+  });
+
+  // Interacción en Hotspots sobre la persona
+  hotspots.forEach(hotspot => {
+    const gearId = hotspot.getAttribute('data-gear');
+    hotspot.addEventListener('mouseenter', () => setActiveGear(gearId));
+    hotspot.addEventListener('focus', () => setActiveGear(gearId));
+    hotspot.addEventListener('mouseleave', () => clearActiveGear());
+    hotspot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setActiveGear(gearId);
+      // En mobile: scroll suave hacia la tarjeta correspondiente
+      const targetCard = stage.querySelector(`.gear-card[data-gear="${gearId}"]`);
+      if (targetCard && window.innerWidth < 1024) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
   });
 }

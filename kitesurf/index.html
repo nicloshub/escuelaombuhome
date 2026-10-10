@@ -593,71 +593,151 @@
           </div>
         </header>
 
-        <!-- Grilla de 4 Tarjetas de Equipamiento con <figure> -->
-        <div class="equipo-cards-grid">
-          <!-- Tarjeta 1: Kite -->
-          <article class="equipo-card-item">
-            <div class="equipo-card-visual">
-              <!-- TODO: Subir foto real de kite de escuela en ../assets/kitesurf-equipo-kite.jpg -->
-              <figure class="equipo-figure">
-                <img src="../assets/kitesurf-equipo-kite.jpg" alt="Kite de escuela adaptado a las condiciones de viento" loading="lazy" width="400" height="300">
-              </figure>
-            </div>
-            <div class="equipo-card-body">
-              <h3 class="equipo-card-title">Kite</h3>
-              <p class="equipo-card-text">
-                El tamaño se elige según tu peso y el viento del día — te lo ajustamos antes de entrar al agua.
-              </p>
-            </div>
-          </article>
+        <!-- Escenario Interactivo de Equipamiento (Exploded View con Flechas e Indicadores) -->
+        <div class="gear-interactive-stage" id="gearStage">
+          <!-- Líneas Conectoras SVG (Desktop) -->
+          <svg class="gear-connectors-svg" viewBox="0 0 1000 640" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <marker id="gear-dot-left" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+                <circle cx="5" cy="5" r="4" fill="#FF5206" />
+              </marker>
+              <marker id="gear-dot-right" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+                <circle cx="5" cy="5" r="4" fill="#FF5206" />
+              </marker>
+              <marker id="gear-arrow-left" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 8 1.5 L 1.5 5 L 8 8.5" fill="none" stroke="#FF5206" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </marker>
+              <marker id="gear-arrow-right" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M 2 1.5 L 8.5 5 L 2 8.5" fill="none" stroke="#FF5206" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </marker>
+            </defs>
 
-          <!-- Tarjeta 2: Tabla -->
-          <article class="equipo-card-item">
-            <div class="equipo-card-visual">
-              <!-- TODO: Subir foto real de tabla de iniciación en ../assets/kitesurf-equipo-tabla.jpg -->
-              <figure class="equipo-figure">
-                <img src="../assets/kitesurf-equipo-tabla.jpg" alt="Tabla de iniciación ancha para kitesurf" loading="lazy" width="400" height="300">
-              </figure>
-            </div>
-            <div class="equipo-card-body">
-              <h3 class="equipo-card-title">Tabla</h3>
-              <p class="equipo-card-text">
-                Tablas de iniciación, más estables, pensadas para los primeros niveles de aprendizaje.
-              </p>
-            </div>
-          </article>
+            <!-- Conectores Lado Izquierdo -->
+            <path id="line-casco" class="gear-connector-line" data-gear="casco" d="M 503 96 L 360 96 L 295 95" marker-start="url(#gear-dot-left)" marker-end="url(#gear-arrow-left)" />
+            <path id="line-chaleco" class="gear-connector-line" data-gear="chaleco" d="M 503 218 L 370 218 L 295 285" marker-start="url(#gear-dot-left)" marker-end="url(#gear-arrow-left)" />
+            <path id="line-tabla" class="gear-connector-line" data-gear="tabla" d="M 418 378 L 360 378 L 295 475" marker-start="url(#gear-dot-left)" marker-end="url(#gear-arrow-left)" />
 
-          <!-- Tarjeta 3: Arnés -->
-          <article class="equipo-card-item">
-            <div class="equipo-card-visual">
-              <!-- TODO: Subir foto real de arnés ergonómico en ../assets/kitesurf-equipo-arnes.jpg -->
-              <figure class="equipo-figure">
-                <img src="../assets/kitesurf-equipo-arnes.jpg" alt="Arnés de cintura ergonómico para kitesurf" loading="lazy" width="400" height="300">
-              </figure>
-            </div>
-            <div class="equipo-card-body">
-              <h3 class="equipo-card-title">Arnés</h3>
-              <p class="equipo-card-text">
-                Conecta tu cuerpo al kite y hace que sostener la tracción no dependa solo de tus brazos.
-              </p>
-            </div>
-          </article>
+            <!-- Conectores Lado Derecho -->
+            <path id="line-barra" class="gear-connector-line" data-gear="barra" d="M 602 230 L 650 230 L 705 95" marker-start="url(#gear-dot-right)" marker-end="url(#gear-arrow-right)" />
+            <path id="line-arnes" class="gear-connector-line" data-gear="arnes" d="M 503 310 L 640 310 L 705 285" marker-start="url(#gear-dot-right)" marker-end="url(#gear-arrow-right)" />
+            <path id="line-neoprene" class="gear-connector-line" data-gear="neoprene" d="M 510 518 L 640 518 L 705 475" marker-start="url(#gear-dot-right)" marker-end="url(#gear-arrow-right)" />
+          </svg>
 
-          <!-- Tarjeta 4: Chaleco -->
-          <article class="equipo-card-item">
-            <div class="equipo-card-visual">
-              <!-- TODO: Subir foto real de chaleco homologado en ../assets/kitesurf-equipo-chaleco.jpg -->
-              <figure class="equipo-figure">
-                <img src="../assets/kitesurf-equipo-chaleco.jpg" alt="Chaleco de flotación e impacto homologado" loading="lazy" width="400" height="300">
-              </figure>
+          <!-- Columna Izquierda de Tarjetas -->
+          <div class="gear-column gear-column--left">
+            <!-- 1. Casco -->
+            <article class="gear-card" data-gear="casco" tabindex="0" role="button" aria-label="Casco homologado">
+              <div class="gear-card-thumb-wrap">
+                <img src="../assets/gear-casco.jpg" alt="Casco homologado de kitesurf" class="gear-card-thumb" loading="lazy">
+              </div>
+              <div class="gear-card-info">
+                <span class="gear-card-tag">Seguridad Cefálica</span>
+                <h3 class="gear-card-title">Casco homologado</h3>
+                <p class="gear-card-desc">Protección certificada para agua con ajuste micrométrico y ventilación activa.</p>
+              </div>
+            </article>
+
+            <!-- 2. Chaleco -->
+            <article class="gear-card" data-gear="chaleco" tabindex="0" role="button" aria-label="Chaleco de impacto">
+              <div class="gear-card-thumb-wrap">
+                <img src="../assets/gear-chaleco.jpg" alt="Chaleco de impacto y flotación" class="gear-card-thumb" loading="lazy">
+              </div>
+              <div class="gear-card-info">
+                <span class="gear-card-tag">Flotación Obligatoria</span>
+                <h3 class="gear-card-title">Chaleco de impacto</h3>
+                <p class="gear-card-desc">Flotación CE homologada y paneles de absorción contra impactos en el agua.</p>
+              </div>
+            </article>
+
+            <!-- 3. Tabla -->
+            <article class="gear-card" data-gear="tabla" tabindex="0" role="button" aria-label="Tabla Twin-tip">
+              <div class="gear-card-thumb-wrap">
+                <img src="../assets/gear-tabla.jpg" alt="Tabla twin-tip de iniciación" class="gear-card-thumb" loading="lazy">
+              </div>
+              <div class="gear-card-info">
+                <span class="gear-card-tag">Estabilidad de Planeo</span>
+                <h3 class="gear-card-title">Tabla Twin-tip</h3>
+                <p class="gear-card-desc">Manga ancha y quillas suaves pensadas para salir de pie y ceñir sin esfuerzo.</p>
+              </div>
+            </article>
+          </div>
+
+          <!-- Centro: Fotografía del Rider con Hotspots -->
+          <div class="gear-stage-center">
+            <div class="gear-rider-wrapper">
+              <img src="../assets/kitesurf-rider-equipment.jpg" alt="Rider equipado para kitesurf en Escuela Ombú" class="gear-rider-img" loading="lazy">
+              
+              <!-- Hotspots interactivos con pulso -->
+              <button type="button" class="gear-hotspot" data-gear="casco" style="top: 15%; left: 50.3%;" aria-label="Ver Casco homologado">
+                <span class="gear-hotspot-pulse"></span>
+                <span class="gear-hotspot-dot"></span>
+              </button>
+
+              <button type="button" class="gear-hotspot" data-gear="chaleco" style="top: 34%; left: 50.3%;" aria-label="Ver Chaleco de impacto">
+                <span class="gear-hotspot-pulse"></span>
+                <span class="gear-hotspot-dot"></span>
+              </button>
+
+              <button type="button" class="gear-hotspot" data-gear="tabla" style="top: 59%; left: 41.8%;" aria-label="Ver Tabla Twin-tip">
+                <span class="gear-hotspot-pulse"></span>
+                <span class="gear-hotspot-dot"></span>
+              </button>
+
+              <button type="button" class="gear-hotspot" data-gear="barra" style="top: 36%; left: 60.2%;" aria-label="Ver Kite y barra de control">
+                <span class="gear-hotspot-pulse"></span>
+                <span class="gear-hotspot-dot"></span>
+              </button>
+
+              <button type="button" class="gear-hotspot" data-gear="arnes" style="top: 48.5%; left: 50.3%;" aria-label="Ver Arnés de cintura">
+                <span class="gear-hotspot-pulse"></span>
+                <span class="gear-hotspot-dot"></span>
+              </button>
+
+              <button type="button" class="gear-hotspot" data-gear="neoprene" style="top: 81%; left: 51%;" aria-label="Ver Traje de neoprene">
+                <span class="gear-hotspot-pulse"></span>
+                <span class="gear-hotspot-dot"></span>
+              </button>
             </div>
-            <div class="equipo-card-body">
-              <h3 class="equipo-card-title">Chaleco</h3>
-              <p class="equipo-card-text">
-                Flotación y protección — obligatorio en todas las clases, sin excepción.
-              </p>
-            </div>
-          </article>
+          </div>
+
+          <!-- Columna Derecha de Tarjetas -->
+          <div class="gear-column gear-column--right">
+            <!-- 4. Barra y Kite -->
+            <article class="gear-card" data-gear="barra" tabindex="0" role="button" aria-label="Kite y barra 4 líneas">
+              <div class="gear-card-thumb-wrap">
+                <img src="../assets/gear-barra.jpg" alt="Barra de control y líneas de kite" class="gear-card-thumb" loading="lazy">
+              </div>
+              <div class="gear-card-info">
+                <span class="gear-card-tag">Cometa Calibrada</span>
+                <h3 class="gear-card-title">Kite y barra 4 líneas</h3>
+                <p class="gear-card-desc">Calibrada a tu peso y al viento del día. Depower suave y suelta rápida doble.</p>
+              </div>
+            </article>
+
+            <!-- 5. Arnés -->
+            <article class="gear-card" data-gear="arnes" tabindex="0" role="button" aria-label="Arnés de cintura">
+              <div class="gear-card-thumb-wrap">
+                <img src="../assets/gear-arnes.jpg" alt="Arnés de cintura ergonómico" class="gear-card-thumb" loading="lazy">
+              </div>
+              <div class="gear-card-info">
+                <span class="gear-card-tag">Tracción & Control</span>
+                <h3 class="gear-card-title">Arnés de cintura</h3>
+                <p class="gear-card-desc">Transfiere la potencia del viento al centro del cuerpo, liberando tus brazos.</p>
+              </div>
+            </article>
+
+            <!-- 6. Neoprene -->
+            <article class="gear-card" data-gear="neoprene" tabindex="0" role="button" aria-label="Traje de neoprene">
+              <div class="gear-card-thumb-wrap">
+                <img src="../assets/gear-neoprene.jpg" alt="Traje de neoprene térmico" class="gear-card-thumb" loading="lazy">
+              </div>
+              <div class="gear-card-info">
+                <span class="gear-card-tag">Confort Térmico</span>
+                <h3 class="gear-card-title">Traje de neoprene</h3>
+                <p class="gear-card-desc">Aislamiento térmico continuo en el río y máxima protección contra roces.</p>
+              </div>
+            </article>
+          </div>
         </div>
 
         <!-- Banner Inferior: ¿Tenés equipo propio? -->
