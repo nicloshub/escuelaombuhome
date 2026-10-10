@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchLiveWind();
   initCaminoTabs();
   initFaqAccordion();
-  initMobileDrawer();
+  initDropdown();
+  initMobileMenu();
   setInterval(fetchLiveWind, 10 * 60 * 1000); // Actualiza cada 10 min
 });
 
@@ -162,46 +163,65 @@ function initFaqAccordion() {
   });
 }
 
-// 4. Menú Drawer Mobile
-function initMobileDrawer() {
+// 4. Menú desplegable para "Deportes" en Navbar (idéntico a la Home)
+function initDropdown() {
+  const dropdown = document.querySelector('.nav-dropdown');
+  const trigger = document.querySelector('.nav-dropdown-trigger');
+  if (!dropdown || !trigger) return;
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.toggle('is-open');
+    trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      dropdown.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// 5. Menú hamburguesa móvil / tablet (idéntico a la Home)
+function initMobileMenu() {
   const btn = document.getElementById('mobileMenuBtn');
   const drawer = document.getElementById('mobileNavDrawer');
   const header = document.querySelector('header.site-header');
-  if (!btn || !drawer) return;
+  if (!btn || !drawer || !header) return;
 
-  function toggleDrawer(forceClose = false) {
-    const isOpen = drawer.classList.contains('is-open');
-    const nextState = forceClose ? false : !isOpen;
-
-    drawer.classList.toggle('is-open', nextState);
-    btn.setAttribute('aria-expanded', nextState ? 'true' : 'false');
-    drawer.setAttribute('aria-hidden', nextState ? 'false' : 'true');
-
-    if (header) {
-      header.classList.toggle('menu-active', nextState);
-    }
+  function toggleMenu(forceClose = false) {
+    const shouldOpen = forceClose ? false : !drawer.classList.contains('is-open');
+    drawer.classList.toggle('is-open', shouldOpen);
+    btn.classList.toggle('is-active', shouldOpen);
+    header.classList.toggle('menu-open', shouldOpen);
+    btn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    drawer.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
   }
 
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
-    toggleDrawer();
+    toggleMenu();
   });
 
+  // Cerrar al hacer clic en cualquier enlace interno
   drawer.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      toggleDrawer(true);
+      toggleMenu(true);
     });
   });
 
+  // Cerrar al hacer clic afuera
   document.addEventListener('click', (e) => {
-    if (!drawer.contains(e.target) && !btn.contains(e.target)) {
-      toggleDrawer(true);
+    if (!header.contains(e.target)) {
+      toggleMenu(true);
     }
   });
 
+  // Cerrar con tecla Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-      toggleDrawer(true);
+      toggleMenu(true);
       btn.focus();
     }
   });

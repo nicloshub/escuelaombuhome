@@ -48,63 +48,70 @@
         <img src="../assets/logo-ombu-navbar.png" alt="Logo Escuela Ombú" class="brand-disc-img">
       </a>
 
-      <!-- Navegación Desktop -->
-      <nav class="desktop-nav" aria-label="Navegación principal">
-        <ul class="desktop-nav-list">
-          <li class="desktop-dropdown">
-            <a href="/#disciplinas" class="desktop-nav-link">
+      <nav id="main-navigation" aria-label="Navegación principal">
+        <ul class="header-nav">
+          <li><a href="/#disciplinas">Aprendizaje</a></li>
+          <li><a href="/#kayaks">Alquileres</a></li>
+          <li><a href="/#spot">El spot</a></li>
+          <li><a href="/#instructores">Nosotros</a></li>
+          <li class="nav-dropdown">
+            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
               <span>Deportes</span>
-              <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+              <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-            </a>
-            <div class="desktop-dropdown-menu">
-              <a href="/kitesurf/" class="desktop-dropdown-item is-active">Kitesurf</a>
-              <a href="/windsurf/" class="desktop-dropdown-item">Windsurf</a>
-              <a href="/wingfoil/" class="desktop-dropdown-item">Wingfoil</a>
-              <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="desktop-dropdown-item">SUP Paddle</a>
+            </button>
+            <div class="nav-dropdown-menu">
+              <a href="/kitesurf/" class="dropdown-sport-item is-active">
+                <span class="dropdown-sport-icon">1</span>
+                <span class="dropdown-sport-name">Kitesurf</span>
+              </a>
+              <a href="/windsurf/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">2</span>
+                <span class="dropdown-sport-name">Windsurf</span>
+              </a>
+              <a href="/wingfoil/" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">3</span>
+                <span class="dropdown-sport-name">Wingfoil</span>
+              </a>
+              <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
+                <span class="dropdown-sport-icon">4</span>
+                <span class="dropdown-sport-name">SUP Paddle</span>
+              </a>
             </div>
           </li>
-          <li><a href="#camino" class="desktop-nav-link">El Camino</a></li>
-          <li><a href="#dia-de-clase" class="desktop-nav-link">Un Día de Clase</a></li>
-          <li><a href="#seguridad" class="desktop-nav-link">Seguridad</a></li>
-          <li><a href="#equipo" class="desktop-nav-link">Equipo</a></li>
-          <li><a href="#precios" class="desktop-nav-link">Precios</a></li>
-          <li><a href="#instructores" class="desktop-nav-link">Instructores</a></li>
-          <li><a href="#faq" class="desktop-nav-link">FAQ</a></li>
+          <li><a href="/#faq">FAQ</a></li>
         </ul>
       </nav>
 
-      <div class="header-actions">
-        <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="header-btn-reserve">
+      <div class="header-cta-wrap">
+        <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="nav-btn-reserve" rel="noopener noreferrer">
           RESERVÁ TU CLASE
         </a>
-        <button type="button" class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNavDrawer">
-          <span class="mobile-toggle-bar"></span>
-          <span class="mobile-toggle-bar"></span>
-          <span class="mobile-toggle-bar"></span>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNavDrawer">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
         </button>
       </div>
     </div>
 
-    <!-- Menú Drawer Mobile -->
+    <!-- Mobile Nav Drawer -->
     <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
       <ul class="mobile-nav-list">
-        <li class="mobile-nav-label">// Disciplinas Náuticas</li>
+        <li class="mobile-nav-label">// Deportes</li>
         <li class="mobile-sports-grid">
           <a href="/kitesurf/" class="mobile-sport-pill is-active">Kitesurf</a>
           <a href="/windsurf/" class="mobile-sport-pill">Windsurf</a>
           <a href="/wingfoil/" class="mobile-sport-pill">Wingfoil</a>
           <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="mobile-sport-pill">SUP Paddle</a>
         </li>
-        <li><a href="#camino" class="mobile-nav-link">El Camino en 14 Objetivos</a></li>
-        <li><a href="#dia-de-clase" class="mobile-nav-link">Cómo es un Día de Clase</a></li>
-        <li><a href="#seguridad" class="mobile-nav-link">Seguridad y Bote de Apoyo</a></li>
-        <li><a href="#equipo" class="mobile-nav-link">Equipo Incluido</a></li>
-        <li><a href="#precios" class="mobile-nav-link">Precios y Duración</a></li>
-        <li><a href="#instructores" class="mobile-nav-link">Instructores</a></li>
-        <li><a href="#faq" class="mobile-nav-link">Antes de Anotarte (FAQ)</a></li>
-        <li><a href="/" class="mobile-nav-link">← Volver al Inicio</a></li>
+        <li class="mobile-nav-divider"></li>
+        <li><a href="/#disciplinas" class="mobile-nav-link">Aprendizaje</a></li>
+        <li><a href="/#kayaks" class="mobile-nav-link">Alquileres</a></li>
+        <li><a href="/#spot" class="mobile-nav-link">El spot</a></li>
+        <li><a href="/#instructores" class="mobile-nav-link">Nosotros</a></li>
+        <li><a href="/#faq" class="mobile-nav-link">Preguntas frecuentes</a></li>
       </ul>
     </div>
   </header>
@@ -226,16 +233,18 @@
          ========================================================= -->
     <section class="section-macro" id="camino">
       <div class="container">
-        <header class="camino-header-wrap">
-          <div class="camino-kicker">
-            <span class="camino-kicker-dot">●</span> EL CAMINO
+        <header class="editorial-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// El Camino</span>
+            <h2 class="editorial-title">
+              ASÍ SE APRENDE,<br>SIN APURO.
+            </h2>
           </div>
-          <h2 class="camino-title">
-            ASÍ SE APRENDE,<br>SIN APURO
-          </h2>
-          <p class="camino-bajada">
-            Cada nivel se apoya en el anterior. Tocá cada tarjeta para explorar los objetivos.
-          </p>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Cada nivel se apoya en el anterior. Tocá cada tarjeta para explorar los 14 objetivos medibles que te llevan desde el armado en tierra hasta navegar con total autonomía.
+            </p>
+          </div>
         </header>
 
         <!-- Acordeón Interactivo de Niveles según Referencia -->
@@ -399,16 +408,18 @@
          ========================================================= -->
     <section class="section-macro section-light" id="dia-de-clase">
       <div class="container">
-        <header class="editorial-header" style="text-align: center; margin-bottom: 24px;">
-          <div class="camino-kicker" style="justify-content: center;">
-            <span class="camino-kicker-dot">●</span> PASO A PASO
+        <header class="editorial-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// Paso a Paso</span>
+            <h2 class="editorial-title">
+              CÓMO ES UN<br>DÍA DE CLASE.
+            </h2>
           </div>
-          <h2 class="editorial-title">
-            CÓMO ES UN DÍA DE CLASE.
-          </h2>
-          <p class="editorial-lead" style="margin: 0 auto; max-width: 620px;">
-            Una rutina clara y predecible desde que llegás hasta que salís del agua.
-          </p>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Una rutina clara y predecible desde que llegás hasta que salís del agua. Sabés exactamente qué vas a hacer en cada minuto de la sesión.
+            </p>
+          </div>
         </header>
 
         <div class="timeline-section-wrap">
@@ -459,15 +470,17 @@
     <section class="section-macro" id="para-quien">
       <div class="container">
         <header class="editorial-header">
-          <div class="camino-kicker">
-            <span class="camino-kicker-dot">●</span> REQUISITOS CLAROS
+          <div class="editorial-col-left">
+            <span class="section-label">// Requisitos Claros</span>
+            <h2 class="editorial-title">
+              PARA QUIÉN ES.
+            </h2>
           </div>
-          <h2 class="editorial-title">
-            PARA QUIÉN ES.
-          </h2>
-          <p class="editorial-lead">
-            Sin barreras raras. Lo que de verdad necesitás para empezar kitesurf en Ombú.
-          </p>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Sin barreras raras. Lo que de verdad necesitás para empezar kitesurf en Ombú: no hace falta fuerza desmedida ni experiencia previa, solo ganas y constancia.
+            </p>
+          </div>
         </header>
 
         <div class="para-quien-grid">
@@ -523,12 +536,17 @@
     <section class="section-macro section-sand" id="seguridad">
       <div class="container">
         <header class="editorial-header">
-          <h2 class="editorial-title">
-            SIEMPRE HAY UN BOTE DETRÁS TUYO.
-          </h2>
-          <p class="editorial-lead">
-            El mayor freno para arrancar kitesurf es el miedo a perder el control en el río. En Ombú la seguridad no es un folleto: es un semirrígido con motor en guardia continua, comunicación técnica que te guía en cada metro y un protocolo estricto antes de mojar el equipo.
-          </p>
+          <div class="editorial-col-left">
+            <span class="section-label">// Seguridad y Rescate</span>
+            <h2 class="editorial-title">
+              SIEMPRE HAY UN BOTE DETRÁS TUYO.
+            </h2>
+          </div>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              El mayor freno para arrancar kitesurf es el miedo a perder el control en el río. En Ombú la seguridad no es un folleto: es un semirrígido con motor en guardia continua, comunicación técnica que te guía en cada metro y un protocolo estricto antes de mojar el equipo.
+            </p>
+          </div>
         </header>
 
         <div class="seguridad-editorial-layout">
@@ -571,16 +589,18 @@
          ========================================================= -->
     <section class="section-macro" id="equipo">
       <div class="container">
-        <header class="equipo-header-wrap">
-          <div class="equipo-kicker">
-            <span class="equipo-kicker-dot">●</span> EL EQUIPO
+        <header class="editorial-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// Equipamiento 100% Provisto</span>
+            <h2 class="editorial-title">
+              CON QUÉ VAS<br>A NAVEGAR.
+            </h2>
           </div>
-          <h2 class="equipo-title">
-            CON QUÉ VAS A NAVEGAR
-          </h2>
-          <p class="equipo-bajada">
-            Todo el equipo está incluido en la clase — no hace falta que compres nada para arrancar.
-          </p>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Todo el equipo está incluido en la clase — no hace falta que compres nada para arrancar. Materiales de primeras marcas, renovados cada temporada y testeados antes de cada salida.
+            </p>
+          </div>
         </header>
 
         <!-- Grilla de 4 Tarjetas de Equipamiento con <figure> -->
@@ -664,15 +684,17 @@
     <section class="section-macro section-light" id="precios">
       <div class="container">
         <header class="editorial-header">
-          <div class="camino-kicker">
-            <span class="camino-kicker-dot">●</span> TRANSPARENCIA TOTAL
+          <div class="editorial-col-left">
+            <span class="section-label">// Transparencia Total</span>
+            <h2 class="editorial-title">
+              CUÁNTO CUESTA<br>Y CUÁNTO LLEVA.
+            </h2>
           </div>
-          <h2 class="editorial-title">
-            CUÁNTO CUESTA Y CUÁNTO LLEVA.
-          </h2>
-          <p class="editorial-lead">
-            Sin letras chicas ni paquetes confusos. Podés tomar clases particulares sueltas o comprometerte con el curso hacia la autonomía completa.
-          </p>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Sin letras chicas ni paquetes confusos. Podés tomar clases particulares sueltas o comprometerte con el curso hacia la autonomía completa.
+            </p>
+          </div>
         </header>
 
         <div class="pricing-editorial-grid">
@@ -778,12 +800,17 @@
     <section class="section-macro section-sand" id="condiciones">
       <div class="container">
         <header class="editorial-header">
-          <h2 class="editorial-title">
-            SABÉS CUÁNDO VENIR ANTES DE VENIR.
-          </h2>
-          <p class="editorial-lead">
-            El río no se adivina: se monitorea. Te mostramos la intensidad del viento en tiempo real en nuestro spot y la cámara HD transmitiendo las 24 horas para que salgas de tu casa sabiendo con qué te vas a encontrar.
-          </p>
+          <div class="editorial-col-left">
+            <span class="section-label">// Telemetría en Vivo</span>
+            <h2 class="editorial-title">
+              SABÉS CUÁNDO VENIR<br>ANTES DE SALIR.
+            </h2>
+          </div>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              El río no se adivina: se monitorea. Te mostramos la intensidad del viento en tiempo real en nuestro spot y la cámara HD transmitiendo las 24 horas para que salgas de tu casa sabiendo con qué te vas a encontrar.
+            </p>
+          </div>
         </header>
 
         <div class="condiciones-grid">
@@ -840,13 +867,18 @@
          ========================================================= -->
     <section class="section-macro" id="testimonios">
       <div class="container">
-        <header class="historias-header-wrap">
-          <div class="historias-kicker">
-            <span class="historias-kicker-dot">●</span> HISTORIAS REALES
+        <header class="editorial-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// Historias Reales</span>
+            <h2 class="editorial-title">
+              ALUMNOS QUE YA<br>NAVEGAN SOLOS.
+            </h2>
           </div>
-          <h2 class="historias-title">
-            ALUMNOS QUE YA NAVEGAN SOLOS
-          </h2>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Cada uno arrancó de cero, con sus miedos y sus tiempos. Hoy entran al agua de forma autónoma y con criterio de seguridad en el Río de la Plata.
+            </p>
+          </div>
         </header>
 
         <div class="historias-cards-grid">
@@ -928,12 +960,17 @@
     <section class="section-macro section-sand" id="instructores">
       <div class="container">
         <header class="editorial-header">
-          <h2 class="editorial-title">
-            CON QUIÉN VAS A APRENDER.
-          </h2>
-          <p class="editorial-lead">
-            No somos una plataforma con instructores tercerizados ni rotativos. Somos los navegantes que estamos en el agua todos los días cuidando tu proceso técnico.
-          </p>
+          <div class="editorial-col-left">
+            <span class="section-label">// El Equipo Docente</span>
+            <h2 class="editorial-title">
+              CON QUIÉN<br>VAS A APRENDER.
+            </h2>
+          </div>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              No somos una plataforma con instructores tercerizados ni rotativos. Somos los navegantes que estamos en el agua todos los días cuidando tu proceso técnico.
+            </p>
+          </div>
         </header>
 
         <div class="coaches-editorial-grid">
@@ -973,16 +1010,18 @@
          ========================================================= -->
     <section class="section-macro section-light" id="reserva-pasos">
       <div class="container">
-        <header class="editorial-header" style="text-align: center;">
-          <div class="camino-kicker" style="justify-content: center;">
-            <span class="camino-kicker-dot">●</span> SIMPLE Y DIRECTO
+        <header class="editorial-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// Simple y Directo</span>
+            <h2 class="editorial-title">
+              RESERVÁ EN<br>3 PASOS.
+            </h2>
           </div>
-          <h2 class="editorial-title">
-            RESERVÁ EN 3 PASOS.
-          </h2>
-          <p class="editorial-lead" style="margin: 0 auto; max-width: 580px;">
-            Coordinamos todo por mensaje para que no des vueltas.
-          </p>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Coordinamos todo por mensaje para que no des vueltas. Hablás directo por WhatsApp con quien te va a dar la clase para chequear pronóstico y disponibilidad.
+            </p>
+          </div>
         </header>
 
         <div class="pasos-reserva-grid">
@@ -1064,12 +1103,17 @@
     <section class="section-macro section-sand" id="faq">
       <div class="container">
         <header class="editorial-header">
-          <h2 class="editorial-title">
-            ANTES DE ANOTARTE.
-          </h2>
-          <p class="editorial-lead">
-            Respuestas directas a las preguntas que todos nos hacen antes de poner un pie en el agua.
-          </p>
+          <div class="editorial-col-left">
+            <span class="section-label">// Preguntas Frecuentes</span>
+            <h2 class="editorial-title">
+              ANTES DE<br>ANOTARTE.
+            </h2>
+          </div>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Respuestas directas a las dudas más comunes sobre equipamiento, condiciones climáticas, seguridad y modalidad de las clases.
+            </p>
+          </div>
         </header>
 
         <div class="faq-grid-wrapper">

@@ -235,6 +235,8 @@
     margin-right: auto;
     gap: 24px;
   }
+}
+
 /* --- 4.1. COMPONENTE: NIVELES EXPANDING CARDS ACCORDION (REFERENCIA FIGMA) --- */
 .niveles-accordion-container {
   width: 100%;
@@ -507,6 +509,12 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .niveles-accordion-row {
+    gap: var(--grid-gutter, 32px);
+  }
+}
+
 /* --- 5. SECCIÓN NUEVA: "PARA QUIÉN ES" (3 ÍTEMS CON SVG CONSISTENTE) --- */
 .para-quien-grid {
   display: grid;
@@ -558,6 +566,17 @@
   .para-quien-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .para-quien-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter, 32px);
+  }
+
+  .para-quien-card {
+    grid-column: span 4;
   }
 }
 
@@ -718,6 +737,17 @@
   .pasos-reserva-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pasos-reserva-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter, 32px);
+  }
+
+  .paso-reserva-card {
+    grid-column: span 4;
   }
 }
 
