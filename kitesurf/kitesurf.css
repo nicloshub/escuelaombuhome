@@ -54,45 +54,250 @@
   background-color: #F8F7F4;
 }
 
-/* --- 2. HERO DESPEJADO & MICROCOPY --- */
-.hero-split-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+/* --- 2. HERO DESPEJADO SEGÚN DISEÑO DE REFERENCIA --- */
+.hero-split-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.2vw, 5.2rem);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 20px;
 }
 
-.hero-primary-cta-group {
+.hero-word-orange {
+  color: var(--orange);
+  display: block;
+}
+
+.hero-split-bajada {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin: 0 0 28px;
+}
+
+@media (min-width: 768px) {
+  .hero-split-bajada {
+    font-size: 16.5px;
+  }
+}
+
+.hero-split-actions {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.btn-pill-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 26px;
+  border-radius: 100px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-pill-outline-dark:hover {
+    background-color: var(--ink);
+    color: var(--white);
+    transform: translateY(-1px);
+  }
 }
 
 .hero-microcopy {
-  font-size: 14px;
-  line-height: 20px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.4;
   color: var(--text-muted);
   font-weight: 500;
   margin: 0;
-  padding-left: 4px;
+  padding-left: 2px;
 }
 
-/* Despejar el hero: quitar badge flotante "+15 años" y avatares que tapan la foto */
+/* Ocultar badges no deseados en el hero */
 .badge-experience-card,
-.badge-avatars-cluster {
+.badge-avatars-cluster,
+.badge-rating-card {
   display: none !important;
 }
 
-/* Tarjeta 4.9/5 simplificada y limpia */
-.badge-rating-card {
-  padding: 16px 20px;
-  max-width: 260px;
+/* Frame de la foto con curvatura amplia y sombra limpia */
+.hero-stage-container {
+  position: relative;
+  width: 100%;
 }
 
-.badge-rating-caption {
-  margin-bottom: 0;
+.hero-main-photo-frame {
+  width: 100%;
+  height: 380px;
+  border-radius: 32px;
+  overflow: hidden;
+  background-color: var(--light-1);
+  box-shadow: 0 20px 48px rgba(13, 21, 28, 0.08);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero-main-photo-frame {
+    height: 440px;
+    border-radius: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-main-photo-frame {
+    height: 480px;
+    border-radius: 38px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-main-photo-frame {
+    height: 520px;
+    border-radius: 40px;
+  }
+}
+
+.hero-main-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+}
+
+/* Widget de Viento en Vivo Flotante Superior Derecho */
+.hero-weather-card {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 22px;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.12),
+              0 4px 12px rgba(0, 0, 0, 0.04);
+  color: var(--ink);
+  padding: 18px 20px;
+  width: 260px;
+  max-width: 100%;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .hero-weather-card {
+    position: absolute;
+    top: -24px;
+    right: -24px;
+    transform: none;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-weather-card {
+    position: relative;
+    margin: -36px auto 0;
+    width: calc(100% - 32px);
+    max-width: 300px;
+  }
+}
+
+.weather-header-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.weather-title-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(35, 31, 32, 0.45);
+}
+
+.weather-speed-num {
+  font-family: var(--font-body);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+}
+
+.speed-unit-kmh {
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(35, 31, 32, 0.85);
+}
+
+.speed-unit-knots {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: rgba(35, 31, 32, 0.5);
+  margin-top: 2px;
+}
+
+.weather-progress-bar-wrap {
+  width: 100%;
+  height: 4px;
+  background: rgba(35, 31, 32, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 14px;
+}
+
+.weather-progress-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 4px;
+}
+
+.weather-status-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(35, 31, 32, 0.07);
+  gap: 8px;
+}
+
+.weather-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(35, 31, 32, 0.65);
+}
+
+.weather-suitability-pill {
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: transparent !important;
+  border: 1.5px solid var(--orange) !important;
+  padding: 4px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
 }
 
 /* --- 3. COMPONENTE FIGURE PARA ELIMINAR PLACEHOLDERS "FOTO: ..." --- */

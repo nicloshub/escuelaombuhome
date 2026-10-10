@@ -88,15 +88,16 @@ async function fetchLiveWind() {
 
       // Recomendación de disciplina según nudos
       if (captionEl && suitabilityEl) {
+        const isKitePage = window.location.pathname.includes('kitesurf');
         if (knots >= 14 && knots <= 26) {
           captionEl.textContent = 'Condición óptima de planeo';
           suitabilityEl.textContent = 'Ideal Kitesurf';
         } else if (knots >= 10 && knots < 14) {
-          captionEl.textContent = 'Viento moderado';
-          suitabilityEl.textContent = 'Iniciación Kite & Wing';
+          captionEl.textContent = 'Viento suave en el spot';
+          suitabilityEl.textContent = 'Clase Iniciación';
         } else if (knots < 10) {
           captionEl.textContent = 'Agua calma sin viento';
-          suitabilityEl.textContent = 'Ideal SUP & Kayak';
+          suitabilityEl.textContent = isKitePage ? 'NO HAY CONDICIONES' : 'Ideal SUP & Kayak';
         } else {
           captionEl.textContent = 'Viento fuerte en el spot';
           suitabilityEl.textContent = 'Kite & Wind Pro';

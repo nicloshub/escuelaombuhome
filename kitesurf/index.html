@@ -126,33 +126,33 @@
           <!-- Columna Izquierda: Título en Anton, Bajada, CTAs y Microcopy -->
           <div class="hero-content-col">
             <h1 class="hero-split-title">
-              EL VIENTO NO<br>
-              PERDONA<br>
-              <span class="hero-word-orange">IMPROVISADOS.</span>
+              APRENDÉ KITESURF<br>
+              <span class="hero-word-orange">SIN IMPROVISAR.</span>
             </h1>
 
             <p class="hero-split-bajada">
-              Por eso acá nunca improvisás: tenés un plan por niveles, un bote de rescate detrás tuyo y el equipo completo incluido. 15 años enseñando a leer el viento en el Río de la Plata.
+              Plan por niveles, equipo completo y un bote de rescate siempre cerca. 15 años enseñando a leer el viento en el Río de la Plata.
             </p>
 
             <div class="hero-split-actions">
-              <div class="hero-primary-cta-group">
-                <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
-                  Reservá tu clase
-                  <span class="btn-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                  </span>
-                </a>
-                <p class="hero-microcopy">Clase particular desde $120.000 · Equipo incluido</p>
-              </div>
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20aprender%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+                <span>QUIERO APRENDER</span>
+                <span class="btn-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </span>
+              </a>
 
-              <a href="#camino" class="hero-secondary-link">
-                Ver los 14 objetivos →
+              <a href="#camino" class="btn-pill-outline-dark">
+                VER OBJETIVOS
               </a>
             </div>
+
+            <p class="hero-microcopy">
+              Clase particular desde $120.000 · Equipo incluido
+            </p>
           </div>
 
-          <!-- Columna Derecha: Foto de Kitesurf Despejada (Solo Viento + Calificación) -->
+          <!-- Columna Derecha: Foto de Kitesurf Despejada con Widget de Viento en Vivo Flotante -->
           <div class="hero-visual-col">
             <div class="hero-stage-container">
               <!-- Frame Principal con Foto de Kitesurf -->
@@ -160,18 +160,7 @@
                 <img src="../assets/deporte-kitesurf.jpg" alt="Kitesurf en el Río de la Plata - Escuela Ombú Acassuso" fetchpriority="high">
               </div>
 
-              <!-- Badge 4.9/5 Reseñas (Limpio, sin avatares que tapen la imagen) -->
-              <aside class="badge-rating-card" aria-label="Calificación de alumnos">
-                <div class="badge-rating-top">
-                  <span class="badge-rating-score">4.9/5</span>
-                  <span class="badge-rating-stars">★★★★★</span>
-                </div>
-                <p class="badge-rating-caption">
-                  Alumnos formados con seguridad y técnica en el río.
-                </p>
-              </aside>
-
-              <!-- Widget Oficial de Viento en Vivo (Intacto) -->
+              <!-- Widget Oficial de Viento en Vivo (Top-Right Floating) -->
               <aside class="hero-weather-card" aria-label="Condición del viento en vivo">
                 <div class="weather-header-stack">
                   <div class="weather-live-badge">
@@ -185,10 +174,10 @@
                 <div class="weather-main-grid">
                   <div class="weather-metric-primary">
                     <div class="weather-speed-cluster">
-                      <span class="weather-speed-num" id="heroWindSpeed">--</span>
+                      <span class="weather-speed-num" id="heroWindSpeed">13</span>
                       <div class="weather-speed-units">
                         <span class="speed-unit-kmh">KM/H</span>
-                        <span class="speed-unit-knots" id="heroWindKnots">-- nudos</span>
+                        <span class="speed-unit-knots" id="heroWindKnots">7 nudos</span>
                       </div>
                     </div>
                   </div>
@@ -198,7 +187,7 @@
                     <div class="compass-dial">
                       <span class="compass-marker n">N</span>
                       <span class="compass-marker e">E</span>
-                      <span class="compass-marker s">S</span>
+                      <span class="compass-marker s is-active">S</span>
                       <span class="compass-marker o">O</span>
                       <div class="compass-arrow-wrap" id="heroCompassDial">
                         <svg class="compass-needle-svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -215,8 +204,8 @@
                 </div>
 
                 <div class="weather-status-footer">
-                  <span class="weather-caption" id="heroWindCaption">Viento moderado</span>
-                  <span class="weather-suitability-pill" id="heroSpotSuitability">Ideal Kitesurf</span>
+                  <span class="weather-caption" id="heroWindCaption">Agua calma sin viento</span>
+                  <span class="weather-suitability-pill" id="heroSpotSuitability">NO HAY CONDICIONES</span>
                 </div>
               </aside>
             </div>
