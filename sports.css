@@ -61,16 +61,21 @@
   --caption-size: 14px;
   --caption-lh: 20px;
 
-  /* --- 3. GRILLA Y LAYOUT: BASE MOBILE (12 Columnas · Gutter 32px · Margen 160px en Desktop) --- */
-  --container-max-width: 1440px;
-  --container-padding: 24px;
-  --page-margin: 24px;
+  /* --- 3. GRILLA Y LAYOUT OFICIAL (Idéntico a Home / styles.css) --- */
   --grid-cols: 4;
   --grid-gutter: 16px;
-  --gutter: 16px;
+  --grid-margin: 24px;
+  --gutter: var(--grid-gutter);
+  --page-margin: var(--grid-margin);
+  --container-content-max: 1440px;
+  --container-max: 1760px;
+  --container-max-width: var(--container-max);
+  --container-padding: var(--grid-margin);
 
   /* --- 4. MACRO-ESPACIADO: BASE MOBILE --- */
+  --section-space: 64px;
   --section-padding-y: 64px;
+  --section-header-mb: 24px;
 
   /* --- NAVBAR: BASE MOBILE --- */
   --nav-height: 64px;
@@ -89,8 +94,8 @@
     --h3-size: 28px;
     --h3-lh: 36px;
 
-    --h4-size: 24px;
-    --h4-lh: 32px;
+    --h4-size: 20px;
+    --h4-lh: 28px;
 
     --body-size: 18px;
     --body-lh: 28px;
@@ -101,13 +106,19 @@
     --caption-size: 14px;
     --caption-lh: 20px;
 
-    --container-padding: 64px;
-    --page-margin: 64px;
     --grid-cols: 12;
     --grid-gutter: 24px;
+    --grid-margin: 64px;
     --gutter: 24px;
+    --page-margin: 64px;
+    --container-content-max: 1440px;
+    --container-max: 1760px;
+    --container-max-width: var(--container-max);
+    --container-padding: var(--grid-margin);
 
+    --section-space: 96px;
     --section-padding-y: 96px;
+    --section-header-mb: 32px;
 
     --nav-height: 72px;
     --nav-margin-x: 64px;
@@ -140,13 +151,19 @@
     --caption-size: 14px;
     --caption-lh: 20px;
 
-    --container-padding: 160px;
-    --page-margin: 160px;
     --grid-cols: 12;
     --grid-gutter: 32px;
+    --grid-margin: 160px;
     --gutter: 32px;
+    --page-margin: 160px;
+    --container-content-max: 1440px;
+    --container-max: 1760px;
+    --container-max-width: var(--container-max);
+    --container-padding: var(--grid-margin);
 
+    --section-space: 160px;
     --section-padding-y: 160px;
+    --section-header-mb: 48px;
 
     --nav-height: 80px;
     --nav-margin-x: 160px;
@@ -535,12 +552,12 @@ header.site-header {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  width: calc(100% - 64px);
-  max-width: 1276px;
-  background: rgba(254, 254, 254, 0.82);
+  width: calc(100% - (var(--grid-margin, 160px) * 2));
+  max-width: var(--container-content-max, 1440px);
+  background: rgba(254, 254, 254, 0.80);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.70);
   border-radius: 100px;
   padding: 8px 18px;
   box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08), 
@@ -962,7 +979,7 @@ header.site-header:hover {
 
 @media (max-width: 768px) {
   header.site-header {
-    width: calc(100% - 24px);
+    width: calc(100% - (var(--grid-margin, 24px) * 2));
     top: 10px;
     padding: 6px 12px;
     border-radius: 24px;

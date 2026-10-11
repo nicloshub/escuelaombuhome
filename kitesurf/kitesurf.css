@@ -14,7 +14,7 @@
 }
 
 .hero-split-section {
-  padding-top: 80px;
+  padding-top: calc(96px + env(safe-area-inset-top, 0px));
   padding-bottom: var(--kitesurf-pad-y-mobile);
 }
 
@@ -25,7 +25,7 @@
 
 @media (min-width: 768px) {
   .hero-split-section {
-    padding-top: 100px;
+    padding-top: calc(112px + env(safe-area-inset-top, 0px));
     padding-bottom: var(--kitesurf-pad-y-tablet);
   }
   .section-macro {
@@ -36,7 +36,7 @@
 
 @media (min-width: 1024px) {
   .hero-split-section {
-    padding-top: 120px;
+    padding-top: calc(130px + env(safe-area-inset-top, 0px));
     padding-bottom: var(--kitesurf-pad-y-desktop);
   }
   .section-macro {
@@ -200,8 +200,8 @@
 @media (min-width: 1024px) {
   .hero-weather-card {
     position: absolute;
-    top: -24px;
-    right: -24px;
+    top: 24px;
+    right: 24px;
     transform: none;
     margin-top: 0;
   }
