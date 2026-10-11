@@ -8,14 +8,11 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetchLiveWind();
+  // Inicializaciones específicas de la subpágina
   initLevelAccordion();
   initCaminoTabs();
   initGearExplodedView();
-  initFaqAccordion();
-  initDropdown();
-  initMobileMenu();
-  setInterval(fetchLiveWind, 10 * 60 * 1000); // Actualiza cada 10 min
+  initFaqAccordion(); // Respaldo para acordeones con clase legacy si existieran
 });
 
 // 1. Telemetría de viento en tiempo real para Acassuso (Sincronizado con componentes de la Home)
