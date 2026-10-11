@@ -1,15 +1,188 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- Analytics & Marketing Tracking (DESACTIVADO DURANTE DESARROLLO/MAQUETADO)
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'AW-18489977345');
+    gtag('config', 'G-7X7M1YDKR4');
+
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];}(window, document);
+    fbq('init', '1136627058894681');
+    fbq('track', 'PageView');
+
+    function loadAnalytics() {
+      if (window._analyticsLoaded) return;
+      window._analyticsLoaded = true;
+
+      var isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.');
+      if (isDev) {
+        window['ga-disable-AW-18489977345'] = true;
+        window['ga-disable-G-7X7M1YDKR4'] = true;
+        return;
+      }
+
+      var gtmScript = document.createElement('script');
+      gtmScript.async = true;
+      gtmScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18489977345';
+      document.head.appendChild(gtmScript);
+
+      var fbScript = document.createElement('script');
+      fbScript.async = true;
+      fbScript.src = 'https://connect.facebook.net/en_US/fbevents.js';
+      document.head.appendChild(fbScript);
+    }
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(function() { setTimeout(loadAnalytics, 1200); }, { timeout: 3500 });
+    } else {
+      window.addEventListener('load', function() { setTimeout(loadAnalytics, 1200); });
+    }
+    ['touchstart', 'scroll', 'click'].forEach(function(evt) {
+      window.addEventListener(evt, loadAnalytics, { once: true, passive: true });
+    });
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1136627058894681&ev=PageView&noscript=1" alt="">
+  </noscript>
+  -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Escuela Ombú — Deportes Náuticos en Acassuso</title>
+  <title>Escuela Náutica Ombú | Kitesurf, Windsurf, Wingfoil y SUP en Buenos Aires</title>
+  <meta name="description" content="Escuela de kitesurf, windsurf, wingfoil y Stand Up Paddle en Buenos Aires. Clases por nivel, instructores con más de 10 años de experiencia y bajada náutica propia.">
+  <link rel="canonical" href="https://escuelaombu.com.ar/">
+
+  <!-- Open Graph / Redes Sociales & WhatsApp -->
+  <meta property="og:title" content="Escuela Náutica Ombú | Deportes Náuticos en Buenos Aires">
+  <meta property="og:description" content="Escuela de kitesurf, windsurf, wingfoil y Stand Up Paddle en Buenos Aires. Clases por nivel, instructores con más de 10 años de experiencia y bajada náutica propia.">
+  <meta property="og:image" content="https://escuelaombu.com.ar/assets/og-image.jpg?v=2">
+  <meta property="og:image:secure_url" content="https://escuelaombu.com.ar/assets/og-image.jpg?v=2">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Escuela Náutica Ombú - Kitesurf, Windsurf, Wingfoil y SUP en Buenos Aires">
+  <meta property="og:url" content="https://escuelaombu.com.ar/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Escuela Náutica Ombú | Deportes Náuticos en Buenos Aires">
+  <meta name="twitter:description" content="Escuela de kitesurf, windsurf, wingfoil y Stand Up Paddle en Buenos Aires.">
+  <meta name="twitter:image" content="https://escuelaombu.com.ar/assets/og-image.jpg?v=2">
+
   <link rel="icon" type="image/png" href="./assets/logo-ombu-footer.png">
   <link rel="apple-touch-icon" href="./assets/logo-ombu-footer.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="alternate" type="application/json" href="https://escuelaombu.com.ar/.well-known/ai-catalog.json" title="AI Catalog">
+  <link rel="preconnect" href="https://api.open-meteo.com">
+  <link rel="preload" href="./assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="./assets/hero-bg-kitesurf-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/hero-bg-kitesurf.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+  <link rel="stylesheet" href="./styles.css?v=6.3">
+
+  <!-- Datos estructurados LocalBusiness para SEO Local -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    "name": "Escuela Náutica Ombú",
+    "url": "https://escuelaombu.com.ar/",
+    "image": "https://escuelaombu.com.ar/assets/og-image.jpg",
+    "description": "Escuela de Kitesurf, Windsurf, Wingfoil y Stand Up Paddle en el Río de la Plata, Buenos Aires.",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Sebastián Elcano 994",
+      "addressLocality": "Acassuso",
+      "addressRegion": "Provincia de Buenos Aires",
+      "postalCode": "B1641DJD",
+      "addressCountry": "AR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -34.4735342,
+      "longitude": -58.4926754
+    },
+    "telephone": "+54 9 11 3004-1100",
+    "email": "info@escuelaombu.com.ar",
+    "hasMap": "https://maps.app.goo.gl/duhdkxUzUEPQsZHx5",
+    "areaServed": [
+      "Acassuso",
+      "San Isidro",
+      "Zona Norte",
+      "Buenos Aires"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/escuelaombu/",
+      "https://maps.app.goo.gl/duhdkxUzUEPQsZHx5"
+    ]
+  }
+  </script>
+
+  <!-- Datos estructurados FAQPage para Rich Snippets en Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Se puede practicar a cualquier edad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Podés empezar el aprendizaje de vela en cualquier momento de tu vida. Para kitesurf y wingfoil, necesitás tener al menos 16 años y autorización de tus padres."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Necesito experiencia?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No necesitás experiencia previa. Empezás de cero, con equipo incluido y acompañamiento del instructor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué llevo a mi primera clase?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Traé ropa para mojarte, una muda seca, toalla y protector solar. Cuando reserves, confirmamos con vos qué llevar según el deporte y las condiciones del día."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Las actividades incluyen el equipo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Todas las clases y alquileres incluyen la totalidad del equipo, junto con chaleco, casco y traje de neoprene, de ser necesario. Si traés tu equipo propio, el costo de las clases es el mismo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo reservo y confirmo las condiciones?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Escribinos por WhatsApp al +54 9 11 3004-1100. Por ahí vamos informando sobre los días y horarios que tendremos lindas condiciones para organizar clases, ¡y a partir de ahí organizamos para entrar al agua!"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuentan con vestuario?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "¡Sí! El predio cuenta con duchas con agua caliente y baños limpios. No olvides traer toalla y otra muda de ropa!"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -18,43 +191,70 @@
        ========================================================= -->
   <header class="site-header">
     <div class="header-inner">
-      <a href="/" class="header-brand" aria-label="Inicio - Escuela Ombú">
-        <img src="./assets/logo-ombu-navbar.png" alt="Logo Escuela Ombú" class="brand-disc-img">
+      <a href="#inicio" class="header-brand" aria-label="Inicio - Escuela Ombú">
+        <img src="./assets/logo-ombu-navbar.webp" alt="Logo Escuela Ombú" class="brand-disc-img" width="40" height="40">
       </a>
 
-      <nav id="main-navigation" aria-label="Navegación principal">
-        <ul class="header-nav">
-          <li><a href="#disciplinas">Aprendizaje</a></li>
-          <li><a href="#kayaks">Alquileres</a></li>
-          <li><a href="#spot">El spot</a></li>
-          <li><a href="#instructores">Nosotros</a></li>
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+      <nav id="main-navigation" class="motion-nav-root" aria-label="Navegación principal">
+        <ul class="header-nav" id="headerNavList">
+          <!-- Pill highlight flotante (HighlightItem de Motion Nav) -->
+          <li class="nav-highlight-pill" id="navHighlightPill" aria-hidden="true"></li>
+
+          <li class="nav-item nav-dropdown" id="navSportsDropdown">
+            <a href="#disciplinas" class="nav-dropdown-trigger nav-link" aria-expanded="false" aria-haspopup="true" id="navSportsTrigger">
               <span>Deportes</span>
               <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-            </button>
-            <div class="nav-dropdown-menu">
-              <a href="/kitesurf/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">1</span>
-                <span class="dropdown-sport-name">Kitesurf</span>
-              </a>
-              <a href="/windsurf/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">2</span>
-                <span class="dropdown-sport-name">Windsurf</span>
-              </a>
-              <a href="/wingfoil/" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">3</span>
-                <span class="dropdown-sport-name">Wingfoil</span>
-              </a>
-              <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
-                <span class="dropdown-sport-icon">4</span>
-                <span class="dropdown-sport-name">SUP Paddle</span>
-              </a>
+            </a>
+
+            <!-- Viewport flotante de MotionNavigationMenu -->
+            <div class="nav-dropdown-viewport" id="navSportsViewport">
+              <div class="nav-dropdown-caret" aria-hidden="true"></div>
+
+              <div class="nav-dropdown-menu">
+                <div class="dropdown-hover-pill" id="dropdownHoverPill" aria-hidden="true"></div>
+
+                <a href="/kitesurf/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Kitesurf</span>
+                    <span class="dropdown-sport-desc">Saltos, giros y maniobras</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="/windsurf/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Windsurf</span>
+                    <span class="dropdown-sport-desc">Velocidad, equilibrio y planeo</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="/wingfoil/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Wingfoil</span>
+                    <span class="dropdown-sport-desc">Ala inflable y vuelo sobre foil</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Stand Up Paddle</span>
+                    <span class="dropdown-sport-desc">Remo de pie y travesías</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </li>
-          <li><a href="#faq">FAQ</a></li>
+
+          <li class="nav-item"><a href="#disciplinas" class="nav-link">Aprendizaje</a></li>
+          <li class="nav-item"><a href="#instructores" class="nav-link">Nosotros</a></li>
+          <li class="nav-item"><a href="#alquileres" class="nav-link">Alquileres</a></li>
+          <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
+          <li class="nav-item"><a href="#spot" class="nav-link">Ubicación</a></li>
         </ul>
       </nav>
 
@@ -71,21 +271,21 @@
     </div>
 
     <!-- Mobile Nav Drawer -->
-    <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+    <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true" inert>
       <ul class="mobile-nav-list">
         <li class="mobile-nav-label">// Deportes</li>
         <li class="mobile-sports-grid">
           <a href="/kitesurf/" class="mobile-sport-pill">Kitesurf</a>
           <a href="/windsurf/" class="mobile-sport-pill">Windsurf</a>
           <a href="/wingfoil/" class="mobile-sport-pill">Wingfoil</a>
-          <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="mobile-sport-pill">SUP Paddle</a>
+          <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="mobile-sport-pill">Stand Up Paddle</a>
         </li>
         <li class="mobile-nav-divider"></li>
         <li><a href="#disciplinas" class="mobile-nav-link">Aprendizaje</a></li>
-        <li><a href="#kayaks" class="mobile-nav-link">Alquileres</a></li>
-        <li><a href="#spot" class="mobile-nav-link">El spot</a></li>
         <li><a href="#instructores" class="mobile-nav-link">Nosotros</a></li>
+        <li><a href="#alquileres" class="mobile-nav-link">Alquileres</a></li>
         <li><a href="#faq" class="mobile-nav-link">Preguntas frecuentes</a></li>
+        <li><a href="#spot" class="mobile-nav-link">Ubicación</a></li>
       </ul>
     </div>
   </header>
@@ -96,7 +296,11 @@
          ========================================================= -->
     <section class="hero-section" id="inicio">
       <div class="hero-bg-layer">
-        <img src="./assets/HERO_OP1.png" alt="Escuela de Deportes Náuticos Ombú - Kitesurf en el Río de la Plata" fetchpriority="high" loading="eager" decoding="async">
+        <picture>
+          <source media="(max-width: 768px)" srcset="./assets/hero-bg-kitesurf-mobile.webp" type="image/webp">
+          <source srcset="./assets/hero-bg-kitesurf.webp" type="image/webp">
+          <img src="./assets/hero-bg-kitesurf.webp" alt="Escuela Náutica Ombú - Kitesurf en el Río de la Plata" fetchpriority="high" loading="eager" decoding="async" width="2506" height="1411">
+        </picture>
       </div>
 
       <div class="container hero-content-wrap">
@@ -148,49 +352,47 @@
 
               <!-- Estado y Recomendación de Deportes -->
               <div class="weather-status-footer">
-                <span class="weather-caption" id="heroWindCaption">Calculando condiciones...</span>
-                <span class="weather-suitability-pill" id="heroSpotSuitability">Spot Activo</span>
+                <span class="weather-caption" id="heroWindCaption">Viento moderado</span>
+                <span class="weather-suitability-pill" id="heroSpotSuitability">Ideal Wing & Wind</span>
               </div>
             </aside>
           </div>
         </div>
 
-        <!-- Parte Inferior: Bajada (Cols 9-12) + H1 Monumental -->
-        <div class="hero-bottom-area">
-          <div class="hero-bajada-row">
-            <div class="hero-bajada-col">
-              <p class="hero-bajada-text">
-                Clases y alquileres de <strong>Kitesurf, Windsurf, Wingfoil y SUP</strong> con la seguridad de 15 años de experiencia. Todo el equipamiento incluido para que empieces hoy mismo.
-              </p>
-              <div class="hero-actions-row">
-                <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange" rel="noopener noreferrer">
-                  RESERVÁ TU CLASE
-                  <div class="icon">
-                    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M0 0h24v24H0z" fill="none"></path>
-                      <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                    </svg>
-                  </div>
-                </a>
-                <a href="#disciplinas" class="hero-cta-sports">VER DEPORTES</a>
-              </div>
+        <!-- Div 2: Centro - Bajada descriptiva y Botones de acción alineados a la derecha -->
+        <div class="hero-middle-row">
+          <div class="hero-bajada-col">
+            <p class="hero-bajada-text">
+              Clases y alquileres de <strong>kitesurf</strong>, <strong>windsurf</strong>, <strong>wingfoil</strong> y <strong>stand up paddle</strong> en el bajo de San Isidro, Buenos Aires a 20 minutos de Capital. Te acompañamos paso a paso, con todo el equipo incluido.
+            </p>
+            <div class="hero-actions-row">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20mi%20primera%20clase." target="_blank" class="btn-pill-orange" rel="noopener noreferrer">
+                QUIERO APRENDER
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+              <a href="#disciplinas" class="hero-cta-sports">VER DEPORTES</a>
             </div>
           </div>
+        </div>
 
-          <!-- H1 Monumental: Alineado a la izquierda (Refe visual) -->
-          <div class="hero-headline-wrap">
-            <h1 class="hero-giant-heading">
-              <span class="hero-title-line-1">
-                TU ESCUELA DE
-                <a href="#disciplinas" class="hero-title-badge" aria-label="Conocé las actividades">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M7 17L17 7M7 7h10v10"/>
-                  </svg>
-                </a>
-              </span>
-              <span class="hero-title-line-2">DEPORTES NAUTICOS</span>
-            </h1>
-          </div>
+        <!-- Div 3: Inferior - H1 Monumental a todo el ancho -->
+        <div class="hero-bottom-row">
+          <h1 class="hero-giant-heading">
+            <span class="hero-title-line-1">
+              DISFRUTÁ EL RÍO
+              <a href="#disciplinas" class="hero-title-badge" aria-label="Conocé las actividades">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M7 17L17 7M7 7h10v10"/>
+                </svg>
+              </a>
+            </span>
+            <span class="hero-title-line-2">APRENDÉ A NAVEGAR</span>
+          </h1>
         </div>
       </div>
     </section>
@@ -200,12 +402,14 @@
          ========================================================= -->
     <section id="disciplinas" class="section-disciplinas">
       <div class="container">
-        <div class="disciplinas-header">
-          <div class="disciplinas-title-group">
-            <span class="section-label">// Deportes</span>
-            <h2 class="display-title">Aprendé con nosotros</h2>
+        <div class="section-header disciplinas-header">
+          <div class="section-title-col disciplinas-title-col">
+            <span class="section-label">// El punto de partida</span>
+            <h2 class="display-title disciplinas-title">Elegí tu deporte</h2>
+          </div>
+          <div class="section-desc-col disciplinas-desc-col">
             <p class="disciplinas-subtext">
-              Scrolleá para recorrer cada deporte o elegí una pestaña para obtener más información.
+              Encontrá tu forma de disfrutar el agua. Empezá desde cero, con todo el equipo incluido e instructores que te acompañan paso a paso.
             </p>
           </div>
         </div>
@@ -218,32 +422,35 @@
           <div class="scroll-stack-card" data-sport="kitesurf" data-index="0" style="--card-index: 0;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/deporte-kitesurf.jpg" alt="Kitesurf Ombú">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="./assets/deporte-kitesurf-mobile.webp" type="image/webp">
+                  <source srcset="./assets/deporte-kitesurf.webp" type="image/webp">
+                  <img src="./assets/deporte-kitesurf.webp" alt="Kitesurf Ombú" loading="lazy" decoding="async" width="960" height="640">
+                </picture>
               </div>
 
               <div class="sport-details-box">
                 <div>
-                  <div class="sport-tag-pill">01 // DISCIPLINA</div>
-                  <h3 class="sport-title-giant">Kitesurf</h3>
+                  <h3 class="sport-title-giant">KITESURF</h3>
                   <p class="sport-desc-text">
                     ¡Aprende a volar sobre el agua con este deporte! Te enseñamos a entender y dominar el viento, el control del cuerpo en el agua y la navegación autónoma a favor y en contra del mismo.
                   </p>
 
                   <div class="sport-specs-grid">
                     <div class="spec-box">
-                      <span class="spec-box-label">Duracion del curso</span>
-                      <span class="spec-box-val">8 a 10 horas (autonomía)</span>
+                      <span class="spec-box-label">DURACIÓN DEL CURSO</span>
+                      <span class="spec-box-val">8 a 10 hs aprox. (autonomía)</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Equipamiento incluido</span>
+                      <span class="spec-box-label">EQUIPO INCLUIDO</span>
                       <span class="spec-box-val">Equipo completo + traje neoprene</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Desarrollo</span>
-                      <span class="spec-box-val">14 objetivos repartidos en 3 niveles</span>
+                      <span class="spec-box-label">APRENDIZAJE</span>
+                      <span class="spec-box-val">14 objetivos en 3 niveles</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Seguridad</span>
+                      <span class="spec-box-label">SEGURIDAD</span>
                       <span class="spec-box-val">Bote para rescates</span>
                     </div>
                   </div>
@@ -251,11 +458,11 @@
 
                 <div class="sport-cta-row">
                   <div class="sport-price-wrap">
-                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-label-tiny">CLASE PARTICULAR DESDE</span>
                     <span class="price-val-big">$120.000</span>
                   </div>
-                  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20disponibilidad%20para%20clases%20de%20Kitesurf." target="_blank" class="btn-pill-orange">
-                    Quiero aprender
+                  <a href="/kitesurf/" class="btn-pill-orange">
+                    QUIERO SABER MÁS
                     <div class="icon">
                       <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0h24v24H0z" fill="none"></path>
@@ -272,44 +479,47 @@
           <div class="scroll-stack-card" data-sport="wingfoil" data-index="1" style="--card-index: 1;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/deporte-wingfoil.jpg" alt="Wingfoil Ombú">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="./assets/deporte-wingfoil-mobile.webp" type="image/webp">
+                  <source srcset="./assets/deporte-wingfoil.webp" type="image/webp">
+                  <img src="./assets/deporte-wingfoil.webp" alt="Wingfoil Ombú" loading="lazy" decoding="async" width="960" height="640">
+                </picture>
               </div>
 
               <div class="sport-details-box">
                 <div>
-                  <div class="sport-tag-pill">02 // DISCIPLINA</div>
-                  <h3 class="sport-title-giant">Wingfoil</h3>
+                  <h3 class="sport-title-giant">WINGFOIL</h3>
                   <p class="sport-desc-text">
                     Un ala inflable ultraliviana en tus manos y un foil bajo la tabla que te eleva sobre el agua. Sensación de vuelo silencioso y suave, sin impacto contra el oleaje del río.
                   </p>
 
                   <div class="sport-specs-grid">
                     <div class="spec-box">
-                      <span class="spec-box-label">Duracion del curso</span>
-                      <span class="spec-box-val">6 a 8 horas (autonomía)</span>
+                      <span class="spec-box-label">DURACIÓN DEL CURSO</span>
+                      <span class="spec-box-val">6 a 8 hs aprox. (autonomía)</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Equipamiento incluido</span>
+                      <span class="spec-box-label">EQUIPO INCLUIDO</span>
                       <span class="spec-box-val">Equipo completo + traje neoprene</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Desarrollo</span>
-                      <span class="spec-box-val">Dominio de la vela + dominio del foil</span>
+                      <span class="spec-box-label">APRENDIZAJE</span>
+                      <span class="spec-box-val">Dominio de vela + vuelo en foil</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Seguridad</span>
-                      <span class="spec-box-val">Bote para rescates y clases avanzadas</span>
+                      <span class="spec-box-label">SEGURIDAD</span>
+                      <span class="spec-box-val">Bote de apoyo y rescate</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="sport-cta-row">
                   <div class="sport-price-wrap">
-                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-label-tiny">CLASE PARTICULAR DESDE</span>
                     <span class="price-val-big">$140.000</span>
                   </div>
-                  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20disponibilidad%20para%20clases%20de%20Wingfoil." target="_blank" class="btn-pill-orange">
-                    Quiero aprender
+                  <a href="/wingfoil/" class="btn-pill-orange">
+                    QUIERO SABER MÁS
                     <div class="icon">
                       <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0h24v24H0z" fill="none"></path>
@@ -326,32 +536,35 @@
           <div class="scroll-stack-card" data-sport="windsurf" data-index="2" style="--card-index: 2;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/deporte-windsurf.jpg" alt="Windsurf Ombú">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="./assets/deporte-windsurf-mobile.webp" type="image/webp">
+                  <source srcset="./assets/deporte-windsurf.webp" type="image/webp">
+                  <img src="./assets/deporte-windsurf.webp" alt="Windsurf Ombú" loading="lazy" decoding="async" width="960" height="640">
+                </picture>
               </div>
 
               <div class="sport-details-box">
                 <div>
-                  <div class="sport-tag-pill">03 // DISCIPLINA</div>
-                  <h3 class="sport-title-giant">Windsurf</h3>
+                  <h3 class="sport-title-giant">WINDSURF</h3>
                   <p class="sport-desc-text">
                     El deporte de mayor trayectoria. Sentí la fuerza pura del viento en tus manos y disfruta el planeo a toda velocidad sobre el agua. Aprende con tablas anchas diseñadas para facilitarte el proceso.
                   </p>
 
                   <div class="sport-specs-grid">
                     <div class="spec-box">
-                      <span class="spec-box-label">Duracion del curso</span>
-                      <span class="spec-box-val">8 a 10 horas (autonomía)</span>
+                      <span class="spec-box-label">DURACIÓN DEL CURSO</span>
+                      <span class="spec-box-val">8 a 10 hs aprox. (autonomía)</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Equipamiento incluido</span>
+                      <span class="spec-box-label">EQUIPO INCLUIDO</span>
                       <span class="spec-box-val">Equipo completo + traje neoprene</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Desarrollo</span>
-                      <span class="spec-box-val">¡Navegas desde el primer día!</span>
+                      <span class="spec-box-label">APRENDIZAJE</span>
+                      <span class="spec-box-val">¡Navegás desde el primer día!</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Seguridad</span>
+                      <span class="spec-box-label">SEGURIDAD</span>
                       <span class="spec-box-val">Bote para rescates</span>
                     </div>
                   </div>
@@ -359,11 +572,11 @@
 
                 <div class="sport-cta-row">
                   <div class="sport-price-wrap">
-                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-label-tiny">CLASE PARTICULAR DESDE</span>
                     <span class="price-val-big">$70.000</span>
                   </div>
-                  <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20disponibilidad%20para%20clases%20de%20Windsurf." target="_blank" class="btn-pill-orange">
-                    Quiero aprender
+                  <a href="/windsurf/" class="btn-pill-orange">
+                    QUIERO SABER MÁS
                     <div class="icon">
                       <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0h24v24H0z" fill="none"></path>
@@ -380,44 +593,47 @@
           <div class="scroll-stack-card" data-sport="sup" data-index="3" style="--card-index: 3;">
             <div class="sport-card-stage">
               <div class="sport-media-box">
-                <img src="./assets/deporte-sup.jpg" alt="Stand Up Paddle Ombú">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="./assets/deporte-sup-mobile.webp" type="image/webp">
+                  <source srcset="./assets/deporte-sup.webp" type="image/webp">
+                  <img src="./assets/deporte-sup.webp" alt="Stand Up Paddle Ombú" loading="lazy" decoding="async" width="960" height="640">
+                </picture>
               </div>
 
               <div class="sport-details-box">
                 <div>
-                  <div class="sport-tag-pill">04 // DISCIPLINA</div>
-                  <h3 class="sport-title-giant">Stand Up Paddle</h3>
+                  <h3 class="sport-title-giant">STAND UP PADDLE</h3>
                   <p class="sport-desc-text">
                     Remo de pie sobre tablas grandes. Sin depender del viento. Perfecto para entrenar el equilibrio, desconectar junto con la naturaleza y disfrutar de travesías grupales guiadas al atardecer/amanecer.
                   </p>
 
                   <div class="sport-specs-grid">
                     <div class="spec-box">
-                      <span class="spec-box-label">Duracion del curso</span>
-                      <span class="spec-box-val">Remamos desde el primer dia</span>
+                      <span class="spec-box-label">DURACIÓN DEL CURSO</span>
+                      <span class="spec-box-val">Remamos desde el primer día</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Equipamiento incluido</span>
-                      <span class="spec-box-val">Equipo completo + traje neoprene</span>
+                      <span class="spec-box-label">EQUIPO INCLUIDO</span>
+                      <span class="spec-box-val">Tabla, remo, chaleco y traje</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Desarrollo</span>
-                      <span class="spec-box-val">Guía e instructor en grupo</span>
+                      <span class="spec-box-label">MODALIDAD</span>
+                      <span class="spec-box-val">Lecciones individuales y grupales</span>
                     </div>
                     <div class="spec-box">
-                      <span class="spec-box-label">Seguridad</span>
-                      <span class="spec-box-val">Bote para rescates</span>
+                      <span class="spec-box-label">SEGURIDAD</span>
+                      <span class="spec-box-val">Monitoreo permanente en el agua</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="sport-cta-row">
                   <div class="sport-price-wrap">
-                    <span class="price-label-tiny">Clase particular desde</span>
+                    <span class="price-label-tiny">CLASE PARTICULAR DESDE</span>
                     <span class="price-val-big">$50.000</span>
                   </div>
                   <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
-                    Quiero aprender
+                    QUIERO SABER MÁS
                     <div class="icon">
                       <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0h24v24H0z" fill="none"></path>
@@ -434,22 +650,8 @@
           <!-- Rail Lateral Minimalista de Navegación -->
           <aside class="disciplinas-side-rail" aria-label="Navegación de disciplinas">
             <div class="side-rail-sticky">
-              <div class="side-rail-track">
+              <div class="side-rail-track" id="sideRailTrack" title="Indicador de disciplinas">
                 <div class="side-rail-thumb" id="sideRailThumb"></div>
-              </div>
-              <div class="side-rail-list">
-                <button class="side-rail-item active" data-sport="kitesurf" onclick="scrollToSport('kitesurf')">
-                  <span class="side-rail-name">Kitesurf</span>
-                </button>
-                <button class="side-rail-item" data-sport="wingfoil" onclick="scrollToSport('wingfoil')">
-                  <span class="side-rail-name">Wingfoil</span>
-                </button>
-                <button class="side-rail-item" data-sport="windsurf" onclick="scrollToSport('windsurf')">
-                  <span class="side-rail-name">Windsurf</span>
-                </button>
-                <button class="side-rail-item" data-sport="sup" onclick="scrollToSport('sup')">
-                  <span class="side-rail-name">SUP Paddle</span>
-                </button>
               </div>
             </div>
           </aside>
@@ -458,90 +660,66 @@
     </section>
 
     <!-- =========================================================
-         CITA MANIFIESTO & SLIDER FOTOGRÁFICO
+         SECCIÓN: EN NÚMEROS / COMUNIDAD (BENTO GRID)
          ========================================================= -->
-    <section class="section-mosaic-quote">
-      <div class="mosaic-stage-wrap">
-        <!-- Cita Central en Naranja -->
-        <div class="mosaic-center-quote">
-          <h2 class="manifesto-big-quote">
-            “EL AGUA ENSEÑA LO QUE NINGÚN<br>MANUAL PUEDE EXPLICAR.”
-          </h2>
-        </div>
-
-        <!-- Slider de Imágenes sin estar chuecas -->
-        <div class="mosaic-slider-track">
-          <div class="mosaic-card-thumb">
-            <img src="./assets/mosaico-kitesurf.jpg" alt="Kitesurf en Escuela Ombú" loading="lazy">
-          </div>
-          <div class="mosaic-card-thumb">
-            <img src="./assets/mosaico-alumnos.jpg" alt="Alumnos navegando en el río" loading="lazy">
-          </div>
-          <div class="mosaic-card-thumb">
-            <img src="./assets/mosaico-tablas.jpg" alt="Tablas de windsurf y SUP" loading="lazy">
-          </div>
-          <div class="mosaic-card-thumb">
-            <img src="./assets/mosaico-clase.jpg" alt="Clase en el río" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================
-         SECCIÓN: ALQUILER DE KAYAKS (BLOQUE OSCURO)
-         ========================================================= -->
-    <section class="section-kayaks-dark" id="kayaks">
+    <section class="section-bento" id="experiencia">
       <div class="container">
-        <div class="kayak-card-white">
-          <div class="kayak-media" id="kayakSlider" aria-roledescription="carousel" aria-label="Fotos de alquileres">
-            <div class="kayak-slider-track">
-              <div class="kayak-slide is-active" aria-label="1 de 3: Alquiler de kayaks">
-                <img src="./assets/kayaks.jpg" alt="Alquiler de kayaks simples y dobles en Escuela Ombú Acassuso">
-              </div>
-              <div class="kayak-slide" aria-label="2 de 3: Alquiler de tablas SUP">
-                <img src="./assets/alquiler-sup.jpg" alt="Alquiler de tablas de SUP Paddle en el río" loading="lazy">
-              </div>
-              <div class="kayak-slide" aria-label="3 de 3: Alquiler de equipos de windsurf">
-                <img src="./assets/alquiler-windsurf.jpeg" alt="Alquiler de equipos y tablas de Windsurf" loading="lazy">
-              </div>
-            </div>
-
-            <!-- Flechas de navegación rápida -->
-            <button type="button" class="kayak-slider-arrow prev" aria-label="Foto anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-            </button>
-            <button type="button" class="kayak-slider-arrow next" aria-label="Foto siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-            </button>
-
-            <!-- Indicadores: 3 puntitos en el centro abajo -->
-            <div class="kayak-dots" role="tablist" aria-label="Selector de fotos">
-              <button type="button" class="kayak-dot is-active" data-slide="0" role="tab" aria-selected="true" aria-label="Foto 1"></button>
-              <button type="button" class="kayak-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Foto 2"></button>
-              <button type="button" class="kayak-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Foto 3"></button>
-            </div>
+        <div class="section-header bento-header">
+          <div class="section-title-col bento-header-title-col">
+            <span class="section-label">// COMUNIDAD &amp; ESCUELA</span>
+            <h2 class="bento-title">MUCHO MÁS<br>QUE UNA CLASE</h2>
           </div>
-          <div class="kayak-content">
-            <span class="section-label">// Alquileres</span>
-            <h2 class="kayak-title">Viví el río a tu manera</h2>
-            <p class="kayak-text">
-              Podés meterte al río con tablas de stand up paddle o windsurf, y kayaks simples o dobles. Chalecos, remos y traje incluidos. Antes de entrar al agua te contamos el recorrido recomendado y las condiciones del día.
+          <div class="section-desc-col bento-header-desc-col">
+            <p class="bento-header-desc">
+              Desde las primeras nociones de seguridad en tierra hasta la navegación libre en el Río de la Plata. Cada encuentro es una oportunidad para conectar con el río y con otras personas.
             </p>
-            <div class="kayak-features">
-              <div class="kayak-feat-item">Equipo completo</div>
-              <div class="kayak-feat-item">Charla de seguridad</div>
-            </div>
-            <div>
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20alquileres." target="_blank" class="btn-pill-orange">
-                Consultar por WhatsApp
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
-            </div>
+          </div>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Foto ancha: clase de kite en el río -->
+          <div class="bento-cell bento-cell--photo bento-cell--wide">
+            <picture>
+              <source media="(max-width: 768px)" srcset="./assets/mosaico-clasekite-mobile.webp" type="image/webp">
+              <source srcset="./assets/mosaico-clasekite.webp" type="image/webp">
+              <img src="./assets/mosaico-clasekite.webp" alt="Clase de kitesurf en Escuela Ombú" loading="lazy" decoding="async" width="1000" height="700">
+            </picture>
+          </div>
+
+          <!-- Dato real de trayectoria -->
+          <div class="bento-cell bento-cell--dark">
+            <span class="bento-stat-number">15+</span>
+            <p class="bento-stat-text">
+              Años enseñando a leer el río y el viento, formando riders autónomos.
+            </p>
+          </div>
+
+          <!-- Foto alta: instructores y alumnos con equipo (ocupa las 2 filas) -->
+          <div class="bento-cell bento-cell--photo bento-cell--tall">
+            <picture>
+              <source media="(max-width: 768px)" srcset="./assets/mosaico-alumnosv2-mobile.webp" type="image/webp">
+              <source srcset="./assets/mosaico-alumnosv2.webp" type="image/webp">
+              <img src="./assets/mosaico-alumnosv2.webp" alt="Instructores y alumnos de Escuela Ombú" loading="lazy" decoding="async" width="750" height="1088">
+            </picture>
+          </div>
+
+          <!-- Tarjeta naranja: Sponsor Oficial HARD WIND -->
+          <div class="bento-cell bento-cell--sponsor">
+            <a href="https://hardwind.com/" target="_blank" rel="noopener noreferrer" class="bento-sponsor-logo-wrap" aria-label="Visitar Hard Wind (Sponsor Oficial)">
+              <img src="./assets/logo_hw.svg" alt="Hard Wind" class="bento-sponsor-logo" loading="lazy" width="120" height="35">
+            </a>
+            <p class="bento-sponsor-desc">
+              <strong>Sponsor oficial</strong>, brindando equipos de primer nivel
+            </p>
+          </div>
+
+          <!-- Foto: riders chocando las manos en el agua -->
+          <div class="bento-cell bento-cell--photo bento-cell--photo-alt">
+            <picture>
+              <source media="(max-width: 768px)" srcset="./assets/mosaico-tablas-mobile.webp" type="image/webp">
+              <source srcset="./assets/mosaico-tablas.webp" type="image/webp">
+              <img src="./assets/mosaico-tablas.webp" alt="Riders en el agua de Escuela Ombú" loading="lazy" decoding="async" width="900" height="660">
+            </picture>
           </div>
         </div>
       </div>
@@ -551,46 +729,85 @@
          SECCIÓN: EL OBJETIVO (FILOSOFÍA PEDAGÓGICA)
          ========================================================= -->
     <section class="section-objetivo" id="escuela">
-      <div class="container objetivo-grid">
-        <div>
-          <span class="section-label">// El Objetivo</span>
-          <h2 class="objetivo-headline">
-            Te enseñamos<br>
-            a ser un rider<br>
-            <span class="accent">independiente.</span>
-          </h2>
+      <div class="container">
+        <!-- Encabezado editorial (12 columnas) -->
+        <div class="section-header objetivo-header">
+          <div class="section-title-col objetivo-title-col">
+            <span class="section-label">// EL OBJETIVO</span>
+            <h2 class="objetivo-title">
+              TE ENSEÑAMOS<br>
+              A SER UN RIDER<br>
+              <span class="highlight-orange">INDEPENDIENTE</span>
+            </h2>
+          </div>
+          <div class="section-desc-col objetivo-desc-col">
+            <p class="objetivo-subtext">
+              Queremos que ganes la técnica, la confianza y el criterio para navegar con autonomía. Por eso, aprender también es conocer tu equipo, leer el entorno y saber cuándo entrar al agua.
+            </p>
+          </div>
         </div>
 
-        <div class="objetivo-right-pane">
-          <p class="objetivo-lead-p">
-            No buscamos que la pases bien solo por un rato. Queremos que te formes de la manera correcta: dominando los fundamentos técnicos, incorporando hábitos clave de seguridad y ganando la consciencia necesaria para disfrutar del agua con total autonomía.
-          </p>
-
-          <div class="benefits">
-            <div class="benefit">
-              <img src="./assets/seguridad.svg" alt="Seguridad primero" width="20" height="20">
-              <div>
-                <strong>Seguridad primero</strong>
-                <p>Chequeamos equipo y condiciones antes de cada salida.</p>
-              </div>
+        <!-- Tres Cards en la misma línea con recorte y medallón ↘ -->
+        <div class="objetivo-cards-grid">
+          <!-- Card 01 -->
+          <article class="objetivo-card">
+            <svg class="objetivo-card-shape" aria-hidden="true">
+              <path class="objetivo-card-path" d="M 0 81.58 A 20 20 0 0 1 15.24 62.16 A 64 64 0 0 0 62.16 15.24 A 20 20 0 0 1 81.58 0 L 320 0 A 24 24 0 0 1 344 24 L 344 316 A 24 24 0 0 1 320 340 L 24 340 A 24 24 0 0 1 0 316 Z" />
+            </svg>
+            <div class="objetivo-badge" aria-hidden="true">
+              <svg class="objetivo-badge-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="7" x2="17" y2="17"></line>
+                <polyline points="7 17 17 17 17 7"></polyline>
+              </svg>
             </div>
-
-            <div class="benefit">
-              <img src="./assets/lectura.svg" alt="Lectura del entorno" width="20" height="20">
-              <div>
-                <strong>Lectura del entorno</strong>
-                <p>Te enseñamos a interpretar viento, corriente y pronóstico.</p>
-              </div>
+            <div class="objetivo-card-content">
+              <span class="objetivo-card-num">01</span>
+              <h3 class="objetivo-card-title">SEGURIDAD<br>PRIMERO</h3>
+              <p class="objetivo-card-desc">
+                Chequeamos equipo y condiciones antes de cada salida.
+              </p>
             </div>
+          </article>
 
-            <div class="benefit">
-              <img src="./assets/autonomia.svg" alt="Autonomía en el agua" width="20" height="20">
-              <div>
-                <strong>Autonomía en el agua</strong>
-                <p>El objetivo es que ganes confianza para decidir y navegar mejor.</p>
-              </div>
+          <!-- Card 02 -->
+          <article class="objetivo-card">
+            <svg class="objetivo-card-shape" aria-hidden="true">
+              <path class="objetivo-card-path" d="M 0 81.58 A 20 20 0 0 1 15.24 62.16 A 64 64 0 0 0 62.16 15.24 A 20 20 0 0 1 81.58 0 L 320 0 A 24 24 0 0 1 344 24 L 344 316 A 24 24 0 0 1 320 340 L 24 340 A 24 24 0 0 1 0 316 Z" />
+            </svg>
+            <div class="objetivo-badge" aria-hidden="true">
+              <svg class="objetivo-badge-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="7" x2="17" y2="17"></line>
+                <polyline points="7 17 17 17 17 7"></polyline>
+              </svg>
             </div>
-          </div>
+            <div class="objetivo-card-content">
+              <span class="objetivo-card-num">02</span>
+              <h3 class="objetivo-card-title">LECTURA<br>DEL ENTORNO</h3>
+              <p class="objetivo-card-desc">
+                Te enseñamos a interpretar viento, corriente y pronóstico.
+              </p>
+            </div>
+          </article>
+
+          <!-- Card 03 -->
+          <article class="objetivo-card">
+            <svg class="objetivo-card-shape" aria-hidden="true">
+              <path class="objetivo-card-path" d="M 0 81.58 A 20 20 0 0 1 15.24 62.16 A 64 64 0 0 0 62.16 15.24 A 20 20 0 0 1 81.58 0 L 320 0 A 24 24 0 0 1 344 24 L 344 316 A 24 24 0 0 1 320 340 L 24 340 A 24 24 0 0 1 0 316 Z" />
+            </svg>
+            <div class="objetivo-badge" aria-hidden="true">
+              <svg class="objetivo-badge-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="7" y1="7" x2="17" y2="17"></line>
+                <polyline points="7 17 17 17 17 7"></polyline>
+              </svg>
+            </div>
+            <div class="objetivo-card-content">
+              <span class="objetivo-card-num">03</span>
+              <h3 class="objetivo-card-title">DECIDÍ CON<br>CONFIANZA</h3>
+              <p class="objetivo-card-desc">
+                Desarrollá criterio para saber cuándo entrar al agua y cómo moverte según las condiciones.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -600,12 +817,14 @@
          ========================================================= -->
     <section class="section-instructores" id="instructores">
       <div class="container">
-        <div class="instructores-header">
-          <div class="instructores-title-group">
-            <span class="section-label">// Instructores</span>
-            <h2 class="display-title">Quiénes somos</h2>
+        <div class="section-header instructores-header">
+          <div class="section-title-col instructores-title-col">
+            <span class="section-label">// EQUIPO OMBÚ</span>
+            <h2 class="display-title instructores-title">CONOCÉ A TUS INSTRUCTORES</h2>
+          </div>
+          <div class="section-desc-col instructores-desc-col">
             <p class="instructores-subtext">
-              Apasionados por el río y los deportes de vela, con años de experiencia en el agua.
+              Apasionados por el río y los deportes de vela, con años de experiencia en el agua. Conocé al equipo que te acompaña desde el primer día en el agua.
             </p>
           </div>
         </div>
@@ -614,100 +833,121 @@
           <!-- Nicolás Cloos -->
           <div class="instructor-card">
             <div class="instructor-photo">
-              <img src="./assets/instructores_nico.jpg" alt="Nicolás Cloos - Wingfoil // Kitesurf" loading="lazy">
+              <img src="./assets/instructor-nicolas.webp" alt="Nicolás Cloos" loading="lazy" decoding="async" width="600" height="680">
             </div>
-            <div class="instructor-name">Nicolás Cloos</div>
-            <div class="instructor-role"><strong>Wingfoil // Kitesurf</strong></div>
+            <div class="instructor-info-badge">
+              <div class="instructor-name">Nicolás Cloos</div>
+              <div class="instructor-tags">
+                <span class="instructor-tag">Wingfoil</span>
+                <span class="instructor-tag">Kitesurf</span>
+              </div>
+            </div>
           </div>
 
           <!-- Ramiro Oreiro -->
           <div class="instructor-card">
             <div class="instructor-photo">
-              <img src="./assets/instructor-ramiro.svg" alt="Ramiro Oreiro - Kitesurf // Wingfoil" loading="lazy">
+              <img src="./assets/instructor-ramiro.webp" alt="Ramiro Oreiro" loading="lazy" decoding="async" width="600" height="600">
             </div>
-            <div class="instructor-name">Ramiro Oreiro</div>
-            <div class="instructor-role"><strong>Kitesurf // Wingfoil</strong></div>
+            <div class="instructor-info-badge">
+              <div class="instructor-name">Ramiro Oreiro</div>
+              <div class="instructor-tags">
+                <span class="instructor-tag">Kitesurf</span>
+                <span class="instructor-tag">Wingfoil</span>
+              </div>
+            </div>
           </div>
 
-          <!-- Ezequiel Paniglia -->
+          <!-- Ezequiel Paniga -->
           <div class="instructor-card">
             <div class="instructor-photo">
-              <img src="./assets/instructores_eze.jpeg" alt="Ezequiel Paniglia - Windsurf" loading="lazy">
+              <img src="./assets/instructor-ezequiel.webp" alt="Ezequiel Paniga" loading="lazy" decoding="async" width="450" height="600">
             </div>
-            <div class="instructor-name">Ezequiel Paniglia</div>
-            <div class="instructor-role"><strong>Windsurf</strong></div>
+            <div class="instructor-info-badge">
+              <div class="instructor-name">Ezequiel Paniga</div>
+              <div class="instructor-tags">
+                <span class="instructor-tag">Windsurf</span>
+              </div>
+            </div>
           </div>
 
           <!-- Silvina Figueroa -->
           <div class="instructor-card">
             <div class="instructor-photo">
-              <img src="./assets/instructores_chivi.jpeg" alt="Silvina Figueroa - SUP" class="photo-align-right" loading="lazy">
+              <img src="./assets/instructor-silvina.webp" alt="Silvina Figueroa" class="photo-align-right" loading="lazy" decoding="async" width="600" height="600">
             </div>
-            <div class="instructor-name">Silvina Figueroa</div>
-            <div class="instructor-role"><strong>SUP</strong></div>
+            <div class="instructor-info-badge">
+              <div class="instructor-name">Silvina Figueroa</div>
+              <div class="instructor-tags">
+                <span class="instructor-tag">SUP</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =========================================================
-         SECCIÓN: ESTAMOS JUNTO AL RÍO (MAPA Y CONTACTO)
+         SECCIÓN: ALQUILERES (CTA EDITORIAL TIDESCAPE)
          ========================================================= -->
-    <section class="section-ubicacion-mapa" id="spot">
-      <div class="container">
-        <div class="mapa-card-white">
-          <div class="mapa-view-pane">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3288.750388907374!2d-58.4926754!3d-34.4735342!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb1fca0718089%3A0x6f664dc422c6f832!2sBuenos%20Aires%20Kitesurf!5e0!3m2!1ses!2sar!4v1710000000000!5m2!1ses!2sar"
-              title="Ubicación de Escuela Ombú en Google Maps"
-              width="100%"
-              height="100%"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+    <section class="section-tidescape-cta" id="alquileres" aria-label="Alquileres de equipos náuticos">
+      <div id="kayaks" style="position: absolute; top: -88px; left: 0;"></div>
+      <div class="container tidescape-container">
+        <!-- 4 Fotos en las 4 esquinas: separadas limpiamente sin superposición -->
+        <div class="tidescape-photos-wrap" aria-hidden="true">
+          <div class="tidescape-photo-card tidescape-card-tl">
+            <picture>
+              <source media="(max-width: 768px)" srcset="./assets/alquiler-kayaks-mobile.webp" type="image/webp">
+              <source srcset="./assets/alquiler-kayaks.webp" type="image/webp">
+              <img src="./assets/alquiler-kayaks.webp" alt="Alquiler de kayaks simples y dobles" loading="lazy" decoding="async" width="600" height="461">
+            </picture>
           </div>
+          <div class="tidescape-photo-card tidescape-card-tr">
+            <picture>
+              <source media="(max-width: 768px)" srcset="./assets/alquiler-sup-mobile.webp" type="image/webp">
+              <source srcset="./assets/alquiler-sup.webp" type="image/webp">
+              <img src="./assets/alquiler-sup.webp" alt="Alquiler de tablas de Stand Up Paddle" loading="lazy" decoding="async" width="600" height="450">
+            </picture>
+          </div>
+          <div class="tidescape-photo-card tidescape-card-bl">
+            <picture>
+              <source media="(max-width: 768px)" srcset="./assets/alquiler-windsurf-mobile.webp" type="image/webp">
+              <source srcset="./assets/alquiler-windsurf.webp" type="image/webp">
+              <img src="./assets/alquiler-windsurf.webp" alt="Alquiler de equipos de Windsurf" loading="lazy" decoding="async" width="600" height="440">
+            </picture>
+          </div>
+          <div class="tidescape-photo-card tidescape-card-br">
+            <picture>
+              <source media="(max-width: 768px)" srcset="./assets/mosaico-amigos-mobile.webp" type="image/webp">
+              <source srcset="./assets/mosaico-amigos.webp" type="image/webp">
+              <img src="./assets/mosaico-amigos.webp" alt="Amigos disfrutando en Escuela Ombú" loading="lazy" decoding="async" width="900" height="795">
+            </picture>
+          </div>
+        </div>
 
-          <div class="mapa-info-pane">
-            <span class="section-label">// Encontranos</span>
-            <h2 class="mapa-title">Estamos junto al río</h2>
-
-            <div class="mapa-items-list">
-              <div class="mapa-contact-row">
-                <div class="mapa-icon-circle">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                </div>
-                <div class="contact-row-content">
-                  <span class="contact-tag-tiny">A 20 min de Capital</span>
-                  <a href="https://maps.app.goo.gl/duhdkxUzUEPQsZHx5" target="_blank" class="contact-main-val" style="color:var(--text-dark); text-decoration:none; display:inline-block;">
-                    Sebastián Elcano 994, Acassuso, San Isidro ↗
-                  </a>
-                </div>
+        <!-- Contenido Central: Título, Bajada, Línea de soporte y CTA -->
+        <div class="tidescape-center-wrap">
+          <span class="section-label">// ALQUILERES</span>
+          <h2 class="tidescape-title">VIVÍ EL RÍO<br>A TU MANERA</h2>
+          <p class="tidescape-desc">
+            Alquilá tablas de SUP o windsurf y kayaks simples o dobles. Te orientamos sobre el recorrido y las condiciones del día.
+          </p>
+          <p class="tidescape-support-line">
+            <svg class="tidescape-check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Chaleco, remos y traje incluidos según la actividad.</span>
+          </p>
+          <div class="tidescape-cta-action">
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20consultar%20por%20alquileres." target="_blank" class="btn-pill-orange" rel="noopener noreferrer">
+              CONSULTÁ POR ALQUILERES
+              <div class="icon">
+                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                </svg>
               </div>
-
-              <div class="mapa-contact-row">
-                <div class="mapa-icon-circle">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="contact-row-content">
-                  <span class="contact-tag-tiny">Todos los días</span>
-                  <span class="contact-main-val">Lun a dom, 9 a 19 hs</span>
-                </div>
-              </div>
-
-              <div class="mapa-contact-row">
-                <div class="mapa-icon-circle">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                </div>
-                <div class="contact-row-content">
-                  <span class="contact-tag-tiny">Reservas</span>
-                  <a href="https://wa.me/5491130041100" target="_blank" style="color:var(--text-dark); text-decoration:none; font-weight:700; font-size:14px;">
-                    Reservá por WhatsApp
-                  </a>
-                </div>
-              </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -729,7 +969,7 @@
               </p>
             </div>
             <div>
-              <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="btn-pill-white">
+              <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="btn-pill-dark">
                 VER CÁMARA EN VIVO
                 <div class="icon">
                   <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -743,7 +983,11 @@
 
           <!-- Tarjeta con Foto del Río: Cámara en Vivo (Derecha) -->
           <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="spot-dark-camera-card" aria-label="Ver cámara en vivo en YouTube">
-            <img src="./assets/camara-rio-fondo.png" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img">
+            <picture class="spot-camera-picture">
+              <source media="(max-width: 768px)" srcset="./assets/camara-rio-fondo-mobile.webp" type="image/webp">
+              <source srcset="./assets/camara-rio-fondo.webp" type="image/webp">
+              <img src="./assets/camara-rio-fondo.webp" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img" loading="lazy" decoding="async" width="1600" height="900">
+            </picture>
             <div class="spot-camera-overlay"></div>
 
             <div class="camera-header-row">
@@ -773,9 +1017,16 @@
          ========================================================= -->
     <section class="section-faq" id="faq" aria-labelledby="faq-title">
       <div class="container">
-        <div class="faq-title-wrap">
-          <span class="section-label">// Antes de empezar</span>
-          <h2 class="display-title" id="faq-title">Preguntas frecuentes</h2>
+        <div class="section-header faq-header">
+          <div class="section-title-col faq-title-col">
+            <span class="section-label">// ANTES DE EMPEZAR</span>
+            <h2 class="display-title faq-title" id="faq-title">PREGUNTAS FRECUENTES</h2>
+          </div>
+          <div class="section-desc-col faq-desc-col">
+            <p class="section-desc faq-desc">
+              Todo lo que necesitás saber antes de tu primera clase. Si te queda alguna duda, escribinos.
+            </p>
+          </div>
         </div>
         <div class="motion-accordion" data-accordion>
           <div class="motion-accordion-item">
@@ -862,6 +1113,77 @@
               </div>
             </div>
           </div>
+
+          <div class="motion-accordion-item">
+            <button type="button" class="motion-accordion-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-trigger-5">
+              <span class="motion-accordion-question">¿Cuentan con vestuario?</span>
+              <span class="motion-accordion-icon" aria-hidden="true">
+                <svg class="icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="icon-minus" width="14" height="14" viewBox="0 0 14 2" fill="none"><path d="M1 1h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+            <div class="motion-accordion-panel" id="faq-panel-5" role="region" aria-labelledby="faq-trigger-5">
+              <div class="motion-accordion-content">
+                <div class="motion-accordion-content-inner">
+                  <p>¡Sí! El predio cuenta con duchas con agua caliente y baños limpios. No olvides traer toalla y otra muda de ropa!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SECCIÓN: ESTAMOS JUNTO AL RÍO (MAPA Y CONTACTO)
+         ========================================================= -->
+    <section class="section-ubicacion-mapa" id="spot">
+      <div class="container">
+        <div class="mapa-card-white">
+          <div class="mapa-view-pane">
+            <div id="ombuMap" class="ombu-leaflet-container" role="region" aria-label="Mapa de ubicación de Escuela Ombú en Acassuso"></div>
+          </div>
+
+          <div class="mapa-info-pane">
+            <span class="section-label">// Encontranos</span>
+            <h2 class="mapa-title">Estamos junto al río</h2>
+
+            <div class="mapa-items-list">
+              <div class="mapa-contact-row">
+                <div class="mapa-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="contact-row-content">
+                  <span class="contact-tag-tiny">A 20 min de Capital</span>
+                  <a href="https://maps.app.goo.gl/duhdkxUzUEPQsZHx5" target="_blank" class="contact-main-val" style="color:var(--text-dark); text-decoration:none; display:inline-block;">
+                    Sebastián Elcano 994, Buenos Aires
+                  </a>
+                </div>
+              </div>
+
+              <div class="mapa-contact-row">
+                <div class="mapa-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="contact-row-content">
+                  <span class="contact-tag-tiny">Todos los días</span>
+                  <span class="contact-main-val">Lun a dom, 9 a 19 hs</span>
+                </div>
+              </div>
+
+              <div class="mapa-contact-row">
+                <div class="mapa-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-row-content">
+                  <span class="contact-tag-tiny">Reservas</span>
+                  <a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer" style="color:var(--text-dark); text-decoration:none; font-weight:400; font-size:14.5px;">
+                    +54 9 11 3004 1100
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -871,7 +1193,7 @@
        EXPERIENCIA INFERIOR: RESEÑAS, CTA & FOOTER CON FONDO PARALLAX
        ========================================================= -->
   <div class="bottom-experience-wrapper">
-    <!-- Capa de fondo con imagen exec-8ee44b6a-7b18-473f-9584-a9fad9c2168f.png (Wingfoil) y efecto Parallax -->
+    <!-- Capa de fondo con imagen fondo-parallax.webp y efecto Parallax -->
     <div class="bottom-parallax-bg" id="bottomParallaxBg"></div>
 
     <!-- Velo degradé cremita que va hacia abajo hasta ser transparente -->
@@ -885,10 +1207,18 @@
            ========================================================= -->
       <section class="section-alumnos-reviews" id="resenas">
         <div class="container">
-          <div class="reviews-header">
-            <div class="reviews-title-group">
+          <div class="section-header reviews-header">
+            <div class="section-title-col reviews-title-col">
               <span class="section-label">// Reseñas</span>
-              <h2 class="display-title">Nuestros alumnos dicen...</h2>
+              <h2 class="reviews-title">
+                NUESTROS ALUMNOS<br>
+                DICEN...
+              </h2>
+            </div>
+            <div class="section-desc-col reviews-desc-col">
+              <p class="reviews-subtext">
+                Historias de quienes se animaron a entrar al agua y aprender con nosotros.
+              </p>
             </div>
           </div>
 
@@ -905,7 +1235,7 @@
                       <span class="date-tiny">hace 3 meses</span>
                     </div>
                   </div>
-                  <img src="./assets/googleIcon.png" alt="Google" class="review-platform-icon">
+                  <img src="./assets/google-icon.png" alt="Google" class="review-platform-icon">
                 </div>
                 <div class="stars-rating-orange">★★★★★</div>
                 <p class="review-paragraph-text">
@@ -923,7 +1253,7 @@
                       <span class="meta-subtext">@luciifer.ok</span>
                     </div>
                   </div>
-                  <img src="./assets/instagramicon.png" alt="Instagram" class="review-platform-icon">
+                  <img src="./assets/instagram-icon.png" alt="Instagram" class="review-platform-icon">
                 </div>
                 <p class="review-paragraph-text">
                   Super recomendable, muy buenos profes y ambiente muy agradable!! Tuve mi primera clase. La verdad espectacular Nico y Eze. Super recomendable!! 🙌
@@ -944,7 +1274,7 @@
                       <span class="date-tiny">hace 2 meses</span>
                     </div>
                   </div>
-                  <img src="./assets/googleIcon.png" alt="Google" class="review-platform-icon">
+                  <img src="./assets/google-icon.png" alt="Google" class="review-platform-icon">
                 </div>
                 <div class="stars-rating-orange">★★★★★</div>
                 <p class="review-paragraph-text">
@@ -962,7 +1292,7 @@
                       <span class="date-tiny">hace 1 mes</span>
                     </div>
                   </div>
-                  <img src="./assets/googleIcon.png" alt="Google" class="review-platform-icon">
+                  <img src="./assets/google-icon.png" alt="Google" class="review-platform-icon">
                 </div>
                 <div class="stars-rating-orange">★★★★★</div>
                 <p class="review-paragraph-text">
@@ -980,7 +1310,7 @@
                       <span class="meta-subtext">@valen.lopez</span>
                     </div>
                   </div>
-                  <img src="./assets/instagramicon.png" alt="Instagram" class="review-platform-icon">
+                  <img src="./assets/instagram-icon.png" alt="Instagram" class="review-platform-icon">
                 </div>
                 <p class="review-paragraph-text">
                   El mejor spot del Bajo, lejos!! 🔥
@@ -1001,7 +1331,7 @@
                       <span class="date-tiny">hace 1 mes</span>
                     </div>
                   </div>
-                  <img src="./assets/googleIcon.png" alt="Google" class="review-platform-icon">
+                  <img src="./assets/google-icon.png" alt="Google" class="review-platform-icon">
                 </div>
                 <div class="stars-rating-orange">★★★★★</div>
                 <p class="review-paragraph-text">
@@ -1019,7 +1349,7 @@
                       <span class="date-tiny">hace 4 meses</span>
                     </div>
                   </div>
-                  <img src="./assets/googleIcon.png" alt="Google" class="review-platform-icon">
+                  <img src="./assets/google-icon.png" alt="Google" class="review-platform-icon">
                 </div>
                 <div class="stars-rating-orange">★★★★★</div>
                 <p class="review-paragraph-text">
@@ -1037,7 +1367,7 @@
                       <span class="meta-subtext">@cami.gomez</span>
                     </div>
                   </div>
-                  <img src="./assets/instagramicon.png" alt="Instagram" class="review-platform-icon">
+                  <img src="./assets/instagram-icon.png" alt="Instagram" class="review-platform-icon">
                 </div>
                 <p class="review-paragraph-text">
                   Me encantó la experiencia de sup en el amanecer. Supersensorial, hermosa. Gracias por compartir y gracias a todo el equipo por tan bello evento y por cuidarnos 💯
@@ -1058,7 +1388,7 @@
                       <span class="date-tiny">hace 6 meses</span>
                     </div>
                   </div>
-                  <img src="./assets/googleIcon.png" alt="Google" class="review-platform-icon">
+                  <img src="./assets/google-icon.png" alt="Google" class="review-platform-icon">
                 </div>
                 <div class="stars-rating-orange">★★★★★</div>
                 <p class="review-paragraph-text">
@@ -1076,7 +1406,7 @@
                       <span class="date-tiny">hace 2 meses</span>
                     </div>
                   </div>
-                  <img src="./assets/googleIcon.png" alt="Google" class="review-platform-icon">
+                  <img src="./assets/google-icon.png" alt="Google" class="review-platform-icon">
                 </div>
                 <div class="stars-rating-orange">★★★★★</div>
                 <p class="review-paragraph-text">
@@ -1093,8 +1423,8 @@
            ========================================================= -->
       <section class="section-prefooter-banner">
       <div class="container prefooter-flex-row">
-        <h2 class="prefooter-heading">
-          Listo para navegar?
+        <h2 class="display-title prefooter-heading">
+          ¿LISTO PARA NAVEGAR?
         </h2>
         <div>
           <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase." target="_blank" class="btn-pill-orange" style="font-size:16px;">
@@ -1120,9 +1450,9 @@
         <div class="footer-top-columns">
           <!-- Columna 1: Marca & Logo Negro sobre Blanco -->
           <div class="footer-brand-info">
-            <img src="./assets/logo-ombu-footer.png" alt="Escuela Ombú" class="footer-card-logo">
+            <img src="./assets/logo-ombu-footer.webp" alt="Escuela Ombú" class="footer-card-logo" width="80" height="80">
             <p class="footer-brand-p">
-              Escuela de kitesurf, windsurf, wingfoil y SUP en Acassuso, San Isidro. Más de 15 años enseñando a leer el río y el viento.
+              Escuela de kitesurf, windsurf, wingfoil y SUP en Buenos Aires. Más de 15 años enseñando a leer el río y el viento.
             </p>
           </div>
 
@@ -1133,7 +1463,7 @@
               <li><a href="/kitesurf/">Kitesurf</a></li>
               <li><a href="/windsurf/">Windsurf</a></li>
               <li><a href="/wingfoil/">Wingfoil</a></li>
-              <li><a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer">SUP Paddle</a></li>
+              <li><a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer">Stand Up Paddle</a></li>
             </ul>
           </div>
 
@@ -1142,10 +1472,10 @@
             <div class="footer-col-title">Navegación</div>
             <ul class="footer-links-list">
               <li><a href="#disciplinas">Aprendizaje</a></li>
-              <li><a href="#kayaks">Alquileres</a></li>
-              <li><a href="#spot">El spot</a></li>
               <li><a href="#instructores">Nosotros</a></li>
+              <li><a href="#alquileres">Alquileres</a></li>
               <li><a href="#faq">Preguntas frecuentes</a></li>
+              <li><a href="#spot">Ubicación</a></li>
             </ul>
           </div>
 
@@ -1154,7 +1484,7 @@
             <div class="footer-col-title">Contacto</div>
             <ul class="footer-links-list">
               <li><span style="color:var(--text-light-muted);">Sebastián Elcano 994, Acassuso</span></li>
-              <li><a href="mailto:ombuescuela@gmail.com">ombuescuela@gmail.com</a></li>
+              <li><a href="mailto:info@escuelaombu.com.ar">info@escuelaombu.com.ar</a></li>
               <li><a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer">+54 9 11 3004 1100</a></li>
             </ul>
           </div>
@@ -1166,10 +1496,10 @@
             © 2026 Escuela Ombú. Todos los derechos reservados.
           </div>
           <div class="footer-social-icons">
-            <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="footer-social-btn">
+            <a href="https://www.instagram.com/escuelaombu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer-social-btn">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>
-            <a href="https://youtube.com" target="_blank" aria-label="YouTube" class="footer-social-btn">
+            <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="footer-social-btn">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
             </a>
             <a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="footer-social-btn">
@@ -1180,7 +1510,7 @@
 
         <!-- Gran Logo Horizontal Ombú Texturado en la Base del Card -->
         <div class="footer-horizontal-logo-wrap">
-          <img src="./assets/logo-ombu-horizontal.png" alt="OMBU'">
+          <img src="./assets/logo-ombu-horizontal.webp" alt="OMBU'" width="1200" height="280">
         </div>
       </div>
     </div>
@@ -1195,6 +1525,6 @@
     </svg>
   </a>
 
-  <script src="./main.js"></script>
+  <script src="./main.js?v=4.8"></script>
 </body>
 </html>
