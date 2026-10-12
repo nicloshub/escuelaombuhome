@@ -97,9 +97,9 @@
   /* Grilla y contenedor principal (Base Mobile: <= 767px) */
   --grid-cols: 4;
   --grid-gutter: 16px;
-  --grid-margin: 24px;
+  --grid-margin: 18px;
   --container-content-max: 1440px;
-  --container-max: 1760px; /* 1440px + 160px + 160px para Desktop */
+  --container-max: calc(var(--container-content-max, 1440px) + (var(--grid-margin) * 2));
 
   --gutter: var(--grid-gutter);
   --page-margin: var(--grid-margin);
@@ -166,14 +166,15 @@
   --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Tablet (768px a 1023px): 12 Columnas | Gutter: 24px | Margen lateral: 64px */
+/* Tablet (768px a 1023px): 12 Columnas | Gutter: 24px | Margen lateral de seguridad: 24px */
 @media (min-width: 768px) {
   :root {
     --grid-cols: 12;
     --grid-gutter: 24px;
-    --grid-margin: 64px;
+    --grid-margin: 24px;
     --gutter: 24px;
-    --page-margin: 64px;
+    --page-margin: 24px;
+    --container-max: calc(var(--container-content-max, 1440px) + (var(--grid-margin) * 2));
     --section-space: 96px;
     --section-padding-y: 96px;
     --section-header-mb: 32px;
@@ -202,18 +203,18 @@
   }
 }
 
-/* Desktop (>= 1024px): 12 Columnas | Gutter: 32px | Margen lateral: 160px | Contenedor: 1760px */
+/* Desktop (>= 1024px): 12 Columnas | Gutter: 32px | Margen lateral de seguridad: 32px | Contenedor max: 1440px */
 @media (min-width: 1024px) {
   :root {
     --grid-cols: 12;
     --grid-gutter: 32px;
-    --grid-margin: 160px;
+    --grid-margin: 32px;
     --gutter: 32px;
-    --page-margin: 160px;
+    --page-margin: 32px;
     --container-content-max: 1440px;
-    --container-max: 1760px;
-    --section-space: 160px;
-    --section-padding-y: 160px;
+    --container-max: calc(var(--container-content-max, 1440px) + (var(--grid-margin) * 2));
+    --section-space: 140px;
+    --section-padding-y: 140px;
     --section-header-mb: 48px;
 
     /* Escala Desktop */
@@ -579,7 +580,7 @@ header.site-header {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  width: calc(100% - (var(--grid-margin, 160px) * 2));
+  width: calc(100% - (var(--grid-margin, 32px) * 2));
   max-width: var(--container-content-max, 1440px);
   background: rgba(254, 254, 254, 0.80);
   backdrop-filter: blur(24px) saturate(180%);
@@ -1223,7 +1224,7 @@ header.site-header:hover {
 .hero-weather-card {
   position: fixed;
   top: 108px;
-  left: calc(50% - (min(100% - (var(--grid-margin, 160px) * 2), var(--container-content-max, 1440px)) / 2));
+  left: calc(50% - (min(100% - (var(--grid-margin, 32px) * 2), var(--container-content-max, 1440px)) / 2));
   z-index: 990;
   width: 304px;
   max-width: 304px;
@@ -3763,13 +3764,18 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
 
 /* --- MOBILE GENERAL (max-width: 768px) --- */
 @media (max-width: 768px) {
+  :root {
+    --grid-margin: 18px;
+    --page-margin: 18px;
+    --container-max: 100%;
+  }
   /* Contenedor & Header */
   .container {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: var(--grid-margin, 18px);
+    padding-right: var(--grid-margin, 18px);
   }
   header.site-header {
-    width: calc(100% - (var(--grid-margin, 24px) * 2));
+    width: calc(100% - (var(--grid-margin, 18px) * 2));
     top: 10px;
     padding: 6px 12px;
     border-radius: 24px;
@@ -4604,9 +4610,13 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
 
 /* --- TELÉFONOS CHICOS (max-width: 480px) --- */
 @media (max-width: 480px) {
+  :root {
+    --grid-margin: 12px;
+    --page-margin: 12px;
+  }
   .container {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: var(--grid-margin, 12px);
+    padding-right: var(--grid-margin, 12px);
   }
   .hero-content-wrap,
   .container.hero-content-wrap {
@@ -4614,13 +4624,13 @@ html.js-reviews-motion-ready .review-cell-card.masonry-exit-bottom {
     padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   }
   header.site-header {
-    width: calc(100% - 16px);
+    width: calc(100% - (var(--grid-margin, 12px) * 2));
     top: 8px;
     padding: 5px 10px;
   }
   .hero-weather-card {
     top: 76px;
-    left: 8px;
+    left: var(--grid-margin, 12px);
   }
   .brand-disc-img {
     width: 32px;
