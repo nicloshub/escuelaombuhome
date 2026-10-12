@@ -113,10 +113,9 @@ function initLevelAccordion() {
   if (!accordion) return;
 
   const cards = Array.from(accordion.querySelectorAll('.level-card'));
-  const buttons = cards.map(c => c.querySelector('.level-trigger')).filter(Boolean);
 
   function openCard(targetCard) {
-    if (targetCard.classList.contains('is-open')) return;
+    if (!targetCard || targetCard.classList.contains('is-open')) return;
 
     cards.forEach(card => {
       const isOpen = card === targetCard;
@@ -125,30 +124,45 @@ function initLevelAccordion() {
       if (btn) {
         btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       }
+      const panel = card.querySelector('.level-panel');
+      if (panel) {
+        panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      }
     });
   }
 
-  buttons.forEach((btn, index) => {
-    btn.addEventListener('click', (e) => {
-      const card = btn.closest('.level-card');
-      if (card) openCard(card);
-    });
+  cards.forEach((card, index) => {
+    const btn = card.querySelector('.level-trigger');
 
-    btn.addEventListener('keydown', (e) => {
-      let targetIndex = null;
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        targetIndex = (index + 1) % buttons.length;
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        targetIndex = (index - 1 + buttons.length) % buttons.length;
-      } else if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        const card = btn.closest('.level-card');
-        if (card) openCard(card);
-      }
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openCard(card);
+      });
 
-      if (targetIndex !== null) {
-        e.preventDefault();
-        buttons[targetIndex].focus();
+      btn.addEventListener('keydown', (e) => {
+        let targetIndex = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          targetIndex = (index + 1) % cards.length;
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          targetIndex = (index - 1 + cards.length) % cards.length;
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openCard(card);
+        }
+
+        if (targetIndex !== null) {
+          e.preventDefault();
+          const targetBtn = cards[targetIndex].querySelector('.level-trigger');
+          if (targetBtn) targetBtn.focus();
+        }
+      });
+    }
+
+    // Permitir clic en cualquier parte de la pastilla cerrada
+    card.addEventListener('click', () => {
+      if (!card.classList.contains('is-open')) {
+        openCard(card);
       }
     });
   });
