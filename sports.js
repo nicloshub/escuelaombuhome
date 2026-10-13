@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializaciones específicas de la subpágina
   initLevelAccordion();
   initCaminoTabs();
-  initGearExplodedView();
+  initGearExplorer();
   initFaqAccordion(); // Respaldo para acordeones con clase legacy si existieran
+  initJourneyScroller();
 });
 
 // 1. Telemetría de viento en tiempo real para Acassuso (Sincronizado con componentes de la Home)
@@ -288,65 +289,200 @@ function initMobileMenu() {
   });
 }
 
-// 5. Interacción del Escenario de Equipamiento (Exploded View con Flechas)
-function initGearExplodedView() {
-  const stage = document.getElementById('gearStage');
-  if (!stage) return;
+// 5. Hotspots y fichas de producto del equipamiento de Kitesurf
+function initGearExplorer() {
+  const explorer = document.getElementById('gearExplorer');
+  if (!explorer) return;
 
-  const cards = stage.querySelectorAll('.gear-card');
-  const hotspots = stage.querySelectorAll('.gear-hotspot');
-  const lines = stage.querySelectorAll('.gear-connector-line');
+  const stage = explorer.querySelector('#gearStage');
+  const stageImage = stage?.querySelector('img');
+  const hotspots = Array.from(explorer.querySelectorAll('.gear-hotspot'));
+  const options = Array.from(explorer.querySelectorAll('.gear-item-option'));
+  const viewAll = explorer.querySelector('#gearViewAll');
+  let zoomResetTimer = 0;
+  let zoomRequest = 0;
+  if (!stage || !hotspots.length || !options.length) return;
 
-  function setActiveGear(gearId) {
-    cards.forEach(card => {
-      const match = card.getAttribute('data-gear') === gearId;
-      card.classList.toggle('is-active', match);
+  function focusGear(itemId) {
+    const hotspot = hotspots.find((button) => button.dataset.item === itemId);
+    if (!hotspot || !stageImage) return;
+    const x = Number.parseFloat(hotspot.style.left) || Number(hotspot.dataset.x);
+    const y = Number.parseFloat(hotspot.style.top) || Number(hotspot.dataset.y);
+    window.clearTimeout(zoomResetTimer);
+    window.cancelAnimationFrame(zoomRequest);
+    if (stage.classList.contains('is-zoomed')) {
+      stage.classList.remove('is-zoomed');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      zoomResetTimer = window.setTimeout(() => {
+        stage.style.setProperty('--zoom-x', `${x}%`);
+        stage.style.setProperty('--zoom-y', `${y}%`);
+        stageImage.style.transformOrigin = `${x}% ${y}%`;
+        zoomRequest = window.requestAnimationFrame(() => stage.classList.add('is-zoomed'));
+      }, reducedMotion ? 0 : 220);
+    } else {
+      stage.style.setProperty('--zoom-x', `${x}%`);
+      stage.style.setProperty('--zoom-y', `${y}%`);
+      stageImage.style.transformOrigin = `${x}% ${y}%`;
+      zoomRequest = window.requestAnimationFrame(() => stage.classList.add('is-zoomed'));
+    }
+    if (viewAll) viewAll.hidden = false;
+  }
+
+  function resetView() {
+    window.clearTimeout(zoomResetTimer);
+    window.cancelAnimationFrame(zoomRequest);
+    stage.classList.remove('is-zoomed');
+    if (viewAll) viewAll.hidden = true;
+  }
+
+  function selectItem(itemId, interacted = false) {
+    const selected = options.find((option) => option.dataset.item === itemId);
+    if (!selected) return;
+    if (interacted) {
+      stage.classList.add('has-interacted');
+      focusGear(itemId);
+    }
+
+    hotspots.forEach((button) => {
+      const isActive = button.dataset.item === itemId;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-expanded', String(isActive));
+      const symbol = button.querySelector('.gear-hotspot-symbol');
+      if (symbol) symbol.textContent = isActive ? '×' : '+';
     });
-    hotspots.forEach(hotspot => {
-      const match = hotspot.getAttribute('data-gear') === gearId;
-      hotspot.classList.toggle('is-active', match);
-    });
-    lines.forEach(line => {
-      const match = line.getAttribute('data-gear') === gearId;
-      line.classList.toggle('is-active', match);
+    options.forEach((option) => {
+      const isActive = option === selected;
+      const button = option.querySelector('.gear-item-selector-button');
+      const detail = option.querySelector('.gear-item-detail');
+      option.classList.toggle('is-active', isActive);
+      if (button) {
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-expanded', String(isActive));
+      }
+      if (detail) {
+        detail.hidden = !isActive;
+        if (isActive) {
+          const image = detail.querySelector('img');
+          if (image) image.loading = 'eager';
+        }
+      }
     });
   }
 
-  function clearActiveGear() {
-    cards.forEach(card => card.classList.remove('is-active'));
-    hotspots.forEach(hotspot => hotspot.classList.remove('is-active'));
-    lines.forEach(line => line.classList.remove('is-active'));
+  hotspots.forEach((button) => {
+    button.addEventListener('click', () => selectItem(button.dataset.item, true));
+  });
+  options.forEach((option) => {
+    const button = option.querySelector('.gear-item-selector-button');
+    button?.addEventListener('click', () => selectItem(option.dataset.item, true));
+  });
+  viewAll?.addEventListener('click', resetView);
+
+  function positionHotspots() {
+    if (!stageImage) return;
+    const { width, height } = stage.getBoundingClientRect();
+    const imageWidth = stageImage.naturalWidth || Number(stageImage.getAttribute('width'));
+    const imageHeight = stageImage.naturalHeight || Number(stageImage.getAttribute('height'));
+    if (!width || !height || !imageWidth || !imageHeight) return;
+
+    const coverScale = Math.max(width / imageWidth, height / imageHeight);
+    const renderedWidth = imageWidth * coverScale;
+    const renderedHeight = imageHeight * coverScale;
+    const cropX = (width - renderedWidth) / 2;
+    const cropY = (height - renderedHeight) / 2;
+
+    hotspots.forEach((button) => {
+      const x = (Number(button.dataset.x) / 100 * renderedWidth + cropX) / width * 100;
+      const y = (Number(button.dataset.y) / 100 * renderedHeight + cropY) / height * 100;
+      button.style.left = `${x}%`;
+      button.style.top = `${y}%`;
+    });
   }
 
-  // Interacción en Tarjetas (Hover, Focus, Click)
-  cards.forEach(card => {
-    const gearId = card.getAttribute('data-gear');
-    card.addEventListener('mouseenter', () => setActiveGear(gearId));
-    card.addEventListener('focus', () => setActiveGear(gearId));
-    card.addEventListener('mouseleave', () => clearActiveGear());
-    card.addEventListener('click', () => setActiveGear(gearId));
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        setActiveGear(gearId);
-      }
-    });
-  });
+  stageImage?.addEventListener('load', positionHotspots);
+  window.addEventListener('resize', positionHotspots, { passive: true });
+  if ('ResizeObserver' in window) new ResizeObserver(positionHotspots).observe(stage);
+  positionHotspots();
 
-  // Interacción en Hotspots sobre la persona
-  hotspots.forEach(hotspot => {
-    const gearId = hotspot.getAttribute('data-gear');
-    hotspot.addEventListener('mouseenter', () => setActiveGear(gearId));
-    hotspot.addEventListener('focus', () => setActiveGear(gearId));
-    hotspot.addEventListener('mouseleave', () => clearActiveGear());
-    hotspot.addEventListener('click', (e) => {
-      e.stopPropagation();
-      setActiveGear(gearId);
-      // En mobile: scroll suave hacia la tarjeta correspondiente
-      const targetCard = stage.querySelector(`.gear-card[data-gear="${gearId}"]`);
-      if (targetCard && window.innerWidth < 1024) {
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+  selectItem('kite');
+}
+
+// 6. Recorrido scrollytelling: de la arena al agua
+function initJourneyScroller() {
+  const section = document.querySelector('.journey-section');
+  if (!section || !('IntersectionObserver' in window)) return;
+
+  const steps = Array.from(section.querySelectorAll('.journey-step[data-step]'));
+  const sceneLayers = Array.from(section.querySelectorAll('.journey-scene-layer[data-step]'));
+  const sceneLabel = section.querySelector('[data-journey-label]');
+  const stepsShell = section.querySelector('.journey-steps-shell');
+  const progressDot = section.querySelector('.journey-progress-dot');
+  const divider = section.querySelector('[data-journey-divider]');
+  if (!steps.length || !sceneLayers.length || !sceneLabel || !stepsShell || !progressDot) return;
+
+  section.classList.add('is-enhanced');
+  let activeStep = steps.find((step) => step.classList.contains('is-active')) || steps[0];
+
+  function updateProgress(step) {
+    const shellTop = stepsShell.getBoundingClientRect().top;
+    const number = step.querySelector('.journey-number');
+    const stepRect = (number || step).getBoundingClientRect();
+    const dotY = stepRect.top - shellTop + stepRect.height / 2 - progressDot.offsetHeight / 2;
+    stepsShell.style.setProperty('--journey-progress-y', `${Math.max(0, dotY)}px`);
+  }
+
+  function activateStep(step) {
+    if (!step || step === activeStep && step.classList.contains('is-active')) return;
+    activeStep = step;
+    const stepNumber = step.dataset.step;
+    steps.forEach((item) => {
+      const isActive = item === step;
+      item.classList.toggle('is-active', isActive);
+      if (isActive) item.setAttribute('aria-current', 'step');
+      else item.removeAttribute('aria-current');
     });
+    sceneLayers.forEach((layer) => {
+      layer.classList.toggle('is-active', layer.dataset.step === stepNumber);
+    });
+    sceneLabel.textContent = step.dataset.scene || 'EN TIERRA';
+    updateProgress(step);
+  }
+
+  steps.forEach((step) => {
+    if (step === activeStep) step.setAttribute('aria-current', 'step');
+    else step.removeAttribute('aria-current');
   });
+  updateProgress(activeStep);
+
+  const stepObserver = new IntersectionObserver((entries) => {
+    const candidates = entries.filter((entry) => entry.isIntersecting);
+    if (!candidates.length) return;
+    const viewportCenter = window.innerHeight / 2;
+    candidates.sort((a, b) => {
+      const aCenter = a.boundingClientRect.top + a.boundingClientRect.height / 2;
+      const bCenter = b.boundingClientRect.top + b.boundingClientRect.height / 2;
+      return Math.abs(aCenter - viewportCenter) - Math.abs(bCenter - viewportCenter);
+    });
+    activateStep(candidates[0].target);
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+  steps.forEach((step) => stepObserver.observe(step));
+
+  if (divider) {
+    const dividerObserver = new IntersectionObserver((entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        divider.classList.add('is-visible');
+        observer.disconnect();
+      }
+    }, { threshold: 0.15 });
+    dividerObserver.observe(divider);
+  }
+
+  if ('ResizeObserver' in window) {
+    const layoutObserver = new ResizeObserver(() => updateProgress(activeStep));
+    layoutObserver.observe(stepsShell);
+    steps.forEach((step) => layoutObserver.observe(step));
+  } else {
+    window.addEventListener('resize', () => updateProgress(activeStep), { passive: true });
+  }
 }

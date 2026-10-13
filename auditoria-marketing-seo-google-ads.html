@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoría de Marketing SEO y Google Ads · Escuela Ombú</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5206;
+            --primary-hover: #E04600;
+            --primary-subtle: rgba(255, 82, 6, 0.08);
+            --primary-border: rgba(255, 82, 6, 0.25);
+            --bg: #F8F9FA;
+            --surface: #FFFFFF;
+            --surface-elevated: #FFFFFF;
+            --border: #E5E7EB;
+            --border-light: #F3F4F6;
+            --text-main: #111827;
+            --text-muted: #4B5563;
+            --text-soft: #6B7280;
+            --font-display: 'Anton', Impact, sans-serif;
+            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.08);
+            --header-h: 68px;
+            --sidebar-w: 300px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0D1117;
+            --surface: #161B22;
+            --surface-elevated: #1F242C;
+            --border: #30363D;
+            --border-light: #21262D;
+            --text-main: #F0F6FC;
+            --text-muted: #C9D1D9;
+            --text-soft: #8B949E;
+            --primary-subtle: rgba(255, 82, 6, 0.15);
+            --primary-border: rgba(255, 82, 6, 0.4);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.68;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Top Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary) 0%, #FF8533 100%);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Header Navbar */
+        .site-header {
+            position: sticky;
+            top: 0;
+            height: var(--header-h);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        [data-theme="dark"] .site-header {
+            background: rgba(22, 27, 34, 0.85);
+        }
+
+        .brand-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo-icon {
+            width: 34px;
+            height: 34px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 6px rgba(255, 82, 6, 0.3);
+        }
+
+        .brand-title-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.45rem 0.85rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: inherit;
+            transition: all 0.15s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-subtle);
+        }
+
+        .sidebar-toggle-btn {
+            display: none;
+        }
+
+        /* App Layout */
+        .layout-container {
+            max-width: 1480px;
+            margin: 0 auto;
+            display: flex;
+            min-height: calc(100vh - var(--header-h));
+            position: relative;
+        }
+
+        /* Sticky Sidebar */
+        .toc-sidebar {
+            width: var(--sidebar-w);
+            flex-shrink: 0;
+            position: sticky;
+            top: var(--header-h);
+            height: calc(100vh - var(--header-h));
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+            padding: 1.5rem 1rem 2rem 1.25rem;
+            scrollbar-width: thin;
+        }
+
+        .toc-header {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-soft);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+        }
+
+        .toc-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .toc-link {
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+            padding: 0.45rem 0.65rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.835rem;
+            line-height: 1.35;
+            transition: all 0.15s ease;
+            font-weight: 500;
+        }
+
+        .toc-link:hover {
+            background: var(--border-light);
+            color: var(--text-main);
+        }
+
+        .toc-link.active {
+            background: var(--primary-subtle);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .toc-num {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            opacity: 0.75;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-article {
+            flex: 1;
+            min-width: 0;
+            padding: 2.5rem 3rem 5rem 3.5rem;
+        }
+
+        /* Document Header Hero */
+        .doc-hero {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, #FF8533 100%);
+        }
+
+        .doc-meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .meta-pill {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            background: var(--border-light);
+            color: var(--text-muted);
+        }
+
+        .meta-pill-primary {
+            background: var(--primary-subtle);
+            color: var(--primary);
+            border: 1px solid var(--primary-border);
+        }
+
+        .doc-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            line-height: 1.12;
+            color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .doc-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 1.25rem;
+            max-width: 900px;
+        }
+
+        .doc-author-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        /* Key Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .metric-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-label {
+            font-size: 0.78rem;
+            color: var(--text-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.2;
+            font-feature-settings: "tnum";
+        }
+
+        .metric-sub {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            margin-top: 0.25rem;
+        }
+
+        /* Section Layout */
+        .audit-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            scroll-margin-top: calc(var(--header-h) + 1.5rem);
+            transition: border-color 0.2s ease;
+        }
+
+        .audit-section:target {
+            border-color: var(--primary);
+        }
+
+        .section-badge-bar {
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-pill {
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--primary);
+            background: var(--primary-subtle);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-content {
+            font-size: 0.98rem;
+            color: var(--text-muted);
+        }
+
+        .audit-h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .audit-h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .audit-p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .audit-list {
+            list-style: none;
+            margin: 0.75rem 0 1.25rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .audit-list-item {
+            position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .audit-list-item::before {
+            content: "•";
+            position: absolute;
+            left: 0.35rem;
+            top: 0;
+            color: var(--primary);
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 0 0.15rem;
+            vertical-align: baseline;
+        }
+
+        .badge-code {
+            background: #E0F2FE;
+            color: #0369A1;
+            border: 1px solid #BAE6FD;
+        }
+
+        .badge-web {
+            background: #EDE9FE;
+            color: #6D28D9;
+            border: 1px solid #DDD6FE;
+        }
+
+        .badge-prop {
+            background: #FEF3C7;
+            color: #B45309;
+            border: 1px solid #FDE68A;
+        }
+
+        .badge-pend {
+            background: #FEE2E2;
+            color: #B91C1C;
+            border: 1px solid #FECACA;
+        }
+
+        [data-theme="dark"] .badge-code {
+            background: rgba(3, 105, 161, 0.25);
+            color: #7DD3FC;
+            border-color: rgba(3, 105, 161, 0.4);
+        }
+        [data-theme="dark"] .badge-web {
+            background: rgba(109, 40, 217, 0.25);
+            color: #C4B5FD;
+            border-color: rgba(109, 40, 217, 0.4);
+        }
+        [data-theme="dark"] .badge-prop {
+            background: rgba(180, 83, 9, 0.25);
+            color: #FCD34D;
+            border-color: rgba(180, 83, 9, 0.4);
+        }
+        [data-theme="dark"] .badge-pend {
+            background: rgba(185, 28, 28, 0.25);
+            color: #FCA5A5;
+            border-color: rgba(185, 28, 28, 0.4);
+        }
+
+        /* Links and References */
+        .doc-link {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .doc-link:hover {
+            color: var(--primary-hover);
+        }
+
+        .doc-ref {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--primary-subtle);
+            padding: 0 0.3rem;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 0 2px;
+            vertical-align: super;
+            line-height: 1.2;
+            border: 1px solid var(--primary-border);
+        }
+
+        .doc-ref:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Responsive Tables */
+        .table-container {
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.885rem;
+            text-align: left;
+        }
+
+        .audit-table th {
+            background: var(--border-light);
+            color: var(--text-main);
+            font-weight: 700;
+            padding: 0.85rem 1rem;
+            border-bottom: 2px solid var(--border);
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+
+        .audit-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+            line-height: 1.55;
+        }
+
+        .audit-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .audit-table tr:hover td {
+            background: rgba(255, 82, 6, 0.02);
+        }
+
+        .td-primary {
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+        }
+
+        /* Checklist Grid */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.75rem;
+            margin: 1.25rem 0;
+        }
+
+        .checklist-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            background: var(--border-light);
+            padding: 0.85rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .checklist-card:hover {
+            border-color: var(--primary);
+            background: var(--primary-subtle);
+        }
+
+        .checklist-input {
+            display: none;
+        }
+
+        .checklist-box {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            border: 2px solid var(--text-soft);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all 0.15s ease;
+            background: var(--surface);
+        }
+
+        .checklist-box svg {
+            width: 10px;
+            height: 10px;
+            display: none;
+        }
+
+        .checklist-input:checked + .checklist-box {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .checklist-input:checked + .checklist-box svg {
+            display: block;
+        }
+
+        .checklist-input:checked ~ .checklist-text {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .checklist-text {
+            font-size: 0.865rem;
+            font-weight: 500;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        /* Reference Sources Cards */
+        .source-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            background: var(--border-light);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 0.85rem 1.25rem;
+            margin-bottom: 0.6rem;
+            transition: border-color 0.15s ease;
+        }
+
+        .source-card:target {
+            border-color: var(--primary);
+            background: var(--primary-subtle);
+        }
+
+        .source-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--surface);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .source-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .source-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .source-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .source-link-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .source-internal {
+            font-size: 0.75rem;
+            color: var(--text-soft);
+            font-style: italic;
+        }
+
+        /* Floating action buttons */
+        .floating-tools {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 800;
+        }
+
+        .fab-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            color: var(--text-main);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fab-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .toc-sidebar {
+                position: fixed;
+                top: var(--header-h);
+                left: -100%;
+                width: 320px;
+                background: var(--surface);
+                z-index: 950;
+                box-shadow: var(--shadow-lg);
+                transition: left 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .toc-sidebar.open {
+                left: 0;
+            }
+
+            .sidebar-toggle-btn {
+                display: inline-flex;
+            }
+
+            .main-article {
+                padding: 1.5rem 1.25rem 4rem 1.25rem;
+            }
+
+            .doc-hero {
+                padding: 1.5rem;
+            }
+
+            .audit-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .site-header, #progress-bar, .toc-sidebar, .floating-tools, .btn-icon {
+                display: none !important;
+            }
+            .layout-container {
+                display: block !important;
+            }
+            .main-article {
+                padding: 0 !important;
+            }
+            .audit-section {
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+                box-shadow: none;
+            }
+            body {
+                background: #fff;
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-bar"></div>
+
+    <header class="site-header">
+        <div class="brand-meta">
+            <button class="btn-icon sidebar-toggle-btn" id="sidebarToggle" aria-label="Abrir menú">
+                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <span>Índice</span>
+            </button>
+            <a href="index.html" class="brand-logo-wrap">
+                <div class="brand-logo-icon">Ω</div>
+                <div class="brand-title-group">
+                    <span class="brand-name">ESCUELA OMBÚ</span>
+                    <span class="brand-subtitle">Plan Estratégico · Marketing SEO y Ads</span>
+                </div>
+            </a>
+        </div>
+        <div class="header-actions">
+            <button class="btn-icon" id="themeToggle" title="Cambiar tema (Claro / Oscuro)">
+                <svg id="moonIcon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg id="sunIcon" style="display:none;" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <span id="themeText">Oscuro</span>
+            </button>
+            <button class="btn-icon" onclick="window.print()" title="Imprimir o guardar PDF">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                <span>Exportar</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="layout-container">
+        <!-- Sidebar Navigation -->
+        <aside class="toc-sidebar" id="tocSidebar">
+            <div class="toc-header">Contenido del Plan</div>
+            <nav class="toc-nav">
+                <a href="#sec-01" class="toc-link" data-target="sec-01">
+        <span class="toc-num">01</span>
+        <span class="toc-text">Decisión Recomendada y Bases Estratégicas</span>
+    </a><a href="#sec-02" class="toc-link" data-target="sec-02">
+        <span class="toc-num">02</span>
+        <span class="toc-text">Hallazgos y correcciones de la auditoría original</span>
+    </a><a href="#sec-03" class="toc-link" data-target="sec-03">
+        <span class="toc-num">03</span>
+        <span class="toc-text">Segmentación geográfica recomendada</span>
+    </a><a href="#sec-04" class="toc-link" data-target="sec-04">
+        <span class="toc-num">04</span>
+        <span class="toc-text">Google Trends e investigación de demanda</span>
+    </a><a href="#sec-05" class="toc-link" data-target="sec-05">
+        <span class="toc-num">05</span>
+        <span class="toc-text">Competidores y posicionamiento de Ombú</span>
+    </a><a href="#sec-06" class="toc-link" data-target="sec-06">
+        <span class="toc-num">06</span>
+        <span class="toc-text">Cambios comerciales en la home</span>
+    </a><a href="#sec-07" class="toc-link" data-target="sec-07">
+        <span class="toc-num">07</span>
+        <span class="toc-text">Medición de consultas y reservas</span>
+    </a><a href="#sec-08" class="toc-link" data-target="sec-08">
+        <span class="toc-num">08</span>
+        <span class="toc-text">Configuración y validación de Google Ads</span>
+    </a><a href="#sec-09" class="toc-link" data-target="sec-09">
+        <span class="toc-num">09</span>
+        <span class="toc-text">Estructura de anuncios y palabras clave</span>
+    </a><a href="#sec-10" class="toc-link" data-target="sec-10">
+        <span class="toc-num">10</span>
+        <span class="toc-text">SEO local y mantenimiento técnico</span>
+    </a><a href="#sec-11" class="toc-link" data-target="sec-11">
+        <span class="toc-num">11</span>
+        <span class="toc-text">Plan de implementación y control</span>
+    </a><a href="#sec-12" class="toc-link" data-target="sec-12">
+        <span class="toc-num">12</span>
+        <span class="toc-text">Turistas extranjeros e idiomas</span>
+    </a><a href="#sec-13" class="toc-link" data-target="sec-13">
+        <span class="toc-num">13</span>
+        <span class="toc-text">Fuentes y referencias para aplicar el plan</span>
+    </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-article">
+            <!-- Hero Card -->
+            <header class="doc-hero">
+                <div class="doc-meta-tags">
+                    <span class="meta-pill meta-pill-primary">Plan de Campaña y Web</span>
+                    <span class="meta-pill">San Isidro · Zona Norte</span>
+                    <span class="meta-pill">Google Ads & SEO Local</span>
+                    <span class="meta-pill">Auditoría 2026</span>
+                </div>
+                <h1 class="doc-title">Auditoría de marketing SEO y Google Ads de Escuela Ombú</h1>
+                <p class="doc-subtitle">Plan de implementación para la web y el lanzamiento de campañas</p>
+                <div class="doc-author-meta">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>Preparado para Camila y el equipo de Escuela Ombú · 4 de octubre de 2026</span>
+                </div>
+            </header>
+
+            <!-- Metrics Highlight Grid -->
+            <section class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Presupuesto Referencia</div>
+                    <div class="metric-value">ARS 25.000</div>
+                    <div class="metric-sub">~ARS 820 diarios (30,4 días)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Estructura Google Ads</div>
+                    <div class="metric-value">1 Campaña · 4 Grupos</div>
+                    <div class="metric-sub">Kite, Wingfoil, Windsurf, SUP</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Turistas Extranjeros</div>
+                    <div class="metric-value">10% – 20%</div>
+                    <div class="metric-sub">Clases y WhatsApp en inglés</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Núcleo Geográfico</div>
+                    <div class="metric-value">San Isidro + ZN</div>
+                    <div class="metric-sub">Inclusión puntual de CABA</div>
+                </div>
+            </section>
+
+            <!-- All Audit Sections -->
+
+    <section class="audit-section" id="sec-01">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 01</span>
+        </div>
+        <h2 class="section-title">Decisión Recomendada y Bases Estratégicas</h2>
+        <div class="section-content">
+            <h3 class="audit-h3">Decisión recomendada</h3>
+<p class="audit-p">Promocionar la home con una campaña de Búsqueda y cuatro grupos de anuncios, uno por deporte. Contemplar anuncios en español e inglés, Zona Norte y áreas de alojamiento turístico de CABA por validar. Mejorar las consultas desde la home y verificar la medición antes de invertir. La prioridad comercial es conseguir consultas útiles y reservas, no acumular clics a WhatsApp.</p>
+<p class="audit-p">El presupuesto de trabajo es de ARS 25.000 mensuales, interpretado a partir de la conversación. Antes de activar, confirmar moneda, periodicidad y si ese importe corresponde a inversión publicitaria o al desembolso total con cargos de facturación. No se activaron campañas ni se modificó la web durante esta revisión.</p>
+<h3 class="audit-h3">Respuesta sobre Buenos Aires</h3>
+<p class="audit-p">Sí conviene mencionar Buenos Aires en el anuncio y en la web. Para mostrar los anuncios, conviene seleccionar zonas específicas dentro del área metropolitana. No elegir toda la provincia por defecto. CABA, provincia de Buenos Aires, partidos y localidades son coberturas distintas: revisar siempre el mapa y el tipo de ubicación que propone Google Ads.</p>
+<h3 class="audit-h3">Tres condiciones para lanzar</h3>
+<ul class="audit-list">
+<li class="audit-list-item">La oferta de cada deporte debe indicar precio, duración, qué incluye y cómo consultar disponibilidad.</li>
+<li class="audit-list-item">La medición debe distinguir clases, alquileres y contactos generales. Un clic a WhatsApp no equivale a una conversación ni a una reserva.</li>
+<li class="audit-list-item">La cuenta debe tener una conversión principal adecuada, etiquetado automático y pruebas de recepción en la web publicada.</li>
+</ul>
+<h3 class="audit-h3">Cómo usar este documento</h3>
+<p class="audit-p">Las páginas 2 a 5 explican evidencia, segmentación y demanda. Las páginas 6 a 9 describen los cambios y la campaña. Las páginas 10 a 13 contienen SEO, ejecución, turistas e idiomas y fuentes. Cada recomendación debe aplicarse con su criterio de verificación; los precios, condiciones y promesas requieren validación del negocio.</p>
+<h3 class="audit-h3">Criterio de evidencia</h3>
+<p class="audit-p"><span class="status-badge badge-code">Confirmado en código</span> significa observado en los archivos locales. <span class="status-badge badge-web">Observado en web</span> significa publicado por una fuente consultada. <span class="status-badge badge-prop">Propuesta</span> significa una decisión recomendada, todavía sin prueba de rendimiento. <span class="status-badge badge-pend">Pendiente</span> significa que requiere una cuenta, una prueba en producción o confirmación del equipo. Las afirmaciones de competidores se atribuyen a sus propios sitios.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-02">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 02</span>
+        </div>
+        <h2 class="section-title">Hallazgos y correcciones de la auditoría original</h2>
+        <div class="section-content">
+            <p class="audit-p">La auditoría anterior acertó al priorizar precios y medición, pero algunas conclusiones necesitan matices. La instalación local de etiquetas está confirmada; su funcionamiento en producción y la configuración de las cuentas siguen pendientes.</p>
+<div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Hallazgo</th><th scope="col">Estado y consecuencia</th></tr></thead><tbody><tr><td class="td-primary">Etiquetas GA4 y Ads</td><td class="">Confirmadas en index.html y en las páginas breves por deporte. No confirma recepción ni vinculación de cuentas.</td></tr><tr><td class="td-primary">Todos los WhatsApp convierten</td><td class="">Confirmado en main.js. Incluye clases, alquileres, contacto general y el enlace por fallo del widget de viento.</td></tr><tr><td class="td-primary">Dos eventos por clic</td><td class="">Confirmados conversion y generate_lead. La duplicación en Ads depende de las acciones importadas y los objetivos utilizados.</td></tr><tr><td class="td-primary">Precios sin unidad suficiente</td><td class="">La home muestra clase particular desde un importe y duración total del curso. Falta vincular precio con duración de esa clase.</td></tr><tr><td class="td-primary">Páginas por deporte</td><td class="">Existen index.html breves y versiones index.full.html para algunos deportes. No reemplazar archivos sin revisar contenido y despliegue.</td></tr><tr><td class="td-primary">SUP en otro dominio</td><td class="">La home enlaza a supombu.com.ar aunque existe /sup/index.html local. La elección de destino y la continuidad de medición requieren revisión.</td></tr></tbody></table></div></div>
+<h3 class="audit-h3">Afirmaciones que deben corregirse</h3>
+<ul class="audit-list">
+<li class="audit-list-item">No existe una regla documentada de caída de ranking por pasar tres semanas sin reseñas. Trabajar reseñas auténticas y calidad de la ficha. <a href="#ref-1" class="doc-ref">[1]</a></li>
+<li class="audit-list-item">JavaScript no implica falta de indexación. Google puede renderizarlo; comprobar la página concreta en Search Console. <a href="#ref-2" class="doc-ref">[2]</a></li>
+<li class="audit-list-item">Agregar aggregateRating no garantiza estrellas. Google no muestra reseñas autorreferenciales de LocalBusiness como resultados enriquecidos de reseñas. <a href="#ref-3" class="doc-ref">[3]</a></li>
+<li class="audit-list-item">El mayor precio de wingfoil y las notas de prensa no prueban mayor demanda ni rentabilidad. Evaluar margen, cupos y reservas.</li>
+<li class="audit-list-item">Un dominio externo puede fragmentar atribución; no demuestra por sí mismo pérdida de ventas. La medición entre dominios tiene requisitos técnicos. <a href="#ref-4" class="doc-ref">[4]</a></li>
+<li class="audit-list-item">No hay evidencia suficiente para afirmar que las listas de mejores sean el principal factor de recomendación por IA.</li>
+<li class="audit-list-item">No aplicar un umbral universal de 30 conversiones para cambiar de puja. La decisión depende de la señal, el historial y el volumen disponible.</li>
+</ul>
+<h3 class="audit-h3">Qué no se considera un bloqueo comercial</h3>
+<p class="audit-p">Cambiar toda la estética, crear una página de pronóstico o completar cada propiedad opcional del schema puede esperar. El lanzamiento depende primero de una oferta comprensible, una experiencia móvil usable y una medición confiable.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-03">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 03</span>
+        </div>
+        <h2 class="section-title">Segmentación geográfica recomendada</h2>
+        <div class="section-content">
+            <p class="audit-p">La propuesta inicial es usar una sola campaña con varias ubicaciones incluidas. No crear una campaña ni un presupuesto por localidad: fragmentaría un presupuesto pequeño. Camila estima que 10–20% del público objetivo son turistas extranjeros y confirma atención y clases en inglés; por eso se suma CABA a la evaluación inicial. Las ubicaciones son una hipótesis comercial basada en cercanía; no un hallazgo de demanda municipal ni la segmentación comprobada de competidores.</p>
+<div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Cobertura</th><th scope="col">Aplicación propuesta</th></tr></thead><tbody><tr><td class="td-primary">San Isidro</td><td class="">Núcleo inicial. Si se elige el partido, evitar agregar sus localidades solo para duplicar cobertura. Confirmar límites en el mapa.</td></tr><tr><td class="td-primary">Vicente López</td><td class="">Núcleo inicial por cercanía. Validar con la procedencia real de alumnos y consultas.</td></tr><tr><td class="td-primary">San Fernando y Tigre</td><td class="">Incluir si el negocio recibe alumnos de esas zonas y la previsión no dispersa demasiado la inversión. Revisar límites y áreas de difícil acceso.</td></tr><tr><td class="td-primary">CABA</td><td class="">Incorporar al plan inicial por el público turista confirmado. Validar Palermo, Recoleta y Retiro con alojamientos reales; no asumir cobertura sin revisar el mapa de Ads.</td></tr><tr><td class="td-primary">Provincia completa</td><td class="">No propuesta para el lanzamiento de clases presenciales con ARS 25.000 mensuales. Abarca destinos lejanos al servicio.</td></tr></tbody></table></div></div>
+<h3 class="audit-h3">Configuración y revisión</h3>
+<ul class="audit-list">
+<li class="audit-list-item">En Ubicaciones, seleccionar cada zona y comprobar si Google la identifica como ciudad, partido u otra entidad. No asumir que un nombre coincide con el límite administrativo esperado.</li>
+<li class="audit-list-item">Usar la opción Presencia para personas que se encuentran o suelen encontrarse en las ubicaciones objetivo. Es una estimación de Google, no una barrera exacta. <a href="#ref-5" class="doc-ref">[5]</a></li>
+<li class="audit-list-item">No incluir toda la provincia y luego esperar que las localidades reduzcan el alcance: las inclusiones se suman.</li>
+<li class="audit-list-item">No excluir toda la provincia mientras se incluyen localidades dentro de ella: una exclusión amplia puede impedir la cobertura deseada.</li>
+<li class="audit-list-item">Revisar resultados geográficos y localidad declarada por las consultas. Ajustar con reservas y capacidad de traslado, no solo con clics.</li>
+</ul>
+<h3 class="audit-h3">Cómo mantener Buenos Aires en el mensaje</h3>
+<p class="audit-p">Ejemplo: “Clases de kitesurf en San Isidro, Buenos Aires”. La palabra Buenos Aires ayuda a describir el lugar; no obliga a mostrar el anuncio en toda la provincia. También puede captarse una búsqueda “clases de kitesurf Buenos Aires” de alguien ubicado dentro de las zonas seleccionadas.</p>
+<h3 class="audit-h3">Cuándo ampliar</h3>
+<p class="audit-p">Ampliar una zona por vez si la campaña está limitada por poca demanda relevante, la medición funciona y existe capacidad para atender nuevos alumnos. Si el presupuesto se consume con consultas locales de buena calidad, primero evaluar resultados y margen antes de expandir el área.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-04">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 04</span>
+        </div>
+        <h2 class="section-title">Google Trends e investigación de demanda</h2>
+        <div class="section-content">
+            <p class="audit-p">Consulta del 4 de octubre de 2026. Se compararon los términos kitesurf, wingfoil, windsurf y stand up paddle, en Búsqueda web, últimos 12 meses. Se revisó Argentina sin filtro de categoría, luego Deportes y finalmente provincia de Buenos Aires con Deportes. Son términos de búsqueda, no temas agregados ni variantes exhaustivas. <a href="#ref-6" class="doc-ref">[6]</a></p>
+<div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Consulta</th><th scope="col">Observación</th><th scope="col">Uso correcto</th></tr></thead><tbody><tr><td class="td-primary">Kitesurf</td><td class="">En Argentina y Deportes apareció kitesurf que es con +300%. Sin filtro, tabla de kitesurf con +60%.</td><td class="">Señales informativas y de equipamiento. No equivalen a crecimiento de ventas de clases.</td></tr><tr><td class="td-primary">Windsurf</td><td class="">Sin categoría, aparecen Claude Code, Devin y GitHub Copilot entre las relacionadas.</td><td class="">La consulta mezcla significados. No usar el total como demanda del deporte.</td></tr><tr><td class="td-primary">Wingfoil</td><td class="">Datos insuficientes en varias secciones al aplicar Deportes.</td><td class="">No demuestra ausencia de clientes ni liderazgo del deporte.</td></tr><tr><td class="td-primary">Stand up paddle</td><td class="">Relacionadas con tablas, board y tablas inflables sin filtro; escasez con Deportes.</td><td class="">Distinguir compra de equipo, aprendizaje y alquiler.</td></tr><tr><td class="td-primary">Buenos Aires</td><td class="">Con Deportes, numerosas semanas en cero y desglose por ciudad insuficiente.</td><td class="">No permite elegir municipios ni repartir dinero con confianza.</td></tr></tbody></table></div></div>
+<h3 class="audit-h3">Conclusión para la campaña</h3>
+<p class="audit-p">Trends permite detectar ambigüedades y observar señales generales, pero esta consulta no permite ordenar de manera robusta la demanda comercial de los cuatro deportes en el área de Ombú. No se confirmó que wingfoil sea la principal oportunidad ni una subida local precisa en octubre. La semana iniciada el 4 de octubre está incompleta y no debe compararse con semanas cerradas.</p>
+<p class="audit-p">Los índices de Trends se normalizan de 0 a 100; no son cantidad de personas ni porcentajes de mercado. Un cero puede representar volumen insuficiente. Las comparaciones con distinta categoría o geografía se reescalan y no deben mezclarse. <a href="#ref-7" class="doc-ref">[7]</a></p>
+<h3 class="audit-h3">Validación que falta en Google Ads</h3>
+<p class="audit-p">En el Planificador de palabras clave, usar las zonas elegidas y términos de clases, cursos y escuelas. Revisar variantes wingfoil y wing foil; SUP y stand up paddle acompañados de intención comercial. Exportar búsquedas mensuales estimadas, competencia publicitaria y rangos de puja. Registrar fecha, ubicación y red de la consulta. No se obtuvieron esos volúmenes ni CPC en esta investigación. <a href="#ref-8" class="doc-ref">[8]</a></p>
+<p class="audit-p">En Search Console, exportar Consultas y Páginas, separar marca de no marca y revisar búsquedas de los cuatro deportes. Son datos de visibilidad de Ombú, no del mercado completo. Comparar períodos equivalentes y, cuando esté disponible, el mismo período del año anterior.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-05">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 05</span>
+        </div>
+        <h2 class="section-title">Competidores y posicionamiento de Ombú</h2>
+        <div class="section-content">
+            <p class="audit-p">La siguiente lectura se basa en mensajes y servicios publicados por cada escuela. El público descrito es una inferencia de marketing. No se verificaron presupuestos, palabras clave pagas, radios, edades, exclusiones ni tasas de conversión de sus campañas.</p>
+<div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Escuela</th><th scope="col">Oferta pública observada</th><th scope="col">Lectura para Ombú</th></tr></thead><tbody><tr><td class="td-primary">El Molino <a href="#ref-9" class="doc-ref">[9]</a></td><td class="">San Isidro. Kite, windsurf y SUP; mensajes de accesibilidad, diversión y seguridad.</td><td class="">La claridad del valor y del precio es relevante para quien compara escuelas.</td></tr><tr><td class="td-primary">La Playita <a href="#ref-10" class="doc-ref">[10]</a></td><td class="">San Isidro. Bautismo con duración, cursos iniciales y avanzados, prácticas y viajes.</td><td class="">Una primera experiencia concreta puede reducir la indecisión. No implica regalar clases.</td></tr><tr><td class="td-primary">Spirit Kite Beach <a href="#ref-11" class="doc-ref">[11]</a></td><td class="">Zona Norte. Destaca trayectoria, respaldo deportivo, clases embarcadas y equipo premium.</td><td class="">Compite con autoridad técnica y progresión. Sustentar las credenciales propias.</td></tr><tr><td class="td-primary">Bbrave <a href="#ref-12" class="doc-ref">[12]</a></td><td class="">San Isidro. Intercomunicadores, hasta dos alumnos por instructor, equipo e instructores IKO/AAK.</td><td class="">Explica cómo enseña. Mostrar el método de Ombú y el acompañamiento real.</td></tr><tr><td class="td-primary">Second Wind <a href="#ref-13" class="doc-ref">[13]</a></td><td class="">Página específica de wingfoil con programa, equipamiento y servicios del predio.</td><td class="">Responde a quien ya eligió deporte y quiere comparar opciones concretas.</td></tr></tbody></table></div></div>
+<h3 class="audit-h3"><span class="status-badge badge-prop">Propuesta</span> de posicionamiento</h3>
+<p class="audit-p">“Empezá a navegar en San Isidro con equipo incluido y acompañamiento desde tu primera clase”. Es una propuesta de mensaje basada en la web local; validar que se cumpla en cada deporte. Complementarla con duración, modalidad y precio real, más fotos del equipo y alumnos.</p>
+<p class="audit-p">Equipo incluido, seguridad y atención personalizada aparecen en varios competidores. Deben estar presentes, pero no presentarse como exclusividades sin evidencia. La diferenciación puede surgir de la facilidad para empezar, la transparencia de la oferta, la calidad docente y la experiencia de comunidad.</p>
+<h3 class="audit-h3">Mensajes según intención</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Principiante indeciso: explicar diferencias entre deportes y ayudar a elegir una primera clase.</li>
+<li class="audit-list-item">Persona que ya eligió deporte: mostrar modalidad, precio, duración, ubicación y disponibilidad.</li>
+<li class="audit-list-item">Alumno con experiencia: describir perfeccionamiento solo si existe una oferta concreta.</li>
+<li class="audit-list-item">Público recreativo de SUP: distinguir clases de alquileres y travesías; no juntar objetivos comerciales diferentes en un mismo mensaje genérico.</li>
+</ul>
+<h3 class="audit-h3">Qué investigar después</h3>
+<p class="audit-p">Consultar el Centro de Transparencia Publicitaria para anuncios públicos cuando haya registros disponibles. Eso puede aportar creatividad y destinos; no permite reconstruir toda la configuración privada. La ausencia de un resultado de búsqueda no demuestra que una escuela no anuncie.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-06">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 06</span>
+        </div>
+        <h2 class="section-title">Cambios comerciales en la home</h2>
+        <div class="section-content">
+            <p class="audit-p">La home puede ser el destino de los cuatro grupos. Tiene presentación, deportes, precios, instructores, preguntas frecuentes y contacto. El ajuste principal es conectar el interés por un deporte con una consulta concreta, sin obligar a recorrer páginas breves o salir a otro dominio.</p>
+<h3 class="audit-h3">Texto inicial y elección del deporte</h3>
+<p class="audit-p">Conservar “Disfrutá el río” si representa la marca y sumar una frase visible: “Clases de kitesurf, wingfoil, windsurf y SUP en San Isidro. Empezá desde cero con equipo incluido”. El H1 puede conservar intención de marca si el conjunto comunica con claridad actividad y ubicación; cambiarlo no es un requisito para Ads.</p>
+<p class="audit-p">Agregar acceso visible a cada disciplina, especialmente en móvil. Cada tarjeta debe ofrecer “Consultar clases de [deporte]” y mantener “Ver el programa” como opción secundaria. El primer botón abre WhatsApp con el deporte identificado; el segundo puede conservar la página interna.</p>
+<div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Deporte</th><th scope="col">Precio en archivo local</th><th scope="col">Antes de publicar el anuncio</th></tr></thead><tbody><tr><td class="td-primary">Kitesurf</td><td class="">$120.000 desde</td><td class="">Confirmar vigencia y duración de la clase particular.</td></tr><tr><td class="td-primary">Wingfoil</td><td class="">$140.000 desde</td><td class="">Confirmar modalidad, duración y qué incluye.</td></tr><tr><td class="td-primary">Windsurf</td><td class="">$70.000 desde</td><td class="">Aclarar unidad y si hay otras modalidades.</td></tr><tr><td class="td-primary">SUP</td><td class="">$50.000 desde</td><td class="">Separar clase de alquiler o travesía.</td></tr></tbody></table></div></div>
+<p class="audit-p">Estos valores son evidencia del HTML, no tarifas verificadas comercialmente. Redacción a completar: “Clase particular de [duración] desde ARS [importe]. Incluye [equipo y acompañamiento]”. Separar la duración estimada del curso completo de la duración que compra ese precio. No publicar corchetes ni prometer autonomía garantizada.</p>
+<h3 class="audit-h3">Información que debe quedar cerca de la consulta</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Requisitos y nivel inicial; para menores, reglas del negocio confirmadas y claramente redactadas.</li>
+<li class="audit-list-item">Qué ocurre por falta de viento o mal clima, cómo se reprograma y cómo se confirma la reserva.</li>
+<li class="audit-list-item">Ubicación exacta y acceso al predio. Sustituir promesas universales como 20 minutos de Capital por una descripción geográfica comprobable.</li>
+<li class="audit-list-item">Testimonios auténticos con fuente o enlace verificable. No inventar nombres, credenciales ni resultados.</li>
+<li class="audit-list-item">Para alquileres, publicar una referencia de precio y duración si el negocio puede mantenerla actualizada.</li>
+</ul>
+<h3 class="audit-h3">Criterio de aceptación</h3>
+<p class="audit-p">Desde celular, una persona puede encontrar su deporte, entender qué compra y abrir la consulta correcta. Verificar que no haya superposiciones entre navegación, tarjetas animadas y botón flotante. El rendimiento y la presentación visual requieren prueba real, no solo lectura del CSS.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-07">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 07</span>
+        </div>
+        <h2 class="section-title">Medición de consultas y reservas</h2>
+        <div class="section-content">
+            <p class="audit-p">La home configura GA4 G-7X7M1YDKR4 y Ads AW-18489977345. main.js envía conversion al destino AW-18489977345/axdJCKmZ7pAdEIHU2vBE y generate_lead en cada clic de WhatsApp. Las páginas breves repiten el seguimiento en scripts propios. Cambiar solo main.js no actualizaría esos scripts.</p>
+<h3 class="audit-h3">Diseño propuesto de eventos</h3>
+<div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Acción</th><th scope="col">Evento y parámetros propuestos</th><th scope="col">Tratamiento</th></tr></thead><tbody><tr><td class="td-primary">Clic por clase</td><td class="">whatsapp_click; inquiry_type=class; sport; cta_location</td><td class="">Señal provisional para captar consultas de clases.</td></tr><tr><td class="td-primary">Clic por alquiler</td><td class="">whatsapp_click; inquiry_type=rental; sport si se conoce</td><td class="">Separado de clases. No optimizar la campaña de clases hacia alquileres.</td></tr><tr><td class="td-primary">Viento o contacto</td><td class="">whatsapp_click; inquiry_type=weather o general</td><td class="">Observación. No contarlo automáticamente como consulta de clase.</td></tr><tr><td class="td-primary">Consulta real</td><td class="">Registro comercial de conversación y calificación</td><td class="">Confirmación manual o integración posterior; no inferirla del clic.</td></tr><tr><td class="td-primary">Reserva pagada</td><td class="">Registro comercial de reserva, importe y deporte</td><td class="">Resultado de negocio; futura importación a Ads si se implementa asociación válida.</td></tr></tbody></table></div></div>
+<p class="audit-p">Valores de sport: kitesurf, wingfoil, windsurf, sup o unknown. Valores de cta_location: hero, sport_card, navbar, rentals, footer, floating y weather. Para el botón flotante genérico, usar unknown salvo que haya una selección explícita. No adivinar el deporte por el anuncio.</p>
+<h3 class="audit-h3">Implementación para desarrollo</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Agregar data-sport, data-inquiry-type y data-cta-location a los enlaces. Leer esos atributos con un único manejador delegado de clics.</li>
+<li class="audit-list-item">Filtrar conversiones de Ads de clases por inquiry_type=class. Mantener el resto como observación o acciones distintas. Coordinar primero el destino y nombre de la acción en Ads.</li>
+<li class="audit-list-item">Reemplazar el disparo genérico anterior; no apilar dos manejadores que vuelvan a contar el mismo clic. Auditar también scripts internos de cada página.</li>
+<li class="audit-list-item">Enviar parámetros estructurados, evitando usar como etiqueta la URL completa de WhatsApp con teléfono y texto. No enviar datos personales del cliente a Analytics.</li>
+<li class="audit-list-item">Si se migra generate_lead a whatsapp_click, dejar registrada la fecha del cambio y actualizar eventos clave, informes e importaciones para no romper la continuidad.</li>
+</ul>
+<h3 class="audit-h3">Atribución y mensajes</h3>
+<p class="audit-p">Mensaje por deporte: “Hola Ombú, quiero consultar disponibilidad y precio para una clase de windsurf”. Identifica interés, no origen. No escribir “vengo de Google” para todos. El etiquetado automático y la etiqueta de Ads atribuyen el clic web cuando hay señal disponible; no vinculan por sí solos la conversación recibida con una venta.</p>
+<p class="audit-p">Para empezar, registrar fecha, deporte, origen conocido o desconocido, localidad, estado y reserva en una planilla operativa. La importación de ventas requiere una asociación técnica y permisos adecuados; no queda resuelta con cambiar el mensaje. <a href="#ref-14" class="doc-ref">[14]</a></p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-08">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 08</span>
+        </div>
+        <h2 class="section-title">Configuración y validación de Google Ads</h2>
+        <div class="section-content">
+            <h3 class="audit-h3">Cuenta y objetivo</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Confirmar acceso a la cuenta asociada a AW-18489977345 y a su acción de conversión. El ID en el código no demuestra acceso ni estado activo.</li>
+<li class="audit-list-item">Vincular la propiedad de GA4 correcta y activar el etiquetado automático de Ads. Verificar que redirecciones y enlaces internos no eliminen identificadores necesarios. <a href="#ref-15" class="doc-ref">[15]</a></li>
+<li class="audit-list-item">Para el mismo clic, elegir una conversión primaria. Si la directa de Ads es primaria, la importada de Analytics equivalente debe quedar secundaria o fuera del objetivo usado para pujar. Revisar también objetivos personalizados. <a href="#ref-16" class="doc-ref">[16]</a></li>
+<li class="audit-list-item">Configurar el recuento de la acción de lead como Una cuando corresponda. Esto limita el recuento por interacción publicitaria; no identifica por sí solo una persona única. <a href="#ref-17" class="doc-ref">[17]</a></li>
+<li class="audit-list-item">No asignar el precio de una clase como valor de cada clic a WhatsApp. Sin una estimación defendible, evitar un valor monetario ficticio.</li>
+</ul>
+<h3 class="audit-h3">Presupuesto de trabajo</h3>
+<p class="audit-p">Si ARS 25.000 son exclusivamente inversión en anuncios durante un mes completo, el presupuesto diario medio de referencia es 25.000 / 30,4 = ARS 822,37. Una cifra práctica de ARS 820 da ARS 24.928 como referencia mensual de 30,4 días. Es el presupuesto total de la campaña, no de cada grupo. <a href="#ref-18" class="doc-ref">[18]</a></p>
+<p class="audit-p">En la mayoría de las campañas, Google puede gastar hasta el doble del promedio en un día; el límite mensual habitual se calcula con 30,4. No es un tope diario rígido. Revisar límites al cambiar presupuesto o iniciar a mitad de mes. Si los ARS 25.000 incluyen impuestos o cargos, calcular primero cuánto queda para medios con los datos reales de facturación; no aplicar una tasa supuesta.</p>
+<h3 class="audit-h3">Puja y distribución</h3>
+<p class="audit-p">Sin historial confiable, considerar una prueba controlada con Maximizar clics y límite de CPC, si la configuración lo permite. Definir ese límite con el Planificador y el costo admisible, no con una cifra inventada. Si hay historial útil de conversiones reales, revisar si conviene una estrategia de conversiones desde el inicio. No asumir que maximizar clics maximiza calidad.</p>
+<p class="audit-p">Los cuatro grupos comparten presupuesto de campaña, pero eso no garantiza reparto parejo ni un mínimo por deporte o idioma. Revisar gasto por grupo; si uno absorbe toda la inversión sin consultas útiles, ajustar palabras, pujas o realizar pruebas por etapas.</p>
+<h3 class="audit-h3">Prueba antes de habilitar</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Usar Tag Assistant y GA4 DebugView o tiempo real en la web publicada. El código desactiva gtag en localhost, 127.0.0.1 y direcciones 192.168.x.x.</li>
+<li class="audit-list-item">Probar cada botón de clase, alquiler, viento y contacto desde móvil y escritorio. Verificar evento, deporte y ubicación del botón.</li>
+<li class="audit-list-item">Confirmar un único disparo del evento esperado por clic y que las acciones generales no disparen la conversión primaria de clases.</li>
+<li class="audit-list-item">Revisar diagnóstico de la acción en Ads. Una prueba de etiqueta confirma envío, no una conversión atribuida a un anuncio real. No hacer clic en anuncios propios para probar.</li>
+</ul>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-09">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 09</span>
+        </div>
+        <h2 class="section-title">Estructura de anuncios y palabras clave</h2>
+        <div class="section-content">
+            <p class="audit-p"><span class="status-badge badge-prop">Propuesta</span> inicial: campaña “Ombú | Búsqueda | Clases | Zona Norte”, red de Búsqueda de Google y cuatro grupos. Como prueba controlada, dejar socios de búsqueda y expansión a Display desactivados cuando esas opciones estén disponibles. Destino común: https://escuelaombu.com.ar/. No activar ampliaciones automáticas sin revisar su efecto sobre alcance y gasto. Agregar versiones completas de anuncios en inglés por deporte cuando exista un recorrido equivalente en la home; ver página 12.</p>
+<div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Grupo</th><th scope="col">Semillas de intención comercial</th><th scope="col">Titulares propuestos</th></tr></thead><tbody><tr><td class="td-primary">Kitesurf</td><td class="">clases de kitesurf San Isidrocurso kitesurf zona norteescuela kitesurf Buenos Aires</td><td class="">Clases de KitesurfKitesurf en San Isidro</td></tr><tr><td class="td-primary">Wingfoil</td><td class="">clases de wingfoil Buenos Airescurso wing foil San Isidroescuela wingfoil zona norte</td><td class="">Clases de WingfoilWingfoil en San Isidro</td></tr><tr><td class="td-primary">Windsurf</td><td class="">clases de windsurf San Isidrocurso windsurf Buenos Airesescuela windsurf zona norte</td><td class="">Clases de WindsurfWindsurf en San Isidro</td></tr><tr><td class="td-primary">SUP</td><td class="">clases de SUP San Isidroclases stand up paddlecurso SUP zona norte</td><td class="">Clases de SUPSUP en San Isidro</td></tr></tbody></table></div></div>
+<p class="audit-p">Son semillas para validar, no volúmenes confirmados. Empezar con frase y exacta; ambas pueden activar variantes cercanas según las reglas de Google. Revisar términos reales. Evitar iniciar con nombres de deporte solos, “kite” o “SUP” sin contexto.</p>
+<h3 class="audit-h3">Texto de anuncio para adaptar por deporte</h3>
+<p class="audit-p">Titulares adicionales: “Equipo Incluido”, “Empezá Desde Cero”, “Consultá Disponibilidad” y “Escuela Náutica Ombú”. Descripción propuesta: “Clases en San Isidro con equipo incluido. Consultá modalidad y disponibilidad.” Validar cada beneficio por deporte y revisar límites y políticas en la interfaz antes de publicar.</p>
+<p class="audit-p">Usar fotos y activos del negocio cuando sean pertinentes. No anunciar certificaciones, duración o resultados sin confirmar. Los enlaces de sitio deben llevar a destinos útiles y cumplir las políticas; no crear enlaces casi idénticos solo para completar espacios.</p>
+<h3 class="audit-h3">Negativas iniciales y revisión</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Evaluar términos inequívocos de compra o empleo: comprar tabla, tabla usada, venta de equipos, empleo instructor, según lo que no se quiera captar.</li>
+<li class="audit-list-item">Para windsurf, revisar términos de software como editor, IDE, Claude Code y GitHub Copilot. No asumir que toda coincidencia será deportiva.</li>
+<li class="audit-list-item">No excluir “equipo” de forma aislada: puede bloquear “clases con equipo incluido”. Tampoco excluir destinos o marcas en bloque sin mirar las consultas.</li>
+<li class="audit-list-item">Separar intención informativa de comercial. Con presupuesto pequeño, no dedicar la campaña inicial a “qué es” o tutoriales; sí puede ser contenido útil para SEO.</li>
+</ul>
+<h3 class="audit-h3">Horarios y audiencias</h3>
+<p class="audit-p">No fijar horarios únicamente por la apertura del predio: alguien puede investigar de noche. Alinear anuncios con la capacidad de respuesta y medir antes de restringir. No segmentar por género o un rango de edad arbitrario. Los requisitos de participación deben estar claros en la oferta; no equivalen al perfil de quien compra o regala una clase.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-10">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 10</span>
+        </div>
+        <h2 class="section-title">SEO local y mantenimiento técnico</h2>
+        <div class="section-content">
+            <p class="audit-p">Estas acciones refuerzan la confianza y la captación orgánica. No todas son condiciones para anunciar. Search Console sirve para diagnosticar búsquedas e indexación; no es requisito de Google Ads.</p>
+<h3 class="audit-h3">Identidad y ubicación</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Unificar dirección útil para llegar: Sebastián Elcano 994, Acassuso, partido de San Isidro, provincia de Buenos Aires, si el equipo confirma que es la correcta.</li>
+<li class="audit-list-item">Acassuso y Buenos Aires pueden ser niveles geográficos compatibles. Tampoco distintos formatos legibles del mismo teléfono son por sí solos un error SEO grave. Priorizar exactitud y ausencia de contradicciones.</li>
+<li class="audit-list-item">El schema usa longitud -58.4926754 y el mapa de main.js -58.4901005. Confirmar físicamente el acceso y corregir la fuente equivocada; no elegir coordenadas por intuición.</li>
+<li class="audit-list-item">La web menciona más de 10 años y 15+. Pueden referirse a instructores y escuela, respectivamente. Aclarar el sujeto y la fecha antes de unificar una cifra.</li>
+</ul>
+<h3 class="audit-h3">Ficha de Google y datos estructurados</h3>
+<p class="audit-p">Revisar Google Business Profile: nombre real, categoría adecuada a la actividad, dirección, pin, horarios, servicios, enlace web, fotos actuales y respuesta a reseñas. Solicitar reseñas auténticas después de las clases, sin una supuesta obligación de una cada tres semanas. El ranking local depende de relevancia, distancia y prominencia. <a href="#ref-1" class="doc-ref">[1]</a></p>
+<p class="audit-p">Completar datos estructurados con URL, imagen, horarios y redes verificadas cuando correspondan. Validar sintaxis y elegibilidad; no asumir un beneficio de ranking por añadir campos. No priorizar aggregateRating para reseñas del propio negocio. Los testimonios pueden ser útiles para el usuario aunque no generen estrellas en Google. <a href="#ref-3" class="doc-ref">[3]</a></p>
+<h3 class="audit-h3">Páginas y rastreo</h3>
+<p class="audit-p">Revisar respuesta HTTP, canonical, indexabilidad, sitemap y enlaces internos de cada deporte en producción. Inspeccionar index.full.html: decidir si son borradores, archivos publicados o alternativas, y evitar que versiones redundantes compitan si están accesibles. No borrar ni sustituir sin comprobar su uso.</p>
+<p class="audit-p">Para SUP, elegir entre mantener el otro sitio con medición coordinada o desarrollar la página interna. No migrar solo para simplificar Analytics sin evaluar tráfico orgánico, contenido y redirecciones. La medición entre dominios requiere etiquetas compatibles y continuidad del parámetro de enlace. <a href="#ref-4" class="doc-ref">[4]</a></p>
+<h3 class="audit-h3">Accesibilidad y velocidad</h3>
+<p class="audit-p">Probar PageSpeed Insights y experiencia real en móvil. Revisar peso de imágenes, carga del mapa, fuentes y animaciones si las mediciones muestran problemas. El naranja #FF5206 sobre blanco ofrece aproximadamente 3,3:1; no es suficiente para texto normal que requiera 4,5:1. Oscurecer el fondo o cambiar el color del texto en componentes afectados y volver a medir.</p>
+<p class="audit-p">La clave de Maps visible en frontend es esperable; revisar restricciones por dominio y API en Google Cloud. No consta una exposición de credenciales privadas por ese solo hecho. La página de viento queda como proyecto posterior: su tráfico puede ser de navegantes que no quieren clases.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-11">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 11</span>
+        </div>
+        <h2 class="section-title">Plan de implementación y control</h2>
+        <div class="section-content">
+            <div class="table-container"><div class="table-responsive"><table class="audit-table"><thead><tr><th scope="col">Momento</th><th scope="col">Responsable sugerido</th><th scope="col">Entrega y criterio de cierre</th></tr></thead><tbody><tr><td class="td-primary">Antes de lanzar</td><td class="">Camila y operación</td><td class="">Confirmar presupuesto, tarifas, duración, cupos, requisitos, reprogramaciones y zonas de alumnos.</td></tr><tr><td class="td-primary">Días 1 a 3</td><td class="">Desarrollo</td><td class="">Botones por deporte, precios claros y eventos clasificados en home y páginas. Pruebas móviles y de etiquetas aprobadas.</td></tr><tr><td class="td-primary">Días 3 a 5</td><td class="">Gestión de Ads</td><td class="">Vinculación, etiquetado, objetivo sin duplicación, Planificador y campaña revisada con destino home.</td></tr><tr><td class="td-primary">Primera semana activa</td><td class="">Ads y atención</td><td class="">Revisar gasto, términos y consultas. Corregir fallos o búsquedas irrelevantes sin rehacer todo cada día.</td></tr><tr><td class="td-primary">Segunda semana</td><td class="">Ads y operación</td><td class="">Comparar consultas calificadas y reservas por deporte y zona. Registrar motivos de pérdida.</td></tr><tr><td class="td-primary">Días 15 a 30</td><td class="">Equipo</td><td class="">Ajustar alcance y oferta según evidencia. Completar tareas SEO de ubicación, páginas e indexación.</td></tr></tbody></table></div></div>
+<h3 class="audit-h3">Indicadores que sí ayudan a decidir</h3>
+<ul class="audit-list">
+<li class="audit-list-item">Gasto y clics por grupo. CPC = gasto / clics. Sirve para evaluar adquisición de visitas, no ventas.</li>
+<li class="audit-list-item">Clics a WhatsApp por clases y su tasa sobre visitas de campaña. Mantenerlos separados de conversaciones recibidas.</li>
+<li class="audit-list-item">Consultas calificadas: personas interesadas en una actividad ofrecida, con posibilidad de asistir y una consulta concreta. Definir el criterio de manera consistente.</li>
+<li class="audit-list-item">Reservas pagadas, ingresos cobrados y margen de contribución. Costo por reserva = gasto atribuible / reservas atribuibles. Si no hay reservas, no informar costo cero.</li>
+<li class="audit-list-item">Tiempo de respuesta, localidad y motivo de no reserva: precio, horario, distancia, falta de cupo o condiciones climáticas.</li>
+</ul>
+<h3 class="audit-h3">Reglas de decisión</h3>
+<p class="audit-p">Si hay clics pero no consultas, revisar primero funcionamiento, coherencia del anuncio, precio y experiencia móvil. Si hay consultas pero no reservas, revisar calificación, respuesta, disponibilidad y oferta. Si no hay impresiones, comprobar elegibilidad, búsquedas disponibles, cobertura y pujas antes de ampliar todo el alcance.</p>
+<p class="audit-p">No declarar ganador a un deporte por una sola reserva ni perdedor por pocos clics. Con este presupuesto, 30 días pueden no alcanzar para comparar los cuatro grupos con confianza. Registrar limitaciones y concentrar pruebas si la evidencia queda demasiado dispersa.</p>
+<h3 class="audit-h3">Lista final de habilitación</h3>
+<div class="checklist-grid">
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Presupuesto y cargos aclarados.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Precios y duración confirmados.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Home usable en móvil.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">WhatsApp correcto por deporte.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Evento único y clasificado.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Conversión principal revisada.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Destinos publicados verificados.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Ubicaciones y presencia revisadas.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Anuncios y términos controlados.</span>
+                        </label>
+<label class="checklist-card">
+                            <input type="checkbox" class="checklist-input" />
+                            <span class="checklist-box"><svg viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span class="checklist-text">Registro de consultas y reservas listo.</span>
+                        </label>
+</div>
+<p class="audit-p">El documento define cambios y controles; no certifica que estén implementados. Conservar una copia de los archivos previos, publicar de forma controlada y repetir las pruebas después del despliegue.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-12">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 12</span>
+        </div>
+        <h2 class="section-title">Turistas extranjeros e idiomas</h2>
+        <div class="section-content">
+            <p class="audit-p">Camila estima que 10–20% del público objetivo son turistas extranjeros y confirma que Ombú puede dar clases y responder WhatsApp en inglés. Es una estimación del negocio, no una proporción medida en Analytics ni una obligación de asignar 10–20% del gasto. Nacionalidad, idioma y ubicación son conceptos diferentes.</p>
+<h3 class="audit-h3">Dónde alcanzar a ese público</h3>
+<p class="audit-p">Incluir en la evaluación inicial zonas de alojamiento de CABA además de Zona Norte. Palermo, Recoleta y Retiro son hipótesis a validar con la ubicación real de los turistas atendidos y las áreas disponibles en Ads. Preguntar dónde se alojan y cuánto pueden desplazarse. Un turista que ya está en CABA puede ser elegible por presencia; no necesita ser residente.</p>
+<p class="audit-p">No orientar la campaña inicial a Estados Unidos, Europa o todo el país solo por atender extranjeros. Captar viajeros antes de llegar sería otra estrategia, con palabras de viaje, calendario y presupuesto propios. Con ARS 25.000, priorizar personas que ya pueden asistir.</p>
+<h3 class="audit-h3">Anuncios y recorrido en inglés</h3>
+<p class="audit-p">Mantener cuatro grupos por deporte y preparar un anuncio completo en inglés y otro en español por grupo, sin mezclar idiomas dentro de una misma pieza. Incorporar semillas específicas en inglés, sujetas al Planificador: kitesurf lessons Buenos Aires, wingfoil lessons Buenos Aires, windsurf lessons Buenos Aires y paddleboarding lessons Buenos Aires. La separación por idioma en grupos adicionales puede hacerse después si hay volumen y necesidad de control; no exige duplicar campañas.</p>
+<p class="audit-p">Titulares propuestos: “Kitesurf Lessons Buenos Aires”, “Lessons in English” y “Equipment Included”. Descripción: “Learn in San Isidro with equipment included. Message us in English for availability.” Adaptar el deporte y verificar la oferta. No usar promesas de transporte o disponibilidad inmediata sin confirmarlas.</p>
+<p class="audit-p">En la home, ofrecer un selector EN o un bloque inglés visible con disciplina, precio en ARS, duración, nivel, equipo, requisitos, disponibilidad, reprogramación y acceso al predio. WhatsApp: “Hi Ombú, I would like to ask about kitesurf lessons in English and availability.” Explicar cómo llegar desde CABA, tiempos variables y si hay o no traslado. No depender solo de traducción automática del navegador.</p>
+<h3 class="audit-h3">Actualización de Google y medición</h3>
+<p class="audit-p">La ayuda oficial anuncia que desde septiembre de 2026 se elimina gradualmente el ajuste de idioma a nivel de campaña de Búsqueda y se prioriza el idioma de los anuncios y consultas. Revisar lo que efectivamente muestra la cuenta; no depender de una instrucción fija de seleccionar español e inglés. La comprensión del anuncio y la página de destino sigue siendo relevante. <a href="#ref-19" class="doc-ref">[19]</a></p>
+<p class="audit-p">Registrar content_language=es o en en los eventos y el idioma solicitado en la atención. Medir consultas, reservas y margen por idioma; no inferir nacionalidad del idioma del navegador. Ajustar inversión según resultados. El lanzamiento de anuncios en inglés queda condicionado a publicar y probar la información esencial y el botón de consulta en inglés.</p>
+        </div>
+    </section>
+
+    <section class="audit-section" id="sec-13">
+        <div class="section-badge-bar">
+            <span class="badge-pill">SECCIÓN 13</span>
+        </div>
+        <h2 class="section-title">Fuentes y referencias para aplicar el plan</h2>
+        <div class="section-content">
+            <p class="audit-p">Referencias consultadas durante la revisión del 4 de octubre de 2026. Los enlaces de Trends usan un período móvil y sus resultados pueden cambiar. Las páginas de competidores documentan lo que publican; no certifican sus credenciales ni resultados.</p>
+<div class="source-card" id="ref-1">
+                            <div class="source-badge">Ref [1]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Ranking local de Google</h4>
+                                <a href="https://support.google.com/business/answer/7091?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-2">
+                            <div class="source-badge">Ref [2]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Google Search y JavaScript</h4>
+                                <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-3">
+                            <div class="source-badge">Ref [3]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Reseñas del propio negocio y resultados enriquecidos</h4>
+                                <a href="https://developers.google.com/search/blog/2019/09/making-review-rich-results-more-helpful" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-4">
+                            <div class="source-badge">Ref [4]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Medición entre dominios en GA4</h4>
+                                <a href="https://support.google.com/analytics/answer/10071811?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-5">
+                            <div class="source-badge">Ref [5]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Segmentación geográfica por presencia</h4>
+                                <a href="https://support.google.com/google-ads/answer/9376662?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-6a">
+                            <div class="source-badge">Ref [6a]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Trends Argentina y categoría Deportes</h4>
+                                <a href="https://trends.google.com/trends/explore?cat=20&amp;date=today%2012-m&amp;geo=AR&amp;q=kitesurf,wingfoil,windsurf,stand%20up%20paddle&amp;hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-6b">
+                            <div class="source-badge">Ref [6b]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Trends provincia de Buenos Aires y Deportes</h4>
+                                <a href="https://trends.google.com/trends/explore?cat=20&amp;date=today%2012-m&amp;geo=AR-B&amp;q=kitesurf,wingfoil,windsurf,stand%20up%20paddle&amp;hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-7">
+                            <div class="source-badge">Ref [7]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Interpretación y límites de Google Trends</h4>
+                                <a href="https://support.google.com/trends/answer/4365533?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-8">
+                            <div class="source-badge">Ref [8]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Planificador de palabras clave</h4>
+                                <a href="https://support.google.com/google-ads/answer/7337243?hl=es-419" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-9">
+                            <div class="source-badge">Ref [9]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Escuela El Molino</h4>
+                                <a href="https://escuelaelmolino.com/escuela/" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-10">
+                            <div class="source-badge">Ref [10]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Escuela La Playita</h4>
+                                <a href="https://www.laplayita.com.ar/" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-11">
+                            <div class="source-badge">Ref [11]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Spirit Kite Beach</h4>
+                                <a href="https://www.skbs.com.ar/escuela" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-12">
+                            <div class="source-badge">Ref [12]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Bbrave Kiteschool</h4>
+                                <a href="https://bbravekiteschool.com.ar/cursos.html" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-13">
+                            <div class="source-badge">Ref [13]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Second Wind y curso de wingfoil</h4>
+                                <a href="https://escueladekite.com.ar/curso-wing-foil-3/" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-14">
+                            <div class="source-badge">Ref [14]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Leads calificados y convertidos</h4>
+                                <a href="https://support.google.com/google-ads/answer/11459091?hl=es-419" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-15">
+                            <div class="source-badge">Ref [15]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Vinculación entre GA4 y Google Ads</h4>
+                                <a href="https://support.google.com/google-ads/answer/7519537" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-16">
+                            <div class="source-badge">Ref [16]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Conversiones primarias y secundarias</h4>
+                                <a href="https://support.google.com/google-ads/answer/11461796?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-17">
+                            <div class="source-badge">Ref [17]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Opciones de recuento de conversiones</h4>
+                                <a href="https://support.google.com/google-ads/answer/3438531?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-18">
+                            <div class="source-badge">Ref [18]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Presupuesto diario medio y límite mensual</h4>
+                                <a href="https://support.google.com/google-ads/answer/6385083?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<div class="source-card" id="ref-19">
+                            <div class="source-badge">Ref [19]</div>
+                            <div class="source-info">
+                                <h4 class="source-title">Idiomas y cambios en Búsqueda desde septiembre de 2026</h4>
+                                <a href="https://support.google.com/google-ads/answer/1722078?hl=es" target="_blank" rel="noopener noreferrer" class="source-link-btn">Abrir fuente oficial <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8.5H2.75a.75.75 0 0 1 0-1.5h7.19L6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg></a>
+                            </div>
+                        </div>
+<h3 class="audit-h3">Archivos revisados</h3>
+<p class="audit-p">Auditoría de marketing_ Escuela Ombú.html; index.html, styles.css y main.js de la carpeta escuela ombu mac; index.html de kitesurf, wingfoil, windsurf y sup. Se detectó además la existencia de algunas versiones index.full.html. La revisión local no sustituye la comprobación del sitio publicado.</p>
+<p class="audit-p">No se accedió a los informes privados de GA4, Search Console, Google Ads, Google Business Profile ni Google Cloud. Las verificaciones de esas cuentas están identificadas como tareas pendientes para evitar confundir instalación con funcionamiento o recomendación con resultado.</p>
+        </div>
+    </section>
+
+        </main>
+    </div>
+
+    <!-- Floating Back to Top button -->
+    <div class="floating-tools">
+        <button class="fab-btn" id="scrollTopBtn" title="Volver arriba">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+        </button>
+    </div>
+
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Scroll Top Button
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+        const themeText = document.getElementById('themeText');
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+                themeText.textContent = 'Claro';
+                localStorage.setItem('doc-theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+                themeText.textContent = 'Oscuro';
+                localStorage.setItem('doc-theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('doc-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        // Mobile Sidebar Toggle
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const tocSidebar = document.getElementById('tocSidebar');
+        if (sidebarToggle && tocSidebar) {
+            sidebarToggle.addEventListener('click', () => {
+                tocSidebar.classList.toggle('open');
+            });
+            document.querySelectorAll('.toc-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 1024) {
+                        tocSidebar.classList.remove('open');
+                    }
+                });
+            });
+        }
+
+        // Intersection Observer for Active TOC Link
+        const sections = document.querySelectorAll('.audit-section');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        if (link.getAttribute('data-target') === id) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(sec => observer.observe(sec));
+    </script>
+</body>
+</html>
