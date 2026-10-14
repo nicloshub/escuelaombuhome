@@ -246,11 +246,12 @@ img {
    ========================================================= */
 .container {
   width: 100%;
-  max-width: var(--container-max-width);
+  max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
+  padding-left: var(--grid-margin);
+  padding-right: var(--grid-margin);
+  box-sizing: border-box;
 }
 
 /* Grilla oficial Escuela Ombú: 12 Columnas · Gutter 32px · Margen 160px */
@@ -5685,7 +5686,7 @@ button:focus-visible {
 }
 
 .journey-container {
-  max-width: var(--container-content-max, 1440px);
+  max-width: var(--container-max);
 }
 
 .journey-header {
@@ -6133,7 +6134,7 @@ button:focus-visible {
 
 .windhero-container,
 .windweek-container {
-  max-width: var(--container-content-max, 1440px);
+  max-width: var(--container-max);
 }
 
 .windhero-grid {
@@ -7283,17 +7284,17 @@ button:focus-visible {
 body.is-subpage .container,
 .site-footer-wrapper .container {
   width: 100%;
-  max-width: 100%;
+  max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: var(--grid-margin, 18px);
+  padding-right: var(--grid-margin, 18px);
   box-sizing: border-box;
 }
 
 header.site-header {
-  width: calc(100% - 48px);
-  max-width: calc(100% - 48px);
+  width: calc(100% - (var(--grid-margin, 18px) * 2));
+  max-width: var(--container-content-max, 1440px);
 }
 
 .subpage-section {
@@ -7312,7 +7313,7 @@ header.site-header {
 }
 
 /* Tablet (768px a 1023px):
-   - Márgenes laterales: 64px
+   - Márgenes laterales: 24px
    - Macro-espaciado vertical: 96px
    - Grilla: 12 columnas, gap: 24px
 */
@@ -7325,14 +7326,14 @@ header.site-header {
   .subpage-main .container,
   body.is-subpage .container,
   .site-footer-wrapper .container {
-    max-width: 100%;
-    padding-left: 64px;
-    padding-right: 64px;
+    max-width: var(--container-max);
+    padding-left: var(--grid-margin, 24px);
+    padding-right: var(--grid-margin, 24px);
   }
 
   header.site-header {
-    width: calc(100% - 128px);
-    max-width: calc(100% - 128px);
+    width: calc(100% - (var(--grid-margin, 24px) * 2));
+    max-width: var(--container-content-max, 1440px);
   }
 
   .subpage-section {
@@ -7347,11 +7348,9 @@ header.site-header {
 }
 
 /* Desktop (>= 1024px):
-   - Caja máx: 1440px
-   - Márgenes laterales: 160px (Área útil contenido: 1120px)
-   - Navbar: exactamente 1120px, alineada milimétricamente con el contenido
-   - Macro-espaciado vertical: 160px
-   - Grilla: 12 columnas, gap: 32px
+   - Contenedor máx fluido con contenido útil de 1440px
+   - Margen de seguridad lateral: 32px
+   - Navbar unificada: hasta 1440px, alineada milimétricamente con la Home
 */
 @media (min-width: 1024px) {
   .subpage-main {
@@ -7362,22 +7361,22 @@ header.site-header {
   .subpage-main .container,
   body.is-subpage .container,
   .site-footer-wrapper .container {
-    max-width: 1440px;
-    padding-left: 160px;
-    padding-right: 160px;
+    max-width: var(--container-max);
+    padding-left: var(--grid-margin, 32px);
+    padding-right: var(--grid-margin, 32px);
   }
 
-  /* La Navbar comparte esta misma matemática: 1120px centrados */
+  /* La Navbar comparte exactamente la misma matemática que la Home: 1440px centrados */
   header.site-header {
-    width: calc(100% - 320px);
-    max-width: 1120px;
+    width: calc(100% - (var(--grid-margin, 32px) * 2));
+    max-width: var(--container-content-max, 1440px);
     left: 50%;
     transform: translateX(-50%);
   }
 
   .subpage-section {
-    padding-top: 160px;
-    padding-bottom: 160px;
+    padding-top: 140px;
+    padding-bottom: 140px;
   }
 
   .subpage-grid-12 {
