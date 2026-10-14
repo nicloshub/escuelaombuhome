@@ -1162,35 +1162,7 @@ header.site-header:hover {
   margin-left: -8px;
 }
 
-/* Badge 3: Widget de Viento Oficial de la Home (Right Overlapping) */
-.hero-weather-card {
-  background: rgba(254, 254, 254, 0.92);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  border-radius: var(--radius-card, 24px);
-  box-shadow: 0 16px 36px rgba(13, 21, 28, 0.12),
-              0 2px 8px rgba(13, 21, 28, 0.04);
-  color: var(--ink);
-  padding: 16px 18px;
-  width: 100%;
-  max-width: 250px;
-  margin-top: 32px;
-  position: relative;
-  z-index: 5;
-}
-
-@media (min-width: 1024px) {
-  .hero-weather-card {
-    position: absolute;
-    top: 50%;
-    right: -24px;
-    transform: translateY(-50%);
-    margin-top: 0;
-    padding: 18px 20px;
-    width: 260px;
-  }
-}
+/* (Widget de Viento Oficial de Subpáginas estilizado más abajo en hero-weather-card) */
 
 .weather-header-stack {
   display: flex;
@@ -2823,6 +2795,7 @@ header.site-header:hover {
 
 .pricing-btn-box a {
   width: 100%;
+  justify-content: center;
 }
 
 /* =========================================================
@@ -3199,30 +3172,6 @@ header.site-header:hover {
    se rige íntegramente por las reglas maestras de styles.css */
 
 /* =========================================================
-   BOTÓN FLOTANTE WHATSAPP (56px)
-   ========================================================= */
-.floating-wpp-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 999;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #25D366;
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
-}
-
-.floating-wpp-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.50);
-}
-/* =========================================================
    ESCUELA OMBÃš â€” ESTILOS COMPLEMENTARIOS SUBPÃGINA KITESURF
    (kitesurf/kitesurf.css)
    Reutiliza variables de styles.css / sports.css
@@ -3409,14 +3358,17 @@ header.site-header:hover {
 
 /* Widget de Viento en Vivo Flotante Superior Derecho */
 .hero-weather-card {
-  background: #FFFFFF !important;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 22px;
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.12),
-              0 4px 12px rgba(0, 0, 0, 0.04);
+  background: rgba(254, 254, 254, 0.94);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-card, 24px);
+  box-shadow: 0 16px 36px rgba(13, 21, 28, 0.12),
+              0 2px 8px rgba(13, 21, 28, 0.04),
+              inset 0 1px 0 rgba(255, 255, 255, 0.95);
   color: var(--ink);
-  padding: 18px 20px;
-  width: 260px;
+  padding: 16px 20px;
+  width: 270px;
   max-width: 100%;
   z-index: 10;
 }
@@ -3522,6 +3474,11 @@ header.site-header:hover {
   padding: 4px 10px;
   border-radius: 100px;
   white-space: nowrap;
+}
+
+.weather-suitability-pill.is-not-recommended {
+  color: rgba(35, 31, 32, 0.45) !important;
+  border-color: rgba(35, 31, 32, 0.22) !important;
 }
 
 /* --- 3. SECCIÃ“N EQUIPAMIENTO: INTERACTIVE GEAR EXPLODED VIEW --- */
@@ -5175,14 +5132,16 @@ header.site-header:hover {
   }
 
   .mobile-bottom-bar .btn-pill-orange {
-    padding: 10px 18px;
+    --btn-h: 42px;
+    --btn-icon-size: 28px;
     font-size: 13px;
+    padding-left: 1.15rem;
     white-space: nowrap;
     flex-shrink: 0;
   }
 
-  /* Ocultar el botÃ³n flotante de WhatsApp en mobile para que no se superpongan */
-  .floating-wpp-btn {
+  /* Ocultar el botón flotante de WhatsApp en mobile si la barra de reserva está presente */
+  body:has(.mobile-bottom-bar) .floating-wpp-btn {
     display: none !important;
   }
 }
@@ -5195,18 +5154,6 @@ button:focus-visible {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .btn-pill-orange:hover {
-    background-color: var(--orange-hover);
-    transform: translateY(-1px);
-  }
-  .btn-pill-dark:hover {
-    background-color: #000;
-    transform: translateY(-1px);
-  }
-  .btn-pill-white:hover {
-    background-color: var(--light-1);
-    transform: translateY(-1px);
-  }
   .hero-secondary-link:hover {
     color: var(--orange);
   }
@@ -6720,120 +6667,366 @@ button:focus-visible {
   .windhero-section .windhero-panel { opacity: 1; transform: none; }
 }
 
-/* --- Kitesurf: hero anterior con fondo oscuro y widget compacto --- */
-.windhero-previous {
-  background: var(--ink);
-  color: var(--white);
+/* =========================================================
+   REDISEÑO HERO KITESURF (FIGMA SPEC 1728px / RESPONSIVE)
+   Layout: Title Full Width -> Split Middle Row -> Centered Grand Stage Photo
+   ========================================================= */
+.kite-hero-section {
+  position: relative;
+  background-color: #161616;
+  color: #FFFFFF;
+  padding-top: calc(116px + env(safe-area-inset-top, 0px));
+  padding-bottom: 96px;
+  overflow: hidden;
 }
 
-.windhero-previous .hero-split-grid {
-  align-items: center;
+@media (min-width: 768px) {
+  .kite-hero-section {
+    padding-top: calc(132px + env(safe-area-inset-top, 0px));
+    padding-bottom: 112px;
+  }
 }
 
-.windhero-previous .hero-content-col { color: var(--white); }
-.windhero-previous .hero-review-proof { color: var(--white); }
-.windhero-previous .hero-split-title { color: var(--white); }
-.windhero-previous .hero-split-bajada,
-.windhero-previous .hero-microcopy { color: var(--white); }
-.windhero-previous .hero-microcopy { font-size: 16px; font-weight: 700; }
-.windhero-previous .hero-cta-sports {
-  border-color: rgba(254, 254, 254, 0.55);
-  color: var(--white);
+@media (min-width: 1024px) {
+  .kite-hero-section {
+    padding-top: calc(148px + env(safe-area-inset-top, 0px));
+    padding-bottom: 128px;
+  }
 }
-.windhero-previous .windhero-compact-card {
-  position: absolute;
-  top: 50%;
-  right: -24px;
-  z-index: 5;
-  width: 276px;
-  max-width: 100%;
-  margin: 0;
-  padding: 16px 18px;
-  border: 1px solid rgba(35, 31, 32, 0.12);
-  border-radius: var(--radius-card);
-  background: var(--white);
-  box-shadow: var(--shadow-lg);
-  color: var(--ink);
-  transform: translateY(-50%);
-  animation: windhero-panel-enter 400ms cubic-bezier(0.23, 1, 0.32, 1) both;
-}
-.windhero-previous .weather-title-label { color: rgba(35, 31, 32, 0.72); }
-.windhero-previous .weather-live-badge { color: var(--ink); }
-.windhero-previous .windhero-live-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--orange);
-  animation: windhero-live-pulse 2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
-}
-.windhero-previous .windhero-compact-card .weather-main-grid { margin-top: 8px; }
-.windhero-previous .windhero-compact-card .weather-speed-num {
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 54px;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-.windhero-previous .windhero-compact-card .speed-unit-kmh { color: var(--ink); }
-.windhero-previous .windhero-compact-card .speed-unit-knots { color: rgba(35, 31, 32, 0.72); }
-.windhero-previous .windhero-compact-card .weather-compass-box { flex: 0 0 52px; margin-top: 0; }
-.windhero-previous .windhero-compass-marker { position: absolute; color: rgba(35, 31, 32, 0.65); font-family: var(--font-body); font-size: 8px; font-weight: 700; line-height: 1; }
-.windhero-previous .windhero-compass-marker.n { top: 2px; left: 50%; transform: translateX(-50%); }
-.windhero-previous .windhero-compass-marker.s { bottom: 2px; left: 50%; transform: translateX(-50%); }
-.windhero-previous .windhero-compass-marker.e { top: 50%; right: 2px; transform: translateY(-50%); }
-.windhero-previous .windhero-compass-marker.o { top: 50%; left: 2px; transform: translateY(-50%); }
-.windhero-previous .windhero-compass-marker.is-active { color: var(--orange); }
-.windhero-previous .windhero-compact-card .weather-status-footer {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: flex-start;
-  justify-content: stretch;
-  gap: 8px;
-  margin-top: 14px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(35, 31, 32, 0.12);
-}
-.windhero-previous .windhero-compact-card .weather-caption {
-  min-width: 0;
-  overflow: visible;
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.35;
-  text-overflow: clip;
-  white-space: normal;
-}
-.windhero-previous .windhero-compact-card .weather-suitability-pill {
-  justify-self: start;
-  padding: 5px 8px;
-  border-radius: var(--radius-pill);
-  background: var(--orange);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.2;
-}
-.windhero-compact-meta {
+
+.kite-hero-container {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin: 10px 0 0;
-  color: rgba(35, 31, 32, 0.82);
+  flex-direction: column;
+}
+
+/* 1. TÍTULO H1 IMPACTANTE */
+.kite-hero-title {
+  font-family: var(--font-display, 'Anton', sans-serif);
+  font-size: clamp(48px, 6.8vw, 118px);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0 0 clamp(28px, 3.5vw, 48px);
+  display: flex;
+  flex-direction: column;
+}
+
+.kite-hero-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.kite-hero-title-accent-row {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 26px);
+  margin-top: 6px;
+}
+
+.kite-hero-arrow-disc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(52px, 5.8vw, 92px);
+  height: clamp(52px, 5.8vw, 92px);
+  border-radius: 50%;
+  background: var(--orange, #FF5206);
+  color: #FFFFFF;
+  flex-shrink: 0;
+  box-shadow: 0 10px 24px rgba(255, 82, 6, 0.35);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.kite-hero-arrow-disc:hover {
+  transform: scale(1.06) rotate(6deg);
+  box-shadow: 0 14px 28px rgba(255, 82, 6, 0.45);
+}
+
+.kite-hero-arrow-disc svg {
+  width: 44%;
+  height: 44%;
+}
+
+.kite-hero-word-orange {
+  color: var(--orange, #FF5206);
+}
+
+/* 2. FILA MEDIA (Bajada + CTAs a la izquierda | Badges a la derecha) */
+.kite-hero-middle-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin-bottom: clamp(40px, 4.5vw, 64px);
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .kite-hero-middle-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter, 32px);
+    align-items: end;
+  }
+
+  .kite-hero-desc-col {
+    grid-column: 1 / span 7;
+  }
+
+  .kite-hero-badges-col {
+    grid-column: 8 / span 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.kite-hero-bajada {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.76);
+  max-width: 480px;
+  margin: 0 0 28px;
+}
+
+.kite-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .kite-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .kite-hero-actions .btn-pill-orange {
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 1.5rem;
+    padding-right: 6px;
+  }
+
+  .kite-hero-actions .hero-cta-sports {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Botón Outline en Hero Oscuro (Figma spec) */
+.kite-hero-actions .hero-cta-sports {
+  color: #FFFFFF !important;
+  background: transparent !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 100px;
+  height: 48px;
+  min-height: 48px;
+  padding: 0 1.8rem;
   font-family: var(--font-body);
   font-size: 13px;
-  line-height: 1.3;
-}
-.windhero-alternative {
-  margin: 10px 0 0;
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 14px;
   font-weight: 700;
-  text-decoration-color: var(--orange);
-  text-underline-offset: 3px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.windhero-alternative[hidden] { display: none; }
+
+.kite-hero-actions .hero-cta-sports:hover {
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  transform: translateY(-2px);
+}
+
+.kite-hero-badges-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kite-hero-badges-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.kite-hero-badge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(12.5px, 0.9vw, 14px);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 100px;
+  padding: 8px 18px;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+}
+
+.kite-hero-badge:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+/* 3. STAGE VISUAL (Gran Foto Central en Cols 2-11 con Overlapping Cards en Cols 1 y 12) */
+.kite-hero-stage {
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .kite-hero-stage {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gutter, 32px);
+    align-items: center;
+    position: relative;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+}
+
+.kite-hero-photo-frame {
+  width: 100%;
+  height: clamp(340px, 42vw, 600px);
+  border-radius: clamp(24px, 2.8vw, 42px);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  background-color: #0E0E0E;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .kite-hero-photo-frame {
+    grid-column: 2 / span 10;
+  }
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-photo-frame {
+    height: clamp(280px, 54vw, 440px);
+    border-radius: 24px;
+  }
+}
+
+.kite-hero-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+/* Card del Tiempo Flotante a la Izquierda (Alineada a Columna 1) */
+.kite-hero-stage .hero-weather-card.kite-weather-left {
+  background: rgba(254, 254, 254, 0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--ink, #231F20);
+  padding: 18px 22px;
+  width: 304px;
+  max-width: 100%;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .kite-hero-stage .hero-weather-card.kite-weather-left {
+    position: absolute;
+    grid-column: auto;
+    top: 36%;
+    left: 0;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-stage .hero-weather-card.kite-weather-left {
+    position: static;
+    margin: 0 auto;
+    width: min(340px, 100%);
+    transform: none;
+  }
+}
+
+/* Card de Experiencia "+15 AÑOS formando navegantes" (Alineada a Columna 12) */
+.kite-hero-exp-card {
+  background: var(--orange, #FF5206);
+  border-radius: 20px;
+  padding: 20px 28px;
+  box-shadow: 0 16px 36px rgba(255, 82, 6, 0.35);
+  display: flex;
+  flex-direction: column;
+  color: #FFFFFF;
+  z-index: 10;
+  width: fit-content;
+}
+
+@media (min-width: 1024px) {
+  .kite-hero-exp-card {
+    position: absolute;
+    grid-column: auto;
+    bottom: -18px;
+    right: 0;
+    min-width: 216px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-exp-card {
+    position: static;
+    margin: 0 auto;
+    width: min(340px, 100%);
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.kite-hero-exp-num {
+  font-family: var(--font-display, 'Anton', sans-serif);
+  font-size: clamp(36px, 3.2vw, 46px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.kite-hero-exp-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.96);
+  margin-top: 4px;
+  line-height: 1.2;
+}
 
 /* --- Equipo: acercamiento al hotspot seleccionado --- */
 #gearStage { isolation: isolate; }
@@ -6994,18 +7187,6 @@ button:focus-visible {
 }
 
 @media (max-width: 1023px) {
-  .windhero-previous .hero-split-section { min-height: 0; }
-  .windhero-previous .hero-split-grid { gap: 30px; }
-  .windhero-previous .windhero-compact-card {
-    position: absolute;
-    top: auto;
-    right: 14px;
-    bottom: 18px;
-    width: min(276px, calc(100% - 28px));
-    margin: 0;
-    transform: none;
-  }
-  .windhero-previous .hero-main-photo-frame { height: clamp(330px, 66vw, 480px); }
   .closing-scene { min-height: 620px; }
   .closing-scene::after {
     background: linear-gradient(90deg, rgba(35, 31, 32, 0.72) 0%, rgba(35, 31, 32, 0.5) 58%, rgba(35, 31, 32, 0.34) 100%), linear-gradient(0deg, rgba(35, 31, 32, 0.46), transparent 68%);
@@ -7013,16 +7194,6 @@ button:focus-visible {
 }
 
 @media (max-width: 767px) {
-  .windhero-previous { padding-top: calc(104px + env(safe-area-inset-top, 0px)); }
-  .windhero-previous .hero-review-proof { margin-bottom: 18px; }
-  .windhero-previous .hero-split-title { font-size: clamp(42px, 11vw, 58px); }
-  .windhero-previous .hero-split-bajada { font-size: 16px; }
-  .windhero-previous .windhero-compact-card { right: 10px; bottom: 10px; width: min(250px, calc(100% - 20px)); padding: 12px 14px; }
-  .windhero-previous .windhero-compact-card .weather-speed-num { font-size: 44px; }
-  .windhero-previous .windhero-compact-card .weather-compass-box { width: 46px; height: 46px; flex-basis: 46px; }
-  .windhero-previous .windhero-compact-card .weather-status-footer { margin-top: 8px; padding-top: 8px; }
-  .windhero-previous .windhero-compact-card .weather-caption { font-size: 13px; }
-  .windhero-compact-meta { font-size: 12px; }
   #instructores .instructores-grid--kite { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .closing-scene { min-height: 640px; padding-block: 72px; }
   .closing-scene-title { margin-bottom: 28px; font-size: clamp(40px, 11vw, 58px); }
@@ -7080,24 +7251,1225 @@ button:focus-visible {
   border-top: 1px solid rgba(254, 254, 254, 0.22);
   color: var(--white);
 }
+/* =========================================================
+   SUBPÁGINAS DE DISCIPLINAS (KITESURF, WINDSURF, WINGFOIL)
+   Escuela Náutica Ombú — Sistema de Diseño 8pt Grid
+   Filosofía Mobile-First · Anton Uppercase · Inter Body
+   ========================================================= */
 
-/* El footer reutiliza la foto de fondo usada en la home, detrás de su card original. */
-.site-footer-wrapper.kitesurf-footer {
+:root {
+  /* Color Naranja Accesible para textos chicos sobre blanco (WCAG AA) */
+  --orange-text: #D13F00;
+}
+
+/* =========================================================
+   1. CONTENEDOR Y MACRO-ESPACIADO (8PT GRID POR BREAKPOINT)
+   ========================================================= */
+
+/* Mobile-First Base (<= 767px):
+   - Márgenes laterales: 24px
+   - Macro-espaciado vertical entre secciones: 64px
+   - Grilla: 4 columnas, gap: 16px
+*/
+.subpage-main {
+  padding-top: 88px;
+  padding-bottom: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.subpage-container,
+.subpage-main .container,
+body.is-subpage .container,
+.site-footer-wrapper .container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+header.site-header {
+  width: calc(100% - 48px);
+  max-width: calc(100% - 48px);
+}
+
+.subpage-section {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Grilla responsive base: 4 columnas mobile */
+.subpage-grid-12 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+/* Tablet (768px a 1023px):
+   - Márgenes laterales: 64px
+   - Macro-espaciado vertical: 96px
+   - Grilla: 12 columnas, gap: 24px
+*/
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-main {
+    padding-top: 104px;
+  }
+
+  .subpage-container,
+  .subpage-main .container,
+  body.is-subpage .container,
+  .site-footer-wrapper .container {
+    max-width: 100%;
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  header.site-header {
+    width: calc(100% - 128px);
+    max-width: calc(100% - 128px);
+  }
+
+  .subpage-section {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+
+  .subpage-grid-12 {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Desktop (>= 1024px):
+   - Caja máx: 1440px
+   - Márgenes laterales: 160px (Área útil contenido: 1120px)
+   - Navbar: exactamente 1120px, alineada milimétricamente con el contenido
+   - Macro-espaciado vertical: 160px
+   - Grilla: 12 columnas, gap: 32px
+*/
+@media (min-width: 1024px) {
+  .subpage-main {
+    padding-top: 120px;
+  }
+
+  .subpage-container,
+  .subpage-main .container,
+  body.is-subpage .container,
+  .site-footer-wrapper .container {
+    max-width: 1440px;
+    padding-left: 160px;
+    padding-right: 160px;
+  }
+
+  /* La Navbar comparte esta misma matemática: 1120px centrados */
+  header.site-header {
+    width: calc(100% - 320px);
+    max-width: 1120px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .subpage-section {
+    padding-top: 160px;
+    padding-bottom: 160px;
+  }
+
+  .subpage-grid-12 {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+  }
+}
+
+/* =========================================================
+   2. CABECERA ASIMÉTRICA UNIFICADA (REGLA DE ORO)
+   ========================================================= */
+
+/* Mobile: Apilado vertical a 1 sola columna visual */
+.subpage-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.subpage-header-title-col {
+  width: 100%;
+  text-align: left;
+}
+
+.subpage-header-desc-col {
+  width: 100%;
+  text-align: left;
+}
+
+.subpage-header-desc-col p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Tablet (768px a 1023px): H2 ocupa 5 columnas, Bajada ocupa 7 columnas */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-section-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+    align-items: start;
+    margin-bottom: 48px;
+  }
+
+  .subpage-header-title-col {
+    grid-column: 1 / span 5;
+  }
+
+  .subpage-header-desc-col {
+    grid-column: 6 / span 7;
+    padding-top: 8px;
+  }
+
+  .subpage-header-desc-col p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+/* Desktop (>= 1024px):
+   - H2 ocupa exactamente 4 columnas a la izquierda
+   - Bajada ocupa exactamente 5 columnas a la derecha
+   - 3 columnas vacías en el medio (cols 5, 6 y 7)
+   - Ambos textos alineados por arriba (top-alignment)
+*/
+@media (min-width: 1024px) {
+  .subpage-section-header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 32px;
+    align-items: start;
+    margin-bottom: 64px;
+  }
+
+  .subpage-header-title-col {
+    grid-column: 1 / span 4;
+  }
+
+  .subpage-header-desc-col {
+    grid-column: 8 / span 5;
+    padding-top: 8px;
+  }
+
+  .subpage-header-desc-col p {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+/* =========================================================
+   3. TIPOGRAFÍA Y ESCALA ESTÁTICA POR BREAKPOINT (SIN CLAMP)
+   ========================================================= */
+
+/* Display Titles: Anton siempre Uppercase */
+h1.subpage-hero-title,
+.subpage-hero-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+h2.subpage-title,
+.subpage-section-header h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+h3.subpage-card-title,
+.subpage-card-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+h4.subpage-card-subtitle,
+.subpage-card-subtitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+/* Mobile Sizes (<= 767px) */
+.subpage-hero-title {
+  font-size: 48px;
+  line-height: 56px;
+}
+.subpage-section-header h2 {
+  font-size: 32px;
+  line-height: 40px;
+}
+.subpage-card-title {
+  font-size: 24px;
+  line-height: 32px;
+}
+.subpage-card-subtitle {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* Tablet Sizes (768px a 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-hero-title {
+    font-size: 64px;
+    line-height: 72px;
+  }
+  .subpage-section-header h2 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .subpage-card-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .subpage-card-subtitle {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+/* Desktop Sizes (>= 1024px) */
+@media (min-width: 1024px) {
+  .subpage-hero-title {
+    font-size: 88px;
+    line-height: 96px;
+  }
+  .subpage-section-header h2 {
+    font-size: 56px;
+    line-height: 64px;
+  }
+  .subpage-card-title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .subpage-card-subtitle {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+/* Breadcrumbs con variable accesible --orange-text */
+.subpage-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.subpage-breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subpage-breadcrumbs a:hover {
+  color: var(--orange-text);
+}
+
+.subpage-breadcrumbs .separator {
+  color: var(--line);
+}
+
+.subpage-breadcrumbs .current {
+  color: var(--orange-text);
+}
+
+/* Etiquetas y Eyebrows */
+.section-label,
+.subpage-eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange-text);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.accent {
+  color: var(--orange);
+}
+
+/* =========================================================
+   4. BOTONES RESPONSIVE (8PT GRID & AJUSTE MOBILE)
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .btn-pill-orange,
+  .btn-pill-dark,
+  .btn-pill-white {
+    font-size: 14px !important;
+    line-height: 20px !important;
+    padding: 12px 20px !important;
+  }
+}
+
+/* =========================================================
+   5. SECCIÓN HERO (KITESURF)
+   ========================================================= */
+
+.subpage-hero {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 768px) {
+  .subpage-hero {
+    padding-top: 48px;
+    padding-bottom: 96px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subpage-hero {
+    padding-top: 64px;
+    padding-bottom: 128px;
+  }
+}
+
+.subpage-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.subpage-hero-media-wrap {
   position: relative;
-  isolation: isolate;
+  width: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-hero-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .subpage-hero-content {
+    grid-column: 1 / span 7;
+  }
+  .subpage-hero-media-wrap {
+    grid-column: 8 / span 5;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subpage-hero-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+  }
+  .subpage-hero-content {
+    grid-column: 1 / span 7;
+  }
+  .subpage-hero-media-wrap {
+    grid-column: 8 / span 5;
+  }
+}
+
+.subpage-hero-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 1024px) {
+  .subpage-hero-desc {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.subpage-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 480px) {
+  .subpage-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.subpage-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subpage-stat-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--orange-text);
+}
+
+.subpage-stat-value {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subpage-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.subpage-hero-media {
+  position: relative;
+  border-radius: 24px;
   overflow: hidden;
-  padding-block: clamp(40px, 7vw, 88px);
+  box-shadow: 0 16px 36px rgba(35, 31, 32, 0.12);
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 3.6;
+  background: var(--dark);
 }
-.site-footer-wrapper.kitesurf-footer::before,
-.site-footer-wrapper.kitesurf-footer::after {
+
+.subpage-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.subpage-hero-media-badge {
   position: absolute;
-  z-index: -1;
-  inset: 0;
-  content: "";
+  top: 16px;
+  left: 16px;
+  background: rgba(35, 31, 32, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
-.site-footer-wrapper.kitesurf-footer::before {
-  background: url("../assets/fondo-parallax.webp") center 58% / cover no-repeat;
+
+.subpage-hero-price-tag {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 12px 20px;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--line);
 }
-.site-footer-wrapper.kitesurf-footer::after {
-  background: rgba(35, 31, 32, 0.58);
+
+.subpage-hero-price-tag .p-label {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
 }
+
+.subpage-hero-price-tag .p-amount {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 32px;
+  color: var(--orange-text);
+}
+
+/* =========================================================
+   6. ROADMAP: PROGRAMA DE 4 PASOS
+   ========================================================= */
+
+.subpage-roadmap-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-roadmap-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subpage-roadmap-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+.subpage-roadmap-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.subpage-roadmap-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(35, 31, 32, 0.08);
+}
+
+.subpage-step-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 40px;
+  color: var(--orange-text);
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subpage-step-badge {
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(35, 31, 32, 0.08);
+  color: var(--ink);
+}
+
+.subpage-step-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.subpage-step-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.subpage-step-bullets li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.subpage-step-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--orange-text);
+  font-weight: bold;
+}
+
+.subpage-step-goal {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.subpage-step-goal span {
+  color: var(--orange-text);
+  text-transform: uppercase;
+  font-size: 11px;
+  line-height: 16px;
+  display: block;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+/* =========================================================
+   7. GARANTÍA DE SEGURIDAD & EQUIPAMIENTO (4 PILARES)
+   ========================================================= */
+
+.subpage-features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subpage-features-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+.subpage-feature-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.subpage-feature-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 82, 6, 0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.subpage-feature-icon-box img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.subpage-feature-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.subpage-feature-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   8. MODALIDADES & TARIFAS (PRICING CARDS EN 12 COLS)
+   ========================================================= */
+
+.subpage-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subpage-pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    align-items: stretch;
+  }
+}
+
+.subpage-pricing-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(35, 31, 32, 0.04);
+}
+
+.subpage-pricing-card.featured {
+  background: var(--ink);
+  color: var(--white);
+  border: 2px solid var(--orange);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+}
+
+@media (min-width: 1024px) {
+  .subpage-pricing-card.featured {
+    transform: translateY(-8px);
+  }
+}
+
+.subpage-pricing-featured-tag {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--orange);
+  color: var(--white);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.subpage-pcard-label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--orange-text);
+  margin-bottom: 8px;
+}
+
+.subpage-pricing-card.featured .subpage-pcard-label {
+  color: var(--orange);
+}
+
+.subpage-pcard-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 32px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.subpage-pricing-card.featured .subpage-pcard-title {
+  color: var(--white);
+}
+
+.subpage-pcard-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.subpage-pricing-card.featured .subpage-pcard-desc {
+  color: var(--text-light-muted);
+}
+
+.subpage-pcard-price-box {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.subpage-pricing-card.featured .subpage-pcard-price-box {
+  border-bottom: 1px solid rgba(254, 254, 254, 0.15);
+}
+
+.subpage-pcard-price {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 48px;
+  color: var(--ink);
+}
+
+.subpage-pricing-card.featured .subpage-pcard-price {
+  color: var(--white);
+}
+
+.subpage-pcard-price.is-accessible {
+  color: var(--orange-text);
+}
+
+.subpage-pcard-price-note {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.subpage-pricing-card.featured .subpage-pcard-price-note {
+  color: var(--text-light-muted);
+}
+
+.subpage-pcard-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
+.subpage-pricing-card.featured .subpage-pcard-bullets {
+  color: var(--text-light-muted);
+}
+
+.subpage-pcard-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.subpage-pcard-bullets svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--orange-text);
+}
+
+.subpage-pricing-card.featured .subpage-pcard-bullets svg {
+  color: var(--orange);
+}
+
+/* =========================================================
+   9. EL SPOT DE ACASSUSO (SPLIT 6 / 6 EN DESKTOP)
+   ========================================================= */
+
+.subpage-spot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .subpage-spot-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+  }
+  .subpage-spot-info-col {
+    grid-column: 1 / span 6;
+  }
+  .subpage-spot-media-col {
+    grid-column: 7 / span 6;
+  }
+}
+
+.subpage-spot-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subpage-spot-feature-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subpage-spot-feature-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.subpage-spot-feature-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-muted);
+}
+
+.subpage-spot-media-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(35, 31, 32, 0.12);
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 3;
+  background: var(--dark);
+}
+
+.subpage-spot-media-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.subpage-spot-badge-box {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  background: rgba(35, 31, 32, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--white);
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.subpage-spot-badge-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.subpage-spot-badge-label {
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--orange);
+}
+
+.subpage-spot-badge-val {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* =========================================================
+   10. INSTRUCTORES CERTIFICADOS (3 COLS EN DESKTOP)
+   ========================================================= */
+
+.subpage-instructores-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .subpage-instructores-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subpage-instructores-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+.subpage-instructor-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.subpage-instructor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(35, 31, 32, 0.08);
+}
+
+.subpage-instructor-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--light-1);
+  overflow: hidden;
+}
+
+.subpage-instructor-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.subpage-instructor-card:hover .subpage-instructor-photo {
+  transform: scale(1.04);
+}
+
+.subpage-instructor-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.subpage-instructor-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.subpage-instructor-role {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--orange-text);
+  margin-bottom: 12px;
+}
+
+.subpage-instructor-bio {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   11. PREGUNTAS FRECUENTES (FAQ)
+   ========================================================= */
+
+.subpage-faq-wrap {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .subpage-faq-wrap {
+    grid-column: 1 / span 12;
+  }
+}
+
+/* =========================================================
+   12. BANNER PRE-FOOTER CTA
+   ========================================================= */
+
+.subpage-prefooter-banner {
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 24px;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .subpage-prefooter-banner {
+    padding: 64px 48px;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.subpage-prefooter-heading {
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .subpage-prefooter-heading {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
+.subpage-prefooter-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text-light-muted);
+  margin-top: 8px;
+  max-width: 520px;
+}
+
+/* =========================================================
+   13. SALVAGUARDA DE VISIBILIDAD (SUBPÁGINAS)
+   ========================================================= */
+body.is-subpage .motion-accordion-item,
+body.is-subpage .footer-floating-card,
+body.is-subpage .subpage-prefooter-banner {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+

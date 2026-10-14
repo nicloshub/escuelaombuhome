@@ -255,18 +255,90 @@ async function fetchLiveWind() {
     }
 
     if (captionEl && suitabilityEl) {
-      if (knots >= 14 && knots <= 26) {
-        captionEl.textContent = 'Condición óptima de planeo';
-        suitabilityEl.textContent = 'Ideal Kite & Wing';
-      } else if (knots >= 8 && knots < 14) {
-        captionEl.textContent = 'Viento moderado';
-        suitabilityEl.textContent = 'Ideal Wing & Wind';
-      } else if (knots < 8) {
-        captionEl.textContent = 'Agua calma sin viento';
-        suitabilityEl.textContent = 'Ideal SUP & Kayak';
+      // Detectar si estamos en una subpágina de deporte específico
+      const sportAttr = document.querySelector('[data-sport]')?.getAttribute('data-sport');
+      let currentSport = sportAttr || null;
+      if (!currentSport) {
+        const path = window.location.pathname.toLowerCase();
+        if (path.includes('kitesurf')) currentSport = 'kitesurf';
+        else if (path.includes('windsurf')) currentSport = 'windsurf';
+        else if (path.includes('wingfoil')) currentSport = 'wingfoil';
+      }
+
+      suitabilityEl.classList.remove('is-not-recommended');
+
+      if (currentSport === 'kitesurf') {
+        if (knots >= 14 && knots <= 25) {
+          captionEl.textContent = 'Condición óptima de planeo';
+          suitabilityEl.textContent = 'Kitesurf Ideal';
+        } else if (knots >= 10 && knots < 14) {
+          captionEl.textContent = 'Viento suave en el spot';
+          suitabilityEl.textContent = 'Kite Posible / Foil';
+        } else if (knots > 25 && knots <= 30) {
+          captionEl.textContent = 'Viento fuerte en el spot';
+          suitabilityEl.textContent = 'Kite Avanzado';
+        } else if (knots < 10) {
+          captionEl.textContent = 'Viento insuficiente';
+          suitabilityEl.textContent = 'No recomendado';
+          suitabilityEl.classList.add('is-not-recommended');
+        } else {
+          captionEl.textContent = 'Viento excesivo / temporal';
+          suitabilityEl.textContent = 'No recomendado';
+          suitabilityEl.classList.add('is-not-recommended');
+        }
+      } else if (currentSport === 'windsurf') {
+        if (knots >= 11 && knots <= 22) {
+          captionEl.textContent = 'Viento parejo para navegar';
+          suitabilityEl.textContent = 'Windsurf Ideal';
+        } else if (knots >= 7 && knots < 11) {
+          captionEl.textContent = 'Viento suave (iniciación)';
+          suitabilityEl.textContent = 'Iniciación Posible';
+        } else if (knots > 22 && knots <= 28) {
+          captionEl.textContent = 'Viento fuerte / planeo';
+          suitabilityEl.textContent = 'Windsurf Pro';
+        } else if (knots < 7) {
+          captionEl.textContent = 'Agua calma sin viento';
+          suitabilityEl.textContent = 'No recomendado';
+          suitabilityEl.classList.add('is-not-recommended');
+        } else {
+          captionEl.textContent = 'Condición extrema';
+          suitabilityEl.textContent = 'No recomendado';
+          suitabilityEl.classList.add('is-not-recommended');
+        }
+      } else if (currentSport === 'wingfoil') {
+        if (knots >= 11 && knots <= 22) {
+          captionEl.textContent = 'Vuelo óptimo sobre foil';
+          suitabilityEl.textContent = 'Wingfoil Ideal';
+        } else if (knots >= 8 && knots < 11) {
+          captionEl.textContent = 'Viento suave (iniciación)';
+          suitabilityEl.textContent = 'Wing Posible';
+        } else if (knots > 22 && knots <= 26) {
+          captionEl.textContent = 'Viento fuerte / ala chica';
+          suitabilityEl.textContent = 'Wing Avanzado';
+        } else if (knots < 8) {
+          captionEl.textContent = 'Sin viento para volar';
+          suitabilityEl.textContent = 'No recomendado';
+          suitabilityEl.classList.add('is-not-recommended');
+        } else {
+          captionEl.textContent = 'Ráfagas fuertes en el spot';
+          suitabilityEl.textContent = 'No recomendado';
+          suitabilityEl.classList.add('is-not-recommended');
+        }
       } else {
-        captionEl.textContent = 'Viento fuerte en el spot';
-        suitabilityEl.textContent = 'Kite & Wind Pro';
+        // Home oficial (recomendación multideporte general)
+        if (knots >= 14 && knots <= 26) {
+          captionEl.textContent = 'Condición óptima de planeo';
+          suitabilityEl.textContent = 'Ideal Kite & Wing';
+        } else if (knots >= 8 && knots < 14) {
+          captionEl.textContent = 'Viento moderado';
+          suitabilityEl.textContent = 'Ideal Wing & Wind';
+        } else if (knots < 8) {
+          captionEl.textContent = 'Agua calma sin viento';
+          suitabilityEl.textContent = 'Ideal SUP & Kayak';
+        } else {
+          captionEl.textContent = 'Viento fuerte en el spot';
+          suitabilityEl.textContent = 'Kite & Wind Pro';
+        }
       }
     }
   } catch (err) {
@@ -1118,7 +1190,7 @@ function initHeroFloatingScroll() {
     if (wppBtn) {
       wppBtn.classList.toggle('is-visible', isPast);
     }
-    if (weatherCard) {
+    if (weatherCard && weatherCard.closest('.hero-weather-col')) {
       if (isPast) {
         weatherCard.style.animation = 'none';
         weatherCard.classList.add('is-scrolled-hidden');

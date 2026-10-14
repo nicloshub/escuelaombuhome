@@ -1518,6 +1518,11 @@ header.site-header.menu-open ~ main .hero-weather-card {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+.weather-suitability-pill.is-not-recommended {
+  color: rgba(35, 31, 32, 0.45) !important;
+  border-color: rgba(35, 31, 32, 0.22) !important;
+}
+
 /* Estado de Fallback / Error de datos meteorológicos */
 .hero-weather-card.has-weather-error .weather-caption {
   color: var(--ink);
