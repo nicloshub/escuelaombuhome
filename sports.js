@@ -319,6 +319,34 @@ function initGearExplorer() {
   function selectItem(itemId, interacted = false) {
     const selected = options.find((option) => option.dataset.item === itemId);
     if (!selected) return;
+
+    const isAlreadyActive = selected.classList.contains('is-active');
+    const shouldClose = interacted && isAlreadyActive;
+
+    if (shouldClose) {
+      resetView();
+      hotspots.forEach((button) => {
+        button.classList.remove('is-active');
+        button.setAttribute('aria-expanded', 'false');
+        const symbol = button.querySelector('.gear-hotspot-symbol');
+        if (symbol) symbol.textContent = '+';
+      });
+      options.forEach((option) => {
+        option.classList.remove('is-active');
+        const button = option.querySelector('.gear-item-selector-button');
+        const detail = option.querySelector('.gear-item-detail');
+        if (button) {
+          button.classList.remove('is-active');
+          button.setAttribute('aria-expanded', 'false');
+        }
+        if (detail) {
+          detail.removeAttribute('hidden');
+          detail.setAttribute('aria-hidden', 'true');
+        }
+      });
+      return;
+    }
+
     if (interacted) {
       stage.classList.add('has-interacted');
       focusGear(itemId);
@@ -341,7 +369,8 @@ function initGearExplorer() {
         button.setAttribute('aria-expanded', String(isActive));
       }
       if (detail) {
-        detail.hidden = !isActive;
+        detail.removeAttribute('hidden');
+        detail.setAttribute('aria-hidden', String(!isActive));
         if (isActive) {
           const image = detail.querySelector('img');
           if (image) image.loading = 'eager';
