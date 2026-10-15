@@ -25,12 +25,11 @@ function initLevelAccordion() {
 
   const cards = Array.from(accordion.querySelectorAll('.level-card'));
 
-  function openCard(targetCard) {
-    if (!targetCard || targetCard.classList.contains('is-open')) return;
+  let isAnimating = false;
 
+  function updateAria(activeCard) {
     cards.forEach(card => {
-      const isOpen = card === targetCard;
-      card.classList.toggle('is-open', isOpen);
+      const isOpen = card === activeCard;
       const btn = card.querySelector('.level-trigger');
       if (btn) {
         btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -42,12 +41,44 @@ function initLevelAccordion() {
     });
   }
 
+  function openCard(targetCard) {
+    if (!targetCard || targetCard.classList.contains('is-open')) return;
+
+    cards.forEach(card => {
+      const isOpen = card === targetCard;
+      card.classList.toggle('is-open', isOpen);
+      card.classList.remove('is-expanding', 'is-closing');
+
+      if (!isOpen) {
+        card.classList.remove('is-content-ready');
+      }
+
+      const btn = card.querySelector('.level-trigger');
+      if (btn) {
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+      const panel = card.querySelector('.level-panel');
+      if (panel) {
+        panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      }
+    });
+
+    // Cascada con física Apple (blur + drift) para la tarjeta recién abierta
+    // Se activa apenas la tarjeta se ensancha y entra el panel blanco
+    setTimeout(() => {
+      if (targetCard.classList.contains('is-open')) {
+        targetCard.classList.add('is-content-ready');
+      }
+    }, 180);
+  }
+
   cards.forEach((card, index) => {
     const btn = card.querySelector('.level-trigger');
 
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
+        userHasInteracted = true;
         openCard(card);
       });
 
@@ -59,6 +90,7 @@ function initLevelAccordion() {
           targetIndex = (index - 1 + cards.length) % cards.length;
         } else if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
+          userHasInteracted = true;
           openCard(card);
         }
 
@@ -76,7 +108,46 @@ function initLevelAccordion() {
         openCard(card);
       }
     });
+
+    // Evitar que el clic en el botón de WhatsApp active manejadores de la card
+    const notchBtn = card.querySelector('.level-notch-btn');
+    if (notchBtn) {
+      notchBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
   });
+
+  // Revelado "onda footer / reseñas": al scrollear hasta #camino,
+  // el contenedor del acordeón emerge suavemente desde abajo (translateY + opacity)
+  // y la tarjeta abierta (Nivel 01) despliega su cascada de elementos interiores.
+  const caminoSection = document.getElementById('camino') || accordion;
+  if ('IntersectionObserver' in window && caminoSection) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          accordion.classList.add('is-in-view');
+
+          const openCardEl = accordion.querySelector('.level-card.is-open');
+          if (openCardEl && !openCardEl.classList.contains('is-content-ready')) {
+            setTimeout(() => {
+              openCardEl.classList.add('is-content-ready');
+            }, 180);
+          }
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    observer.observe(caminoSection);
+  } else {
+    accordion.classList.add('is-in-view');
+    const openCardEl = accordion.querySelector('.level-card.is-open');
+    if (openCardEl) openCardEl.classList.add('is-content-ready');
+  }
 }
 
 // 2.1. Tabs interactivos para los 3 niveles de "El Camino" (según diseño exacto Figma)
@@ -328,7 +399,7 @@ function initJourneyScroller() {
   const stepsShell = section.querySelector('.journey-steps-shell');
   const progressDot = section.querySelector('.journey-progress-dot');
   const divider = section.querySelector('[data-journey-divider]');
-  if (!steps.length || !sceneLayers.length || !sceneLabel || !stepsShell || !progressDot) return;
+  if (!steps.length || !sceneLayers.length || !stepsShell || !progressDot) return;
 
   section.classList.add('is-enhanced');
   let activeStep = steps.find((step) => step.classList.contains('is-active')) || steps[0];
@@ -354,7 +425,7 @@ function initJourneyScroller() {
     sceneLayers.forEach((layer) => {
       layer.classList.toggle('is-active', layer.dataset.step === stepNumber);
     });
-    sceneLabel.textContent = step.dataset.scene || 'EN TIERRA';
+    if (sceneLabel) sceneLabel.textContent = step.dataset.scene || 'EN TIERRA';
     updateProgress(step);
   }
 

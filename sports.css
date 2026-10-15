@@ -3849,9 +3849,19 @@ header.site-header:hover {
 .level-accordion {
   display: flex;
   gap: 16px;
-  height: 580px;
+  height: 530px;
   width: 100%;
   position: relative;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.level-accordion.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Tarjeta individual */
@@ -3860,11 +3870,11 @@ header.site-header:hover {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: var(--light-1);
+  background-color: transparent;
   box-shadow: 0 4px 16px rgba(13, 21, 28, 0.05);
-  transition: flex-grow 520ms cubic-bezier(0.16, 1, 0.3, 1),
-              flex-basis 520ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-radius 520ms cubic-bezier(0.16, 1, 0.3, 1),
+  transition: flex-grow 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              flex-basis 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 500ms cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 380ms ease;
   will-change: flex-grow, flex-basis, border-radius;
 }
@@ -3879,11 +3889,11 @@ header.site-header:hover {
 }
 
 .level-card:not(.is-open):hover {
-  box-shadow: 0 8px 24px rgba(13, 21, 28, 0.12);
+  box-shadow: 0 8px 24px rgba(13, 21, 28, 0.16);
   transform: translateY(-2px);
-  transition: flex-grow 520ms cubic-bezier(0.16, 1, 0.3, 1),
-              flex-basis 520ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-radius 520ms cubic-bezier(0.16, 1, 0.3, 1),
+  transition: flex-grow 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              flex-basis 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 500ms cubic-bezier(0.16, 1, 0.3, 1),
               transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 250ms ease;
 }
@@ -3898,7 +3908,7 @@ header.site-header:hover {
   box-shadow: 0 16px 44px rgba(13, 21, 28, 0.10);
 }
 
-/* Botón Trigger / Pastilla */
+/* Botón Trigger / Pastilla (Cubre el 100% de la tarjeta para que el degradé oscuro abarque toda la foto) */
 .level-trigger {
   position: absolute;
   inset: 0;
@@ -3910,11 +3920,7 @@ header.site-header:hover {
   margin: 0;
   cursor: pointer;
   z-index: 5;
-  display: flex;
-  flex-direction: column;
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 260ms cubic-bezier(0.16, 1, 0.3, 1) 180ms;
+  border-radius: inherit;
 }
 
 .level-trigger:focus-visible {
@@ -3922,58 +3928,62 @@ header.site-header:hover {
   outline-offset: 3px;
 }
 
+.level-card:not(.is-open) .level-trigger {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 240ms ease-out 60ms;
+}
+
 .level-card.is-open .level-trigger {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 140ms ease-in 0ms;
+  transition: opacity 160ms ease-out 0ms;
 }
 
-/* Fondo y degradé de la pastilla cerrada */
-.level-pill-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  z-index: 1;
-  transform: scale(1.02);
-  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.level-trigger:hover .level-pill-photo {
-  transform: scale(1.06);
-}
-
+/* Degradé oscuro sobre la foto cuando está en modo pastilla: cubre el 100% de la tarjeta */
 .level-pill-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(35, 31, 32, 0.50) 0%, rgba(35, 31, 32, 0.72) 100%);
-  z-index: 2;
-}
-
-.level-pill-content {
-  position: relative;
-  z-index: 3;
   width: 100%;
   height: 100%;
+  background: linear-gradient(180deg, rgba(35, 31, 32, 0.40) 0%, rgba(35, 31, 32, 0.70) 100%);
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: opacity 350ms ease;
+}
+
+.level-card:not(.is-open) .level-pill-overlay {
+  opacity: 1;
+  transition: opacity 280ms ease 40ms;
+}
+
+.level-card.is-open .level-pill-overlay {
+  opacity: 0;
+  transition: opacity 240ms ease 0ms;
+}
+
+/* Contenido de textos y flecha de la pastilla: anclado fijamente a la columna izquierda de 88px para que los textos no se trasladen horizontalmente al abrir/cerrar */
+.level-pill-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 88px;
+  height: 100%;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 24px 0;
   pointer-events: none;
-  transform: scale(1);
-  opacity: 1;
-  transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1) 180ms,
-              transform 350ms cubic-bezier(0.16, 1, 0.3, 1) 180ms;
+  transform: none !important;
+  transition: none !important;
 }
 
 .level-card.is-open .level-pill-content {
-  opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 120ms ease-in 0ms,
-              transform 120ms ease-in 0ms;
+  transform: none !important;
 }
 
 .level-pill-num {
@@ -4016,18 +4026,19 @@ header.site-header:hover {
 .level-pill-arrow svg {
   display: block;
   stroke: currentColor;
+  transform-origin: center;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .level-trigger:hover .level-pill-arrow {
+  .level-card:not(.is-open):hover .level-pill-arrow {
     background-color: var(--orange);
     color: #FFFFFF;
-    transform: scale(1.1);
+    transform: scale(1.08);
     box-shadow: 0 6px 18px rgba(255, 82, 6, 0.35);
   }
-  .level-trigger:hover .level-pill-arrow svg {
-    transform: translateX(3px);
+  .level-card:not(.is-open):hover .level-pill-arrow svg {
+    transform: rotate(-35deg);
   }
 }
 
@@ -4039,87 +4050,234 @@ header.site-header:hover {
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  border-radius: 36px;
-  background-color: #FFFFFF;
+  border-radius: inherit;
+  background-color: transparent;
   z-index: 2;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1) 120ms,
-              visibility 0s linear 0ms;
-}
-
-.level-card:not(.is-open) .level-panel {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 180ms ease-out 0ms,
-              visibility 0s linear 180ms;
 }
 
 /* Columna izquierda: Media / Foto con badge de nivel */
 .level-panel-media {
-  flex: 0 0 38%;
   position: relative;
   height: 100%;
   overflow: hidden;
-  border-top-left-radius: 36px;
-  border-bottom-left-radius: 36px;
-  background-color: var(--light-1);
+  background-color: #121212;
+  will-change: width, max-width, border-radius;
+}
+
+/* Cerrada: la foto espera a que el contorno la alcance (340px) y luego se contrae en sincronía pura al 100% hasta 88px */
+.level-card:not(.is-open) .level-panel-media {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 340px;
+  border-radius: 44px;
+  transition: border-radius 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Abierta: la foto ocupa el 38% del ancho con sus esquinas izquierdas redondeadas */
+.level-card.is-open .level-panel-media {
+  flex: 0 0 38%;
+  width: 38%;
+  max-width: 38%;
+  border-radius: 36px 0 0 36px;
+  transition: flex-basis 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              width 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              max-width 500ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .level-panel-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
-  transform: scale(1.03);
-  transition: transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
+  transform: none !important;
+  transition: none !important;
 }
 
-.level-card.is-open .level-panel-img {
-  transform: scale(1);
-}
-
-/* Badge NIVEL 01/02/03 sobre la foto (arriba a la derecha) */
+/* Badge NIVEL 01/02/03 sobre la foto */
 .level-media-badge {
   position: absolute;
-  top: 24px;
+  top: 28px;
   right: 28px;
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: 36px;
   line-height: 1;
   color: #FFFFFF;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.01em;
   z-index: 3;
+  will-change: transform, opacity;
+}
+
+/* Cerrada o antes de abrir: oculto debajo de la sección blanca (a la derecha) */
+.level-card:not(.is-open) .level-media-badge,
+.level-card.is-open:not(.is-content-ready) .level-media-badge {
+  opacity: 0;
+  transform: translate3d(calc(100% + 32px), 0, 0);
+  pointer-events: none;
+  transition: opacity 140ms ease-out 0ms,
+              transform 140ms ease-out 0ms;
+}
+
+/* Abierta: emerge de derecha a izquierda desde abajo de la sección blanca una vez que la card está lista */
+.level-card.is-open.is-content-ready .level-media-badge {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 450ms ease 100ms,
+              transform 550ms cubic-bezier(0.16, 1, 0.3, 1) 100ms;
 }
 
 /* Columna derecha: Contenido blanco, títulos, objetivos y footer */
 .level-panel-content {
-  flex: 1 1 auto;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 32px 36px;
+  padding: 28px 32px;
   background-color: #FFFFFF;
-  min-width: 0;
-  border-top-right-radius: 36px;
-  border-bottom-right-radius: 36px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 180ms ease-out 0ms,
-              transform 180ms ease-out 0ms;
+  border-radius: 0;
   will-change: transform, opacity;
+  overflow: hidden;
 }
 
+/* Cerrada: se desvanece de inmediato y colapsa de forma flexible sin forzar min-width ni dejar colas blancas */
+.level-card:not(.is-open) .level-panel-content {
+  flex: 1 1 0%;
+  min-width: 0 !important;
+  opacity: 0;
+  transform: translateX(30px);
+  pointer-events: none;
+  transition: transform 180ms ease-in 0ms,
+              opacity 140ms ease-out 0ms;
+}
+
+/* Abierta: entra deslizándose suavemente desde la derecha ocupando el 62% */
 .level-card.is-open .level-panel-content {
+  flex: 0 0 62%;
+  width: 62%;
+  min-width: 380px;
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 380ms ease-out 140ms,
-              transform 460ms cubic-bezier(0.16, 1, 0.3, 1) 140ms;
+  transform: translateX(0);
+  pointer-events: auto;
+  transition: transform 460ms cubic-bezier(0.16, 1, 0.3, 1) 80ms,
+              opacity 380ms ease 120ms;
+}
+
+/* Contenidos interiores: Título, bajada, objetivos y footer con física Apple (Blur + Drift) */
+.level-panel-header,
+.level-point-row,
+.level-card-footer {
+  will-change: transform, opacity, filter;
+}
+
+/* Cerrada o mientras se abre sin estar lista */
+.level-card:not(.is-open) .level-panel-header,
+.level-card:not(.is-open) .level-point-row,
+.level-card:not(.is-open) .level-card-footer,
+.level-card.is-open:not(.is-content-ready) .level-panel-header,
+.level-card.is-open:not(.is-content-ready) .level-point-row,
+.level-card.is-open:not(.is-content-ready) .level-card-footer {
+  opacity: 0;
+  filter: blur(4px);
+  transform: translate3d(0, 20px, 0);
+  pointer-events: none;
+}
+
+/* Al cerrar: fade out sutil y rápido hacia abajo */
+.level-card:not(.is-open) .level-panel-header,
+.level-card:not(.is-open) .level-point-row,
+.level-card:not(.is-open) .level-card-footer {
+  transition: opacity 160ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+              filter 160ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Abierta con is-content-ready: cascada idéntica a las reseñas de la Home (Apple Motion Physics) */
+.level-card.is-content-ready .level-panel-header {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1) 0ms,
+              transform 520ms cubic-bezier(0.22, 1, 0.36, 1) 0ms,
+              filter 520ms cubic-bezier(0.22, 1, 0.36, 1) 0ms;
+}
+
+.level-card.is-content-ready .level-point-row:nth-child(1) {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) 50ms,
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 50ms,
+              filter 500ms cubic-bezier(0.22, 1, 0.36, 1) 50ms,
+              background-color 0.2s ease;
+}
+
+.level-card.is-content-ready .level-point-row:nth-child(2) {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) 100ms,
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 100ms,
+              filter 500ms cubic-bezier(0.22, 1, 0.36, 1) 100ms,
+              background-color 0.2s ease;
+}
+
+.level-card.is-content-ready .level-point-row:nth-child(3) {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) 150ms,
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 150ms,
+              filter 500ms cubic-bezier(0.22, 1, 0.36, 1) 150ms,
+              background-color 0.2s ease;
+}
+
+.level-card.is-content-ready .level-point-row:nth-child(4) {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) 200ms,
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 200ms,
+              filter 500ms cubic-bezier(0.22, 1, 0.36, 1) 200ms,
+              background-color 0.2s ease;
+}
+
+.level-card.is-content-ready .level-point-row:nth-child(5) {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) 250ms,
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 250ms,
+              filter 500ms cubic-bezier(0.22, 1, 0.36, 1) 250ms,
+              background-color 0.2s ease;
+}
+
+.level-card.is-content-ready .level-point-row:nth-child(n+6) {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms,
+              transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms,
+              filter 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms,
+              background-color 0.2s ease;
+}
+
+.level-card.is-content-ready .level-card-footer {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1) 320ms,
+              transform 520ms cubic-bezier(0.22, 1, 0.36, 1) 320ms,
+              filter 520ms cubic-bezier(0.22, 1, 0.36, 1) 320ms;
 }
 
 .level-panel-header {
@@ -4128,8 +4286,8 @@ header.site-header:hover {
 
 .level-title {
   font-family: var(--font-display);
-  font-size: clamp(28px, 2.6vw, 36px);
-  line-height: 1.05;
+  font-size: 36px;
+  line-height: 1;
   text-transform: uppercase;
   color: var(--ink);
   margin: 0 0 8px;
@@ -4146,12 +4304,12 @@ header.site-header:hover {
   font-weight: 400;
 }
 
-/* Lista de Objetivos en filas horizontales */
+/* Lista de Objetivos en filas horizontales (Píldoras compactas según Figma) */
 .level-points-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  gap: 6px;
+  margin-top: 6px;
   margin-bottom: auto;
 }
 
@@ -4161,7 +4319,7 @@ header.site-header:hover {
   gap: 12px;
   background: #F5F5F7;
   border-radius: 12px;
-  padding: 7px 14px;
+  padding: 12px 16px;
   border: 1px solid rgba(0, 0, 0, 0.03);
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -4178,34 +4336,35 @@ header.site-header:hover {
   background-color: var(--orange, #FF5206);
   color: #FFFFFF;
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 4px 10px;
+  padding: 2.5px 8px;
+  line-height: 1.2;
   border-radius: 100px;
   white-space: nowrap;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(255, 82, 6, 0.25);
+  box-shadow: 0 1px 4px rgba(255, 82, 6, 0.2);
 }
 
 .level-point-text {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.25;
   color: var(--ink, #231F20);
 }
 
-/* Footer de la tarjeta con pastillas y CTA */
+/* Footer de la tarjeta con pastillas de horas y alcance */
 .level-card-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 16px;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(35, 31, 32, 0.06);
+  margin-top: 18px;
+  padding-top: 0;
+  padding-right: 88px;
 }
 
 .level-card-meta-group {
@@ -4244,51 +4403,109 @@ header.site-header:hover {
   border-radius: 100px;
 }
 
-.level-card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #FFFFFF;
-  color: var(--ink, #231F20);
-  border: 1.5px solid var(--ink, #231F20);
-  padding: 5px 6px 5px 16px;
-  border-radius: 100px;
-  text-decoration: none;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  flex-shrink: 0;
+/* Esquina cóncava inferior derecha según identidad visual Ombú */
+.level-corner-notch {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 82px;
+  height: 82px;
+  background-color: var(--light-1);
+  border-top-left-radius: 36px;
+  z-index: 10;
+  pointer-events: auto;
+  will-change: transform, opacity;
 }
 
-.level-cta-circle {
-  width: 32px;
-  height: 32px;
+/* Empalme cóncavo superior (inverted fillet) */
+.level-corner-notch::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border-bottom-right-radius: 24px;
+  box-shadow: 6px 6px 0 6px var(--light-1);
+  pointer-events: none;
+}
+
+/* Empalme cóncavo izquierdo (inverted fillet) */
+.level-corner-notch::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -24px;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border-bottom-right-radius: 24px;
+  box-shadow: 6px 6px 0 6px var(--light-1);
+  pointer-events: none;
+}
+
+/* Estado cerrado o previo a abrir: oculto con scale suave */
+.level-card:not(.is-open) .level-corner-notch,
+.level-card.is-open:not(.is-content-ready) .level-corner-notch {
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  transition: opacity 120ms ease-out 0ms,
+              transform 120ms ease-out 0ms;
+}
+
+/* Estado abierto y listo (cascada Apple motion) */
+.level-card.is-open.is-content-ready .level-corner-notch {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  transition: opacity 400ms ease 180ms,
+              transform 480ms cubic-bezier(0.16, 1, 0.3, 1) 180ms;
+}
+
+/* Botón circular alineado exactamente con la flecha de la pastilla cerrada */
+.level-notch-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--ink, #231F20);
+  background-color: var(--ink);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              box-shadow 0.25s ease;
+  z-index: 2;
 }
 
-.level-cta-circle svg {
-  display: block;
+.level-notch-arrow {
+  width: 18px;
+  height: 18px;
   stroke: currentColor;
+  transform-origin: center;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .level-card-cta:hover {
-    border-color: var(--orange, #FF5206);
-    color: var(--orange, #FF5206);
-    box-shadow: 0 4px 14px rgba(255, 82, 6, 0.2);
-  }
-  .level-card-cta:hover .level-cta-circle {
+  .level-notch-btn:hover,
+  .level-corner-notch:hover .level-notch-btn {
     background-color: var(--orange, #FF5206);
-    transform: translateX(2px);
+    color: #FFFFFF;
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(255, 82, 6, 0.35);
+  }
+
+  .level-notch-btn:hover .level-notch-arrow,
+  .level-corner-notch:hover .level-notch-arrow {
+    transform: rotate(-45deg);
   }
 }
 
@@ -4353,12 +4570,20 @@ header.site-header:hover {
   }
 
   .level-panel {
+    display: flex;
     flex-direction: column;
     height: auto;
     border-radius: 28px;
   }
 
-  .level-panel-media {
+  .level-card:not(.is-open) .level-panel-media {
+    flex: 0 0 84px;
+    height: 84px;
+    width: 100%;
+    border-radius: 28px;
+  }
+
+  .level-card.is-open .level-panel-media {
     flex: 0 0 220px;
     height: 220px;
     width: 100%;
@@ -4372,8 +4597,30 @@ header.site-header:hover {
   }
 
   .level-panel-content {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
     padding: 24px 20px;
     border-radius: 0 0 28px 28px;
+  }
+
+  .level-card:not(.is-open) .level-panel-content {
+    display: none;
+  }
+
+  .level-card.is-open .level-panel-content {
+    display: flex;
+    opacity: 1;
+    transform: none;
+  }
+
+  .level-card.is-open .level-panel-header,
+  .level-card.is-open .level-point-row,
+  .level-card.is-open .level-card-footer {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   .level-title {
@@ -4404,18 +4651,58 @@ header.site-header:hover {
 
   .level-card-footer {
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 14px;
-    margin-top: 18px;
-    padding-top: 14px;
+    margin-top: 16px;
+    padding-top: 0;
+    padding-right: 64px;
   }
 
-  .level-card-cta {
-    justify-content: center;
-    padding: 8px 12px 8px 18px;
+  .level-corner-notch {
+    width: 60px;
+    height: 60px;
+    border-top-left-radius: 24px;
+  }
+
+  .level-corner-notch::before {
+    top: -20px;
+    width: 20px;
+    height: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 5px 5px 0 5px var(--light-1);
+  }
+
+  .level-corner-notch::after {
+    left: -20px;
+    width: 20px;
+    height: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 5px 5px 0 5px var(--light-1);
+  }
+
+  .level-notch-btn {
+    bottom: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .level-notch-arrow {
+    width: 16px;
+    height: 16px;
+  }
+
+  .level-trigger {
+    width: 100%;
+    height: 100%;
   }
 
   .level-pill-content {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -4454,14 +4741,23 @@ header.site-header:hover {
 
 /* prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
+  .level-accordion,
   .level-card,
   .level-trigger,
   .level-pill-arrow,
+  .level-media-badge,
+  .level-corner-notch,
+  .level-notch-btn,
+  .level-notch-arrow,
   .level-panel-content,
   .para-quien-card {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     transition-delay: 0ms !important;
+  }
+  .level-accordion {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
@@ -4845,6 +5141,13 @@ header.site-header:hover {
     transition: none !important;
     transform: none !important;
   }
+}
+
+/* Cards de protocolo y seguridad bajo la sección Bento */
+.bento-pillar-cards {
+  margin: clamp(40px, 4.5vw, 64px) 0 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* --- 6. SECCIÃ“N NUEVA: "Â¿Y SI NO HAY VIENTO?" (FRANJA CLARA) --- */
@@ -6697,107 +7000,58 @@ button:focus-visible {
   }
 }
 
+/* 1. LAYOUT 2 COLUMNAS HERO (Figma spec: Split Content Izquierda + Stage Derecha) */
 .kite-hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+@media (min-width: 1024px) {
+  .kite-hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: clamp(36px, 4vw, 64px);
+    align-items: center;
+  }
+}
+
+.kite-hero-content-col {
   display: flex;
   flex-direction: column;
 }
 
-/* 1. TÍTULO H1 IMPACTANTE */
+/* Título H1 */
 .kite-hero-title {
   font-family: var(--font-display, 'Anton', sans-serif);
-  font-size: clamp(48px, 6.8vw, 118px);
+  font-size: clamp(40px, 4.4vw, 76px);
   line-height: 0.95;
   letter-spacing: -0.015em;
   text-transform: uppercase;
   color: #FFFFFF;
-  margin: 0 0 clamp(28px, 3.5vw, 48px);
+  margin: 0 0 18px;
   display: flex;
   flex-direction: column;
 }
 
-.kite-hero-title-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.kite-hero-title-accent-row {
-  display: inline-flex;
-  align-items: center;
-  gap: clamp(14px, 1.8vw, 26px);
-  margin-top: 6px;
-}
-
-.kite-hero-arrow-disc {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: clamp(52px, 5.8vw, 92px);
-  height: clamp(52px, 5.8vw, 92px);
-  border-radius: 50%;
-  background: var(--orange, #FF5206);
-  color: #FFFFFF;
-  flex-shrink: 0;
-  box-shadow: 0 10px 24px rgba(255, 82, 6, 0.35);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-}
-
-.kite-hero-arrow-disc:hover {
-  transform: scale(1.06) rotate(6deg);
-  box-shadow: 0 14px 28px rgba(255, 82, 6, 0.45);
-}
-
-.kite-hero-arrow-disc svg {
-  width: 44%;
-  height: 44%;
-}
-
 .kite-hero-word-orange {
   color: var(--orange, #FF5206);
-}
-
-/* 2. FILA MEDIA (Bajada + CTAs a la izquierda | Badges a la derecha) */
-.kite-hero-middle-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 28px;
-  margin-bottom: clamp(40px, 4.5vw, 64px);
-  align-items: end;
-}
-
-@media (min-width: 900px) {
-  .kite-hero-middle-grid {
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--grid-gutter, 32px);
-    align-items: end;
-  }
-
-  .kite-hero-desc-col {
-    grid-column: 1 / span 7;
-  }
-
-  .kite-hero-badges-col {
-    grid-column: 8 / span 5;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
+  display: block;
 }
 
 .kite-hero-bajada {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(15px, 1.1vw, 17px);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.76);
-  max-width: 480px;
+  font-size: clamp(14.5px, 1.05vw, 16px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 440px;
   margin: 0 0 28px;
 }
 
 .kite-hero-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -6854,85 +7108,56 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
-.kite-hero-badges-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* Línea separadora y precio inferior */
+.kite-hero-price-wrap {
+  margin-top: 36px;
 }
 
-.kite-hero-badges-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+.kite-hero-divider {
+  width: 100%;
+  max-width: 380px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin-bottom: 18px;
 }
 
-.kite-hero-badge {
+.kite-hero-price-line {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(12.5px, 0.9vw, 14px);
-  font-weight: 500;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.88);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 100px;
-  padding: 8px 18px;
-  white-space: nowrap;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.2s ease;
+  margin: 0;
+  line-height: 1.4;
 }
 
-.kite-hero-badge:hover {
-  border-color: rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-1px);
+.kite-hero-price-line strong {
+  font-weight: 700;
+  color: #FFFFFF;
 }
 
-/* 3. STAGE VISUAL (Gran Foto Central en Cols 2-11 con Overlapping Cards en Cols 1 y 12) */
-.kite-hero-stage {
+/* 2. STAGE VISUAL (Columna Derecha: Foto + Badges Overlapping) */
+.kite-hero-stage-col {
   position: relative;
   width: 100%;
 }
 
-@media (min-width: 1024px) {
-  .kite-hero-stage {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--grid-gutter, 32px);
-    align-items: center;
-    position: relative;
-    margin-bottom: 24px;
-  }
-}
-
-@media (max-width: 1023px) {
-  .kite-hero-stage {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-  }
+.kite-hero-photo-wrap {
+  position: relative;
+  width: 100%;
 }
 
 .kite-hero-photo-frame {
   width: 100%;
-  height: clamp(340px, 42vw, 600px);
-  border-radius: clamp(24px, 2.8vw, 42px);
+  height: clamp(340px, 35vw, 500px);
+  border-radius: clamp(24px, 2.8vw, 36px);
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
   background-color: #0E0E0E;
   position: relative;
 }
 
-@media (min-width: 1024px) {
-  .kite-hero-photo-frame {
-    grid-column: 2 / span 10;
-  }
-}
-
 @media (max-width: 1023px) {
   .kite-hero-photo-frame {
-    height: clamp(280px, 54vw, 440px);
+    height: clamp(280px, 50vw, 420px);
     border-radius: 24px;
   }
 }
@@ -6945,46 +7170,14 @@ button:focus-visible {
   display: block;
 }
 
-/* Card del Tiempo Flotante a la Izquierda (Alineada a Columna 1) */
-.kite-hero-stage .hero-weather-card.kite-weather-left {
-  background: rgba(254, 254, 254, 0.96);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  border-radius: 24px;
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.08);
-  color: var(--ink, #231F20);
-  padding: 18px 22px;
-  width: 304px;
-  max-width: 100%;
-  z-index: 10;
-}
-
-@media (min-width: 1024px) {
-  .kite-hero-stage .hero-weather-card.kite-weather-left {
-    position: absolute;
-    grid-column: auto;
-    top: 36%;
-    left: 0;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-}
-
-@media (max-width: 1023px) {
-  .kite-hero-stage .hero-weather-card.kite-weather-left {
-    position: static;
-    margin: 0 auto;
-    width: min(340px, 100%);
-    transform: none;
-  }
-}
-
-/* Card de Experiencia "+15 AÑOS formando navegantes" (Alineada a Columna 12) */
+/* Card de Experiencia "+15 AÑOS formando navegantes" (Arriba a la derecha) */
 .kite-hero-exp-card {
+  position: absolute;
+  top: -14px;
+  right: -14px;
   background: var(--orange, #FF5206);
-  border-radius: 20px;
-  padding: 20px 28px;
+  border-radius: 18px;
+  padding: 18px 24px;
   box-shadow: 0 16px 36px rgba(255, 82, 6, 0.35);
   display: flex;
   flex-direction: column;
@@ -6993,29 +7186,18 @@ button:focus-visible {
   width: fit-content;
 }
 
-@media (min-width: 1024px) {
-  .kite-hero-exp-card {
-    position: absolute;
-    grid-column: auto;
-    bottom: -18px;
-    right: 0;
-    min-width: 216px;
-  }
-}
-
 @media (max-width: 1023px) {
   .kite-hero-exp-card {
-    position: static;
-    margin: 0 auto;
-    width: min(340px, 100%);
-    text-align: center;
-    align-items: center;
+    top: -10px;
+    right: -8px;
+    padding: 12px 18px;
+    border-radius: 14px;
   }
 }
 
 .kite-hero-exp-num {
   font-family: var(--font-display, 'Anton', sans-serif);
-  font-size: clamp(36px, 3.2vw, 46px);
+  font-size: clamp(32px, 2.8vw, 42px);
   line-height: 0.95;
   letter-spacing: -0.01em;
   color: #FFFFFF;
@@ -7024,11 +7206,43 @@ button:focus-visible {
 
 .kite-hero-exp-text {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.96);
   margin-top: 4px;
   line-height: 1.2;
+}
+
+/* Card del Tiempo Flotante (Abajo a la izquierda, sin estirarse hacia arriba) */
+.kite-hero-stage-col .hero-weather-card.kite-weather-left {
+  position: absolute;
+  top: auto !important;
+  right: auto !important;
+  bottom: 24px !important;
+  left: 24px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: rgba(254, 254, 254, 0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 22px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--ink, #231F20);
+  padding: 16px 20px;
+  width: 270px;
+  max-width: calc(100% - 48px);
+  z-index: 10;
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-stage-col .hero-weather-card.kite-weather-left {
+    bottom: 14px !important;
+    left: 14px !important;
+    width: 230px;
+    padding: 12px 16px;
+    border-radius: 18px;
+  }
 }
 
 /* --- Equipo: acercamiento al hotspot seleccionado --- */
