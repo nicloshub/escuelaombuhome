@@ -282,7 +282,7 @@ img {
 }
 
 .section-sand {
-  background-color: var(--light-1);
+  background-color: var(--white);
 }
 
 .section-dark {
@@ -396,28 +396,45 @@ img {
 }
 
 @media (min-width: 1024px) {
-  .editorial-header {
+  .editorial-header,
+  .section-header {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--grid-gutter, 32px);
-    align-items: start;
+    align-items: end;
     margin-bottom: 72px;
   }
 
-  /* 4 Columnas para Titular + Kicker */
+  /* 5 Columnas para Titular + Kicker */
   .editorial-col-left,
+  .section-title-col,
   .editorial-header > .editorial-title {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 5;
     margin-bottom: 0;
   }
 
-  /* 3 COL VOID: Columnas 5, 6 y 7 quedan totalmente libres */
+  /* 2 COL VOID: Columnas 6 y 7 quedan libres para respiro visual */
 
-  /* 5 Columnas para la Descripción / Bajada */
+  /* 5 Columnas para la Descripción / Bajada (Alineada a la derecha contra la línea verde y abajo contra la línea naranja) */
   .editorial-col-right,
+  .section-desc-col,
   .editorial-header > .editorial-lead {
     grid-column: 8 / span 5;
-    margin-top: 6px; /* alineación óptica con la primera línea del titular */
+    margin: 0;
+    align-self: end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .editorial-lead,
+  .section-desc-text,
+  .section-desc-col p {
+    margin: 0;
+    text-align: right;
+    max-width: 540px;
+    margin-left: auto;
   }
 }
 
@@ -2693,11 +2710,13 @@ header.site-header:hover {
 
 @media (min-width: 768px) {
   .pricing-editorial-grid {
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .pricing-card {
-    grid-column: span 6;
+@media (min-width: 1024px) {
+  .pricing-editorial-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -2705,7 +2724,7 @@ header.site-header:hover {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
-  padding: 40px 24px;
+  padding: 36px 24px;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-card);
@@ -2713,7 +2732,7 @@ header.site-header:hover {
 
 @media (min-width: 1024px) {
   .pricing-card {
-    padding: 48px 40px;
+    padding: 38px 28px;
   }
 }
 
@@ -2743,7 +2762,7 @@ header.site-header:hover {
 
 .pricing-amount {
   font-family: var(--font-display);
-  font-size: 48px;
+  font-size: clamp(34px, 2.4vw, 44px);
   line-height: 1;
   color: var(--ink);
 }
@@ -3219,13 +3238,13 @@ header.site-header:hover {
   }
 }
 
-/* Fondos alternados para evitar dos bloques oscuros consecutivos */
+/* Fondos claros para secciones (Blanco puro) */
 .section-light {
-  background-color: var(--light-1);
+  background-color: var(--white);
 }
 
 .section-sand {
-  background-color: #F8F7F4;
+  background-color: var(--white);
 }
 
 /* --- 2. HERO DESPEJADO SEGÃšN DISEÃ‘O DE REFERENCIA --- */
@@ -3834,7 +3853,7 @@ header.site-header:hover {
 
 /* --- 4.1. COMPONENTE: ACORDEÓN HORIZONTAL DE 3 NIVELES (LEVEL ACCORDION) --- */
 #camino {
-  background-color: var(--light-1);
+  background-color: var(--white);
 }
 
 .level-meta-line {
@@ -4410,7 +4429,7 @@ header.site-header:hover {
   right: 0;
   width: 82px;
   height: 82px;
-  background-color: var(--light-1);
+  background-color: var(--white);
   border-top-left-radius: 36px;
   z-index: 10;
   pointer-events: auto;
@@ -4427,7 +4446,7 @@ header.site-header:hover {
   height: 24px;
   background: transparent;
   border-bottom-right-radius: 24px;
-  box-shadow: 6px 6px 0 6px var(--light-1);
+  box-shadow: 6px 6px 0 6px var(--white);
   pointer-events: none;
 }
 
@@ -4441,7 +4460,7 @@ header.site-header:hover {
   height: 24px;
   background: transparent;
   border-bottom-right-radius: 24px;
-  box-shadow: 6px 6px 0 6px var(--light-1);
+  box-shadow: 6px 6px 0 6px var(--white);
   pointer-events: none;
 }
 
@@ -4528,10 +4547,10 @@ header.site-header:hover {
 
 .level-footer-note {
   font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--ink);
-  opacity: 0.85;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.6;
+  color: var(--text-muted);
+  opacity: 1;
   margin: 0;
   max-width: 580px;
 }
@@ -4669,7 +4688,7 @@ header.site-header:hover {
     width: 20px;
     height: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 5px 5px 0 5px var(--light-1);
+    box-shadow: 5px 5px 0 5px var(--white);
   }
 
   .level-corner-notch::after {
@@ -4677,7 +4696,7 @@ header.site-header:hover {
     width: 20px;
     height: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 5px 5px 0 5px var(--light-1);
+    box-shadow: 5px 5px 0 5px var(--white);
   }
 
   .level-notch-btn {
@@ -5143,11 +5162,16 @@ header.site-header:hover {
   }
 }
 
-/* Cards de protocolo y seguridad bajo la sección Bento */
-.bento-pillar-cards {
-  margin: clamp(40px, 4.5vw, 64px) 0 0;
-  padding: 0;
+/* Cards de protocolo y proceso de aprendizaje */
+.section-protocolo {
+  background: transparent;
+  padding-block: clamp(72px, 8vw, 112px);
+}
+
+.section-protocolo .objetivo-cards-grid {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* --- 6. SECCIÃ“N NUEVA: "Â¿Y SI NO HAY VIENTO?" (FRANJA CLARA) --- */
@@ -5362,7 +5386,7 @@ header.site-header:hover {
 /* --- 10. CRUCE FINAL: "Â¿DUDÃS ENTRE KITE Y WINGFOIL?" --- */
 .section-cruce {
   padding: 48px 0;
-  background-color: var(--light-1);
+  background-color: var(--white);
   border-top: 1px solid var(--line);
 }
 
@@ -5771,21 +5795,11 @@ button:focus-visible {
 }
 
 #equipo .equipment-header {
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  align-items: center;
-  gap: 16px clamp(24px, 4vw, 64px);
   margin-bottom: clamp(24px, 2.5vw, 32px);
 }
 
 #equipo .equipment-header .editorial-col-left {
-  grid-column: 1;
   gap: 10px;
-}
-
-#equipo .equipment-header .editorial-col-right {
-  grid-column: 2;
-  align-self: center;
-  margin: 0;
 }
 
 @media (max-width: 1199px) {
@@ -5947,13 +5961,6 @@ button:focus-visible {
 
 .community-review figcaption span {
   opacity: 0.8;
-}
-
-#instructores .instructores-grid--kite {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 840px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 @media (min-width: 1024px) {
@@ -6419,10 +6426,6 @@ button:focus-visible {
   .community-review {
     margin-top: 18px;
     padding: 20px;
-  }
-
-  #instructores .instructores-grid--kite {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -7321,14 +7324,23 @@ button:focus-visible {
 /* --- Kitesurf: tarjetas de instructores con el componente original de la home --- */
 #instructores {
   padding-block: clamp(64px, 8vw, 104px);
-  background: var(--bg-card);
+  background: var(--white);
 }
 #instructores .instructores-grid--kite {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 840px;
-  margin-right: auto;
-  margin-left: auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  max-width: none;
+  gap: 24px;
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  #instructores .instructores-grid--kite {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: none;
+    gap: 20px;
+  }
 }
 
 /* --- Cierre: foto, frase y una sola acción --- */
@@ -7411,15 +7423,18 @@ button:focus-visible {
 }
 
 @media (max-width: 767px) {
-  #instructores .instructores-grid--kite { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .closing-scene { min-height: 640px; padding-block: 72px; }
   .closing-scene-title { margin-bottom: 28px; font-size: clamp(40px, 11vw, 58px); }
   .closing-scene-steps { max-width: 34ch; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 28px; text-align: left; }
   .closing-scene-steps li[aria-hidden="true"] { display: none; }
 }
 
-@media (max-width: 420px) {
-  #instructores .instructores-grid--kite { gap: 14px; }
+@media (max-width: 640px) {
+  #instructores .instructores-grid--kite {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    gap: 20px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
