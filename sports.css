@@ -7017,81 +7017,397 @@ button:focus-visible {
    REDISEÑO HERO KITESURF (FIGMA SPEC 1728px / RESPONSIVE)
    Layout: Title Full Width -> Split Middle Row -> Centered Grand Stage Photo
    ========================================================= */
+/* =========================================================
+   1. HERO KITESURF (Rediseño Fold Viewport + H1 Anclado al Fondo)
+   ========================================================= */
 .kite-hero-section {
   position: relative;
-  background-color: #161616;
+  background-color: var(--ink, #161616);
   color: #FFFFFF;
-  padding-top: calc(116px + env(safe-area-inset-top, 0px));
-  padding-bottom: 96px;
+  padding: 0;
   overflow: hidden;
 }
 
-@media (min-width: 768px) {
-  .kite-hero-section {
-    padding-top: calc(132px + env(safe-area-inset-top, 0px));
-    padding-bottom: 112px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .kite-hero-section {
-    padding-top: calc(148px + env(safe-area-inset-top, 0px));
-    padding-bottom: 128px;
-  }
-}
-
-/* 1. LAYOUT 2 COLUMNAS HERO (Figma spec: Split Content Izquierda + Stage Derecha) */
 .kite-hero-container {
   display: flex;
   flex-direction: column;
-  gap: 36px;
+}
+
+/* 1. FOLD SUPERIOR: Ocupa exactamente 100vh en Desktop para que el H1 quede anclado al límite inferior */
+.kite-hero-fold {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  padding-top: calc(90px + env(safe-area-inset-top, 0px));
 }
 
 @media (min-width: 1024px) {
-  .kite-hero-container {
-    display: grid;
-    grid-template-columns: 1fr 1.25fr;
-    gap: clamp(36px, 4vw, 64px);
-    align-items: center;
+  .kite-hero-fold {
+    height: 100vh;
+    min-height: 100vh;
+    padding-top: calc(96px + env(safe-area-inset-top, 0px));
   }
 }
 
-.kite-hero-content-col {
-  display: flex;
-  flex-direction: column;
+@media (max-width: 1023px) {
+  .kite-hero-fold {
+    min-height: auto;
+    padding-top: calc(88px + env(safe-area-inset-top, 0px));
+    padding-bottom: 24px;
+  }
 }
 
-/* Título H1 */
+/* Stage Visual Central: Foto + Cards flotantes */
+.kite-hero-stage-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .kite-hero-stage-wrap {
+    margin-bottom: clamp(-85px, -7.5vw, -125px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-stage-wrap {
+    margin-bottom: clamp(-30px, -4vw, -50px);
+  }
+}
+
+.kite-hero-photo-frame {
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+  max-height: clamp(400px, 58vh, 660px);
+  border-radius: clamp(24px, 3.2vw, 42px);
+  overflow: hidden;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+  background-color: #0E0E0E;
+  position: relative;
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-photo-frame {
+    height: clamp(260px, 50vw, 420px);
+    max-height: none;
+    border-radius: 24px;
+  }
+}
+
+.kite-hero-photo-frame picture,
+.kite-hero-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  display: block;
+}
+
+/* Card del Tiempo Flotante (Arriba a la Izquierda) */
+.kite-hero-stage-wrap .hero-weather-card.kite-weather-floating {
+  position: absolute;
+  top: clamp(-20px, -2vw, -30px);
+  left: clamp(-10px, -2.5vw, -32px);
+  bottom: auto !important;
+  right: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: rgba(254, 254, 254, 0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 22px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.32), 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: var(--ink, #231F20);
+  padding: 16px 20px;
+  width: 275px;
+  max-width: calc(100% - 32px);
+  z-index: 10;
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-stage-wrap .hero-weather-card.kite-weather-floating {
+    top: -12px;
+    left: -8px;
+    width: 235px;
+    padding: 12px 16px;
+    border-radius: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .kite-hero-fold {
+    padding-top: calc(96px + env(safe-area-inset-top, 0px));
+  }
+
+  .kite-hero-stage-wrap {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin-bottom: -24px;
+  }
+
+  .kite-hero-photo-frame {
+    width: 100%;
+    height: 320px;
+    border-radius: 22px;
+  }
+
+  .kite-hero-stage-wrap .hero-weather-card.kite-weather-floating {
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    width: 205px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+  }
+
+  .kite-hero-stage-wrap .kite-weather-floating .weather-speed-num {
+    font-size: 26px;
+  }
+
+  .kite-hero-stage-wrap .kite-weather-floating .compass-dial {
+    width: 38px;
+    height: 38px;
+  }
+
+  .kite-hero-stage-wrap .kite-weather-floating .weather-status-footer {
+    display: flex !important;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .kite-hero-stage-wrap .kite-weather-floating .weather-caption {
+    font-size: 9px;
+  }
+
+  .kite-hero-stage-wrap .kite-weather-floating .weather-suitability-pill {
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+
+  .kite-hero-exp-card {
+    position: absolute;
+    top: auto;
+    bottom: 12px;
+    right: 8px;
+    transform: none;
+    padding: 8px 14px;
+    border-radius: 12px;
+    z-index: 10;
+  }
+
+  .kite-hero-exp-num {
+    font-size: 24px;
+  }
+
+  .kite-hero-exp-text {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .kite-hero-title {
+    font-size: clamp(38px, 11vw, 56px);
+    line-height: 0.94;
+  }
+
+  .kite-hero-circle-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .kite-hero-circle-arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.kite-hero-stage-wrap .kite-weather-floating .weather-status-footer {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.kite-hero-stage-wrap .kite-weather-floating .weather-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(35, 31, 32, 0.7);
+  white-space: nowrap;
+}
+
+.kite-hero-stage-wrap .kite-weather-floating .weather-suitability-pill {
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1.5px solid var(--orange, #FF5206);
+  color: var(--orange, #FF5206);
+  white-space: nowrap;
+}
+
+/* Card de Experiencia "+15 AÑOS formando navegantes" (A la Derecha) */
+.kite-hero-exp-card {
+  position: absolute;
+  top: 52%;
+  right: clamp(-10px, -2.5vw, -30px);
+  transform: translateY(-50%);
+  background: var(--orange, #FF5206);
+  border-radius: 18px;
+  padding: 18px 24px;
+  box-shadow: 0 18px 40px rgba(255, 82, 6, 0.45);
+  display: flex;
+  flex-direction: column;
+  color: #FFFFFF;
+  z-index: 10;
+  width: fit-content;
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-exp-card {
+    top: auto;
+    bottom: -10px;
+    right: -8px;
+    transform: none;
+    padding: 12px 18px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .kite-hero-exp-card {
+    bottom: -8px;
+    right: 8px;
+    padding: 8px 14px;
+  }
+}
+
+.kite-hero-exp-num {
+  font-family: var(--font-display, 'Anton', sans-serif);
+  font-size: clamp(28px, 2.8vw, 42px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.kite-hero-exp-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.96);
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+/* Título H1 Gigante */
 .kite-hero-title {
   font-family: var(--font-display, 'Anton', sans-serif);
-  font-size: clamp(40px, 4.4vw, 76px);
-  line-height: 0.95;
+  font-size: clamp(48px, 9.2vw, 138px);
+  line-height: 0.92;
   letter-spacing: -0.015em;
   text-transform: uppercase;
   color: #FFFFFF;
-  margin: 0 0 18px;
+  margin: 0;
+  padding-bottom: clamp(6px, 1.2vh, 16px);
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.kite-hero-title-line1 {
+  display: block;
+  color: #FFFFFF;
+}
+
+.kite-hero-title-line2 {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 30px);
+  flex-wrap: wrap;
+}
+
+/* Círculo naranja con flecha diagonal ↗ */
+.kite-hero-circle-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(50px, 6.4vw, 96px);
+  height: clamp(50px, 6.4vw, 96px);
+  border-radius: 50%;
+  background: var(--orange, #FF5206);
+  color: #FFFFFF;
+  box-shadow: 0 12px 36px rgba(255, 82, 6, 0.55);
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.kite-hero-circle-arrow:hover {
+  transform: scale(1.08) rotate(6deg);
+  box-shadow: 0 16px 44px rgba(255, 82, 6, 0.75);
+}
+
+.kite-hero-circle-arrow svg {
+  width: clamp(24px, 3.2vw, 44px);
+  height: clamp(24px, 3.2vw, 44px);
+  stroke: #FFFFFF;
 }
 
 .kite-hero-word-orange {
   color: var(--orange, #FF5206);
-  display: block;
+  display: inline-block;
+}
+
+/* 2. BLOQUE INFERIOR: Bajada + CTAs (Izquierda) & Requisitos (Derecha) */
+.kite-hero-bottom-grid {
+  padding-top: clamp(32px, 4.2vw, 56px);
+  padding-bottom: clamp(64px, 8vw, 112px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+}
+
+@media (min-width: 1024px) {
+  .kite-hero-bottom-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: clamp(40px, 5vw, 80px);
+  }
 }
 
 .kite-hero-bajada {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(14.5px, 1.05vw, 16px);
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.72);
-  max-width: 440px;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 500px;
   margin: 0 0 28px;
 }
 
 .kite-hero-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -7116,7 +7432,7 @@ button:focus-visible {
   }
 }
 
-/* Botón Outline en Hero Oscuro (Figma spec) */
+/* Botón Outline en Hero Oscuro */
 .kite-hero-actions .hero-cta-sports {
   color: #FFFFFF !important;
   background: transparent !important;
@@ -7148,141 +7464,57 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
-/* Línea separadora y precio inferior */
-.kite-hero-price-wrap {
-  margin-top: 36px;
-}
-
-.kite-hero-divider {
-  width: 100%;
-  max-width: 380px;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.15);
-  margin-bottom: 18px;
-}
-
-.kite-hero-price-line {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.88);
-  margin: 0;
-  line-height: 1.4;
-}
-
-.kite-hero-price-line strong {
-  font-weight: 700;
-  color: #FFFFFF;
-}
-
-/* 2. STAGE VISUAL (Columna Derecha: Foto + Badges Overlapping) */
-.kite-hero-stage-col {
-  position: relative;
-  width: 100%;
-}
-
-.kite-hero-photo-wrap {
-  position: relative;
-  width: 100%;
-}
-
-.kite-hero-photo-frame {
-  width: 100%;
-  height: clamp(340px, 35vw, 500px);
-  border-radius: clamp(24px, 2.8vw, 36px);
-  overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
-  background-color: #0E0E0E;
-  position: relative;
+/* Pills de Requisitos (Derecha) */
+.kite-hero-bottom-right {
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media (max-width: 1023px) {
-  .kite-hero-photo-frame {
-    height: clamp(280px, 50vw, 420px);
-    border-radius: 24px;
+  .kite-hero-bottom-right {
+    justify-content: flex-start;
   }
 }
 
-.kite-hero-photo-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  display: block;
-}
-
-/* Card de Experiencia "+15 AÑOS formando navegantes" (Arriba a la derecha) */
-.kite-hero-exp-card {
-  position: absolute;
-  top: -14px;
-  right: -14px;
-  background: var(--orange, #FF5206);
-  border-radius: 18px;
-  padding: 18px 24px;
-  box-shadow: 0 16px 36px rgba(255, 82, 6, 0.35);
+.kite-hero-badges-wrap {
   display: flex;
   flex-direction: column;
-  color: #FFFFFF;
-  z-index: 10;
-  width: fit-content;
+  gap: 12px;
+  align-items: flex-end;
 }
 
 @media (max-width: 1023px) {
-  .kite-hero-exp-card {
-    top: -10px;
-    right: -8px;
-    padding: 12px 18px;
-    border-radius: 14px;
+  .kite-hero-badges-wrap {
+    align-items: flex-start;
   }
 }
 
-.kite-hero-exp-num {
-  font-family: var(--font-display, 'Anton', sans-serif);
-  font-size: clamp(32px, 2.8vw, 42px);
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  color: #FFFFFF;
-  text-transform: uppercase;
+.kite-hero-badges-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.kite-hero-exp-text {
+.kite-hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.88);
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.96);
-  margin-top: 4px;
-  line-height: 1.2;
+  line-height: 1.3;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-/* Card del Tiempo Flotante (Abajo a la izquierda, sin estirarse hacia arriba) */
-.kite-hero-stage-col .hero-weather-card.kite-weather-left {
-  position: absolute;
-  top: auto !important;
-  right: auto !important;
-  bottom: 24px !important;
-  left: 24px !important;
-  height: auto !important;
-  min-height: 0 !important;
-  background: rgba(254, 254, 254, 0.96);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  border-radius: 22px;
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28), 0 4px 12px rgba(0, 0, 0, 0.08);
-  color: var(--ink, #231F20);
-  padding: 16px 20px;
-  width: 270px;
-  max-width: calc(100% - 48px);
-  z-index: 10;
-}
-
-@media (max-width: 1023px) {
-  .kite-hero-stage-col .hero-weather-card.kite-weather-left {
-    bottom: 14px !important;
-    left: 14px !important;
-    width: 230px;
-    padding: 12px 16px;
-    border-radius: 18px;
-  }
+.kite-hero-pill-badge:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
 }
 
 /* --- Equipo: acercamiento al hotspot seleccionado --- */

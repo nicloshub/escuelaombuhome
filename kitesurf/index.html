@@ -160,59 +160,21 @@
 
   <main>
     <!-- TODO: validar con instructores los rangos iniciales y las direcciones de viento configurados en ../wind.js -->
-    <section class="kite-hero-section" id="inicio" data-sport="kitesurf" aria-labelledby="windhero-title">
+        <section class="kite-hero-section" id="inicio" data-sport="kitesurf" aria-labelledby="windhero-title">
       <div class="container kite-hero-container">
 
-        <!-- Columna Izquierda: Textos, CTAs y Precio -->
-        <div class="kite-hero-content-col">
-          <h1 class="kite-hero-title" id="windhero-title">
-            <span>APRENDÉ KITESURF</span>
-            <span class="kite-hero-word-orange">SIN IMPROVISAR.</span>
-          </h1>
-
-          <p class="kite-hero-bajada">
-            Plan por niveles, equipo completo y un bote de rescate siempre cerca. 15 años enseñando a leer el viento en el Río de la Plata.
-          </p>
-
-          <div class="kite-hero-actions">
-            <a id="windhero-reserve" href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf%20en%20Acassuso." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
-              RESERVÁ TU CLASE
-              <div class="icon">
-                <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                </svg>
-              </div>
-            </a>
-            <a href="#camino" class="hero-cta-sports">VER LOS NIVELES</a>
-          </div>
-
-          <div class="kite-hero-price-wrap">
-            <div class="kite-hero-divider"></div>
-            <p class="kite-hero-price-line">
-              <strong>Clase particular desde $120.000</strong> · Equipo incluido
-            </p>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Stage Foto con Badge +15 AÑOS arriba y Widget Viento abajo -->
-        <div class="kite-hero-stage-col">
-          <div class="kite-hero-photo-wrap">
+        <!-- 1. FOLD SUPERIOR: Foto + Floating Cards + H1 alineado al límite inferior del viewport en desktop -->
+        <div class="kite-hero-fold">
+          <div class="kite-hero-stage-wrap">
             <div class="kite-hero-photo-frame">
               <picture>
                 <source srcset="../assets/deporte-kitesurf.webp" type="image/webp">
-                <img src="../assets/deporte-kitesurf.jpg" alt="Kitesurf en el Río de la Plata, en Acassuso" fetchpriority="high" width="1200" height="600">
+                <img src="../assets/deporte-kitesurf.jpg" alt="Kitesurfista en acción en el Río de la Plata, Acassuso" fetchpriority="high" width="1200" height="700">
               </picture>
             </div>
 
-            <!-- Badge Experiencia "+15 AÑOS formando navegantes" (Arriba a la derecha) -->
-            <div class="kite-hero-exp-card" aria-label="15 años formando navegantes">
-              <span class="kite-hero-exp-num">+15 AÑOS</span>
-              <span class="kite-hero-exp-text">formando navegantes</span>
-            </div>
-
-            <!-- Widget de Viento Oficial En Vivo (Abajo a la izquierda) -->
-            <aside class="hero-weather-card kite-weather-left" aria-label="Condición del viento en vivo">
+            <!-- Widget del Viento En Vivo (Arriba Izquierda) -->
+            <aside class="hero-weather-card kite-weather-floating" aria-label="Condición del viento en vivo">
               <div class="weather-header-stack">
                 <div class="weather-live-badge">
                   <span class="weather-radar-ping"></span>
@@ -233,7 +195,7 @@
                   </div>
                 </div>
 
-                <!-- Brújula Náutica Dinámica (Español N, E, S, O) -->
+                <!-- Brújula Náutica Dinámica -->
                 <div class="weather-compass-box" title="Dirección del viento">
                   <div class="compass-dial">
                     <span class="compass-marker n">N</span>
@@ -250,17 +212,71 @@
                 </div>
               </div>
 
-              <!-- Medidor de Nivel & Barra del Viento 100% Naranja -->
+              <!-- Medidor de Nivel & Barra del Viento -->
               <div class="weather-progress-bar-wrap">
                 <div class="weather-progress-bar-fill" id="heroWindBar" style="width: 45%;"></div>
               </div>
 
-              <!-- Estado y Recomendación de Deportes (Opcional, preserva IDs para main.js) -->
-              <div class="weather-status-footer" style="display: none;">
+              <!-- Estado y Recomendación de Deportes -->
+              <div class="weather-status-footer">
                 <span class="weather-caption" id="heroWindCaption">Viento suave en el spot</span>
                 <span class="weather-suitability-pill" id="heroSpotSuitability">Kite Posible / Foil</span>
               </div>
             </aside>
+
+            <!-- Badge Experiencia "+15 AÑOS formando navegantes" (A la derecha) -->
+            <div class="kite-hero-exp-card" aria-label="15 años formando navegantes">
+              <span class="kite-hero-exp-num">+15 AÑOS</span>
+              <span class="kite-hero-exp-text">formando navegantes</span>
+            </div>
+          </div>
+
+          <!-- Título H1 Gigante (Alineado con el límite inferior del viewheight en desktop) -->
+          <h1 class="kite-hero-title" id="windhero-title">
+            <span class="kite-hero-title-line1">APRENDÉ KITESURF</span>
+            <span class="kite-hero-title-line2">
+              <a href="#camino" class="kite-hero-circle-arrow" aria-label="Ver niveles de kitesurf">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+              <span class="kite-hero-word-orange">SIN IMPROVISAR.</span>
+            </span>
+          </h1>
+        </div>
+
+        <!-- 2. BLOQUE INFERIOR: Bajada + CTAs a la izquierda, Badges de requisitos a la derecha -->
+        <div class="kite-hero-bottom-grid">
+          <div class="kite-hero-bottom-left">
+            <p class="kite-hero-bajada">
+              Plan por niveles, equipo completo y un bote de rescate siempre cerca. Enseñando en el bajo de San Isidro, Buenos Aires a 20 minutos de Capital.
+            </p>
+
+            <div class="kite-hero-actions">
+              <a id="windhero-reserve" href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf%20en%20Acassuso." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+                RESERVÁ TU CLASE
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+              <a href="#camino" class="hero-cta-sports">VER LOS NIVELES</a>
+            </div>
+          </div>
+
+          <div class="kite-hero-bottom-right">
+            <div class="kite-hero-badges-wrap">
+              <div class="kite-hero-badges-row">
+                <span class="kite-hero-pill-badge">Mayores de 16 años</span>
+                <span class="kite-hero-pill-badge">Sin experiencia previa</span>
+              </div>
+              <div class="kite-hero-badges-row">
+                <span class="kite-hero-pill-badge">Con chaleco y bote de apoyo</span>
+              </div>
+            </div>
           </div>
         </div>
 
