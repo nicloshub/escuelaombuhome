@@ -85,42 +85,15 @@
 
 ---
 
-## 4. Próxima Tarea en Curso: Sección Comunidad / Reseñas (`#experiencia`)
+## 4. Sección Reseñas de Alumnos (`#resenas`) - *Completado*
 
-El usuario solicitó **reemplazar la sección actual** (`#experiencia`, antes llamada *Mucho más que una clase*) por el **nuevo diseño de Reseñas de Alumnos**:
-
-### Referencia visual del nuevo diseño:
-* Mockup cargado por el usuario: `media_1792759462981_c89557c9.png` (disponible en la carpeta `.user_uploaded/`).
-
-### Especificación de la nueva sección:
-1. **Cabecera unificada:**
-   * Etiqueta: `// RESEÑAS DE ALUMNOS` (en naranja `--orange`).
-   * Titular H2: `EMPEZARON DE CERO.`<br>`MIRÁ DÓNDE ESTÁN.` (Anton, uppercase, unificado).
-   * Bajada a la derecha: *"Sin experiencia previa y con las dudas de todos. Esto cuentan quienes ya pasaron por la escuela."*
-2. **Grilla de 3 Columnas:**
-   * **Columna Izquierda:**
-     * *Arriba:* Foto de rider navegando en el agua con kite en el cielo (`border-radius: 24px`).
-     * *Abajo:* Card naranja (`#FF5206`, `border-radius: 24px`) de **HARD WIND**:
-       * Logo Hard Wind (`../assets/logo_hw.svg` o texto estilizado).
-       * Texto: `<strong>Sponsor oficial</strong>, brindando equipos de primer nivel`.
-   * **Columna Central (Card de Reseña Activa):**
-     * Card blanca/gris clara con borde sutil (`border-radius: 24px`, padding `32px`).
-     * Ícono de comillas dobles en naranja `“`.
-     * Cita textual de la reseña:  
-       *"Tenía pánico a no hacer pie o que el viento me lleve. En la primera clase me explicaron todo en tierra. En la 5ta clase ya estaba planeando solo."*
-     * Fila de autor y calificación:  
-       * Izquierda: Nombre del alumno en negrita (ej: `Santiago Muñoz`).  
-       * Derecha: `5.0 ★` en naranja.
-     * Foto interior al pie de la card: Foto del alumno en clase con el instructor (`border-radius: 18px`).
-   * **Columna Derecha:**
-     * *Arriba:* Foto de 3 riders chocando los cinco en el agua (`../assets/mosaico-tablas.webp`, `border-radius: 24px`).
-     * *Abajo:* Card oscura (`#231F20`, `border-radius: 24px`, padding `32px`):
-       * Gran número naranja `200+` (Anton, ~56-64px).
-       * Texto: *"Alumnos ya navegan solos.<br>Entrenando, creciendo y logrando más cada semana."*
-3. **Navegación del Carrusel de Reseñas:**
-   * Al pie de la sección, centrado debajo de las columnas:
-   * Dos botones circulares con flechas: `←` (anterior) y `→` (siguiente).
-   * Al hacer clic, cambia el contenido de la card central (cita, autor, puntaje y foto interior) mediante una transición suave en `sports.js`.
+Se reemplazó exitosamente la antigua sección bento por la **grilla editorial de 3 columnas de Reseñas de Alumnos**:
+* **Cabecera unificada:** `// RESEÑAS DE ALUMNOS` con título Anton `EMPEZARON DE CERO. MIRÁ DÓNDE ESTÁN.`
+* **Columna Izquierda:** Foto superior de rider en salto (`deporte-kitesurf.webp`) + Card naranja con logo de **HARD WIND** (`logo_hw.svg`) y bajada institucional.
+* **Columna Central (Reseña Activa):** Card con comillas dobles naranjas, cita testimonial, autor, puntaje `5.0 ★` y foto interior del alumno.
+* **Controles Circulares:** Botones `←` y `→` centrados al pie de la tarjeta central con microinteracciones y soporte táctil swipe en móviles.
+* **Carrusel en JavaScript (`sports.js`):** Función `initResenasCarousel()` con precarga inmediata de imágenes y transición suave por crossfade.
+* **Columna Derecha:** Foto superior de alumnos celebrando en el agua (`mosaico-tablas.webp`) + Card oscura `#231F20` con cifra `200+` y texto social proof.
 
 ---
 

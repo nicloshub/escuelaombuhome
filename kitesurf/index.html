@@ -55,7 +55,7 @@
   <link rel="preload" href="../assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="../sports.css?v=7.4">
+  <link rel="stylesheet" href="../sports.css?v=7.5">
 </head>
 <body>
 
@@ -1093,65 +1093,107 @@
       </div>
     </section>
 
-    <!-- 9. MUCHO MÁS QUE UNA CLASE -->
-    <section class="section-bento" id="experiencia">
+    <!-- 9. RESEÑAS DE ALUMNOS (TESTIMONIOS & SOCIAL PROOF) -->
+    <section class="section-macro section-light section-resenas" id="resenas" aria-labelledby="resenas-title">
       <div class="container">
-        <div class="section-header bento-header">
-          <div class="section-title-col bento-header-title-col">
-            <span class="section-label">// COMUNIDAD &amp; ESCUELA</span>
-            <h2 class="bento-title">MUCHO MÁS<br>QUE UNA CLASE</h2>
+        <!-- Cabecera Editorial Oficial -->
+        <header class="editorial-header resenas-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// RESEÑAS DE ALUMNOS</span>
+            <h2 class="editorial-title" id="resenas-title">
+              EMPEZARON DE CERO.<br>MIRÁ DÓNDE ESTÁN.
+            </h2>
           </div>
-          <div class="section-desc-col bento-header-desc-col">
-            <p class="bento-header-desc">
-              Desde las primeras nociones de seguridad en tierra hasta la navegación libre en el Río de la Plata. Cada encuentro es una oportunidad para conectar con el río y con otras personas.
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Sin experiencia previa y con las dudas de todos. Esto cuentan quienes ya pasaron por la escuela.
             </p>
           </div>
-        </div>
+        </header>
 
-        <div class="bento-grid">
-          <!-- Foto ancha: clase de kite en el río -->
-          <div class="bento-cell bento-cell--photo bento-cell--wide">
-            <picture>
-              <source media="(max-width: 768px)" srcset="../assets/mosaico-clasekite-mobile.webp" type="image/webp">
-              <source srcset="../assets/mosaico-clasekite.webp" type="image/webp">
-              <img src="../assets/mosaico-clasekite.webp" alt="Clase de kitesurf en Escuela Ombú" loading="lazy" decoding="async" width="1000" height="700">
-            </picture>
+        <!-- Grilla de 3 Columnas según nuevo diseño -->
+        <div class="resenas-grid-stage">
+          <!-- Columna 1 (Izquierda): Foto de rider + Card Sponsor Oficial Hard Wind -->
+          <div class="resenas-col resenas-col-side resenas-col-left">
+            <div class="resenas-media-box">
+              <picture>
+                <source media="(max-width: 768px)" srcset="../assets/deporte-kitesurf-mobile.webp" type="image/webp">
+                <source srcset="../assets/deporte-kitesurf.webp" type="image/webp">
+                <img src="../assets/deporte-kitesurf.jpg" alt="Rider navegando en kitesurf en el Río de la Plata" loading="eager" decoding="async" width="600" height="480">
+              </picture>
+            </div>
+            <div class="resenas-card-orange">
+              <div class="resenas-sponsor-top">
+                <a href="https://hardwind.com/" target="_blank" rel="noopener noreferrer" class="resenas-sponsor-logo-wrap" aria-label="Visitar Hard Wind (Sponsor Oficial)">
+                  <img src="../assets/logo_hw.svg" alt="Hard Wind" class="resenas-sponsor-logo" loading="eager" width="160" height="44">
+                </a>
+              </div>
+              <p class="resenas-sponsor-desc">
+                <strong>Sponsor oficial</strong>, brindando equipos de primer nivel
+              </p>
+            </div>
           </div>
 
-          <!-- Dato real de trayectoria -->
-          <div class="bento-cell bento-cell--dark">
-            <span class="bento-stat-number">15+</span>
-            <p class="bento-stat-text">
-              Años enseñando a leer el río y el viento, formando riders autónomos.
-            </p>
+          <!-- Columna 2 (Central): Tarjeta de Reseña Activa con Carrusel -->
+          <div class="resenas-col resenas-col-center">
+            <article class="resenas-card-testimonial" id="resenaCardActive" aria-live="polite">
+              <div class="resenas-quote-icon" aria-hidden="true">
+                <svg width="28" height="22" viewBox="0 0 28 22" fill="none">
+                  <path d="M0 22V13.2C0 5.86667 4.4 1.46667 11.2 0L12.4 2.8C7.6 4.13333 5.4 7.2 5.2 10.2H12V22H0ZM16 22V13.2C16 5.86667 20.4 1.46667 27.2 0L28.4 2.8C23.6 4.13333 21.4 7.2 21.2 10.2H28V22H16Z" fill="var(--orange, #FF5206)"/>
+                </svg>
+              </div>
+
+              <div class="resenas-testimonial-body" id="resenaTestimonialBody">
+                <blockquote class="resenas-quote-text" id="resenaQuoteText">
+                  “Tenía pánico a no hacer pie o que el viento me lleve. En la primera clase me explicaron todo en tierra. En la 5ta clase ya estaba planeando solo.”
+                </blockquote>
+
+                <div class="resenas-author-row">
+                  <span class="resenas-author-name" id="resenaAuthorName">Santiago Muñoz</span>
+                  <div class="resenas-author-rating" id="resenaAuthorRating" aria-label="Calificación 5.0 de 5 estrellas">
+                    <span class="rating-val">5.0</span>
+                    <span class="rating-star">★</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="resenas-student-media">
+                <img src="../assets/mosaico-clasekite.webp" alt="Santiago Muñoz en su clase de kitesurf" id="resenaStudentPhoto" loading="eager" decoding="async" width="600" height="420">
+              </div>
+            </article>
+
+            <!-- Controles Circulares de Navegación del Carrusel -->
+            <div class="resenas-nav-controls" aria-label="Navegación de testimonios">
+              <button type="button" class="resenas-nav-btn resenas-nav-prev" id="resenasPrevBtn" aria-label="Ver testimonio anterior">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+              </button>
+              <button type="button" class="resenas-nav-btn resenas-nav-next" id="resenasNextBtn" aria-label="Ver siguiente testimonio">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <!-- Foto alta: instructores y alumnos con equipo (ocupa las 2 filas) -->
-          <div class="bento-cell bento-cell--photo bento-cell--tall">
-            <picture>
-              <source media="(max-width: 768px)" srcset="../assets/mosaico-alumnosv2-mobile.webp" type="image/webp">
-              <source srcset="../assets/mosaico-alumnosv2.webp" type="image/webp">
-              <img src="../assets/mosaico-alumnosv2.webp" alt="Instructores y alumnos de Escuela Ombú" loading="lazy" decoding="async" width="750" height="1088">
-            </picture>
-          </div>
-
-          <!-- Tarjeta naranja: Sponsor Oficial HARD WIND -->
-          <div class="bento-cell bento-cell--sponsor">
-            <a href="https://hardwind.com/" target="_blank" rel="noopener noreferrer" class="bento-sponsor-logo-wrap" aria-label="Visitar Hard Wind (Sponsor Oficial)">
-              <img src="../assets/logo_hw.svg" alt="Hard Wind" class="bento-sponsor-logo" loading="lazy" width="120" height="35">
-            </a>
-            <p class="bento-sponsor-desc">
-              <strong>Sponsor oficial</strong>, brindando equipos de primer nivel
-            </p>
-          </div>
-
-          <!-- Foto: riders chocando las manos en el agua -->
-          <div class="bento-cell bento-cell--photo bento-cell--photo-alt">
-            <picture>
-              <source media="(max-width: 768px)" srcset="../assets/mosaico-tablas-mobile.webp" type="image/webp">
-              <source srcset="../assets/mosaico-tablas.webp" type="image/webp">
-              <img src="../assets/mosaico-tablas.webp" alt="Riders en el agua de Escuela Ombú" loading="lazy" decoding="async" width="900" height="660">
-            </picture>
+          <!-- Columna 3 (Derecha): Foto alumnos chocando manos + Card 200+ Alumnos -->
+          <div class="resenas-col resenas-col-side resenas-col-right">
+            <div class="resenas-media-box">
+              <picture>
+                <source media="(max-width: 768px)" srcset="../assets/mosaico-tablas-mobile.webp" type="image/webp">
+                <source srcset="../assets/mosaico-tablas.webp" type="image/webp">
+                <img src="../assets/mosaico-tablas.webp" alt="Riders de kitesurf celebrando en el agua de Escuela Ombú" loading="eager" decoding="async" width="600" height="480">
+              </picture>
+            </div>
+            <div class="resenas-card-dark">
+              <span class="resenas-stat-number">200+</span>
+              <p class="resenas-stat-desc">
+                Alumnos ya navegan solos.<br>Entrenando, creciendo y logrando más cada semana.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1542,6 +1584,6 @@
 
   <!-- Scripts Oficiales de la Home y de Deportes -->
   <script src="../main.js"></script>
-  <script src="../sports.js?v=4.1"></script>
+  <script src="../sports.js?v=4.2"></script>
 </body>
 </html>

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGearHoverList();
   initFaqAccordion(); // Respaldo para acordeones con clase legacy si existieran
   initJourneyScroller();
+  initResenasCarousel();
 });
 
 // 1. La telemetría oficial de viento es administrada de forma centralizada por main.js (fetchLiveWind)
@@ -410,4 +411,108 @@ function initJourneyScroller() {
   } else {
     window.addEventListener('resize', () => updateProgress(activeStep), { passive: true });
   }
+}
+
+// 7. Carrusel interactivo de Reseñas de Alumnos (#resenas)
+function initResenasCarousel() {
+  const card = document.getElementById('resenaCardActive');
+  const quoteEl = document.getElementById('resenaQuoteText');
+  const authorEl = document.getElementById('resenaAuthorName');
+  const ratingValEl = card?.querySelector('.rating-val');
+  const photoEl = document.getElementById('resenaStudentPhoto');
+  const prevBtn = document.getElementById('resenasPrevBtn');
+  const nextBtn = document.getElementById('resenasNextBtn');
+
+  if (!card || !quoteEl || !authorEl || !photoEl) return;
+
+  const REVIEWS_DATA = [
+    {
+      id: 1,
+      quote: "Tenía pánico a no hacer pie o que el viento me lleve. En la primera clase me explicaron todo en tierra. En la 5ta clase ya estaba planeando solo.",
+      author: "Santiago Muñoz",
+      rating: "5.0",
+      imgSrc: "../assets/mosaico-clasekite.webp",
+      imgAlt: "Santiago Muñoz en su clase de kitesurf en Escuela Ombú"
+    },
+    {
+      id: 2,
+      quote: "Empecé de cero sin noción de navegación. La paciencia de los instructores y tener la lancha de rescate en guardia permanente te da una tranquilidad total para animarte y progresar rápido.",
+      author: "Martín Gómez",
+      rating: "5.0",
+      imgSrc: "../assets/mosaico-alumnosv2.webp",
+      imgAlt: "Martín Gómez con su instructor en Escuela Ombú"
+    },
+    {
+      id: 3,
+      quote: "Pensé que requería muchísima fuerza física, pero la técnica que te enseñan hace que todo sea equilibrio y fluidez. Lograr mis primeros bordes ceñidos en el río fue una experiencia increíble.",
+      author: "Lucía Peralta",
+      rating: "5.0",
+      imgSrc: "../assets/mosaico-amigos.webp",
+      imgAlt: "Lucía Peralta navegando en Escuela Ombú"
+    }
+  ];
+
+  // Pre-cargar imágenes para transiciones inmediatas
+  REVIEWS_DATA.forEach((r) => {
+    if (r.imgSrc) {
+      const img = new Image();
+      img.src = r.imgSrc;
+    }
+  });
+
+  let currentIndex = 0;
+  let isTransitioning = false;
+
+  function goToReview(newIndex) {
+    if (isTransitioning) return;
+    const targetIdx = (newIndex + REVIEWS_DATA.length) % REVIEWS_DATA.length;
+    if (targetIdx === currentIndex) return;
+
+    isTransitioning = true;
+    card.classList.add('is-fading');
+
+    setTimeout(() => {
+      currentIndex = targetIdx;
+      const rev = REVIEWS_DATA[currentIndex];
+
+      if (quoteEl) quoteEl.textContent = `“${rev.quote.replace(/^[“"']|[”"']$/g, '')}”`;
+      if (authorEl) authorEl.textContent = rev.author;
+      if (ratingValEl) ratingValEl.textContent = rev.rating;
+      if (photoEl) {
+        photoEl.src = rev.imgSrc;
+        photoEl.alt = rev.imgAlt;
+      }
+
+      card.classList.remove('is-fading');
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 190);
+    }, 180);
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    goToReview(currentIndex - 1);
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    goToReview(currentIndex + 1);
+  });
+
+  // Soporte para gestos Swipe en Mobile / Touch
+  let touchStartX = 0;
+  card.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  card.addEventListener('touchend', (e) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 48) {
+      if (diff < 0) {
+        goToReview(currentIndex + 1);
+      } else {
+        goToReview(currentIndex - 1);
+      }
+    }
+  }, { passive: true });
 }

@@ -5079,231 +5079,373 @@ header.site-header:hover {
   }
 }
 
-/* --- 5. SECCIÃ“N BENTO GRID: COMUNIDAD & ESCUELA (12 COLUMNAS FIGMA) --- */
-.section-bento {
+/* =========================================================
+   5. SECCIÓN RESEÑAS DE ALUMNOS (CARRUSEL & SOCIAL PROOF 3-COLS)
+   ========================================================= */
+
+.section-resenas {
+  background-color: var(--white, #FEFEFE);
   position: relative;
 }
 
-.bento-header {
-  margin-bottom: clamp(32px, 3.5vw, 48px);
+.resenas-header {
+  margin-bottom: clamp(36px, 4vw, 56px);
 }
 
-.bento-title {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 3.8vw, 52px);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin: 0;
-}
-
-.bento-header-desc {
-  font-family: var(--font-body);
-  font-size: clamp(15px, 1.1vw, 17px);
-  line-height: 1.6;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  opacity: 0.85;
-  margin: 0;
-  max-width: 587px;
-}
-
-.bento-grid {
+/* Grilla principal de 3 columnas */
+.resenas-grid-stage {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 20px;
   width: 100%;
 }
 
-.bento-cell {
+/* Columnas laterales (Izquierda y Derecha) */
+.resenas-col-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Cajas de imagen superior en columnas laterales */
+.resenas-media-box {
   border-radius: var(--radius-card, 24px);
   overflow: hidden;
   position: relative;
-  transition: transform 0.4s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)), 
-              box-shadow 0.4s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
+  width: 100%;
+  height: 260px;
+  background-color: #EAEAEA;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .bento-cell:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08);
-  }
-}
-
-.bento-cell:active {
-  transform: scale(0.985);
-}
-
-.bento-cell--photo {
-  height: 240px;
-}
-
-.bento-cell--photo img {
+.resenas-media-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .bento-cell--photo:hover img {
-    transform: scale(1.04);
+  .resenas-media-box:hover img {
+    transform: scale(1.03);
   }
 }
 
-.bento-cell--tall {
-  height: 320px;
-}
-
-.bento-cell--dark {
-  background-color: var(--ink);
-  padding: 32px 28px;
+/* Tarjeta Naranja: Sponsor Oficial HARD WIND */
+.resenas-card-orange {
+  background-color: var(--orange, #FF5206);
+  border-radius: var(--radius-card, 24px);
+  padding: clamp(24px, 2.5vw, 32px);
+  color: #FFFFFF;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 200px;
-}
-
-.bento-stat-number {
-  font-family: var(--font-display);
-  font-size: 64px;
-  font-weight: 400;
-  line-height: 0.9;
-  color: var(--orange);
-  margin: 0;
-}
-
-.bento-stat-text {
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.5;
-  color: rgba(254, 254, 254, 0.75);
-  max-width: 28ch;
-  margin: 0;
-}
-
-/* Sponsor Oficial HARD WIND */
-.bento-cell--sponsor {
-  background: var(--orange);
-  color: #FFFFFF;
+  min-height: 180px;
+  flex: 1;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 28px;
-  min-height: 200px;
+  transition: transform 0.35s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)),
+              box-shadow 0.35s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
-.bento-sponsor-label {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #FFFFFF;
+@media (hover: hover) and (pointer: fine) {
+  .resenas-card-orange:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(255, 82, 6, 0.22);
+  }
 }
 
-.bento-sponsor-logo-wrap {
+.resenas-sponsor-top {
   display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.resenas-sponsor-logo-wrap {
+  display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-top: auto;
+  text-decoration: none;
 }
 
-.bento-sponsor-logo {
-  max-width: 100%;
-  width: 215px;
+.resenas-sponsor-logo {
+  width: clamp(140px, 12vw, 175px);
+  aspect-ratio: 730 / 60;
   height: auto;
   display: block;
   object-fit: contain;
 }
 
-/* Bento Grid en Tablet (2 columnas) */
-@media (min-width: 768px) {
-  .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    gap: 24px;
-  }
+.resenas-sponsor-desc {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.05vw, 15.5px);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin: 0;
+}
 
-  .bento-cell--wide {
-    grid-column: span 2;
-    height: 280px;
-  }
+.resenas-sponsor-desc strong {
+  font-weight: 700;
+}
 
-  .bento-cell--dark {
-    grid-column: 1;
-    min-height: 220px;
-  }
+/* Tarjeta Oscura: 200+ Alumnos */
+.resenas-card-dark {
+  background-color: var(--dark-card, #231F20);
+  border-radius: var(--radius-card, 24px);
+  padding: clamp(24px, 2.5vw, 32px);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1)),
+              box-shadow 0.35s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
+}
 
-  .bento-cell--sponsor {
-    grid-column: 2;
-    min-height: 220px;
-  }
-
-  .bento-cell--photo-alt {
-    grid-column: 1;
-    height: 280px;
-  }
-
-  .bento-cell--tall {
-    grid-column: 2;
-    height: 280px;
+@media (hover: hover) and (pointer: fine) {
+  .resenas-card-dark:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.18);
   }
 }
 
-/* Bento Grid en Desktop: 12 columnas con gutters de 32px (Figma exacto) */
+.resenas-stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(54px, 4.6vw, 70px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--orange, #FF5206);
+  margin: 0 0 16px 0;
+  display: block;
+}
+
+.resenas-stat-desc {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.05vw, 15.5px);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: rgba(254, 254, 254, 0.82);
+  margin: 0;
+}
+
+/* Columna Central: Reseña Activa & Controles */
+.resenas-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.resenas-card-testimonial {
+  background: #FFFFFF;
+  border: 1px solid rgba(31, 28, 29, 0.08);
+  border-radius: var(--radius-card, 24px);
+  padding: clamp(24px, 2.6vw, 34px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .resenas-card-testimonial:hover {
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.resenas-quote-icon {
+  margin-bottom: clamp(16px, 1.8vw, 22px);
+  display: flex;
+}
+
+.resenas-quote-icon svg {
+  display: block;
+  width: 28px;
+  height: 22px;
+}
+
+.resenas-testimonial-body {
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.resenas-quote-text {
+  font-family: var(--font-body);
+  font-size: clamp(16.5px, 1.3vw, 20px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  color: var(--ink, #1F1C1D);
+  margin: 0 0 clamp(18px, 2vw, 24px) 0;
+}
+
+.resenas-author-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: clamp(20px, 2.2vw, 26px);
+}
+
+.resenas-author-name {
+  font-family: var(--font-body);
+  font-size: clamp(14.5px, 1.1vw, 16px);
+  font-weight: 700;
+  color: var(--ink, #1F1C1D);
+  letter-spacing: -0.01em;
+}
+
+.resenas-author-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--orange, #FF5206);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.resenas-student-media {
+  border-radius: 18px;
+  overflow: hidden;
+  height: clamp(210px, 18vw, 270px);
+  width: 100%;
+  background-color: #EAEAEA;
+  position: relative;
+}
+
+.resenas-student-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Transición suave al alternar reseña */
+.resenas-card-testimonial.is-fading .resenas-testimonial-body,
+.resenas-card-testimonial.is-fading .resenas-student-media img {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Controles Circulares de Navegación */
+.resenas-nav-controls {
+  margin-top: clamp(20px, 2.2vw, 28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.resenas-nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(31, 28, 29, 0.12);
+  color: var(--ink, #1F1C1D);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s var(--ease-apple, cubic-bezier(0.16, 1, 0.3, 1));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .resenas-nav-btn:hover {
+    background-color: var(--ink, #1F1C1D);
+    color: #FFFFFF;
+    border-color: var(--ink, #1F1C1D);
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.resenas-nav-btn:active {
+  transform: scale(0.94);
+}
+
+.resenas-nav-btn:focus-visible {
+  outline: 2px solid var(--orange, #FF5206);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   BREAKPOINTS RESPONSIVOS RESEÑAS
+   ========================================================= */
+
+/* Tablet (768px a 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .resenas-grid-stage {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .resenas-col-center {
+    grid-column: span 2;
+    order: -1; /* Reseña destacada arriba en tablet */
+  }
+
+  .resenas-student-media {
+    height: 320px;
+  }
+}
+
+/* Desktop (min-width: 1024px): 3 Columnas perfectamente balanceadas y alineadas */
 @media (min-width: 1024px) {
-  .bento-grid {
-    display: grid !important;
-    grid-template-columns: repeat(12, 1fr) !important;
-    grid-template-rows: 280px 280px !important;
-    gap: var(--grid-gutter, 32px) !important;
-    width: 100% !important;
+  .resenas-grid-stage {
+    grid-template-columns: 1fr 1.25fr 1fr;
+    gap: clamp(24px, 2.2vw, 32px);
+    align-items: stretch;
   }
 
-  .bento-cell--photo,
-  .bento-cell--tall,
-  .bento-cell--wide,
-  .bento-cell--photo-alt {
-    height: 100% !important;
+  .resenas-col-side {
+    height: 100%;
+    gap: clamp(20px, 2vw, 24px);
   }
 
-  .bento-cell--wide {
-    grid-column: 1 / span 4 !important;
-    grid-row: 1 !important;
+  .resenas-col-side .resenas-media-box {
+    flex: 1 1 0;
+    min-height: 300px;
+    height: auto;
   }
 
-  .bento-cell--dark {
-    grid-column: 5 / span 3 !important;
-    grid-row: 1 !important;
-    min-height: auto !important;
+  .resenas-card-orange,
+  .resenas-card-dark {
+    flex: 0 0 auto;
+    min-height: 190px;
   }
 
-  .bento-cell--tall {
-    grid-column: 8 / span 5 !important;
-    grid-row: 1 / span 2 !important;
-    min-height: auto !important;
+  .resenas-card-testimonial {
+    height: 100%;
   }
 
-  .bento-cell--sponsor {
-    grid-column: 1 / span 3 !important;
-    grid-row: 2 !important;
-    min-height: auto !important;
-  }
-
-  .bento-cell--photo-alt {
-    grid-column: 4 / span 4 !important;
-    grid-row: 2 !important;
+  .resenas-student-media {
+    height: clamp(220px, 20vw, 270px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bento-cell,
-  .bento-cell--photo img {
+  .resenas-card-testimonial,
+  .resenas-media-box img,
+  .resenas-card-orange,
+  .resenas-card-dark,
+  .resenas-nav-btn,
+  .resenas-testimonial-body,
+  .resenas-student-media img {
     transition: none !important;
     transform: none !important;
   }
