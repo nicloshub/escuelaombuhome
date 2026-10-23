@@ -568,9 +568,16 @@
           </div>
         </header>
 
-        <!-- Contenedor interactivo: Lista + Floating Image Preview -->
+        <!-- Contenedor interactivo: Floating Preview (Sticky en mobile) + Lista -->
         <div class="gear-editorial-stage">
           <div class="gear-interactive-wrap">
+            <!-- Floating Preview Image Card (Sticky en mobile) -->
+            <div class="gear-floating-preview" id="gearFloatingPreview" aria-hidden="true">
+              <div class="gear-preview-card">
+                <img src="" alt="Equipamiento de Kitesurf" class="gear-preview-img" id="gearPreviewImg">
+              </div>
+            </div>
+
             <ul class="gear-items-list" role="list">
               <li class="gear-item-row" data-gear="kite" data-rotation="-3.5deg" data-img="../assets/equipo_kite.JPEG" data-alt="Kite de Kitesurf Escuela Ombú">
                 <div class="gear-item-main">
@@ -676,13 +683,6 @@
                 </div>
               </li>
             </ul>
-
-            <!-- Floating Preview Image Card -->
-            <div class="gear-floating-preview" id="gearFloatingPreview" aria-hidden="true">
-              <div class="gear-preview-card">
-                <img src="" alt="Equipamiento de Kitesurf" class="gear-preview-img" id="gearPreviewImg">
-              </div>
-            </div>
           </div>
 
           <!-- Botón inferior negro "¿Traés tu equipo? Consultanos" -->

@@ -372,9 +372,9 @@ function initGearHoverList() {
 
     previewEl.style.setProperty('--gear-rot', rot);
 
-    // Desplazamiento sutil vertical para acompañar el item activo manteniéndose dentro de los límites
+    // Desplazamiento sutil vertical para acompañar el item activo manteniéndose dentro de los límites (solo desktop)
     const itemIndex = items.indexOf(targetItem);
-    if (list && itemIndex !== -1 && window.innerWidth > 720) {
+    if (list && itemIndex !== -1 && window.innerWidth > 900) {
       const listHeight = list.offsetHeight;
       const previewHeight = previewEl.offsetHeight || 360;
       const margin = 16; // Margen de seguridad para respetar las líneas límite superior e inferior
@@ -408,20 +408,59 @@ function initGearHoverList() {
   updateAdjacentBorders();
 
   // En pantallas táctiles o mobile, inicializar con el primer item visible (Kite)
-  if (window.innerWidth <= 720 && items.length > 0) {
+  if (window.innerWidth <= 900 && items.length > 0) {
     setActiveItem(items[0]);
   }
 
-  items.forEach((item) => {
-    item.addEventListener('mouseenter', () => setActiveItem(item));
-    item.addEventListener('focus', () => setActiveItem(item));
-    item.addEventListener('click', () => setActiveItem(item));
-  });
+  // Soporte de Scroll-Spy en mobile para que al scrollear la imagen fija arriba
+  // se actualice automáticamente al elemento de equipamiento que pasa por la pantalla
+  if ('IntersectionObserver' in window) {
+    let isUserClicking = false;
+
+    items.forEach((item) => {
+      item.addEventListener('click', () => {
+        isUserClicking = true;
+        setActiveItem(item);
+        setTimeout(() => { isUserClicking = false; }, 600);
+      });
+      item.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 900) setActiveItem(item);
+      });
+      item.addEventListener('focus', () => {
+        if (window.innerWidth > 900) setActiveItem(item);
+      });
+    });
+
+    const gearObserver = new IntersectionObserver((entries) => {
+      if (window.innerWidth > 900 || isUserClicking) return;
+      const visible = entries.filter((e) => e.isIntersecting);
+      if (visible.length > 0) {
+        // Encontrar el item más cercano a la zona activa debajo del preview sticky (~300px)
+        const target = visible.reduce((prev, curr) => {
+          const prevDist = Math.abs(curr.boundingClientRect.top - 300);
+          const bestDist = Math.abs(prev.boundingClientRect.top - 300);
+          return prevDist < bestDist ? curr : prev;
+        });
+        setActiveItem(target.target);
+      }
+    }, {
+      rootMargin: '-15% 0px -40% 0px',
+      threshold: [0.1, 0.4]
+    });
+
+    items.forEach((item) => gearObserver.observe(item));
+  } else {
+    items.forEach((item) => {
+      item.addEventListener('mouseenter', () => setActiveItem(item));
+      item.addEventListener('focus', () => setActiveItem(item));
+      item.addEventListener('click', () => setActiveItem(item));
+    });
+  }
 
   // Ocultar preview y desactivar item al sacar el mouse del listado (únicamente en desktop)
   if (list) {
     list.addEventListener('mouseleave', () => {
-      if (window.innerWidth > 720) {
+      if (window.innerWidth > 900) {
         clearActive();
       }
     });

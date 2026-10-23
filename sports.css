@@ -6161,44 +6161,58 @@ button:focus-visible {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
-/* Responsive */
+/* Responsive Equipamiento: Sticky Preview arriba en mobile / tablet */
 @media (max-width: 900px) {
-  .gear-item-main {
-    max-width: 60%;
-  }
-  .gear-floating-preview {
-    right: 2%;
-    width: clamp(220px, 28vw, 280px);
-  }
-}
-
-@media (max-width: 720px) {
   .gear-interactive-wrap {
     display: flex;
-    flex-direction: column-reverse;
-    gap: 20px;
+    flex-direction: column;
+    position: relative;
+    gap: 0;
   }
+
   .gear-floating-preview,
   .gear-floating-preview.is-visible {
-    position: static;
+    position: -webkit-sticky;
+    position: sticky;
+    top: calc(68px + env(safe-area-inset-top, 0px));
+    z-index: 20;
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
     transform: none !important;
     width: 100%;
-    aspect-ratio: 16 / 10;
-    max-height: 260px;
-    border-radius: 18px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
-    margin-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 14px;
+    background-color: var(--white, #FFFFFF);
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    right: auto;
+    left: auto;
   }
+
   .gear-preview-card {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
     border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    background: #0E0E0E;
   }
+
+  .gear-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   .gear-item-row {
     padding: 14px 18px;
     align-items: center;
   }
+
   .gear-item-main {
     display: flex;
     flex-direction: column;
@@ -6207,10 +6221,12 @@ button:focus-visible {
     max-width: calc(100% - 50px);
     width: auto;
   }
+
   .gear-item-name {
     font-size: 22px;
     line-height: 1.1;
   }
+
   .gear-item-pill {
     white-space: normal;
     font-size: 12px;
@@ -6221,15 +6237,19 @@ button:focus-visible {
     box-sizing: border-box;
     word-break: break-word;
   }
+
   .gear-item-row:not(.is-active) .gear-item-pill {
     display: none !important;
   }
+
   .gear-item-row.is-active .gear-item-pill {
     display: inline-block !important;
   }
+
   .gear-item-arrow {
     flex-shrink: 0;
   }
+
   .gear-consult-btn {
     font-size: 14.5px;
     padding: 12px 20px;
