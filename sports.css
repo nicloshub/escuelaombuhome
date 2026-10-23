@@ -7358,16 +7358,43 @@ button:focus-visible {
   }
 }
 
+/* Marco de la foto: en desktop centrado con distancia respecto a los bordes del contenido */
+.kite-hero-photo-frame {
+  position: absolute;
+  top: calc(130px + env(safe-area-inset-top, 0px));
+  left: clamp(28px, 4.5vw, 76px);
+  right: clamp(28px, 4.5vw, 76px);
+  bottom: clamp(225px, 24vh, 285px);
+  border-radius: clamp(24px, 3.2vw, 40px);
+  overflow: hidden;
+  box-shadow: none;
+  background-color: #0E0E0E;
+  z-index: 1;
+}
+
+.kite-hero-mobile-cluster {
+  display: none !important;
+}
+
+.kite-hero-desktop-cluster {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 1023px) {
   .kite-hero-fold {
     height: 100svh;
     min-height: 100svh;
-    padding-top: calc(72px + env(safe-area-inset-top, 0px));
-    padding-bottom: clamp(18px, 3vh, 28px);
+    max-height: 100svh;
+    padding-top: calc(76px + env(safe-area-inset-top, 0px));
+    padding-bottom: clamp(14px, 2.4vh, 20px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 0;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .kite-hero-photo-frame {
@@ -7388,15 +7415,62 @@ button:focus-visible {
     background: linear-gradient(
       180deg,
       rgba(14, 14, 14, 0.45) 0%,
-      rgba(14, 14, 14, 0.15) 35%,
-      rgba(14, 14, 14, 0.88) 100%
+      rgba(14, 14, 14, 0.15) 30%,
+      rgba(14, 14, 14, 0.70) 65%,
+      rgba(14, 14, 14, 0.95) 100%
     );
     pointer-events: none;
     z-index: 2;
   }
 
+  .kite-hero-row-top {
+    height: auto;
+    padding: 0;
+    margin-bottom: auto;
+  }
+
   .kite-hero-row-mid {
     display: none !important;
+  }
+
+  .kite-hero-row-bottom {
+    margin-top: auto;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    width: 100%;
+  }
+
+  .kite-hero-mobile-cluster {
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .kite-hero-desktop-cluster {
+    display: none !important;
+  }
+
+  .kite-hero-bottom-grid {
+    padding-top: 24px;
+    padding-bottom: 44px;
+    gap: 0;
+    display: block;
+  }
+
+  .kite-hero-bottom-right {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .kite-hero-badges-wrap {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .kite-hero-badges-row {
+    justify-content: flex-start;
   }
 }
 
@@ -7655,24 +7729,25 @@ button:focus-visible {
 
 @media (max-width: 767px) {
   .kite-hero-title {
-    font-size: clamp(38px, 11vw, 56px);
-    line-height: 0.94;
+    font-size: clamp(28px, 7.8vw, 36px);
+    line-height: 0.95;
+    gap: 6px;
   }
 
   .kite-hero-circle-arrow {
-    width: 44px;
-    height: 44px;
+    width: 32px;
+    height: 32px;
   }
 
   .kite-hero-circle-arrow svg {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
   }
 
   /* Weather card en mobile: idéntica a la home */
   .kite-hero-row-top .hero-weather-card.kite-weather-floating {
     width: auto;
-    max-width: 230px;
+    max-width: 220px;
     padding: 8px 12px;
     border-radius: 16px;
     background: rgba(254, 254, 254, 0.88);
@@ -7682,6 +7757,7 @@ button:focus-visible {
     box-shadow: 0 16px 36px rgba(13, 21, 28, 0.08),
                 0 2px 8px rgba(13, 21, 28, 0.04),
                 inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    margin: 0;
   }
 
   .kite-hero-row-top .hero-weather-card .weather-title-label,
@@ -7754,6 +7830,40 @@ button:focus-visible {
   .kite-hero-row-top .hero-weather-card .compass-marker {
     font-size: 6px;
   }
+
+  .kite-hero-bajada {
+    font-size: clamp(12.5px, 3.3vw, 13.5px);
+    line-height: 1.4;
+    margin: 8px 0 12px;
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .kite-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .kite-hero-actions .btn-pill-orange {
+    --btn-h: 44px;
+    --btn-icon-size: 30px;
+    height: 44px;
+    min-height: 44px;
+    width: 100%;
+    font-size: 12.5px;
+    padding-left: 18px;
+    padding-right: calc(var(--btn-icon-size, 30px) + 24px) !important;
+  }
+
+  .kite-hero-actions .hero-cta-sports {
+    height: 44px;
+    min-height: 44px;
+    width: 100%;
+    font-size: 12.5px;
+    justify-content: center;
+  }
 }
 
 /* 2. BLOQUE INFERIOR: Bajada + CTAs (Izquierda) & Requisitos (Derecha) */
@@ -7794,36 +7904,6 @@ button:focus-visible {
     padding-top: 24px;
     padding-bottom: 56px;
     gap: 24px;
-  }
-
-  .kite-hero-bottom-left {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .kite-hero-actions {
-    order: 1;
-    margin-bottom: 24px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .kite-hero-bajada {
-    order: 2;
-    margin: 0 0 12px;
-  }
-
-  .kite-hero-actions .btn-pill-orange {
-    width: 100%;
-    padding-left: 20px;
-    padding-right: calc(var(--btn-icon-size, 32px) + 24px) !important;
-  }
-
-  .kite-hero-actions .hero-cta-sports {
-    width: 100%;
-    justify-content: center;
   }
 }
 
