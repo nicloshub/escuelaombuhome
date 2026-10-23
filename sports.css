@@ -4232,6 +4232,10 @@ header.site-header:hover {
   will-change: transform, opacity;
 }
 
+.level-close-btn {
+  display: none !important;
+}
+
 /* Cerrada o antes de abrir: oculto hacia la izquierda */
 .level-card:not(.is-open) .level-media-badge,
 .level-card.is-open:not(.is-content-ready) .level-media-badge {
@@ -4817,8 +4821,40 @@ header.site-header:hover {
 
   .level-media-badge {
     top: 14px;
-    right: 18px;
+    left: 18px;
+    right: auto;
     font-size: 22px;
+  }
+
+  .level-card.is-open .level-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(22, 22, 22, 0.70);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #FFFFFF;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .level-card.is-open .level-close-btn:active {
+    transform: scale(0.92);
+    background: rgba(255, 82, 6, 0.95);
+  }
+
+  .level-card:not(.is-open) .level-close-btn {
+    display: none !important;
   }
 
   .level-panel-content {

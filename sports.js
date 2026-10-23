@@ -19,68 +19,114 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 1. La telemetría oficial de viento es administrada de forma centralizada por main.js (fetchLiveWind)
 
-// 2. Acordeón horizontal de 3 niveles (Kitesurf)
+// 2. Acordeón de 3 niveles (Kitesurf: horizontal en desktop, vertical independiente en mobile)
 function initLevelAccordion() {
   const accordion = document.querySelector('.level-accordion');
   if (!accordion) return;
 
   const cards = Array.from(accordion.querySelectorAll('.level-card'));
+  const isMobileView = () => window.innerWidth <= 900;
 
-  let isAnimating = false;
-
-  function updateAria(activeCard) {
-    cards.forEach(card => {
-      const isOpen = card === activeCard;
-      const btn = card.querySelector('.level-trigger');
-      if (btn) {
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      }
-      const panel = card.querySelector('.level-panel');
-      if (panel) {
-        panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-      }
-    });
+  function closeCard(targetCard) {
+    if (!targetCard) return;
+    targetCard.classList.remove('is-open', 'is-content-ready');
+    const btn = targetCard.querySelector('.level-trigger');
+    if (btn) btn.setAttribute('aria-expanded', 'false');
+    const panel = targetCard.querySelector('.level-panel');
+    if (panel) panel.setAttribute('aria-hidden', 'true');
   }
 
-  function openCard(targetCard) {
-    if (!targetCard || targetCard.classList.contains('is-open')) return;
+  function openCard(targetCard, shouldScroll = true) {
+    if (!targetCard) return;
 
-    cards.forEach(card => {
-      const isOpen = card === targetCard;
-      card.classList.toggle('is-open', isOpen);
-      card.classList.remove('is-expanding', 'is-closing');
+    if (isMobileView()) {
+      if (targetCard.classList.contains('is-open')) return;
 
-      if (!isOpen) {
-        card.classList.remove('is-content-ready');
-      }
+      targetCard.classList.add('is-open');
+      targetCard.classList.remove('is-expanding', 'is-closing');
 
-      const btn = card.querySelector('.level-trigger');
-      if (btn) {
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      }
-      const panel = card.querySelector('.level-panel');
-      if (panel) {
-        panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-      }
-    });
+      const btn = targetCard.querySelector('.level-trigger');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+      const panel = targetCard.querySelector('.level-panel');
+      if (panel) panel.setAttribute('aria-hidden', 'false');
 
-    // Cascada con física Apple (blur + drift) para la tarjeta recién abierta
-    // Se activa apenas la tarjeta se ensancha y entra el panel blanco
-    setTimeout(() => {
-      if (targetCard.classList.contains('is-open')) {
-        targetCard.classList.add('is-content-ready');
+      setTimeout(() => {
+        if (targetCard.classList.contains('is-open')) {
+          targetCard.classList.add('is-content-ready');
+        }
+      }, 180);
+
+      // Scroll suave para que la card que se acaba de abrir quede perfectamente visible
+      // debajo del header fijo, sin saltos ni desorientación
+      if (shouldScroll) {
+        setTimeout(() => {
+          const headerOffset = 84;
+          const rect = targetCard.getBoundingClientRect();
+          const targetY = rect.top + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: targetY,
+            behavior: 'smooth'
+          });
+        }, 80);
       }
-    }, 180);
+    } else {
+      // Desktop: acordeón clásico horizontal (1 abierta a la vez)
+      if (targetCard.classList.contains('is-open')) return;
+
+      cards.forEach(card => {
+        const isOpen = card === targetCard;
+        card.classList.toggle('is-open', isOpen);
+        card.classList.remove('is-expanding', 'is-closing');
+
+        if (!isOpen) {
+          card.classList.remove('is-content-ready');
+        }
+
+        const btn = card.querySelector('.level-trigger');
+        if (btn) {
+          btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+        const panel = card.querySelector('.level-panel');
+        if (panel) {
+          panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        }
+      });
+
+      setTimeout(() => {
+        if (targetCard.classList.contains('is-open')) {
+          targetCard.classList.add('is-content-ready');
+        }
+      }, 180);
+    }
   }
+
+  // En mobile: los niveles empiezan cerrados completamente
+  if (isMobileView()) {
+    cards.forEach(card => closeCard(card));
+  }
+
+  // Al redimensionar entre mobile y desktop
+  window.addEventListener('resize', () => {
+    if (!isMobileView()) {
+      const anyOpen = cards.some(c => c.classList.contains('is-open'));
+      if (!anyOpen) {
+        openCard(cards[0], false);
+      }
+    }
+  });
 
   cards.forEach((card, index) => {
     const btn = card.querySelector('.level-trigger');
+    const closeBtn = card.querySelector('.level-close-btn');
 
     if (btn) {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        userHasInteracted = true;
-        openCard(card);
+        if (isMobileView() && card.classList.contains('is-open')) {
+          closeCard(card);
+        } else {
+          openCard(card, true);
+        }
       });
 
       btn.addEventListener('keydown', (e) => {
@@ -91,8 +137,11 @@ function initLevelAccordion() {
           targetIndex = (index - 1 + cards.length) % cards.length;
         } else if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          userHasInteracted = true;
-          openCard(card);
+          if (isMobileView() && card.classList.contains('is-open')) {
+            closeCard(card);
+          } else {
+            openCard(card, true);
+          }
         }
 
         if (targetIndex !== null) {
@@ -103,10 +152,18 @@ function initLevelAccordion() {
       });
     }
 
-    // Permitir clic en cualquier parte de la pastilla cerrada
+    // Botón cruz para cerrar la card en mobile
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeCard(card);
+      });
+    }
+
+    // Permitir clic en la pastilla cerrada para abrir
     card.addEventListener('click', () => {
       if (!card.classList.contains('is-open')) {
-        openCard(card);
+        openCard(card, true);
       }
     });
 
