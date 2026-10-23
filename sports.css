@@ -858,8 +858,14 @@ header.site-header:hover {
 /* Breakpoints Responsive Navbar */
 @media (max-width: 1024px) {
   header.site-header {
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
     border-radius: 24px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-sizing: border-box;
+    transition: box-shadow 0.25s ease;
   }
   .header-nav { display: none; }
   .mobile-menu-btn { display: inline-flex; }
@@ -883,40 +889,54 @@ header.site-header:hover {
 
 @media (max-width: 768px) {
   header.site-header {
-    width: calc(100% - (var(--grid-margin, 24px) * 2));
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
     top: 10px;
     padding: 6px 12px;
     border-radius: 24px;
+    box-sizing: border-box;
   }
   .nav-btn-reserve {
-    font-size: 11.5px;
-    padding: 9px 16px;
-    letter-spacing: 0.03em;
+    font-size: 11px;
+    padding: 8px 12px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
   .mobile-menu-btn {
     width: 36px;
     height: 36px;
+    flex-shrink: 0;
   }
 }
 
 @media (max-width: 480px) {
   header.site-header {
-    width: calc(100% - 16px);
+    left: 8px !important;
+    right: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    transform: none !important;
     top: 8px;
     padding: 5px 10px;
+    box-sizing: border-box;
   }
   .brand-disc-img {
     width: 32px;
     height: 32px;
+    flex-shrink: 0;
   }
   .nav-btn-reserve {
-    font-size: 10.5px;
-    padding: 7px 12px;
-    letter-spacing: 0.02em;
+    font-size: 10px;
+    padding: 7px 10px;
+    letter-spacing: 0.01em;
   }
   .mobile-menu-btn {
     width: 32px;
     height: 32px;
+    flex-shrink: 0;
   }
 }
 
@@ -2748,9 +2768,8 @@ header.site-header:hover {
   .pricing-btn-box .btn-pill-dark,
   .pricing-btn-box .btn-pill-orange {
     width: 100%;
-    justify-content: space-between;
-    padding-left: 1.5rem;
-    padding-right: 6px;
+    padding-left: 20px;
+    padding-right: calc(var(--btn-icon-size, 32px) + 24px) !important;
   }
 }
 
@@ -6654,10 +6673,14 @@ button:focus-visible {
     left: 10px;
   }
 
-  .journey-step {
-    min-height: 0;
+  .journey-step,
+  .journey-step:first-child,
+  .journey-step:last-child {
+    min-height: 0 !important;
     grid-template-columns: 48px minmax(0, 1fr);
-    padding-block: 24px 34px;
+    padding-block: 22px 26px !important;
+    padding-top: 22px !important;
+    padding-bottom: 26px !important;
   }
 
   .journey-number {
@@ -7794,9 +7817,8 @@ button:focus-visible {
 
   .kite-hero-actions .btn-pill-orange {
     width: 100%;
-    justify-content: space-between;
-    padding-left: 1.5rem;
-    padding-right: 6px;
+    padding-left: 20px;
+    padding-right: calc(var(--btn-icon-size, 32px) + 24px) !important;
   }
 
   .kite-hero-actions .hero-cta-sports {
@@ -8129,6 +8151,37 @@ button:focus-visible {
     min-width: 260px;
     max-width: 310px;
     scroll-snap-align: center;
+    transform: none !important;
+    box-shadow: 0 6px 18px rgba(35, 31, 32, 0.08) !important;
+  }
+
+  /* Desactivar efecto hover en mobile para evitar sombras y saltos en touch */
+  #instructores .instructor-card--kite:hover,
+  #instructores .instructor-card--kite:active,
+  #instructores .instructor-card--kite:focus {
+    transform: none !important;
+    box-shadow: 0 6px 18px rgba(35, 31, 32, 0.08) !important;
+  }
+
+  #instructores .instructor-card--kite:hover .instructor-photo img {
+    transform: none !important;
+  }
+
+  #instructores .instructor-card--kite:hover .instructor-info-badge {
+    transform: none !important;
+    background: rgba(254, 254, 254, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: none !important;
+  }
+
+  #instructores .instructor-card--kite:hover .instructor-name {
+    color: var(--ink, #1F1C1D) !important;
+  }
+
+  #instructores .instructor-card--kite:hover .instructor-tag {
+    color: var(--text-muted, #777777) !important;
+    background: var(--light-2, #F8F8F6) !important;
+    border-color: rgba(35, 31, 32, 0.08) !important;
   }
 }
 
@@ -8218,11 +8271,6 @@ body.is-subpage .container,
   box-sizing: border-box;
 }
 
-header.site-header {
-  width: calc(100% - (var(--grid-margin, 18px) * 2));
-  max-width: var(--container-content-max, 1440px);
-}
-
 .subpage-section {
   padding-top: 64px;
   padding-bottom: 64px;
@@ -8255,11 +8303,6 @@ header.site-header {
     max-width: var(--container-max);
     padding-left: var(--grid-margin, 24px);
     padding-right: var(--grid-margin, 24px);
-  }
-
-  header.site-header {
-    width: calc(100% - (var(--grid-margin, 24px) * 2));
-    max-width: var(--container-content-max, 1440px);
   }
 
   .subpage-section {
@@ -8562,9 +8605,11 @@ h4.subpage-card-subtitle,
   .btn-pill-orange,
   .btn-pill-dark,
   .btn-pill-white {
-    font-size: 14px !important;
+    font-size: 13.5px !important;
     line-height: 20px !important;
-    padding: 12px 20px !important;
+    padding-left: 20px !important;
+    padding-right: calc(var(--btn-icon-size, 32px) + 24px) !important;
+    box-sizing: border-box;
   }
 }
 
