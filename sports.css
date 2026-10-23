@@ -9275,8 +9275,9 @@ body.is-subpage .mapa-card-white {
 }
 
 /* =========================================================
-   15. BOTÓN CTA EN PROCESO / LISTO PARA APRENDER
+   15. BOTONES CTA EN CABECERAS EDITORIALES
    ========================================================= */
+.editorial-col-right .btn-pill-orange,
 .section-desc-col .btn-pill-orange {
   margin-top: 20px;
 }
