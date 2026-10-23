@@ -7627,11 +7627,11 @@ button:focus-visible {
   }
 }
 
-/* Botón Outline en Hero Oscuro */
+/* Botón Secundario en Hero Oscuro (Siempre Blanco con Texto Negro) */
 .kite-hero-actions .hero-cta-sports {
-  color: #FFFFFF !important;
-  background: transparent !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+  color: var(--ink, #1F1C1D) !important;
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #FFFFFF !important;
   border-radius: 100px;
   height: 48px;
   min-height: 48px;
@@ -7646,17 +7646,18 @@ button:focus-visible {
   justify-content: center;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: none !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16) !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .kite-hero-actions .hero-cta-sports:hover {
-  color: #FFFFFF !important;
-  border-color: #FFFFFF !important;
-  background: rgba(255, 255, 255, 0.12) !important;
+  color: var(--ink, #1F1C1D) !important;
+  border-color: #F4F4F4 !important;
+  background-color: #F4F4F4 !important;
   transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24) !important;
 }
 
 /* Pills de Requisitos (Derecha) */
@@ -7688,6 +7689,13 @@ button:focus-visible {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1023px) {
+  .kite-hero-badges-row {
+    justify-content: flex-start;
+  }
 }
 
 .kite-hero-pill-badge {
