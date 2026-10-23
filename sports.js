@@ -277,9 +277,10 @@ function initGearHoverList() {
   if (!container) return;
 
   const items = Array.from(container.querySelectorAll('.gear-item-row'));
+  const previewEl = container.querySelector('#gearFloatingPreview') || container.querySelector('.gear-floating-preview');
   const previewImg = container.querySelector('#gearPreviewImg');
   const list = container.querySelector('.gear-items-list');
-  if (!items.length || !previewImg) return;
+  if (!items.length || !previewImg || !previewEl) return;
 
   // Pre-cargar imágenes para que el hover sea instantáneo sin parpadeos
   items.forEach((item) => {
@@ -310,17 +311,22 @@ function initGearHoverList() {
 
     const newSrc = targetItem.dataset.img;
     const newAlt = targetItem.dataset.alt || targetItem.querySelector('.gear-item-name')?.textContent || 'Equipamiento de Kitesurf';
+    const rot = targetItem.dataset.rotation || '-3deg';
+
+    previewEl.style.setProperty('--gear-rot', rot);
 
     if (newSrc && previewImg.getAttribute('src') !== newSrc) {
-      previewImg.style.opacity = '0.35';
-      previewImg.style.transform = 'scale(0.97)';
-      setTimeout(() => {
-        previewImg.src = newSrc;
-        previewImg.alt = newAlt;
-        previewImg.style.opacity = '1';
-        previewImg.style.transform = 'scale(1)';
-      }, 120);
+      previewImg.src = newSrc;
+      previewImg.alt = newAlt;
     }
+
+    previewEl.classList.add('is-visible');
+  }
+
+  function clearActive() {
+    items.forEach((it) => it.classList.remove('is-active'));
+    updateAdjacentBorders();
+    previewEl.classList.remove('is-visible');
   }
 
   // Inicializar estado de bordes adyacentes
@@ -331,6 +337,13 @@ function initGearHoverList() {
     item.addEventListener('focus', () => setActiveItem(item));
     item.addEventListener('click', () => setActiveItem(item));
   });
+
+  // Ocultar preview y desactivar item al sacar el mouse del listado
+  if (list) {
+    list.addEventListener('mouseleave', () => {
+      clearActive();
+    });
+  }
 }
 
 // 6. Recorrido scrollytelling: de la arena al agua
