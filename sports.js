@@ -491,6 +491,53 @@ function initResenasCarousel() {
     }
   });
 
+  // Medir la reseña más larga para fijar el min-height exacto y evitar saltos de altura en toda la sección
+  function syncMaxQuoteHeight() {
+    if (!quoteEl) return;
+    const currentWidth = quoteEl.getBoundingClientRect().width;
+    if (currentWidth <= 0) return;
+
+    const measureEl = document.createElement('blockquote');
+    measureEl.className = 'resenas-quote-text';
+    measureEl.style.position = 'absolute';
+    measureEl.style.visibility = 'hidden';
+    measureEl.style.pointerEvents = 'none';
+    measureEl.style.left = '-9999px';
+    measureEl.style.top = '0';
+    measureEl.style.width = `${currentWidth}px`;
+    measureEl.style.minHeight = '0';
+    measureEl.style.height = 'auto';
+    measureEl.style.margin = '0';
+    measureEl.style.padding = '0';
+    measureEl.style.boxSizing = 'border-box';
+    document.body.appendChild(measureEl);
+
+    let maxH = 0;
+    REVIEWS_DATA.forEach((r) => {
+      measureEl.textContent = `“${r.quote.replace(/^[“"']|[”"']$/g, '')}”`;
+      const h = measureEl.getBoundingClientRect().height;
+      if (h > maxH) maxH = h;
+    });
+
+    document.body.removeChild(measureEl);
+
+    if (maxH > 0) {
+      quoteEl.style.minHeight = `${Math.ceil(maxH)}px`;
+    }
+  }
+
+  // Ejecutar medición inicial y recalibrar al cargar tipografías o redimensionar
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(syncMaxQuoteHeight);
+  }
+  syncMaxQuoteHeight();
+
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(syncMaxQuoteHeight, 100);
+  });
+
   let currentIndex = 0;
   let isTransitioning = false;
 
