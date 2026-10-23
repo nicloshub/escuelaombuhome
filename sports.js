@@ -350,16 +350,23 @@ function initGearHoverList() {
   // Inicializar estado de bordes adyacentes
   updateAdjacentBorders();
 
+  // En pantallas táctiles o mobile, inicializar con el primer item visible (Kite)
+  if (window.innerWidth <= 720 && items.length > 0) {
+    setActiveItem(items[0]);
+  }
+
   items.forEach((item) => {
     item.addEventListener('mouseenter', () => setActiveItem(item));
     item.addEventListener('focus', () => setActiveItem(item));
     item.addEventListener('click', () => setActiveItem(item));
   });
 
-  // Ocultar preview y desactivar item al sacar el mouse del listado
+  // Ocultar preview y desactivar item al sacar el mouse del listado (únicamente en desktop)
   if (list) {
     list.addEventListener('mouseleave', () => {
-      clearActive();
+      if (window.innerWidth > 720) {
+        clearActive();
+      }
     });
   }
 }

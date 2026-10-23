@@ -2729,6 +2729,31 @@ header.site-header:hover {
   align-items: stretch;
 }
 
+@media (max-width: 767px) {
+  .pricing-editorial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pricing-card.is-featured {
+    order: -1;
+  }
+
+  .pricing-card {
+    padding: 30px 22px;
+    border-radius: 22px;
+  }
+
+  .pricing-btn-box .btn-pill-dark,
+  .pricing-btn-box .btn-pill-orange {
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 1.5rem;
+    padding-right: 6px;
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1023px) {
   .pricing-editorial-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -4723,11 +4748,11 @@ header.site-header:hover {
   }
 
   .level-card:not(.is-open) {
-    flex: 0 0 84px;
-    height: 84px;
-    min-height: 84px;
-    max-height: 84px;
-    border-radius: 28px;
+    flex: 0 0 68px;
+    height: 68px;
+    min-height: 68px;
+    max-height: 68px;
+    border-radius: 20px;
     transform: none !important;
   }
 
@@ -4735,42 +4760,42 @@ header.site-header:hover {
     flex: 0 0 auto;
     min-height: auto;
     max-height: none;
-    border-radius: 28px;
+    border-radius: 24px;
   }
 
   .level-panel {
     display: flex;
     flex-direction: column;
     height: auto;
-    border-radius: 28px;
+    border-radius: 24px;
   }
 
   .level-card:not(.is-open) .level-panel-media {
-    flex: 0 0 84px;
-    height: 84px;
+    flex: 0 0 68px;
+    height: 68px;
     width: 100%;
-    border-radius: 28px;
+    border-radius: 20px;
   }
 
   .level-card.is-open .level-panel-media {
-    flex: 0 0 220px;
-    height: 220px;
+    flex: 0 0 200px;
+    height: 200px;
     width: 100%;
-    border-radius: 28px 28px 0 0;
+    border-radius: 24px 24px 0 0;
   }
 
   .level-media-badge {
-    top: 16px;
-    right: 20px;
-    font-size: 26px;
+    top: 14px;
+    right: 18px;
+    font-size: 22px;
   }
 
   .level-panel-content {
     flex: 1 1 auto;
     width: 100%;
     min-width: 0;
-    padding: 24px 20px 28px;
-    border-radius: 0 0 28px 28px;
+    padding: 20px 18px 24px;
+    border-radius: 0 0 24px 24px;
   }
 
   .level-card:not(.is-open) .level-panel-content {
@@ -4793,7 +4818,7 @@ header.site-header:hover {
   }
 
   .level-title {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .level-desc {
@@ -4818,42 +4843,9 @@ header.site-header:hover {
     font-size: 12.5px;
   }
 
-  .level-card-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-    margin-top: 16px;
-    padding-top: 0;
-    padding-right: 64px;
-  }
-
+  .level-card-footer,
   .level-corner-notch {
-    width: 68px;
-    height: 68px;
-    border-top-left-radius: 34px;
-    border-bottom-right-radius: 28px;
-    background-color: var(--light-1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .level-corner-notch::before,
-  .level-corner-notch::after {
     display: none !important;
-  }
-
-  .level-notch-btn {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    width: 44px;
-    height: 44px;
-  }
-
-  .level-notch-arrow {
-    width: 19px;
-    height: 19px;
   }
 
   .level-trigger {
@@ -5388,6 +5380,50 @@ header.site-header:hover {
 /* =========================================================
    BREAKPOINTS RESPONSIVOS RESEÑAS
    ========================================================= */
+
+/* Mobile (< 768px): Secuencia exacta:
+   1. Card negra con 200+ alumnos
+   2. Card de Reseña (Testimonio + Foto + Flechas)
+   3. Card naranja de Hard Wind
+   Las fotos decorativas laterales se ocultan para priorizar la lectura. */
+@media (max-width: 767px) {
+  .resenas-grid-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .resenas-col-left,
+  .resenas-col-right {
+    display: contents;
+  }
+
+  .resenas-col-side .resenas-media-box {
+    display: none !important;
+  }
+
+  .resenas-card-dark {
+    order: 1;
+    width: 100%;
+    margin: 0;
+  }
+
+  .resenas-col-center {
+    order: 2;
+    width: 100%;
+    margin: 0;
+  }
+
+  .resenas-card-orange {
+    order: 3;
+    width: 100%;
+    margin: 0;
+  }
+
+  .resenas-nav-controls {
+    margin-top: 16px;
+  }
+}
 
 /* Tablet (768px a 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -6078,12 +6114,16 @@ button:focus-visible {
   .gear-floating-preview,
   .gear-floating-preview.is-visible {
     position: static;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
     transform: none !important;
     width: 100%;
     aspect-ratio: 16 / 10;
-    max-height: 250px;
+    max-height: 260px;
     border-radius: 18px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    margin-bottom: 8px;
   }
   .gear-preview-card {
     border-radius: 18px;
@@ -6537,11 +6577,32 @@ button:focus-visible {
   }
 
   .journey-layout {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 24px;
   }
 
   .journey-scene {
-    display: none;
+    display: block !important;
+    position: -webkit-sticky;
+    position: sticky;
+    top: calc(68px + env(safe-area-inset-top, 0px));
+    z-index: 25;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .journey-section.is-enhanced .journey-scene-frame,
+  .journey-scene-frame {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
+    border-radius: 18px;
+    border: 1px solid rgba(254, 254, 254, 0.18);
+    background: #181516;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
   }
 
   .journey-steps-shell::before {
@@ -6573,18 +6634,7 @@ button:focus-visible {
   }
 
   .journey-step-photo {
-    display: grid;
-    grid-column: 2;
-    min-width: 0;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border: 1px solid rgba(254, 254, 254, 0.18);
-    border-radius: 16px;
-    background: rgba(254, 254, 254, 0.08);
-  }
-
-  .journey-step-photo .journey-scene-placeholder {
-    min-height: 0;
+    display: none !important;
   }
 
   .journey-water-divider {
@@ -7252,35 +7302,43 @@ button:focus-visible {
 
 @media (max-width: 1023px) {
   .kite-hero-fold {
-    min-height: auto;
-    padding-top: calc(84px + env(safe-area-inset-top, 0px));
-    padding-bottom: 24px;
-    gap: 16px;
+    height: 100svh;
+    min-height: 100svh;
+    padding-top: calc(72px + env(safe-area-inset-top, 0px));
+    padding-bottom: clamp(18px, 3vh, 28px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0;
   }
-}
 
-/* Marco de la foto: en desktop centrado con distancia respecto a los bordes del contenido */
-.kite-hero-photo-frame {
-  position: absolute;
-  top: calc(130px + env(safe-area-inset-top, 0px));
-  left: clamp(28px, 4.5vw, 76px);
-  right: clamp(28px, 4.5vw, 76px);
-  bottom: clamp(225px, 24vh, 285px);
-  border-radius: clamp(24px, 3.2vw, 40px);
-  overflow: hidden;
-  box-shadow: none;
-  background-color: #0E0E0E;
-  z-index: 1;
-}
-
-@media (max-width: 1023px) {
   .kite-hero-photo-frame {
-    top: calc(84px + env(safe-area-inset-top, 0px));
+    position: absolute;
+    top: 0;
     left: 0;
     right: 0;
-    height: 320px;
-    bottom: auto;
-    border-radius: 22px;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .kite-hero-photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(14, 14, 14, 0.45) 0%,
+      rgba(14, 14, 14, 0.15) 35%,
+      rgba(14, 14, 14, 0.88) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .kite-hero-row-mid {
+    display: none !important;
   }
 }
 
@@ -7520,25 +7578,15 @@ button:focus-visible {
 /* Responsive Tablet y Mobile para el Hero */
 @media (max-width: 1023px) {
   .kite-hero-row-top {
-    height: 160px;
-    padding: 8px 12px;
+    height: auto;
+    padding: 8px 0;
   }
 
   .kite-hero-row-top .hero-weather-card.kite-weather-floating {
     width: 220px;
     padding: 12px 14px;
     border-radius: 18px;
-  }
-
-  .kite-hero-row-mid {
-    height: 160px;
-    padding: 0 12px;
-    align-items: flex-end;
-  }
-
-  .kite-hero-row-mid .kite-hero-exp-card {
-    padding: 10px 16px;
-    border-radius: 14px;
+    margin-top: 0;
   }
 
   .kite-hero-title-line2 {
@@ -7606,12 +7654,30 @@ button:focus-visible {
   flex-wrap: wrap;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
+  .kite-hero-bottom-grid {
+    padding-top: 24px;
+    padding-bottom: 56px;
+    gap: 24px;
+  }
+
+  .kite-hero-bottom-left {
+    display: flex;
+    flex-direction: column;
+  }
+
   .kite-hero-actions {
+    order: 1;
+    margin-bottom: 24px;
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
     width: 100%;
+  }
+
+  .kite-hero-bajada {
+    order: 2;
+    margin: 0 0 12px;
   }
 
   .kite-hero-actions .btn-pill-orange {
@@ -7901,11 +7967,29 @@ button:focus-visible {
   .closing-scene-steps li[aria-hidden="true"] { display: none; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   #instructores .instructores-grid--kite {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    gap: 20px;
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 8px 16px 20px 16px;
+    margin-inline: -16px;
+    scrollbar-width: none;
+    max-width: none;
+  }
+
+  #instructores .instructores-grid--kite::-webkit-scrollbar {
+    display: none;
+  }
+
+  #instructores .instructor-card--kite {
+    flex: 0 0 82%;
+    width: 82%;
+    min-width: 260px;
+    max-width: 310px;
+    scroll-snap-align: center;
   }
 }
 
