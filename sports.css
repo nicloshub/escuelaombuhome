@@ -6214,6 +6214,26 @@ button:focus-visible {
   margin-bottom: clamp(44px, 7vw, 88px);
 }
 
+.journey-header-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.journey-label {
+  color: var(--orange, #FF5206);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .journey-title {
   margin: 0;
   color: var(--white);
@@ -7892,8 +7912,8 @@ button:focus-visible {
    ========================================================= */
 
 :root {
-  /* Color Naranja Accesible para textos chicos sobre blanco (WCAG AA) */
-  --orange-text: #D13F00;
+  /* Color Naranja Oficial Ombú para textos y acentos */
+  --orange-text: var(--orange, #FF5206);
 }
 
 /* =========================================================
@@ -8241,18 +8261,20 @@ h4.subpage-card-subtitle,
   color: var(--orange-text);
 }
 
-/* Etiquetas y Eyebrows */
+/* Etiquetas y Eyebrows (Unificadas al Naranja Oficial Ombú #FF5206) */
 .section-label,
 .subpage-eyebrow {
   font-family: var(--font-body);
   font-size: 12px;
-  line-height: 16px;
+  line-height: 1.4;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--orange-text);
-  margin-bottom: 16px;
-  display: block;
+  color: var(--orange, #FF5206);
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .accent {
