@@ -342,9 +342,9 @@ img {
 
 .editorial-title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 3.8vw, 52px);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  font-size: var(--h2-size);
+  line-height: var(--h2-lh);
+  letter-spacing: var(--h2-ls, -0.015em);
   text-transform: uppercase;
   color: var(--ink);
   margin: 0;
@@ -5983,12 +5983,12 @@ button:focus-visible {
   }
 }
 
-/* Preview flotante de la foto: oculto por defecto, visible en hover con rotación dinámica */
+/* Preview flotante de la foto: oculto por defecto, visible en hover con rotación dinámica y desplazamiento sutil vertical */
 .gear-floating-preview {
   position: absolute;
   right: 8%;
-  top: 50%;
-  transform: translateY(-50%) rotate(var(--gear-rot, -3deg)) scale(0.95);
+  top: 0;
+  transform: translateY(var(--gear-y, 40px)) rotate(var(--gear-rot, -3deg)) scale(0.95);
   width: clamp(260px, 28vw, 340px);
   aspect-ratio: 4 / 4.9;
   pointer-events: none;
@@ -6000,13 +6000,13 @@ button:focus-visible {
   visibility: hidden;
   transition: opacity 0.26s ease,
               visibility 0.26s ease,
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+              transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .gear-floating-preview.is-visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(-50%) rotate(var(--gear-rot, -3deg)) scale(1);
+  transform: translateY(var(--gear-y, 40px)) rotate(var(--gear-rot, -3deg)) scale(1);
 }
 
 .gear-preview-card {
@@ -6077,9 +6077,10 @@ button:focus-visible {
     flex-direction: column-reverse;
     gap: 20px;
   }
-  .gear-floating-preview {
+  .gear-floating-preview,
+  .gear-floating-preview.is-visible {
     position: static;
-    transform: none;
+    transform: none !important;
     width: 100%;
     aspect-ratio: 16 / 10;
     max-height: 250px;
@@ -6217,8 +6218,9 @@ button:focus-visible {
   margin: 0;
   color: var(--white);
   font-family: var(--font-display);
-  font-size: var(--h2-size, clamp(36px, 4vw, 56px));
-  line-height: var(--h2-lh, 0.98);
+  font-size: var(--h2-size);
+  line-height: var(--h2-lh);
+  letter-spacing: var(--h2-ls, -0.015em);
   text-transform: uppercase;
 }
 
@@ -6578,7 +6580,8 @@ button:focus-visible {
   }
 
   .journey-title {
-    font-size: var(--h2-size-mobile, clamp(36px, 10vw, 44px));
+    font-size: var(--h2-size);
+    line-height: var(--h2-lh);
   }
 
   .journey-lead {
@@ -9140,9 +9143,9 @@ body.is-subpage .mapa-card-white {
 
 .rescue-title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 4.2vw, 58px);
-  line-height: 0.98;
-  letter-spacing: -0.01em;
+  font-size: var(--h2-size);
+  line-height: var(--h2-lh);
+  letter-spacing: var(--h2-ls, -0.015em);
   color: var(--white, #FFFFFF);
   text-transform: uppercase;
   margin: 0 0 20px 0;

@@ -315,6 +315,24 @@ function initGearHoverList() {
 
     previewEl.style.setProperty('--gear-rot', rot);
 
+    // Desplazamiento sutil vertical para acompañar el item activo manteniéndose dentro de los límites
+    const itemIndex = items.indexOf(targetItem);
+    if (list && itemIndex !== -1 && window.innerWidth > 720) {
+      const listHeight = list.offsetHeight;
+      const previewHeight = previewEl.offsetHeight || 360;
+      const margin = 16; // Margen de seguridad para respetar las líneas límite superior e inferior
+      const availableTravel = listHeight - previewHeight - (margin * 2);
+
+      let targetY;
+      if (availableTravel > 0) {
+        const t = items.length > 1 ? itemIndex / (items.length - 1) : 0.5;
+        targetY = margin + (t * availableTravel);
+      } else {
+        targetY = Math.max(0, (listHeight - previewHeight) / 2);
+      }
+      previewEl.style.setProperty('--gear-y', `${Math.round(targetY)}px`);
+    }
+
     if (newSrc && previewImg.getAttribute('src') !== newSrc) {
       previewImg.src = newSrc;
       previewImg.alt = newAlt;
