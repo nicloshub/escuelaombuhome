@@ -397,7 +397,8 @@ img {
 
 @media (min-width: 1024px) {
   .editorial-header,
-  .section-header {
+  .section-header,
+  .journey-header {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--grid-gutter, 32px);
@@ -405,19 +406,21 @@ img {
     margin-bottom: 72px;
   }
 
-  /* 5 Columnas para Titular + Kicker */
+  /* 6 Columnas para Titular + Kicker */
   .editorial-col-left,
   .section-title-col,
+  .journey-header-col,
   .editorial-header > .editorial-title {
-    grid-column: 1 / span 5;
+    grid-column: 1 / span 6;
     margin-bottom: 0;
   }
 
-  /* 2 COL VOID: Columnas 6 y 7 quedan libres para respiro visual */
+  /* 1 COL VOID: Columna 7 queda libre para respiro visual */
 
-  /* 5 Columnas para la Descripción / Bajada (Alineada a la derecha contra la línea verde y abajo contra la línea naranja) */
+  /* 5 Columnas para la Descripción / Bajada (Alineada a la derecha) */
   .editorial-col-right,
   .section-desc-col,
+  .journey-lead,
   .editorial-header > .editorial-lead {
     grid-column: 8 / span 5;
     margin: 0;
