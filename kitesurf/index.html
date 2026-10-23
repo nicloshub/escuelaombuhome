@@ -55,7 +55,7 @@
   <link rel="preload" href="../assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="../sports.css?v=4.6">
+  <link rel="stylesheet" href="../sports.css?v=7.4">
 </head>
 <body>
 
@@ -117,11 +117,12 @@
           </li>
 
           <li class="nav-item"><a href="#camino" class="nav-link">Niveles</a></li>
+          <li class="nav-item"><a href="#equipo" class="nav-link">Equipo</a></li>
           <li class="nav-item"><a href="#precios" class="nav-link">Precios</a></li>
           <li class="nav-item"><a href="#instructores" class="nav-link">Instructores</a></li>
           <li class="nav-item"><a href="#camara" class="nav-link">Cámara</a></li>
           <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
-          <li class="nav-item"><a href="/#spot" class="nav-link">Ubicación</a></li>
+          <li class="nav-item"><a href="#spot" class="nav-link">Ubicación</a></li>
         </ul>
       </nav>
 
@@ -149,31 +150,29 @@
         </li>
         <li class="mobile-nav-divider"></li>
         <li><a href="#camino" class="mobile-nav-link">Niveles de Kite</a></li>
+        <li><a href="#equipo" class="mobile-nav-link">Equipamiento</a></li>
         <li><a href="#precios" class="mobile-nav-link">Precios y Packs</a></li>
         <li><a href="#instructores" class="mobile-nav-link">Instructores</a></li>
         <li><a href="#camara" class="mobile-nav-link">Cámara en Vivo</a></li>
         <li><a href="#faq" class="mobile-nav-link">Preguntas frecuentes</a></li>
-        <li><a href="/#spot" class="mobile-nav-link">Ubicación</a></li>
+        <li><a href="#spot" class="mobile-nav-link">Ubicación</a></li>
       </ul>
     </div>
   </header>
 
   <main>
-    <!-- TODO: validar con instructores los rangos iniciales y las direcciones de viento configurados en ../wind.js -->
-        <section class="kite-hero-section" id="inicio" data-sport="kitesurf" aria-labelledby="windhero-title">
+    <!-- 1. HERO -->
+    <section class="kite-hero-section" id="inicio" data-sport="kitesurf" aria-labelledby="windhero-title">
       <div class="container kite-hero-container">
 
-        <!-- 1. FOLD SUPERIOR: Foto + Floating Cards + H1 alineado al límite inferior del viewport en desktop -->
+        <!-- 1. FOLD SUPERIOR: 3 Filas / Divs superpuestos sobre la foto (100vh en Desktop) -->
         <div class="kite-hero-fold">
-          <div class="kite-hero-stage-wrap">
-            <div class="kite-hero-photo-frame">
-              <picture>
-                <source srcset="../assets/deporte-kitesurf.webp" type="image/webp">
-                <img src="../assets/deporte-kitesurf.jpg" alt="Kitesurfista en acción en el Río de la Plata, Acassuso" fetchpriority="high" width="1200" height="700">
-              </picture>
-            </div>
+          <div class="kite-hero-photo-frame">
+            <img src="../assets/hero-kitesurf.jpg" alt="Kitesurfista navegando en el Río de la Plata, Escuela Ombú" fetchpriority="high" width="1200" height="700">
+          </div>
 
-            <!-- Widget del Viento En Vivo (Arriba Izquierda) -->
+          <!-- FILA 1: Widget del Viento En Vivo (Arriba Izquierda) -->
+          <div class="kite-hero-row kite-hero-row-top">
             <aside class="hero-weather-card kite-weather-floating" aria-label="Condición del viento en vivo">
               <div class="weather-header-stack">
                 <div class="weather-live-badge">
@@ -223,27 +222,31 @@
                 <span class="weather-suitability-pill" id="heroSpotSuitability">Kite Posible / Foil</span>
               </div>
             </aside>
+          </div>
 
-            <!-- Badge Experiencia "+15 AÑOS formando navegantes" (A la derecha) -->
+          <!-- FILA 2: Badge Experiencia "+15 AÑOS formando navegantes" (Al Medio a la Derecha) -->
+          <div class="kite-hero-row kite-hero-row-mid">
             <div class="kite-hero-exp-card" aria-label="15 años formando navegantes">
               <span class="kite-hero-exp-num">+15 AÑOS</span>
               <span class="kite-hero-exp-text">formando navegantes</span>
             </div>
           </div>
 
-          <!-- Título H1 Gigante (Alineado con el límite inferior del viewheight en desktop) -->
-          <h1 class="kite-hero-title" id="windhero-title">
-            <span class="kite-hero-title-line1">APRENDÉ KITESURF</span>
-            <span class="kite-hero-title-line2">
-              <a href="#camino" class="kite-hero-circle-arrow" aria-label="Ver niveles de kitesurf">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-              <span class="kite-hero-word-orange">SIN IMPROVISAR.</span>
-            </span>
-          </h1>
+          <!-- FILA 3: Titular H1 Gigante (Abajo, con línea 2 desfasada) -->
+          <div class="kite-hero-row kite-hero-row-bottom">
+            <h1 class="kite-hero-title" id="windhero-title">
+              <span class="kite-hero-title-line1">APRENDÉ KITESURF</span>
+              <span class="kite-hero-title-line2">
+                <a href="#para-quien" class="kite-hero-circle-arrow" aria-label="Ver para quién es">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+                <span class="kite-hero-word-orange">SIN IMPROVISAR.</span>
+              </span>
+            </h1>
+          </div>
         </div>
 
         <!-- 2. BLOQUE INFERIOR: Bajada + CTAs a la izquierda, Badges de requisitos a la derecha -->
@@ -283,9 +286,7 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         2. NIVELES: DE CERO A NAVEGAR SOLO
-         ========================================================= -->
+    <!-- 2. CARDS DE NIVELES -->
     <section class="section-macro" id="camino">
       <div class="container">
         <span id="niveles" class="windhero-level-anchor" aria-hidden="true"></span>
@@ -329,42 +330,41 @@
             <div class="level-panel" id="levelPanel1" role="region" aria-labelledby="levelBtn1" aria-hidden="false">
               <div class="level-panel-media">
                 <img src="../assets/nivel-1.jpg" alt="Nivel 1: Alumno con barrilete en la arena" class="level-panel-img" loading="lazy">
-                <span class="level-media-badge">NIVEL 01</span>
+                <span class="level-media-badge">01</span>
               </div>
 
               <div class="level-panel-content">
                 <div class="level-panel-header">
-                  <h3 class="level-title">INTRODUCCIÓN</h3>
+                  <div class="level-header-tags">
+                    <span class="level-tag-badge">NIVEL 01</span>
+                    <span class="level-tag-pill">1 A 2 HS</span>
+                    <span class="level-tag-pill">TIERRA Y AGUA SIN TABLA</span>
+                  </div>
+                  <h3 class="level-title">CONTROL DEL KITE</h3>
                   <p class="level-desc">Todo arranca sin tabla. Manejo del barrilete, lectura del viento y la confianza de base antes de navegar en el río.</p>
+                  <div class="level-objectives-heading">Objetivos a cumplir</div>
                 </div>
 
                 <div class="level-points-list">
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO A</span>
+                    <span class="level-point-letter">A</span>
                     <span class="level-point-text">Conocimientos generales del viento y señales internacionales</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO B</span>
+                    <span class="level-point-letter">B</span>
                     <span class="level-point-text">Obstáculos, defectos del viento y artefactos que influencian la navegación</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO C</span>
+                    <span class="level-point-letter">C</span>
                     <span class="level-point-text">Armado y desarmado del equipo, comprensión de elementos de seguridad</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO D</span>
+                    <span class="level-point-letter">D</span>
                     <span class="level-point-text">Autorrescate. Correcto uso de los diferentes sistemas de seguridad</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO E</span>
+                    <span class="level-point-letter">E</span>
                     <span class="level-point-text">Control de barrilete en zonas de poca potencia. Eyección en el agua</span>
-                  </div>
-                </div>
-
-                <div class="level-card-footer">
-                  <div class="level-card-meta-group">
-                    <span class="level-pill-hours">1 A 2 HS</span>
-                    <span class="level-pill-scope">LECCIONES TEÓRICO PRÁCTICAS EN EL AGUA Y EN TIERRA</span>
                   </div>
                 </div>
 
@@ -375,7 +375,7 @@
                      rel="noopener noreferrer" 
                      class="level-notch-btn" 
                      aria-label="Consultar Nivel 01 por WhatsApp">
-                    <svg class="level-notch-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="level-notch-arrow" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                   </a>
@@ -407,38 +407,37 @@
             <div class="level-panel" id="levelPanel2" role="region" aria-labelledby="levelBtn2" aria-hidden="true">
               <div class="level-panel-media">
                 <img src="../assets/nivel-2.jpg" alt="Nivel 2: Body drag en el agua" class="level-panel-img" loading="lazy">
-                <span class="level-media-badge">NIVEL 02</span>
+                <span class="level-media-badge">02</span>
               </div>
 
               <div class="level-panel-content">
                 <div class="level-panel-header">
+                  <div class="level-header-tags">
+                    <span class="level-tag-badge">NIVEL 02</span>
+                    <span class="level-tag-pill">3 A 4 HS</span>
+                    <span class="level-tag-pill">BODY DRAG Y WATERSTART EN EL RÍO</span>
+                  </div>
                   <h3 class="level-title">ENTENDÉ EL ENTORNO</h3>
                   <p class="level-desc">Interpretá el viento, la corriente y el pronóstico para entender las condiciones del día. Entrás al río, traccionás con tu cuerpo (body drag) y lográs tus primeros metros de planeo sobre la tabla.</p>
+                  <div class="level-objectives-heading">Objetivos a cumplir</div>
                 </div>
 
                 <div class="level-points-list">
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO F</span>
+                    <span class="level-point-letter">F</span>
                     <span class="level-point-text">Control con una sola mano y comprensión de la ventana de viento</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO G</span>
+                    <span class="level-point-letter">G</span>
                     <span class="level-point-text">Movimiento del cuerpo dentro del agua asistido por la tracción del kite</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO H</span>
+                    <span class="level-point-letter">H</span>
                     <span class="level-point-text">Bodydrag Upwind, comprensión del ejercicio y relanzamiento</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO I</span>
+                    <span class="level-point-letter">I</span>
                     <span class="level-point-text">Bodydrag Downwind, steady pull: cuerpo, tabla en pies y water start</span>
-                  </div>
-                </div>
-
-                <div class="level-card-footer">
-                  <div class="level-card-meta-group">
-                    <span class="level-pill-hours">3 A 4 HS</span>
-                    <span class="level-pill-scope">BODY DRAG Y WATERSTART EN EL RÍO</span>
                   </div>
                 </div>
 
@@ -449,7 +448,7 @@
                      rel="noopener noreferrer" 
                      class="level-notch-btn" 
                      aria-label="Consultar Nivel 02 por WhatsApp">
-                    <svg class="level-notch-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="level-notch-arrow" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                   </a>
@@ -481,42 +480,41 @@
             <div class="level-panel" id="levelPanel3" role="region" aria-labelledby="levelBtn3">
               <div class="level-panel-media">
                 <img src="../assets/nivel-3.jpg" alt="Nivel 3: Rider navegando solo" class="level-panel-img" loading="lazy">
-                <span class="level-media-badge">NIVEL 03</span>
+                <span class="level-media-badge">03</span>
               </div>
 
               <div class="level-panel-content">
                 <div class="level-panel-header">
+                  <div class="level-header-tags">
+                    <span class="level-tag-badge">NIVEL 03</span>
+                    <span class="level-tag-pill">3 A 4 HS</span>
+                    <span class="level-tag-pill">LIBERTAD TOTAL Y NAVEGACIÓN INDEPENDIENTE</span>
+                  </div>
                   <h3 class="level-title">DECIDÍ CON CONFIANZA</h3>
                   <p class="level-desc">El salto a la independencia total. Planeo continuo en ambas direcciones, ceñida técnica para volver exactamente a la playa y navegación 100% autónoma.</p>
+                  <div class="level-objectives-heading">Objetivos a cumplir</div>
                 </div>
 
                 <div class="level-points-list">
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO J</span>
+                    <span class="level-point-letter">J</span>
                     <span class="level-point-text">Primeros bordes y control de la potencia sobre la tabla</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO K</span>
+                    <span class="level-point-letter">K</span>
                     <span class="level-point-text">Navegar ida y vuelta sin transición, canteo y mantener rumbo</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO L</span>
+                    <span class="level-point-letter">L</span>
                     <span class="level-point-text">Ir y volver al mismo punto, transiciones fluidas</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO M</span>
+                    <span class="level-point-letter">M</span>
                     <span class="level-point-text">Ceñir: navegación constante viento arriba superando punto de salida</span>
                   </div>
                   <div class="level-point-row">
-                    <span class="level-point-badge">OBJETIVO N</span>
+                    <span class="level-point-letter">N</span>
                     <span class="level-point-text">Técnica de salto</span>
-                  </div>
-                </div>
-
-                <div class="level-card-footer">
-                  <div class="level-card-meta-group">
-                    <span class="level-pill-hours">3 A 4 HS</span>
-                    <span class="level-pill-scope">LIBERTAD TOTAL Y NAVEGACIÓN INDEPENDIENTE</span>
                   </div>
                 </div>
 
@@ -527,7 +525,7 @@
                      rel="noopener noreferrer" 
                      class="level-notch-btn" 
                      aria-label="Consultar Nivel 03 por WhatsApp">
-                    <svg class="level-notch-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="level-notch-arrow" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                   </a>
@@ -559,38 +557,143 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         3. ASÍ ES UNA CLASE: MINUTO A MINUTO
-         ========================================================= -->
+    <!-- 3. EQUIPAMIENTO -->
+    <section class="section-macro section-light" id="equipo">
+      <div class="container">
+        <!-- Cabecera Editorial oficial y unificada idéntica al resto de las secciones -->
+        <header class="editorial-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// EQUIPAMIENTO 100% PROVISTO</span>
+            <h2 class="editorial-title">
+              TODO EL EQUIPO,<br>LISTO PARA EL RÍO.
+            </h2>
+          </div>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              kite, tabla, arnés, chaleco, casco y traje de neoprene incluidos en la clase.
+            </p>
+          </div>
+        </header>
+
+        <!-- Contenedor interactivo: Lista + Floating Image Preview -->
+        <div class="gear-editorial-stage">
+          <div class="gear-interactive-wrap">
+            <ul class="gear-items-list" role="list">
+              <li class="gear-item-row" data-gear="kite" data-img="../assets/equipo_kite.JPEG" data-alt="Kite de Kitesurf Escuela Ombú">
+                <div class="gear-item-main">
+                  <span class="gear-item-name">Kite</span>
+                  <div class="gear-item-pill">Lo elegimos según tu peso y el viento del día.</div>
+                </div>
+                <div class="gear-item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </li>
+
+              <li class="gear-item-row is-active" data-gear="tabla" data-img="../assets/equipo_tablas.JPEG" data-alt="Tablas Twin-tip de Kitesurf Escuela Ombú">
+                <div class="gear-item-main">
+                  <span class="gear-item-name">Tabla</span>
+                  <div class="gear-item-pill">Lo elegimos según tu peso y el viento del día.</div>
+                </div>
+                <div class="gear-item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </li>
+
+              <li class="gear-item-row" data-gear="chaleco" data-img="../assets/equipo_chaleco.JPEG" data-alt="Chaleco de flotación Escuela Ombú">
+                <div class="gear-item-main">
+                  <span class="gear-item-name">Chaleco</span>
+                  <div class="gear-item-pill">Flotación homologada y protección durante toda la sesión.</div>
+                </div>
+                <div class="gear-item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </li>
+
+              <li class="gear-item-row" data-gear="casco" data-img="../assets/equipo_casco.JPEG" data-alt="Casco náutico Escuela Ombú">
+                <div class="gear-item-main">
+                  <span class="gear-item-name">Casco</span>
+                  <div class="gear-item-pill">Protección en la cabeza y seguridad en el agua.</div>
+                </div>
+                <div class="gear-item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </li>
+
+              <li class="gear-item-row" data-gear="traje" data-img="../assets/equipo_traje.JPEG" data-alt="Traje de neoprene Escuela Ombú">
+                <div class="gear-item-main">
+                  <span class="gear-item-name">Traje de neoprene</span>
+                  <div class="gear-item-pill">Aporte térmico y confort durante toda la sesión.</div>
+                </div>
+                <div class="gear-item-arrow" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Floating Preview Image Card -->
+            <div class="gear-floating-preview" aria-hidden="true">
+              <div class="gear-preview-card">
+                <img src="../assets/equipo_tablas.JPEG" alt="Tablas de kitesurf" class="gear-preview-img" id="gearPreviewImg" loading="lazy">
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón inferior negro "¿Traés tu equipo? Consultanos" -->
+          <div class="gear-action-footer">
+            <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Tengo%20equipo%20propio%20y%20quiero%20consultar%20para%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="gear-consult-btn">
+              ¿Traés tu equipo? Consultanos
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CLASE PASO A PASO -->
     <section class="section-macro section-dark journey-section" id="dia-de-clase" aria-labelledby="journey-title">
       <div class="container journey-container">
         <header class="journey-header">
           <h2 class="journey-title" id="journey-title">ASÍ ES UNA CLASE,<br>MINUTO A MINUTO.</h2>
-          <p class="journey-lead">Sabés qué te espera antes de llegar: charla, tierra, agua y cierre.</p>
+          <p class="journey-lead">Sabés qué te espera antes de llegar: paso a paso, de la escuela al agua.</p>
         </header>
 
         <div class="journey-layout">
           <div class="journey-scene" aria-hidden="true">
             <div class="journey-scene-frame">
               <div class="journey-scene-layer is-active" data-step="1" data-photo="">
-                <!-- TODO: reemplazar por ../assets/clase-paso-1.jpg (llegada y chequeo del viento en la playa) -->
-                <div class="journey-scene-placeholder">Llegada y chequeo del viento en la playa</div>
+                <div class="journey-scene-placeholder">Te recibimos en la escuela</div>
               </div>
               <div class="journey-scene-layer" data-step="2" data-photo="">
-                <!-- TODO: reemplazar por ../assets/clase-paso-2.jpg (charla de seguridad con el instructor) -->
-                <div class="journey-scene-placeholder">Charla de seguridad con el instructor</div>
+                <div class="journey-scene-placeholder">Chequeamos las condiciones</div>
               </div>
               <div class="journey-scene-layer" data-step="3" data-photo="">
-                <!-- TODO: reemplazar por ../assets/clase-paso-3.jpg (práctica con el barrilete en la arena) -->
-                <div class="journey-scene-placeholder">Práctica con el barrilete en la arena</div>
+                <div class="journey-scene-placeholder">Preparamos juntos el equipo</div>
               </div>
               <div class="journey-scene-layer" data-step="4" data-photo="">
-                <!-- TODO: reemplazar por ../assets/clase-paso-4.jpg (alumno en el agua con el bote de apoyo cerca) -->
-                <div class="journey-scene-placeholder">Alumno en el agua con el bote de apoyo cerca</div>
+                <div class="journey-scene-placeholder">Te cambiás (traje de neoprene, etc.)</div>
               </div>
               <div class="journey-scene-layer" data-step="5" data-photo="">
-                <!-- TODO: reemplazar por ../assets/clase-paso-5.jpg (cierre y charla final en la orilla) -->
-                <div class="journey-scene-placeholder">Cierre y charla final en la orilla</div>
+                <div class="journey-scene-placeholder">Entramos al agua</div>
+              </div>
+              <div class="journey-scene-layer" data-step="6" data-photo="">
+                <div class="journey-scene-placeholder">Desarrollo de la clase</div>
+              </div>
+              <div class="journey-scene-layer" data-step="7" data-photo="">
+                <div class="journey-scene-placeholder">Fin y devolución</div>
               </div>
             </div>
           </div>
@@ -601,56 +704,71 @@
               <li class="journey-step is-active" data-step="1" data-scene="EN TIERRA" aria-current="step">
                 <span class="journey-number" aria-hidden="true">01</span>
                 <div class="journey-step-copy">
-                  <h3 class="journey-step-title">LLEGÁS</h3>
-                  <p class="journey-step-text">Chequeamos juntos el viento y las condiciones del día.</p>
+                  <h3 class="journey-step-title">TE RECIBIMOS EN LA ESCUELA</h3>
+                  <p class="journey-step-text">Te damos la bienvenida al club, nos conocemos y te mostramos el lugar.</p>
                 </div>
                 <div class="journey-step-photo" data-photo="">
-                  <!-- TODO: reemplazar por ../assets/clase-paso-1.jpg (llegada y chequeo del viento en la playa) -->
-                  <div class="journey-scene-placeholder">Llegada y chequeo del viento en la playa</div>
+                  <div class="journey-scene-placeholder">Te recibimos en la escuela</div>
                 </div>
               </li>
               <li class="journey-step" data-step="2" data-scene="EN TIERRA">
                 <span class="journey-number" aria-hidden="true">02</span>
                 <div class="journey-step-copy">
-                  <h3 class="journey-step-title">CHARLA DE SEGURIDAD</h3>
-                  <p class="journey-step-text">Te explicamos las reglas antes de tocar el equipo.</p>
+                  <h3 class="journey-step-title">CHEQUEAMOS LAS CONDICIONES</h3>
+                  <p class="journey-step-text">Analizamos el viento, la marea y el pronóstico del día para planificar la sesión.</p>
                 </div>
                 <div class="journey-step-photo" data-photo="">
-                  <!-- TODO: reemplazar por ../assets/clase-paso-2.jpg (charla de seguridad con el instructor) -->
-                  <div class="journey-scene-placeholder">Charla de seguridad con el instructor</div>
+                  <div class="journey-scene-placeholder">Chequeamos las condiciones</div>
                 </div>
               </li>
               <li class="journey-step" data-step="3" data-scene="EN TIERRA">
                 <span class="journey-number" aria-hidden="true">03</span>
                 <div class="journey-step-copy">
-                  <h3 class="journey-step-title">PRÁCTICA EN TIERRA</h3>
-                  <p class="journey-step-text">Aprendés a manejar la cometa con los pies en la arena.</p>
+                  <h3 class="journey-step-title">PREPARAMOS JUNTOS EL EQUIPO</h3>
+                  <p class="journey-step-text">Elegimos el barrilete adecuado, armamos las líneas y repasamos las medidas de seguridad.</p>
                 </div>
                 <div class="journey-step-photo" data-photo="">
-                  <!-- TODO: reemplazar por ../assets/clase-paso-3.jpg (práctica con el barrilete en la arena) -->
-                  <div class="journey-scene-placeholder">Práctica con el barrilete en la arena</div>
+                  <div class="journey-scene-placeholder">Preparamos juntos el equipo</div>
                 </div>
               </li>
-              <li class="journey-step journey-step--water" data-step="4" data-scene="EN EL AGUA">
+              <li class="journey-step" data-step="4" data-scene="EN TIERRA">
                 <span class="journey-number" aria-hidden="true">04</span>
                 <div class="journey-step-copy">
-                  <h3 class="journey-step-title">AL AGUA</h3>
-                  <p class="journey-step-text">Con tu instructor y el bote de apoyo cerca.</p>
+                  <h3 class="journey-step-title">TE CAMBIÁS</h3>
+                  <p class="journey-step-text">Te ponés el traje de neoprene, chaleco de flotación, casco, botitas y arnés.</p>
                 </div>
                 <div class="journey-step-photo" data-photo="">
-                  <!-- TODO: reemplazar por ../assets/clase-paso-4.jpg (alumno en el agua con el bote de apoyo cerca) -->
-                  <div class="journey-scene-placeholder">Alumno en el agua con el bote de apoyo cerca</div>
+                  <div class="journey-scene-placeholder">Te cambiás (traje de neoprene, etc.)</div>
                 </div>
               </li>
-              <li class="journey-step" data-step="5" data-scene="EN EL AGUA">
+              <li class="journey-step journey-step--water" data-step="5" data-scene="EN EL AGUA">
                 <span class="journey-number" aria-hidden="true">05</span>
                 <div class="journey-step-copy">
-                  <h3 class="journey-step-title">CIERRE</h3>
-                  <p class="journey-step-text">Repasamos qué salió bien y qué sigue en la próxima clase.</p>
+                  <h3 class="journey-step-title">ENTRAMOS AL AGUA</h3>
+                  <p class="journey-step-text">Vamos al río con el equipo listo y la lancha de rescate en guardia permanente.</p>
                 </div>
                 <div class="journey-step-photo" data-photo="">
-                  <!-- TODO: reemplazar por ../assets/clase-paso-5.jpg (cierre y charla final en la orilla) -->
-                  <div class="journey-scene-placeholder">Cierre y charla final en la orilla</div>
+                  <div class="journey-scene-placeholder">Entramos al agua</div>
+                </div>
+              </li>
+              <li class="journey-step journey-step--water" data-step="6" data-scene="EN EL AGUA">
+                <span class="journey-number" aria-hidden="true">06</span>
+                <div class="journey-step-copy">
+                  <h3 class="journey-step-title">DESARROLLO DE LA CLASE</h3>
+                  <p class="journey-step-text">Práctica guiada 1 a 1 en el agua según tu nivel, enfocados en tu progresión y autonomía.</p>
+                </div>
+                <div class="journey-step-photo" data-photo="">
+                  <div class="journey-scene-placeholder">Desarrollo de la clase</div>
+                </div>
+              </li>
+              <li class="journey-step" data-step="7" data-scene="EN TIERRA">
+                <span class="journey-number" aria-hidden="true">07</span>
+                <div class="journey-step-copy">
+                  <h3 class="journey-step-title">FIN</h3>
+                  <p class="journey-step-text">Salida del agua, guardado de equipo y charla de devolución sobre tus avances para la próxima clase.</p>
+                </div>
+                <div class="journey-step-photo" data-photo="">
+                  <div class="journey-scene-placeholder">Fin y devolución</div>
                 </div>
               </li>
             </ol>
@@ -660,413 +778,37 @@
       <!-- TODO: agregar duración de cada paso si se confirma -->
     </section>
 
+    <!-- 5. GOMÓN DE RESCATE -->
     <!-- =========================================================
-         4. EQUIPO: EQUIPAMIENTO INCLUIDO EN LA CLASE
+         5. SEGURIDAD Y RESCATE: GOMÓN DE RESCATE EN GUARDIA PERMANENTE
          ========================================================= -->
-    <section class="section-macro section-light" id="equipo">
+    <section class="section-macro section-light" id="rescate">
       <div class="container">
-        <header class="editorial-header equipment-header">
-          <div class="editorial-col-left">
-            <span class="section-label">// Equipamiento 100% provisto</span>
-            <h2 class="editorial-title">TODO EL EQUIPO.<br>LISTO PARA EL RÍO.</h2>
-          </div>
-          <div class="editorial-col-right">
-            <p class="editorial-lead">Barrilete, tabla, arnés, chaleco, casco y traje de neoprene incluidos en la clase.</p>
-          </div>
-        </header>
-
-        <!-- TODO: reemplazar estas fotos de producto generadas por fotos reales del equipo de Ombú. -->
-        <!-- TODO: validar con instructores las descripciones técnicas ampliadas antes de publicarlas. -->
-        <div class="gear-explorer" id="gearExplorer">
-          <div class="gear-selector-column">
-            <nav class="gear-item-selector" aria-label="Elementos incluidos en la clase">
-            <div class="gear-item-option is-active" data-item="kite">
-              <button type="button" class="gear-item-selector-button" aria-expanded="true" aria-controls="gearDetail-kite"><span class="gear-item-selector-index" aria-hidden="true">01</span><span>Barrilete</span></button>
-              <div class="gear-item-detail" id="gearDetail-kite">
-                <div class="gear-item-detail-inner">
-                  <img src="../assets/gear-kite-product.jpg" alt="Primer plano de un barrilete de kitesurf" loading="lazy" decoding="async" width="1254" height="1254">
-                  <div><p>Lo elegimos según tu peso y el viento del día.</p></div>
-                </div>
-              </div>
-            </div>
-            <div class="gear-item-option" data-item="bar">
-              <button type="button" class="gear-item-selector-button" aria-expanded="false" aria-controls="gearDetail-bar"><span class="gear-item-selector-index" aria-hidden="true">02</span><span>Barra y líneas</span></button>
-              <div class="gear-item-detail" id="gearDetail-bar">
-                <div class="gear-item-detail-inner">
-                  <img src="../assets/gear-barra-product.jpg" alt="Barra de control, líneas y leash de kitesurf sobre fondo claro" loading="lazy" decoding="async" width="640" height="640">
-                  <div><p>La barra transmite tus movimientos al barrilete; las líneas la conectan con el equipo.</p></div>
-                </div>
-              </div>
-            </div>
-            <div class="gear-item-option" data-item="board">
-              <button type="button" class="gear-item-selector-button" aria-expanded="false" aria-controls="gearDetail-board"><span class="gear-item-selector-index" aria-hidden="true">03</span><span>Tabla</span></button>
-              <div class="gear-item-detail" id="gearDetail-board">
-                <div class="gear-item-detail-inner">
-                  <img src="../assets/gear-tabla-product.jpg" alt="Tabla twin-tip de kitesurf con footstraps y quillas" loading="lazy" decoding="async" width="640" height="640">
-                  <div><p>Su superficie amplia ayuda a encontrar estabilidad al empezar a deslizarte.</p></div>
-                </div>
-              </div>
-            </div>
-            <div class="gear-item-option" data-item="harness">
-              <button type="button" class="gear-item-selector-button" aria-expanded="false" aria-controls="gearDetail-harness"><span class="gear-item-selector-index" aria-hidden="true">04</span><span>Arnés</span></button>
-              <div class="gear-item-detail" id="gearDetail-harness">
-                <div class="gear-item-detail-inner">
-                  <img src="../assets/gear-arnes-product.jpg" alt="Arnés de cintura de kitesurf con barra y leash" loading="lazy" decoding="async" width="640" height="640">
-                  <div><p>Conecta tu cuerpo al sistema y distribuye la tracción alrededor de la cintura.</p></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="gear-item-option" data-item="vest">
-              <button type="button" class="gear-item-selector-button" aria-expanded="false" aria-controls="gearDetail-vest"><span class="gear-item-selector-index" aria-hidden="true">05</span><span>Chaleco</span></button>
-              <div class="gear-item-detail" id="gearDetail-vest">
-                <div class="gear-item-detail-inner">
-                  <img src="../assets/gear-chaleco-product.jpg" alt="Chaleco de impacto para kitesurf sobre fondo claro" loading="lazy" decoding="async" width="640" height="640">
-                  <div><p>Flotación y protección durante toda la sesión.</p></div>
-                </div>
-              </div>
-            </div>
-            <div class="gear-item-option" data-item="helmet">
-              <button type="button" class="gear-item-selector-button" aria-expanded="false" aria-controls="gearDetail-helmet"><span class="gear-item-selector-index" aria-hidden="true">06</span><span>Casco</span></button>
-              <div class="gear-item-detail" id="gearDetail-helmet">
-                <div class="gear-item-detail-inner">
-                  <img src="../assets/gear-casco-product.jpg" alt="Casco de kitesurf aislado sobre fondo claro" loading="lazy" decoding="async" width="640" height="640">
-                  <div><p>Ayuda a proteger la cabeza durante la práctica.</p></div>
-                </div>
-              </div>
-            </div>
-            <div class="gear-item-option" data-item="wetsuit">
-              <button type="button" class="gear-item-selector-button" aria-expanded="false" aria-controls="gearDetail-wetsuit"><span class="gear-item-selector-index" aria-hidden="true">07</span><span>Traje de neoprene</span></button>
-              <div class="gear-item-detail" id="gearDetail-wetsuit">
-                <div class="gear-item-detail-inner">
-                  <img src="../assets/gear-neoprene-product.jpg" alt="Traje de neoprene completo para kitesurf sobre fondo claro" loading="lazy" decoding="async" width="640" height="640">
-                  <div><p>Aporta abrigo durante la sesión en el agua.</p></div>
-                </div>
-              </div>
-            </div>
-
-            </nav>
-            <a class="gear-hotspots-note" href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Tengo%20equipo%20propio%20y%20quiero%20consultar%20para%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer">¿Traés tu equipo? Consultanos <span aria-hidden="true">↗</span></a>
-          </div>
-
-          <div class="gear-hotspots-image" id="gearStage">
-            <img src="../assets/kitesurf-river-interactive.jpg" alt="Kitesurfista navegando sobre el Río de la Plata con barrilete, tabla y equipo de seguridad" loading="lazy" decoding="async" width="1536" height="1024">
-
-            <!-- AJUSTAR: coordenadas en % del ancho y alto de la imagen; modificar data-x y data-y. -->
-            <button type="button" class="gear-hotspot is-active" data-item="kite" data-x="26" data-y="12" aria-label="Barrilete" aria-expanded="true" aria-controls="gearDetail-kite"><span class="gear-hotspot-symbol" aria-hidden="true">×</span></button>
-            <button type="button" class="gear-hotspot" data-item="bar" data-x="54" data-y="46" aria-label="Barra y líneas" aria-expanded="false" aria-controls="gearDetail-bar"><span class="gear-hotspot-symbol" aria-hidden="true">+</span></button>
-            <button type="button" class="gear-hotspot" data-item="board" data-x="50" data-y="80" aria-label="Tabla" aria-expanded="false" aria-controls="gearDetail-board"><span class="gear-hotspot-symbol" aria-hidden="true">+</span></button>
-            <button type="button" class="gear-hotspot" data-item="harness" data-x="66" data-y="64" aria-label="Arnés" aria-expanded="false" aria-controls="gearDetail-harness"><span class="gear-hotspot-symbol" aria-hidden="true">+</span></button>
-            <button type="button" class="gear-hotspot" data-item="vest" data-x="68" data-y="54" aria-label="Chaleco" aria-expanded="false" aria-controls="gearDetail-vest"><span class="gear-hotspot-symbol" aria-hidden="true">+</span></button>
-            <button type="button" class="gear-hotspot" data-item="helmet" data-x="68" data-y="42" aria-label="Casco" aria-expanded="false" aria-controls="gearDetail-helmet"><span class="gear-hotspot-symbol" aria-hidden="true">+</span></button>
-            <button type="button" class="gear-hotspot" data-item="wetsuit" data-x="60" data-y="75" aria-label="Traje de neoprene" aria-expanded="false" aria-controls="gearDetail-wetsuit"><span class="gear-hotspot-symbol" aria-hidden="true">+</span></button>
-            <button type="button" class="gear-view-all" id="gearViewAll" hidden>VER TODO</button>
-          </div>
-        </div>
-
-        <ul class="sr-only" aria-label="Elementos incluidos en el equipo de kitesurf">
-          <li>Barrilete: Lo elegimos según tu peso y el viento del día.</li>
-          <li>Barra y líneas: La barra transmite tus movimientos al barrilete; las líneas la conectan con el equipo.</li>
-          <li>Tabla: Su superficie amplia ayuda a encontrar estabilidad al empezar a deslizarte.</li>
-          <li>Arnés: Conecta tu cuerpo al sistema y distribuye la tracción alrededor de la cintura.</li>
-          <li>Chaleco: Flotación y protección durante toda la sesión.</li>
-          <li>Casco: Ayuda a proteger la cabeza durante la práctica.</li>
-          <li>Traje de neoprene: Aporta abrigo durante la sesión en el agua.</li>
-        </ul>
-
-      </div>
-    </section>
-
-
-
-    <!-- =========================================================
-         5. PRECIOS: PRECIOS CLAROS, SIN LETRA CHICA.
-         ========================================================= -->
-    <section class="section-macro section-light" id="precios">
-      <div class="container">
-        <header class="editorial-header">
-          <div class="editorial-col-left">
-            <span class="section-label">// Transparencia Total</span>
-            <h2 class="editorial-title">
-              PRECIOS CLAROS,<br>SIN LETRA CHICA.
-            </h2>
-          </div>
-          <div class="editorial-col-right">
-            <p class="editorial-lead">
-              Elegí una clase suelta para probar o el curso completo para llegar a la autonomía.
+        <div class="rescue-card-dark">
+          <div class="rescue-content-col">
+            <span class="section-label rescue-label">// SEGURIDAD Y RESCATE</span>
+            <h2 class="rescue-title">GOMÓN DE RESCATE EN<br>GUARDIA PERMANENTE</h2>
+            <p class="rescue-desc">
+              Nuestra embarcación semirrígida a motor está en el agua durante todas las sesiones. Si el viento cambia de rumbo o si derivás, el bote te asiste en menos de un minuto. Nunca quedás librado a tu suerte en el río.
             </p>
+            <div class="rescue-badge-row">
+              <svg class="rescue-check-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>EMBARCACIÓN NÁUTICA HOMOLOGADA</span>
+            </div>
           </div>
-        </header>
-
-        <div class="pricing-editorial-grid">
-          <!-- Tarjeta 1: Clase Particular -->
-          <article class="pricing-card">
-            <h3 class="pricing-title">CLASE PARTICULAR</h3>
-            <p class="pricing-desc">Sesión individual con instructor 100% dedicado a vos.</p>
-            <div class="pricing-amount-row">
-              <span class="pricing-amount">$135.000</span>
-              <span class="pricing-unit">/ hora</span>
+          <div class="rescue-media-col">
+            <div class="rescue-media-box">
+              <span class="rescue-media-placeholder">foto bote</span>
             </div>
-            <ul class="pricing-features-list">
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                1 instructor exclusivo en todo momento
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Tu instructor te acompaña en el agua durante la práctica
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Asistencia y custodia de lancha de rescate en el agua
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Equipamiento de última generación incluido
-              </li>
-            </ul>
-            <div class="pricing-btn-box">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20particular%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
-                RESERVAR CLASE
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta 2: Pack de 3 horas o más (Destacada) -->
-          <article class="pricing-card is-featured">
-            <h3 class="pricing-title">PACK 3+ HORAS</h3>
-            <p class="pricing-desc">El formato recomendado para progresar clase a clase al mejor valor.</p>
-            <div class="pricing-amount-row">
-              <span class="pricing-amount">$120.000</span>
-              <span class="pricing-unit">/ hora</span>
-            </div>
-            <ul class="pricing-features-list">
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Válido para paquetes a partir de 3 horas
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Instructor exclusivo y seguimiento continuo
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Coordinación flexible según los mejores días de viento
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Equipo completo y lancha de apoyo incluidos
-              </li>
-            </ul>
-            <div class="pricing-btn-box">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20del%20Pack%20de%203%20horas%20o%20m%C3%A1s%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
-                ELEGIR PACK
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
-            </div>
-          </article>
-
-          <!-- Tarjeta 3: Clase Compartida -->
-          <article class="pricing-card">
-            <h3 class="pricing-title">CLASE COMPARTIDA</h3>
-            <p class="pricing-desc">Aprendé de a dos compartiendo equipo y turnos en el agua.</p>
-            <div class="pricing-amount-row">
-              <span class="pricing-amount">$80.000</span>
-              <span class="pricing-unit">/ hora (x persona)</span>
-            </div>
-            <ul class="pricing-features-list">
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Ideal para venir en pareja o con un amigo/a
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                1 instructor y 1 equipo completo compartido
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Dinámica de turnos: descanso activo y observación técnica
-              </li>
-              <li>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                Lancha de rescate y seguridad en todo momento
-              </li>
-            </ul>
-            <div class="pricing-btn-box">
-              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20compartida%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
-                RESERVAR COMPARTIDA
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
-            </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================
-         7. CONDICIONES: NO VIAJES PARA NADA: MIRÁ EL RÍO EN VIVO.
-         ========================================================= -->
-    <!-- =========================================================
-         BANNER DIVIDIDO: CÁMARA EN VIVO (OFICIAL DE LA HOME)
-         ========================================================= -->
-    <section id="camara" class="section-spot-split">
-      <div class="container">
-        <div class="spot-split-grid">
-          <!-- Tarjeta Naranja (Izquierda) -->
-          <div class="spot-orange-card">
-            <div>
-              <span class="spot-tag-white">// El Spot</span>
-              <h2 class="spot-card-title">Condición del río 24/7</h2>
-              <p class="spot-card-text">
-                Tenemos una cámara apuntando al río para que puedas elegir el mejor momento antes de venir a tu clase de kitesurf.
-              </p>
-            </div>
-            <div>
-              <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="btn-pill-dark" rel="noopener noreferrer">
-                VER CÁMARA EN VIVO
-                <div class="icon">
-                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-                  </svg>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <!-- Tarjeta con Foto del Río: Cámara en Vivo (Derecha) -->
-          <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="spot-dark-camera-card" aria-label="Ver cámara en vivo en YouTube" rel="noopener noreferrer">
-            <picture class="spot-camera-picture">
-              <source media="(max-width: 768px)" srcset="../assets/camara-rio-fondo-mobile.webp" type="image/webp">
-              <source srcset="../assets/camara-rio-fondo.webp" type="image/webp">
-              <img src="../assets/camara-rio-fondo.webp" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img" loading="lazy" decoding="async" width="1600" height="900">
-            </picture>
-            <div class="spot-camera-overlay"></div>
-
-            <div class="camera-header-row">
-              <div class="spot-live-pill">
-                <span class="spot-live-dot"></span>
-                <span>EN VIVO</span>
-              </div>
-              <div class="spot-yt-badge">
-                <svg width="15" height="11" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-                <span>YouTube</span>
-              </div>
-            </div>
-
-            <div class="camera-footer-info">
-              <strong class="camera-footer-title">Cámara del río, en directo</strong>
-              <p class="camera-footer-sub">Mirá vos mismo cómo está el agua antes de venir</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- =========================================================
-         SECCIÓN: MUCHO MÁS QUE UNA CLASE (COMUNIDAD KITESURF)
-         ========================================================= -->
-    <section class="section-bento" id="experiencia">
-      <div class="container">
-        <div class="section-header bento-header">
-          <div class="section-title-col bento-header-title-col">
-            <span class="section-label">// COMUNIDAD &amp; ESCUELA</span>
-            <h2 class="bento-title">MUCHO MÁS<br>QUE UNA CLASE</h2>
-          </div>
-          <div class="section-desc-col bento-header-desc-col">
-            <p class="bento-header-desc">
-              Desde las primeras nociones de seguridad en tierra hasta la navegación libre en el Río de la Plata. Cada encuentro es una oportunidad para conectar con el río y con otras personas.
-            </p>
-          </div>
-        </div>
-
-        <div class="bento-grid community-bento-grid">
-          <div class="bento-cell bento-cell--photo community-cell--photo-one">
-            <picture>
-              <source media="(max-width: 768px)" srcset="../assets/mosaico-clasekite-mobile.webp" type="image/webp">
-              <img src="../assets/mosaico-clasekite.webp" alt="Alumnos de kitesurf junto a sus tablas y barrilete al terminar la clase" loading="lazy" decoding="async" width="1000" height="700">
-            </picture>
-          </div>
-
-          <div class="bento-cell bento-cell--dark community-cell--stat">
-            <span class="bento-stat-number">15+</span>
-            <p class="bento-stat-text">
-              Años enseñando a leer el río y el viento, formando riders autónomos.
-            </p>
-          </div>
-
-          <div class="bento-cell bento-cell--sponsor community-cell--sponsor">
-            <a href="https://hardwind.com/" target="_blank" rel="noopener noreferrer" class="bento-sponsor-logo-wrap" aria-label="Visitar Hard Wind (Sponsor Oficial)">
-              <img src="../assets/logo_hw.svg" alt="Hard Wind" class="bento-sponsor-logo" loading="lazy" width="120" height="35">
-            </a>
-            <p class="bento-sponsor-desc">
-              <strong>Sponsor oficial</strong>, brindando equipos de primer nivel.
-            </p>
-          </div>
-
-          <div class="bento-cell bento-cell--photo community-cell--photo-two">
-            <picture>
-              <source media="(max-width: 768px)" srcset="../assets/mosaico-tablas-mobile.webp" type="image/webp">
-              <img src="../assets/mosaico-tablas.webp" alt="Alumnos de kitesurf chocan las manos en el agua después de la clase" loading="lazy" decoding="async" width="900" height="660">
-            </picture>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================
-         MANIFIESTO Y CIERRE: EL OBJETIVO NO ES TOMAR CLASES PARA SIEMPRE
-         ========================================================= -->
-    <section class="prefooter-banner-section closing-scene" id="cierre" aria-labelledby="closing-title">
-      <img class="closing-scene-photo" src="../assets/deporte-kitesurf.jpg" alt="Kitesurfista navegando sobre el Río de la Plata" loading="lazy" decoding="async" width="1920" height="1280">
-      <div class="container closing-scene-content">
-        <h2 class="closing-scene-title" id="closing-title">El objetivo no es tomar clases para siempre. Es venir, armar tu equipo y entrar al río por tu cuenta.</h2>
-        <ol class="closing-scene-steps">
-          <li><span>1</span>Escribinos por WhatsApp</li>
-          <li aria-hidden="true">→</li>
-          <li><span>2</span>Te avisamos los días con viento</li>
-          <li aria-hidden="true">→</li>
-          <li><span>3</span>Entrás al agua</li>
-        </ol>
-        <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20coordinar%20mi%20primera%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange closing-scene-cta">
-          COORDINAR MI PRIMERA CLASE
-          <div class="icon">
-            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
-            </svg>
-          </div>
-        </a>
-        <a class="closing-scene-phone" href="tel:+5491130041100">+54 9 11 3004-1100</a>
-      </div>
-    </section>
-
-    <!-- TODO: volver a publicar una reseña de Kitesurf solo cuando estén confirmados su autenticidad, nombre, fecha y permiso. -->
-
-    <!-- =========================================================
-         SECCIÓN: LOS INSTRUCTORES (OFICIAL DE LA HOME)
-         ========================================================= -->
-    <section class="section-instructores" id="instructores">
+    <!-- 6. INSTRUCTORES -->
+    <section class="section-macro section-instructores" id="instructores">
       <div class="container">
         <div class="section-header instructores-header">
           <div class="section-title-col instructores-title-col">
@@ -1153,9 +895,269 @@
       </div>
     </section>
 
-    <!-- =========================================================
-         11. FAQ: PREGUNTAS FRECUENTES (OFICIAL MOTION ACCORDION)
-         ========================================================= -->
+    <!-- 7. PRECIOS -->
+    <section class="section-macro section-light" id="precios">
+      <div class="container">
+        <header class="editorial-header">
+          <div class="editorial-col-left">
+            <span class="section-label">// PRECIOS DE CLASE</span>
+            <h2 class="editorial-title">
+              PRECIOS CLAROS,<br>SIN LETRA CHICA
+            </h2>
+          </div>
+          <div class="editorial-col-right">
+            <p class="editorial-lead">
+              Elegí una clase suelta para probar o el curso completo para llegar a la autonomía.
+            </p>
+          </div>
+        </header>
+
+        <div class="pricing-editorial-grid">
+          <!-- Tarjeta 1: Clase Particular -->
+          <article class="pricing-card">
+            <h3 class="pricing-title">CLASE PARTICULAR</h3>
+            <p class="pricing-desc">Sesión individual con instructor 100% dedicado a vos.</p>
+            <div class="pricing-amount-row">
+              <span class="pricing-amount">$135.000</span>
+              <span class="pricing-unit">/ hora</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                1 instructor exclusivo en todo momento
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Tu instructor te acompaña en el agua durante la práctica
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Asistencia y custodia de lancha de rescate en el agua
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Equipamiento de última generación incluido
+              </li>
+            </ul>
+            <div class="pricing-btn-box">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20particular%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+                RESERVAR CLASE
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </article>
+
+          <!-- Tarjeta 2: Pack de 3 horas o más (Destacada) -->
+          <article class="pricing-card is-featured">
+            <div class="pricing-card-header">
+              <h3 class="pricing-title">PACK 3+ HORAS</h3>
+              <span class="pricing-badge-pill">MÁS ELEGIDO</span>
+            </div>
+            <p class="pricing-desc">El formato recomendado para progresar clase a clase al mejor valor.</p>
+            <div class="pricing-amount-row">
+              <span class="pricing-amount">$120.000</span>
+              <span class="pricing-unit">/ hora</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Válido para paquetes a partir de 3 horas
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Instructor exclusivo y seguimiento continuo
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Coordinación flexible según los mejores días de viento
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Equipo completo y lancha de apoyo incluidos
+              </li>
+            </ul>
+            <div class="pricing-btn-box">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20info%20del%20Pack%20de%203%20horas%20o%20m%C3%A1s%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-orange">
+                RESERVAR PACK
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </article>
+
+          <!-- Tarjeta 3: Clase Compartida -->
+          <article class="pricing-card">
+            <h3 class="pricing-title">CLASE COMPARTIDA</h3>
+            <p class="pricing-desc">Aprendé de a dos compartiendo equipo y turnos en el agua.</p>
+            <div class="pricing-amount-row">
+              <span class="pricing-amount">$80.000</span>
+              <span class="pricing-unit">/ hora (x persona)</span>
+            </div>
+            <ul class="pricing-features-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Ideal para venir en pareja o con un amigo/a
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                1 instructor y 1 equipo completo compartido
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Dinámica de turnos: descanso activo y observación técnica
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                Lancha de rescate y seguridad en todo momento
+              </li>
+            </ul>
+            <div class="pricing-btn-box">
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20una%20clase%20compartida%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="btn-pill-dark">
+                RESERVAR COMPARTIDA
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CONDICIÓN DEL RÍO 24/7 -->
+    <section id="camara" class="section-spot-split">
+      <div class="container">
+        <div class="spot-split-grid">
+          <!-- Tarjeta Naranja (Izquierda) -->
+          <div class="spot-orange-card">
+            <div>
+              <span class="spot-tag-white">// El Spot</span>
+              <h2 class="spot-card-title">Condición del río 24/7</h2>
+              <p class="spot-card-text">
+                Tenemos una cámara apuntando al río para que puedas elegir el mejor momento antes de venir a tu clase de kitesurf.
+              </p>
+            </div>
+            <div>
+              <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="btn-pill-dark" rel="noopener noreferrer">
+                VER CÁMARA EN VIVO
+                <div class="icon">
+                  <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Tarjeta con Foto del Río: Cámara en Vivo (Derecha) -->
+          <a href="https://www.youtube.com/@elombu-guarderia" target="_blank" class="spot-dark-camera-card" aria-label="Ver cámara en vivo en YouTube" rel="noopener noreferrer">
+            <picture class="spot-camera-picture">
+              <source media="(max-width: 768px)" srcset="../assets/camara-rio-fondo-mobile.webp" type="image/webp">
+              <source srcset="../assets/camara-rio-fondo.webp" type="image/webp">
+              <img src="../assets/camara-rio-fondo.webp" alt="Cámara en vivo del río - Escuela Ombú" class="spot-camera-bg-img" loading="lazy" decoding="async" width="1600" height="900">
+            </picture>
+            <div class="spot-camera-overlay"></div>
+
+            <div class="camera-header-row">
+              <div class="spot-live-pill">
+                <span class="spot-live-dot"></span>
+                <span>EN VIVO</span>
+              </div>
+              <div class="spot-yt-badge">
+                <svg width="15" height="11" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-right:4px;">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <span>YouTube</span>
+              </div>
+            </div>
+
+            <div class="camera-footer-info">
+              <strong class="camera-footer-title">Cámara del río, en directo</strong>
+              <p class="camera-footer-sub">Mirá vos mismo cómo está el agua antes de venir</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. MUCHO MÁS QUE UNA CLASE -->
+    <section class="section-bento" id="experiencia">
+      <div class="container">
+        <div class="section-header bento-header">
+          <div class="section-title-col bento-header-title-col">
+            <span class="section-label">// COMUNIDAD &amp; ESCUELA</span>
+            <h2 class="bento-title">MUCHO MÁS<br>QUE UNA CLASE</h2>
+          </div>
+          <div class="section-desc-col bento-header-desc-col">
+            <p class="bento-header-desc">
+              Desde las primeras nociones de seguridad en tierra hasta la navegación libre en el Río de la Plata. Cada encuentro es una oportunidad para conectar con el río y con otras personas.
+            </p>
+          </div>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Foto ancha: clase de kite en el río -->
+          <div class="bento-cell bento-cell--photo bento-cell--wide">
+            <picture>
+              <source media="(max-width: 768px)" srcset="../assets/mosaico-clasekite-mobile.webp" type="image/webp">
+              <source srcset="../assets/mosaico-clasekite.webp" type="image/webp">
+              <img src="../assets/mosaico-clasekite.webp" alt="Clase de kitesurf en Escuela Ombú" loading="lazy" decoding="async" width="1000" height="700">
+            </picture>
+          </div>
+
+          <!-- Dato real de trayectoria -->
+          <div class="bento-cell bento-cell--dark">
+            <span class="bento-stat-number">15+</span>
+            <p class="bento-stat-text">
+              Años enseñando a leer el río y el viento, formando riders autónomos.
+            </p>
+          </div>
+
+          <!-- Foto alta: instructores y alumnos con equipo (ocupa las 2 filas) -->
+          <div class="bento-cell bento-cell--photo bento-cell--tall">
+            <picture>
+              <source media="(max-width: 768px)" srcset="../assets/mosaico-alumnosv2-mobile.webp" type="image/webp">
+              <source srcset="../assets/mosaico-alumnosv2.webp" type="image/webp">
+              <img src="../assets/mosaico-alumnosv2.webp" alt="Instructores y alumnos de Escuela Ombú" loading="lazy" decoding="async" width="750" height="1088">
+            </picture>
+          </div>
+
+          <!-- Tarjeta naranja: Sponsor Oficial HARD WIND -->
+          <div class="bento-cell bento-cell--sponsor">
+            <a href="https://hardwind.com/" target="_blank" rel="noopener noreferrer" class="bento-sponsor-logo-wrap" aria-label="Visitar Hard Wind (Sponsor Oficial)">
+              <img src="../assets/logo_hw.svg" alt="Hard Wind" class="bento-sponsor-logo" loading="lazy" width="120" height="35">
+            </a>
+            <p class="bento-sponsor-desc">
+              <strong>Sponsor oficial</strong>, brindando equipos de primer nivel
+            </p>
+          </div>
+
+          <!-- Foto: riders chocando las manos en el agua -->
+          <div class="bento-cell bento-cell--photo bento-cell--photo-alt">
+            <picture>
+              <source media="(max-width: 768px)" srcset="../assets/mosaico-tablas-mobile.webp" type="image/webp">
+              <source srcset="../assets/mosaico-tablas.webp" type="image/webp">
+              <img src="../assets/mosaico-tablas.webp" alt="Riders en el agua de Escuela Ombú" loading="lazy" decoding="async" width="900" height="660">
+            </picture>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FAQ -->
     <section class="section-faq" id="faq" aria-labelledby="faq-title">
       <div class="container">
         <div class="section-header faq-header">
@@ -1299,9 +1301,61 @@
         </div>
       </div>
     </section>
+
+    <!-- 11. MAPA -->
+    <section class="section-ubicacion-mapa" id="spot">
+      <div class="container">
+        <div class="mapa-card-white">
+          <div class="mapa-view-pane">
+            <div id="ombuMap" class="ombu-leaflet-container" role="region" aria-label="Mapa de ubicación de Escuela Ombú en Acassuso"></div>
+          </div>
+
+          <div class="mapa-info-pane">
+            <span class="section-label">// Encontranos</span>
+            <h2 class="mapa-title">Estamos junto al río</h2>
+
+            <div class="mapa-items-list">
+              <div class="mapa-contact-row">
+                <div class="mapa-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="contact-row-content">
+                  <span class="contact-tag-tiny">A 20 min de Capital</span>
+                  <a href="https://maps.app.goo.gl/duhdkxUzUEPQsZHx5" target="_blank" class="contact-main-val" style="color:var(--text-dark); text-decoration:none; display:inline-block;">
+                    Sebastián Elcano 994, Buenos Aires
+                  </a>
+                </div>
+              </div>
+
+              <div class="mapa-contact-row">
+                <div class="mapa-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="contact-row-content">
+                  <span class="contact-tag-tiny">Todos los días</span>
+                  <span class="contact-main-val">Lun a dom, 9 a 19 hs</span>
+                </div>
+              </div>
+
+              <div class="mapa-contact-row">
+                <div class="mapa-icon-circle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div class="contact-row-content">
+                  <span class="contact-tag-tiny">Reservas</span>
+                  <a href="https://wa.me/5491130041100" target="_blank" rel="noopener noreferrer" style="color:var(--text-dark); text-decoration:none; font-weight:400; font-size:14.5px;">
+                    +54 9 11 3004 1100
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- =========================================================
+    <!-- =========================================================
        EXPERIENCIA INFERIOR: PROCESO & FOOTER CON FONDO PARALLAX
        ========================================================= -->
   <div class="bottom-experience-wrapper">
@@ -1314,22 +1368,23 @@
     <!-- Capa de contenido por encima del fondo y degradé -->
     <div class="bottom-content-layer">
 
-      <!-- =========================================================
-           SECCIÓN: CÓMO EMPEZAR (PROCESO DE APRENDIZAJE)
-           ========================================================= -->
+      <!-- 12. LISTO PARA APRENDER -->
       <section class="section-macro section-protocolo" id="proceso" aria-labelledby="proceso-title">
         <div class="container">
           <div class="section-header">
             <div class="section-title-col">
               <span class="section-label">// TU APRENDIZAJE EMPIEZA ACÁ</span>
               <h2 class="display-title" id="proceso-title">
-                ¿QUERÉS APRENDER?<br>¡EMPEZÁ ESCRIBIÉNDONOS!
+                ¿LISTO PARA APRENDER?<br>¡EMPEZÁ ESCRIBIÉNDONOS!
               </h2>
             </div>
             <div class="section-desc-col">
               <p class="section-desc-text">
                 Te contamos el proceso desde que nos escribís hasta que estás tomando tu primera clase con nosotros.
               </p>
+              <a href="https://wa.me/5491130041100?text=Hola%20Omb%C3%BA!%20Quiero%20reservar%20mi%20clase%20de%20Kitesurf." target="_blank" rel="noopener noreferrer" class="proceso-cta-btn">
+                RESERVÁ TU CLASE <span class="arrow" aria-hidden="true">→</span>
+              </a>
             </div>
           </div>
 
@@ -1386,6 +1441,7 @@
         </div>
       </section>
 
+      <!-- 13. FOOTER -->
       <footer class="site-footer-wrapper">
         <div class="container footer-card-container">
           <div class="footer-floating-card">
@@ -1486,6 +1542,6 @@
 
   <!-- Scripts Oficiales de la Home y de Deportes -->
   <script src="../main.js"></script>
-  <script src="../sports.js?v=3.4"></script>
+  <script src="../sports.js?v=4.1"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializaciones específicas de la subpágina
   initLevelAccordion();
   initCaminoTabs();
-  initGearExplorer();
+  initGearHoverList();
   initFaqAccordion(); // Respaldo para acordeones con clase legacy si existieran
   initJourneyScroller();
 });
@@ -270,151 +270,66 @@ function initMobileMenu() {
   });
 }
 
-// 5. Hotspots y fichas de producto del equipamiento de Kitesurf
-function initGearExplorer() {
-  const explorer = document.getElementById('gearExplorer');
-  if (!explorer) return;
+// 5. Lista interactiva con hover preview de equipamiento
+function initGearHoverList() {
+  const container = document.querySelector('#equipo') || document.querySelector('.gear-editorial-stage');
+  if (!container) return;
 
-  const stage = explorer.querySelector('#gearStage');
-  const stageImage = stage?.querySelector('img');
-  const hotspots = Array.from(explorer.querySelectorAll('.gear-hotspot'));
-  const options = Array.from(explorer.querySelectorAll('.gear-item-option'));
-  const viewAll = explorer.querySelector('#gearViewAll');
-  let zoomResetTimer = 0;
-  let zoomRequest = 0;
-  if (!stage || !hotspots.length || !options.length) return;
+  const items = Array.from(container.querySelectorAll('.gear-item-row'));
+  const previewImg = container.querySelector('#gearPreviewImg');
+  const list = container.querySelector('.gear-items-list');
+  if (!items.length || !previewImg) return;
 
-  function focusGear(itemId) {
-    const hotspot = hotspots.find((button) => button.dataset.item === itemId);
-    if (!hotspot || !stageImage) return;
-    const x = Number.parseFloat(hotspot.style.left) || Number(hotspot.dataset.x);
-    const y = Number.parseFloat(hotspot.style.top) || Number(hotspot.dataset.y);
-    window.clearTimeout(zoomResetTimer);
-    window.cancelAnimationFrame(zoomRequest);
-    if (stage.classList.contains('is-zoomed')) {
-      stage.classList.remove('is-zoomed');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      zoomResetTimer = window.setTimeout(() => {
-        stage.style.setProperty('--zoom-x', `${x}%`);
-        stage.style.setProperty('--zoom-y', `${y}%`);
-        stageImage.style.transformOrigin = `${x}% ${y}%`;
-        zoomRequest = window.requestAnimationFrame(() => stage.classList.add('is-zoomed'));
-      }, reducedMotion ? 0 : 220);
-    } else {
-      stage.style.setProperty('--zoom-x', `${x}%`);
-      stage.style.setProperty('--zoom-y', `${y}%`);
-      stageImage.style.transformOrigin = `${x}% ${y}%`;
-      zoomRequest = window.requestAnimationFrame(() => stage.classList.add('is-zoomed'));
+  // Pre-cargar imágenes para que el hover sea instantáneo sin parpadeos
+  items.forEach((item) => {
+    const src = item.dataset.img;
+    if (src) {
+      const img = new Image();
+      img.src = src;
     }
-    if (viewAll) viewAll.hidden = false;
-  }
-
-  function resetView() {
-    window.clearTimeout(zoomResetTimer);
-    window.cancelAnimationFrame(zoomRequest);
-    stage.classList.remove('is-zoomed');
-    if (viewAll) viewAll.hidden = true;
-  }
-
-  function selectItem(itemId, interacted = false) {
-    const selected = options.find((option) => option.dataset.item === itemId);
-    if (!selected) return;
-
-    const isAlreadyActive = selected.classList.contains('is-active');
-    const shouldClose = interacted && isAlreadyActive;
-
-    if (shouldClose) {
-      resetView();
-      hotspots.forEach((button) => {
-        button.classList.remove('is-active');
-        button.setAttribute('aria-expanded', 'false');
-        const symbol = button.querySelector('.gear-hotspot-symbol');
-        if (symbol) symbol.textContent = '+';
-      });
-      options.forEach((option) => {
-        option.classList.remove('is-active');
-        const button = option.querySelector('.gear-item-selector-button');
-        const detail = option.querySelector('.gear-item-detail');
-        if (button) {
-          button.classList.remove('is-active');
-          button.setAttribute('aria-expanded', 'false');
-        }
-        if (detail) {
-          detail.removeAttribute('hidden');
-          detail.setAttribute('aria-hidden', 'true');
-        }
-      });
-      return;
-    }
-
-    if (interacted) {
-      stage.classList.add('has-interacted');
-      focusGear(itemId);
-    }
-
-    hotspots.forEach((button) => {
-      const isActive = button.dataset.item === itemId;
-      button.classList.toggle('is-active', isActive);
-      button.setAttribute('aria-expanded', String(isActive));
-      const symbol = button.querySelector('.gear-hotspot-symbol');
-      if (symbol) symbol.textContent = isActive ? '×' : '+';
-    });
-    options.forEach((option) => {
-      const isActive = option === selected;
-      const button = option.querySelector('.gear-item-selector-button');
-      const detail = option.querySelector('.gear-item-detail');
-      option.classList.toggle('is-active', isActive);
-      if (button) {
-        button.classList.toggle('is-active', isActive);
-        button.setAttribute('aria-expanded', String(isActive));
-      }
-      if (detail) {
-        detail.removeAttribute('hidden');
-        detail.setAttribute('aria-hidden', String(!isActive));
-        if (isActive) {
-          const image = detail.querySelector('img');
-          if (image) image.loading = 'eager';
-        }
-      }
-    });
-  }
-
-  hotspots.forEach((button) => {
-    button.addEventListener('click', () => selectItem(button.dataset.item, true));
   });
-  options.forEach((option) => {
-    const button = option.querySelector('.gear-item-selector-button');
-    button?.addEventListener('click', () => selectItem(option.dataset.item, true));
-  });
-  viewAll?.addEventListener('click', resetView);
 
-  function positionHotspots() {
-    if (!stageImage) return;
-    const { width, height } = stage.getBoundingClientRect();
-    const imageWidth = stageImage.naturalWidth || Number(stageImage.getAttribute('width'));
-    const imageHeight = stageImage.naturalHeight || Number(stageImage.getAttribute('height'));
-    if (!width || !height || !imageWidth || !imageHeight) return;
-
-    const coverScale = Math.max(width / imageWidth, height / imageHeight);
-    const renderedWidth = imageWidth * coverScale;
-    const renderedHeight = imageHeight * coverScale;
-    const cropX = (width - renderedWidth) / 2;
-    const cropY = (height - renderedHeight) / 2;
-
-    hotspots.forEach((button) => {
-      const x = (Number(button.dataset.x) / 100 * renderedWidth + cropX) / width * 100;
-      const y = (Number(button.dataset.y) / 100 * renderedHeight + cropY) / height * 100;
-      button.style.left = `${x}%`;
-      button.style.top = `${y}%`;
-    });
+  function updateAdjacentBorders() {
+    items.forEach((it) => it.classList.remove('has-active-next'));
+    const activeIdx = items.findIndex((it) => it.classList.contains('is-active'));
+    if (activeIdx > 0) {
+      items[activeIdx - 1].classList.add('has-active-next');
+    }
+    if (list) {
+      list.classList.toggle('is-first-active', activeIdx === 0);
+    }
   }
 
-  stageImage?.addEventListener('load', positionHotspots);
-  window.addEventListener('resize', positionHotspots, { passive: true });
-  if ('ResizeObserver' in window) new ResizeObserver(positionHotspots).observe(stage);
-  positionHotspots();
+  function setActiveItem(targetItem) {
+    if (targetItem.classList.contains('is-active')) return;
 
-  selectItem('kite');
+    items.forEach((it) => it.classList.remove('is-active'));
+    targetItem.classList.add('is-active');
+    updateAdjacentBorders();
+
+    const newSrc = targetItem.dataset.img;
+    const newAlt = targetItem.dataset.alt || targetItem.querySelector('.gear-item-name')?.textContent || 'Equipamiento de Kitesurf';
+
+    if (newSrc && previewImg.getAttribute('src') !== newSrc) {
+      previewImg.style.opacity = '0.35';
+      previewImg.style.transform = 'scale(0.97)';
+      setTimeout(() => {
+        previewImg.src = newSrc;
+        previewImg.alt = newAlt;
+        previewImg.style.opacity = '1';
+        previewImg.style.transform = 'scale(1)';
+      }, 120);
+    }
+  }
+
+  // Inicializar estado de bordes adyacentes
+  updateAdjacentBorders();
+
+  items.forEach((item) => {
+    item.addEventListener('mouseenter', () => setActiveItem(item));
+    item.addEventListener('focus', () => setActiveItem(item));
+    item.addEventListener('click', () => setActiveItem(item));
+  });
 }
 
 // 6. Recorrido scrollytelling: de la arena al agua
@@ -474,7 +389,7 @@ function initJourneyScroller() {
       return Math.abs(aCenter - viewportCenter) - Math.abs(bCenter - viewportCenter);
     });
     activateStep(candidates[0].target);
-  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+  }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
 
   steps.forEach((step) => stepObserver.observe(step));
 
