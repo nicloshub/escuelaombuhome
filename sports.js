@@ -328,7 +328,7 @@ function initMobileMenu() {
   });
 }
 
-// 5. Lista interactiva con hover preview de equipamiento
+// 5. Lista interactiva de equipamiento (Desktop: Hover + Preview flotante | Mobile: Acordeón desplegable con autoscroll)
 function initGearHoverList() {
   const container = document.querySelector('#equipo') || document.querySelector('.gear-editorial-stage');
   if (!container) return;
@@ -337,9 +337,9 @@ function initGearHoverList() {
   const previewEl = container.querySelector('#gearFloatingPreview') || container.querySelector('.gear-floating-preview');
   const previewImg = container.querySelector('#gearPreviewImg');
   const list = container.querySelector('.gear-items-list');
-  if (!items.length || !previewImg || !previewEl) return;
+  if (!items.length) return;
 
-  // Pre-cargar imágenes para que el hover sea instantáneo sin parpadeos
+  // Pre-cargar imágenes para que la apertura o hover sea instantáneo
   items.forEach((item) => {
     const src = item.dataset.img;
     if (src) {
@@ -359,112 +359,115 @@ function initGearHoverList() {
     }
   }
 
-  function setActiveItem(targetItem) {
+  function setActiveDesktop(targetItem) {
     if (targetItem.classList.contains('is-active')) return;
 
     items.forEach((it) => it.classList.remove('is-active'));
     targetItem.classList.add('is-active');
     updateAdjacentBorders();
 
-    const newSrc = targetItem.dataset.img;
-    const newAlt = targetItem.dataset.alt || targetItem.querySelector('.gear-item-name')?.textContent || 'Equipamiento de Kitesurf';
-    const rot = targetItem.dataset.rotation || '-3deg';
+    if (previewEl && previewImg) {
+      const newSrc = targetItem.dataset.img;
+      const newAlt = targetItem.dataset.alt || targetItem.querySelector('.gear-item-name')?.textContent || 'Equipamiento de Kitesurf';
+      const rot = targetItem.dataset.rotation || '-3deg';
 
-    previewEl.style.setProperty('--gear-rot', rot);
+      previewEl.style.setProperty('--gear-rot', rot);
 
-    // Desplazamiento sutil vertical para acompañar el item activo manteniéndose dentro de los límites (solo desktop)
-    const itemIndex = items.indexOf(targetItem);
-    if (list && itemIndex !== -1 && window.innerWidth > 900) {
-      const listHeight = list.offsetHeight;
-      const previewHeight = previewEl.offsetHeight || 360;
-      const margin = 16; // Margen de seguridad para respetar las líneas límite superior e inferior
-      const availableTravel = listHeight - previewHeight - (margin * 2);
+      // Desplazamiento sutil vertical para acompañar el item activo (solo desktop)
+      const itemIndex = items.indexOf(targetItem);
+      if (list && itemIndex !== -1) {
+        const listHeight = list.offsetHeight;
+        const previewHeight = previewEl.offsetHeight || 360;
+        const margin = 16;
+        const availableTravel = listHeight - previewHeight - (margin * 2);
 
-      let targetY;
-      if (availableTravel > 0) {
-        const t = items.length > 1 ? itemIndex / (items.length - 1) : 0.5;
-        targetY = margin + (t * availableTravel);
-      } else {
-        targetY = Math.max(0, (listHeight - previewHeight) / 2);
+        let targetY;
+        if (availableTravel > 0) {
+          const t = items.length > 1 ? itemIndex / (items.length - 1) : 0.5;
+          targetY = margin + (t * availableTravel);
+        } else {
+          targetY = Math.max(0, (listHeight - previewHeight) / 2);
+        }
+        previewEl.style.setProperty('--gear-y', `${Math.round(targetY)}px`);
       }
-      previewEl.style.setProperty('--gear-y', `${Math.round(targetY)}px`);
-    }
 
-    if (newSrc && previewImg.getAttribute('src') !== newSrc) {
-      previewImg.src = newSrc;
-      previewImg.alt = newAlt;
-    }
+      if (newSrc && previewImg.getAttribute('src') !== newSrc) {
+        previewImg.src = newSrc;
+        previewImg.alt = newAlt;
+      }
 
-    previewEl.classList.add('is-visible');
+      previewEl.classList.add('is-visible');
+    }
   }
 
-  function clearActive() {
+  function clearActiveDesktop() {
     items.forEach((it) => it.classList.remove('is-active'));
     updateAdjacentBorders();
-    previewEl.classList.remove('is-visible');
+    if (previewEl) {
+      previewEl.classList.remove('is-visible');
+    }
   }
 
-  // Inicializar estado de bordes adyacentes
-  updateAdjacentBorders();
+  function toggleMobileItem(item) {
+    const isAlreadyOpen = item.classList.contains('is-active');
 
-  // En pantallas táctiles o mobile, inicializar con el primer item visible (Kite)
-  if (window.innerWidth <= 900 && items.length > 0) {
-    setActiveItem(items[0]);
-  }
+    // Cerrar el resto de los elementos (comportamiento acordeón: solo 1 abierto a la vez)
+    items.forEach((it) => it.classList.remove('is-active'));
 
-  // Soporte de Scroll-Spy en mobile para que al scrollear la imagen fija arriba
-  // se actualice automáticamente al elemento de equipamiento que pasa por la pantalla
-  if ('IntersectionObserver' in window) {
-    let isUserClicking = false;
+    if (!isAlreadyOpen) {
+      item.classList.add('is-active');
 
-    items.forEach((item) => {
-      item.addEventListener('click', () => {
-        isUserClicking = true;
-        setActiveItem(item);
-        setTimeout(() => { isUserClicking = false; }, 600);
-      });
-      item.addEventListener('mouseenter', () => {
-        if (window.innerWidth > 900) setActiveItem(item);
-      });
-      item.addEventListener('focus', () => {
-        if (window.innerWidth > 900) setActiveItem(item);
-      });
-    });
-
-    const gearObserver = new IntersectionObserver((entries) => {
-      if (window.innerWidth > 900 || isUserClicking) return;
-      const visible = entries.filter((e) => e.isIntersecting);
-      if (visible.length > 0) {
-        // Encontrar el item más cercano a la zona activa debajo del preview sticky (~300px)
-        const target = visible.reduce((prev, curr) => {
-          const prevDist = Math.abs(curr.boundingClientRect.top - 300);
-          const bestDist = Math.abs(prev.boundingClientRect.top - 300);
-          return prevDist < bestDist ? curr : prev;
+      // Autoscroll suave hacia el elemento abierto para que el usuario no se pierda visualmente
+      setTimeout(() => {
+        const headerOffset = 76;
+        const rect = item.getBoundingClientRect();
+        const targetY = window.scrollY + rect.top - headerOffset;
+        window.scrollTo({
+          top: Math.max(0, targetY),
+          behavior: 'smooth'
         });
-        setActiveItem(target.target);
+      }, 70);
+    }
+
+    updateAdjacentBorders();
+  }
+
+  // Asignar eventos según viewport
+  items.forEach((item) => {
+    // Desktop hover & focus
+    item.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 900) {
+        setActiveDesktop(item);
       }
-    }, {
-      rootMargin: '-15% 0px -40% 0px',
-      threshold: [0.1, 0.4]
     });
 
-    items.forEach((item) => gearObserver.observe(item));
-  } else {
-    items.forEach((item) => {
-      item.addEventListener('mouseenter', () => setActiveItem(item));
-      item.addEventListener('focus', () => setActiveItem(item));
-      item.addEventListener('click', () => setActiveItem(item));
+    item.addEventListener('focus', () => {
+      if (window.innerWidth > 900) {
+        setActiveDesktop(item);
+      }
     });
-  }
+
+    // Click: en mobile abre/cierra acordeón con autoscroll; en desktop activa
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        toggleMobileItem(item);
+      } else {
+        setActiveDesktop(item);
+      }
+    });
+  });
 
   // Ocultar preview y desactivar item al sacar el mouse del listado (únicamente en desktop)
   if (list) {
     list.addEventListener('mouseleave', () => {
       if (window.innerWidth > 900) {
-        clearActive();
+        clearActiveDesktop();
       }
     });
   }
+
+  // Inicializar estado de bordes adyacentes (en mobile arranca todo cerrado)
+  updateAdjacentBorders();
 }
 
 // 6. Recorrido scrollytelling: de la arena al agua
