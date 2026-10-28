@@ -7586,9 +7586,9 @@ button:focus-visible {
   }
 
   .kite-hero-row-top .hero-weather-card.kite-weather-floating {
-    position: relative;
-    top: auto !important;
-    left: auto !important;
+    position: fixed !important;
+    top: 82px !important;
+    left: var(--grid-margin, 24px) !important;
     bottom: auto !important;
     right: auto !important;
     margin: 0 !important;
@@ -7606,7 +7606,17 @@ button:focus-visible {
                 0 2px 8px rgba(13, 21, 28, 0.04),
                 inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
     animation: none !important;
-    z-index: 10;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.3s ease !important;
+    z-index: 990 !important;
+  }
+
+  @media (max-width: 480px) {
+    .kite-hero-row-top .hero-weather-card.kite-weather-floating {
+      top: 78px !important;
+      left: var(--grid-margin, 12px) !important;
+    }
   }
 
   .kite-hero-row-top .hero-weather-card .weather-title-label,
@@ -7966,14 +7976,15 @@ button:focus-visible {
 @media (max-width: 1023px) {
   .kite-hero-row-top {
     height: auto;
-    padding: 8px 0;
+    padding: 0;
   }
 
   .kite-hero-row-top .hero-weather-card.kite-weather-floating {
-    width: 220px;
-    padding: 12px 14px;
-    border-radius: 18px;
-    margin-top: 0;
+    width: auto !important;
+    max-width: none !important;
+    padding: 12px 14px !important;
+    border-radius: 20px !important;
+    margin-top: 0 !important;
   }
 
   .kite-hero-title-line2 {
