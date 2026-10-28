@@ -1,0 +1,13 @@
+{
+  "name": "escuelaombu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Escuela Ombú - Sitio Web",
+  "scripts": {
+    "start": "node server.cjs",
+    "deployhome": "node deploy.cjs"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.5"
+  }
+}

@@ -4,3 +4,5 @@ node_modules/
 Thumbs.db
 *.mp4
 *.MP4
+ftp-config.json
+.env*
