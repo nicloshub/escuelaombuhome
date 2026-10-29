@@ -532,7 +532,7 @@ header.site-header:hover {
   padding: 0;
 }
 
-.header-nav a {
+.header-nav .nav-link {
   color: var(--ink);
   text-decoration: none;
   font-size: 13.5px;
@@ -542,7 +542,7 @@ header.site-header:hover {
   white-space: nowrap;
 }
 
-.header-nav a:hover {
+.header-nav .nav-link:hover {
   color: var(--orange);
 }
 
@@ -675,7 +675,8 @@ header.site-header:hover {
 }
 
 /* Item de deporte con paddings y tipografía idénticos a la Home */
-.dropdown-sport-item {
+.dropdown-sport-item,
+.header-nav .dropdown-sport-item {
   position: relative;
   z-index: 1;
   display: flex;
