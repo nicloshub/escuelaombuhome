@@ -150,58 +150,66 @@
         <img src="../assets/logo-ombu-navbar.webp" alt="Logo Escuela Ombú" class="brand-disc-img" width="40" height="40">
       </a>
 
-      <nav id="main-navigation" aria-label="Navegación principal">
-        <ul class="header-nav">
-          <!-- Dropdown Deportes con Hover-Pill Elástico -->
-          <li class="nav-dropdown">
-            <button type="button" class="nav-dropdown-trigger is-current-sport" aria-expanded="false" aria-haspopup="true">
+      <nav id="main-navigation" class="motion-nav-root" aria-label="Navegación principal">
+        <ul class="header-nav" id="headerNavList">
+          <!-- Pill highlight flotante de Motion Navigation -->
+          <li class="nav-highlight-pill" id="navHighlightPill" aria-hidden="true"></li>
+
+          <!-- Dropdown Deportes con Hover-Pill Elástico (Idéntico a Home) -->
+          <li class="nav-item nav-dropdown" id="navSportsDropdown">
+            <button type="button" class="nav-dropdown-trigger nav-link is-current-sport" aria-expanded="false" aria-haspopup="true" id="navSportsTrigger">
               <span>Kitesurf</span>
               <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
                 <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
 
-            <div class="nav-dropdown-menu">
-              <div class="dropdown-hover-pill" id="dropdownHoverPill" aria-hidden="true"></div>
+            <!-- Viewport flotante de Motion Navigation -->
+            <div class="nav-dropdown-viewport" id="navSportsViewport">
+              <div class="nav-dropdown-caret" aria-hidden="true"></div>
 
-              <a href="/kitesurf/" class="dropdown-sport-item is-active">
-                <div class="dropdown-sport-info">
-                  <span class="dropdown-sport-name">Kitesurf</span>
-                  <span class="dropdown-sport-desc">Saltos, giros y maniobras</span>
-                </div>
-                <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+              <div class="nav-dropdown-menu">
+                <div class="dropdown-hover-pill" id="dropdownHoverPill" aria-hidden="true"></div>
 
-              <a href="/windsurf/" class="dropdown-sport-item">
-                <div class="dropdown-sport-info">
-                  <span class="dropdown-sport-name">Windsurf</span>
-                  <span class="dropdown-sport-desc">Velocidad, equilibrio y planeo</span>
-                </div>
-                <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+                <a href="/kitesurf/" class="dropdown-sport-item is-active">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Kitesurf</span>
+                    <span class="dropdown-sport-desc">Saltos, giros y maniobras</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
 
-              <a href="/wingfoil/" class="dropdown-sport-item">
-                <div class="dropdown-sport-info">
-                  <span class="dropdown-sport-name">Wingfoil</span>
-                  <span class="dropdown-sport-desc">Ala inflable y vuelo sobre foil</span>
-                </div>
-                <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+                <a href="/windsurf/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Windsurf</span>
+                    <span class="dropdown-sport-desc">Velocidad, equilibrio y planeo</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
 
-              <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
-                <div class="dropdown-sport-info">
-                  <span class="dropdown-sport-name">Stand Up Paddle</span>
-                  <span class="dropdown-sport-desc">Remo de pie y travesías</span>
-                </div>
-                <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+                <a href="/wingfoil/" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Wingfoil</span>
+                    <span class="dropdown-sport-desc">Ala inflable y vuelo sobre foil</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+
+                <a href="https://www.supombu.com.ar/" target="_blank" rel="noopener noreferrer" class="dropdown-sport-item">
+                  <div class="dropdown-sport-info">
+                    <span class="dropdown-sport-name">Stand Up Paddle</span>
+                    <span class="dropdown-sport-desc">Remo de pie y travesías</span>
+                  </div>
+                  <svg class="dropdown-sport-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
             </div>
           </li>
 
           <li class="nav-item"><a href="#camino" class="nav-link">Niveles</a></li>
           <li class="nav-item"><a href="#equipo" class="nav-link">Equipo</a></li>
-          <li class="nav-item"><a href="#precios" class="nav-link">Precios</a></li>
           <li class="nav-item"><a href="#instructores" class="nav-link">Instructores</a></li>
+          <li class="nav-item"><a href="#precios" class="nav-link">Precios</a></li>
           <li class="nav-item"><a href="#camara" class="nav-link">Cámara</a></li>
           <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
           <li class="nav-item"><a href="#spot" class="nav-link">Ubicación</a></li>
@@ -233,8 +241,8 @@
         <li class="mobile-nav-divider"></li>
         <li><a href="#camino" class="mobile-nav-link">Niveles de Kite</a></li>
         <li><a href="#equipo" class="mobile-nav-link">Equipamiento</a></li>
-        <li><a href="#precios" class="mobile-nav-link">Precios y Packs</a></li>
         <li><a href="#instructores" class="mobile-nav-link">Instructores</a></li>
+        <li><a href="#precios" class="mobile-nav-link">Precios y Packs</a></li>
         <li><a href="#camara" class="mobile-nav-link">Cámara en Vivo</a></li>
         <li><a href="#faq" class="mobile-nav-link">Preguntas frecuentes</a></li>
         <li><a href="#spot" class="mobile-nav-link">Ubicación</a></li>

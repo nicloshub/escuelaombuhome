@@ -9,6 +9,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // Inicializaciones específicas de la subpágina
+  initDropdown();
   initLevelAccordion();
   initCaminoTabs();
   initGearHoverList();
@@ -264,11 +265,34 @@ function initFaqAccordion() {
   });
 }
 
-// 4. Menú desplegable para "Deportes" en Navbar (idéntico a la Home)
+// 4. Menú desplegable para "Deportes" en Navbar (idéntico a la Home con timer y hover-pill)
 function initDropdown() {
-  const dropdown = document.querySelector('.nav-dropdown');
-  const trigger = document.querySelector('.nav-dropdown-trigger');
+  const dropdown = document.getElementById('navSportsDropdown') || document.querySelector('.nav-dropdown');
+  const trigger = document.getElementById('navSportsTrigger') || document.querySelector('.nav-dropdown-trigger');
+  const viewport = document.getElementById('navSportsViewport') || document.querySelector('.nav-dropdown-viewport');
+  const dropdownHoverPill = document.getElementById('dropdownHoverPill');
   if (!dropdown || !trigger) return;
+
+  let dropdownCloseTimer = null;
+
+  function openDropdown() {
+    clearTimeout(dropdownCloseTimer);
+    dropdown.classList.add('is-open');
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeDropdown() {
+    dropdownCloseTimer = setTimeout(() => {
+      dropdown.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (dropdownHoverPill) {
+        dropdownHoverPill.style.opacity = '0';
+      }
+    }, 180);
+  }
+
+  dropdown.addEventListener('mouseenter', openDropdown);
+  dropdown.addEventListener('mouseleave', closeDropdown);
 
   trigger.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -282,6 +306,32 @@ function initDropdown() {
       trigger.setAttribute('aria-expanded', 'false');
     }
   });
+
+  // Pill highlight interno para los items de deportes
+  if (dropdownHoverPill) {
+    const sportItems = dropdown.querySelectorAll('.dropdown-sport-item');
+    const menuEl = dropdown.querySelector('.nav-dropdown-menu');
+
+    if (menuEl) {
+      sportItems.forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+          const menuRect = menuEl.getBoundingClientRect();
+          const itemRect = item.getBoundingClientRect();
+          const x = itemRect.left - menuRect.left;
+          const y = itemRect.top - menuRect.top;
+
+          dropdownHoverPill.style.transform = `translate(${x}px, ${y}px)`;
+          dropdownHoverPill.style.width = `${itemRect.width}px`;
+          dropdownHoverPill.style.height = `${itemRect.height}px`;
+          dropdownHoverPill.style.opacity = '1';
+        });
+      });
+
+      menuEl.addEventListener('mouseleave', () => {
+        dropdownHoverPill.style.opacity = '0';
+      });
+    }
+  }
 }
 
 // 5. Menú hamburguesa móvil / tablet (idéntico a la Home)

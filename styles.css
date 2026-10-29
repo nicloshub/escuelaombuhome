@@ -854,6 +854,23 @@ header.site-header:hover {
   transform: translateX(3px);
 }
 
+/* Item Activo / Seleccionado (Fondo naranja sutil, textos naranja) */
+.dropdown-sport-item.is-active {
+  background: rgba(255, 82, 6, 0.10);
+}
+
+.dropdown-sport-item.is-active .dropdown-sport-name {
+  color: var(--orange);
+}
+
+.dropdown-sport-item.is-active .dropdown-sport-arrow {
+  color: var(--orange);
+}
+
+.dropdown-sport-item.is-active .dropdown-sport-desc {
+  color: rgba(255, 82, 6, 0.85);
+}
+
 .header-cta-wrap,
 .header-inner > div:last-child {
   display: flex;
