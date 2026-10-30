@@ -2887,9 +2887,10 @@ header.site-header:hover {
   margin-bottom: 8px;
 }
 
+/* Badge Más Elegido con fondo naranja y letras blancas en Inter */
 .pricing-badge-pill {
-  background: #FFFFFF;
-  color: var(--orange, #FF5206);
+  background: var(--orange, #FF5206);
+  color: #FFFFFF;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 11px;
   font-weight: 700;
