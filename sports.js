@@ -773,7 +773,10 @@ function initSportsMotion() {
     '.section-faq .faq-item',
     '.section-spot-split',
     '.section-ubicacion-mapa',
-    '.section-prefooter-banner'
+    '.section-prefooter-banner',
+    '.section-protocolo .section-header',
+    '.section-protocolo .objetivo-card',
+    '.section-protocolo .proceso-footer-cta'
   ];
 
   const elements = document.querySelectorAll(targets.join(', '));
