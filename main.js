@@ -186,8 +186,9 @@ async function fetchLiveWind() {
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 6000);
-    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh', {
-      signal: controller.signal
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=-34.4735&longitude=-58.4927&current=wind_speed_10m,wind_direction_10m&wind_speed_unit=kmh&_t=${Date.now()}`, {
+      signal: controller.signal,
+      cache: 'no-store'
     });
     clearTimeout(timeoutId);
 
@@ -268,22 +269,31 @@ async function fetchLiveWind() {
       suitabilityEl.classList.remove('is-not-recommended');
 
       if (currentSport === 'kitesurf') {
-        if (knots >= 14 && knots <= 25) {
-          captionEl.textContent = 'Condición óptima de planeo';
-          suitabilityEl.textContent = 'Kitesurf Ideal';
-        } else if (knots >= 10 && knots < 14) {
-          captionEl.textContent = 'Viento suave en el spot';
-          suitabilityEl.textContent = 'Kite Posible / Foil';
-        } else if (knots > 25 && knots <= 30) {
-          captionEl.textContent = 'Viento fuerte en el spot';
-          suitabilityEl.textContent = 'Kite Avanzado';
-        } else if (knots < 10) {
-          captionEl.textContent = 'Viento insuficiente';
-          suitabilityEl.textContent = 'No recomendado';
+        if (knots < 8) {
+          captionEl.textContent = 'Brisa suave';
+          suitabilityEl.textContent = 'Viento insuficiente';
           suitabilityEl.classList.add('is-not-recommended');
+        } else if (knots >= 8 && knots <= 12) {
+          captionEl.textContent = 'Viento suave';
+          suitabilityEl.textContent = 'Primeras clases';
+        } else if (knots >= 13 && knots <= 24) {
+          captionEl.textContent = 'Condición óptima';
+          suitabilityEl.textContent = 'Kitesurf Ideal';
+        } else if (knots >= 25 && knots <= 30) {
+          captionEl.textContent = 'Viento fuerte';
+          suitabilityEl.textContent = 'Kite Avanzado';
         } else {
-          captionEl.textContent = 'Viento excesivo / temporal';
-          suitabilityEl.textContent = 'No recomendado';
+          captionEl.textContent = 'Temporal / Inestable';
+          suitabilityEl.textContent = 'Condición extrema';
+          suitabilityEl.classList.add('is-not-recommended');
+        }
+
+        // Override por Dirección de Viento (Offshore / terral)
+        // Cuadrante seguro navegable: entre Norte (0°/360°) y Sudeste / Sur-sureste (~160°)
+        // Si sopla desde tierra hacia el río (Sur, Sudoeste, Oeste, Noroeste), se indica Viento Offshore en gris
+        const isOffshore = deg > 160 && deg < 350;
+        if (isOffshore) {
+          suitabilityEl.textContent = 'Viento Offshore';
           suitabilityEl.classList.add('is-not-recommended');
         }
       } else if (currentSport === 'windsurf') {
