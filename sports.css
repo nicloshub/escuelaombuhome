@@ -10002,6 +10002,25 @@ body.is-subpage .mapa-card-white {
     html.js-motion-ready .gear-item-row:nth-child(8) { transition-delay: 315ms; }
   }
 
+  /* Botón inferior equipamiento ("¿Traés tu equipo? Consultanos") */
+  html.js-motion-ready .gear-action-footer {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s var(--ease-apple), transform 0.85s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  @media (min-width: 769px) {
+    html.js-motion-ready .gear-action-footer {
+      transition-delay: 360ms;
+    }
+  }
+
+  html.js-motion-ready .gear-action-footer.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Sección Instructores: Stagger secuencial */
   html.js-motion-ready .section-instructores .instructor-card {
     opacity: 0;
@@ -10164,6 +10183,7 @@ body.is-subpage .mapa-card-white {
   html.js-motion-ready .rescue-content-col,
   html.js-motion-ready .rescue-media-box,
   html.js-motion-ready .gear-item-row,
+  html.js-motion-ready .gear-action-footer,
   html.js-motion-ready .section-instructores .instructor-card,
   html.js-motion-ready .pricing-editorial-grid .pricing-card,
   html.js-motion-ready .resenas-grid-stage .resenas-col,

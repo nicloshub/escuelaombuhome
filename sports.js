@@ -767,6 +767,7 @@ function initSportsMotion() {
     '.rescue-content-col',
     '.rescue-media-box',
     '.gear-item-row',
+    '.gear-action-footer',
     '.section-instructores .instructor-card',
     '.pricing-card',
     '.resenas-col',
