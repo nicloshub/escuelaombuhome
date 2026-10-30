@@ -7843,6 +7843,9 @@ button:focus-visible {
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.95);
+    animation: heroCardFadeIn 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+    will-change: transform, opacity;
+  }
     border-radius: var(--radius-card, 24px);
     box-shadow: 0 24px 50px rgba(0, 0, 0, 0.32), 0 4px 12px rgba(0, 0, 0, 0.08);
     color: var(--ink, #231F20);
@@ -7939,7 +7942,6 @@ button:focus-visible {
   position: relative;
   top: auto;
   right: auto;
-  transform: none;
   background: var(--orange, #FF5206);
   border-radius: 14px;
   padding: 20px;
@@ -7949,6 +7951,8 @@ button:focus-visible {
   color: #FFFFFF;
   z-index: 10;
   width: fit-content;
+  animation: heroBajadaFadeIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+  will-change: transform, opacity;
 }
 
 .kite-hero-exp-num {
@@ -7995,6 +7999,8 @@ button:focus-visible {
 .kite-hero-title-line1 {
   display: block;
   color: #F2F1EA;
+  animation: heroFadeInLeft 1.35s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  will-change: transform, opacity;
 }
 
 /* Línea 2 del H1: Separada del comienzo de la línea 1 mediante sangría */
@@ -8004,6 +8010,8 @@ button:focus-visible {
   gap: clamp(14px, 2vw, 30px);
   margin-left: clamp(40px, 8vw, 130px);
   flex-wrap: wrap;
+  animation: heroFadeInLeft 1.35s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+  will-change: transform, opacity;
 }
 
 /* Círculo naranja con flecha diagonal ↗ */
@@ -8101,6 +8109,8 @@ button:focus-visible {
   color: rgba(255, 255, 255, 0.78);
   max-width: 500px;
   margin: 0 0 28px;
+  animation: heroBajadaFadeIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+  will-change: transform, opacity;
 }
 
 .kite-hero-actions {
@@ -8108,6 +8118,8 @@ button:focus-visible {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  animation: heroBajadaFadeIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+  will-change: transform, opacity;
 }
 
 @media (max-width: 767px) {
@@ -8227,6 +8239,8 @@ button:focus-visible {
   flex-direction: column;
   gap: 12px;
   align-items: flex-end;
+  animation: heroBajadaFadeIn 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both;
+  will-change: transform, opacity;
 }
 
 @media (max-width: 1023px) {
@@ -9906,5 +9920,204 @@ body.is-subpage .mapa-card-white {
 .editorial-col-right .btn-pill-orange,
 .section-desc-col .btn-pill-orange {
   margin-top: 20px;
+}
+
+/* =========================================================
+   16. SCROLL REVEALS COORDINADOS SUBPÁGINA (GPU TRANSFORM & OPACITY)
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* Cabeceras editoriales de sección */
+  html.js-motion-ready .editorial-header,
+  html.js-motion-ready .journey-header,
+  html.js-motion-ready .instructores-header,
+  html.js-motion-ready .resenas-header {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.95s var(--ease-apple), transform 0.95s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .editorial-header.is-in-view,
+  html.js-motion-ready .journey-header.is-in-view,
+  html.js-motion-ready .instructores-header.is-in-view,
+  html.js-motion-ready .resenas-header.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Sección Rescate: Split Reveal */
+  html.js-motion-ready .rescue-content-col {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.9s var(--ease-apple), transform 0.9s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .rescue-content-col.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  html.js-motion-ready .rescue-media-box {
+    opacity: 0;
+    transform: scale(0.97) translateY(24px);
+    transition: opacity 0.95s var(--ease-apple) 0.15s, transform 0.95s var(--ease-apple) 0.15s;
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .rescue-media-box.is-in-view {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* Sección Equipamiento: Stagger en cascada de las filas */
+  html.js-motion-ready .gear-item-row {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s var(--ease-apple), transform 0.75s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .gear-item-row.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (min-width: 769px) {
+    html.js-motion-ready .gear-item-row:nth-child(1) { transition-delay: 0ms; }
+    html.js-motion-ready .gear-item-row:nth-child(2) { transition-delay: 45ms; }
+    html.js-motion-ready .gear-item-row:nth-child(3) { transition-delay: 90ms; }
+    html.js-motion-ready .gear-item-row:nth-child(4) { transition-delay: 135ms; }
+    html.js-motion-ready .gear-item-row:nth-child(5) { transition-delay: 180ms; }
+    html.js-motion-ready .gear-item-row:nth-child(6) { transition-delay: 225ms; }
+    html.js-motion-ready .gear-item-row:nth-child(7) { transition-delay: 270ms; }
+    html.js-motion-ready .gear-item-row:nth-child(8) { transition-delay: 315ms; }
+  }
+
+  /* Sección Instructores: Stagger secuencial */
+  html.js-motion-ready .section-instructores .instructor-card {
+    opacity: 0;
+    transform: translateY(38px);
+    transition: opacity 0.85s var(--ease-apple), transform 0.85s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  @media (min-width: 992px) {
+    html.js-motion-ready .section-instructores .instructor-card:nth-child(1) { transition-delay: 0ms; }
+    html.js-motion-ready .section-instructores .instructor-card:nth-child(2) { transition-delay: 130ms; }
+    html.js-motion-ready .section-instructores .instructor-card:nth-child(3) { transition-delay: 260ms; }
+  }
+
+  html.js-motion-ready .section-instructores .instructor-card.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Sección Precios: Stagger de tarjetas con destaque central */
+  html.js-motion-ready .pricing-editorial-grid .pricing-card {
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity 0.85s var(--ease-apple), transform 0.85s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .pricing-editorial-grid .pricing-card.is-featured {
+    transform: translateY(38px) scale(0.97);
+  }
+
+  @media (min-width: 992px) {
+    html.js-motion-ready .pricing-editorial-grid .pricing-card:nth-child(1) { transition-delay: 0ms; }
+    html.js-motion-ready .pricing-editorial-grid .pricing-card:nth-child(2) { transition-delay: 110ms; }
+    html.js-motion-ready .pricing-editorial-grid .pricing-card:nth-child(3) { transition-delay: 220ms; }
+  }
+
+  html.js-motion-ready .pricing-editorial-grid .pricing-card.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  html.js-motion-ready .pricing-editorial-grid .pricing-card.is-featured.is-in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Sección Reseñas: Entrada coordinada de las 3 columnas */
+  html.js-motion-ready .resenas-grid-stage .resenas-col {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.9s var(--ease-apple), transform 0.9s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  @media (min-width: 992px) {
+    html.js-motion-ready .resenas-grid-stage .resenas-col-left { transition-delay: 0ms; }
+    html.js-motion-ready .resenas-grid-stage .resenas-col-center { transition-delay: 120ms; }
+    html.js-motion-ready .resenas-grid-stage .resenas-col-right { transition-delay: 240ms; }
+  }
+
+  html.js-motion-ready .resenas-grid-stage .resenas-col.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Sección FAQ */
+  html.js-motion-ready .section-faq .faq-item {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.75s var(--ease-apple), transform 0.75s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .section-faq .faq-item.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Sección Spot / Mapa / Prefooter Banner */
+  html.js-motion-ready .section-spot-split,
+  html.js-motion-ready .section-ubicacion-mapa,
+  html.js-motion-ready .section-prefooter-banner {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.95s var(--ease-apple), transform 0.95s var(--ease-apple);
+    will-change: opacity, transform;
+  }
+
+  html.js-motion-ready .section-spot-split.is-in-view,
+  html.js-motion-ready .section-ubicacion-mapa.is-in-view,
+  html.js-motion-ready .section-prefooter-banner.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .kite-hero-title-line1,
+  .kite-hero-title-line2,
+  .kite-hero-row-mid .kite-hero-exp-card,
+  .kite-hero-row-top .hero-weather-card.kite-weather-floating,
+  .kite-hero-bajada,
+  .kite-hero-actions,
+  .kite-hero-badges-wrap,
+  html.js-motion-ready .editorial-header,
+  html.js-motion-ready .journey-header,
+  html.js-motion-ready .instructores-header,
+  html.js-motion-ready .resenas-header,
+  html.js-motion-ready .rescue-content-col,
+  html.js-motion-ready .rescue-media-box,
+  html.js-motion-ready .gear-item-row,
+  html.js-motion-ready .section-instructores .instructor-card,
+  html.js-motion-ready .pricing-editorial-grid .pricing-card,
+  html.js-motion-ready .resenas-grid-stage .resenas-col,
+  html.js-motion-ready .section-faq .faq-item,
+  html.js-motion-ready .section-spot-split,
+  html.js-motion-ready .section-ubicacion-mapa,
+  html.js-motion-ready .section-prefooter-banner {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
 }
 

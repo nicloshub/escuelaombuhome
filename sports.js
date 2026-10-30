@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion(); // Respaldo para acordeones con clase legacy si existieran
   initJourneyScroller();
   initResenasCarousel();
+  initSportsMotion();
 });
 
 // 1. La telemetría oficial de viento es administrada de forma centralizada por main.js (fetchLiveWind)
@@ -749,4 +750,47 @@ function initResenasCarousel() {
       }
     }
   }, { passive: true });
+}
+
+// 8. Animaciones coordinadas y Scroll Reveals (GPU Transform & Opacity)
+function initSportsMotion() {
+  if (!('IntersectionObserver' in window)) return;
+
+  const isMobile = window.innerWidth <= 768;
+  const bottomMargin = isMobile ? '-30px' : '-80px';
+
+  const targets = [
+    '.editorial-header',
+    '.journey-header',
+    '.instructores-header',
+    '.resenas-header',
+    '.rescue-content-col',
+    '.rescue-media-box',
+    '.gear-item-row',
+    '.section-instructores .instructor-card',
+    '.pricing-card',
+    '.resenas-col',
+    '.section-faq .faq-item',
+    '.section-spot-split',
+    '.section-ubicacion-mapa',
+    '.section-prefooter-banner'
+  ];
+
+  const elements = document.querySelectorAll(targets.join(', '));
+  if (!elements.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: `0px 0px ${bottomMargin} 0px`,
+    threshold: 0.08
+  });
+
+  elements.forEach(el => observer.observe(el));
 }
