@@ -6862,6 +6862,17 @@ button:focus-visible {
     overflow: hidden;
   }
 
+  /* Ajuste de encuadre en mobile para que no se corten las cabezas ni caras */
+  .journey-scene-layer[data-step="1"] > img,
+  .journey-step[data-step="1"] .journey-step-photo > img {
+    object-position: center 10% !important;
+  }
+
+  .journey-scene-layer[data-step="5"] > img,
+  .journey-step[data-step="5"] .journey-step-photo > img {
+    object-position: center 20% !important;
+  }
+
   .journey-steps-shell::before {
     top: 18px;
     bottom: 18px;
