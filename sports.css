@@ -4272,6 +4272,12 @@ header.site-header:hover {
               height 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.level-panel-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .level-panel-img {
   width: 100%;
   height: 100%;
@@ -4878,7 +4884,13 @@ header.site-header:hover {
     border-radius: 24px 24px 0 0;
   }
 
-  .level-panel-img {
+  .level-panel-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.level-panel-img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
@@ -5239,6 +5251,12 @@ header.site-header:hover {
   width: 100%;
   height: 260px;
   background-color: #EAEAEA;
+}
+
+.resenas-media-box picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .resenas-media-box img {
@@ -9918,6 +9936,12 @@ body.is-subpage .mapa-card-white {
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
 }
 
+.rescue-media-box picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .rescue-media-box img {
   width: 100%;
   height: 100%;
@@ -9928,7 +9952,13 @@ body.is-subpage .mapa-card-white {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .rescue-card-dark:hover .rescue-media-box img {
+  .rescue-card-dark:hover .rescue-media-box picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rescue-media-box img {
     transform: scale(1.03);
   }
 }

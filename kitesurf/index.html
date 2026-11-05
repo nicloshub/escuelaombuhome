@@ -54,8 +54,10 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preload" href="../assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="../assets/hero-kitesurf-mobile.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+  <link rel="preload" as="image" href="../assets/hero-kitesurf.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
   <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="../sports.css?v=9.2">
+  <link rel="stylesheet" href="../sports.css?v=9.3">
 
   <!-- Schema.org FAQPage Structured Data for Rich Snippets -->
   <script type="application/ld+json">
@@ -258,7 +260,11 @@
         <!-- 1. FOLD SUPERIOR: 3 Filas / Divs superpuestos sobre la foto (100vh en Desktop) -->
         <div class="kite-hero-fold">
           <div class="kite-hero-photo-frame">
-            <img src="../assets/hero-kitesurf.jpg" alt="Kitesurfista navegando en el Río de la Plata, Escuela Ombú" fetchpriority="high" width="1200" height="700">
+            <picture>
+              <source media="(max-width: 768px)" srcset="../assets/hero-kitesurf-mobile.webp" type="image/webp">
+              <source srcset="../assets/hero-kitesurf.webp" type="image/webp">
+              <img src="../assets/hero-kitesurf.webp" alt="Kitesurfista navegando en el Río de la Plata, Escuela Ombú" fetchpriority="high" width="1600" height="900">
+            </picture>
           </div>
 
           <!-- FILA 1: Widget del Viento En Vivo (Arriba Izquierda) -->
@@ -432,7 +438,11 @@
 
             <div class="level-panel" id="levelPanel1" role="region" aria-labelledby="levelBtn1" aria-hidden="false">
               <div class="level-panel-media">
-                <img src="../assets/nivel-1.jpg" alt="Nivel 1: Alumno con barrilete en la arena" class="level-panel-img" loading="lazy">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="../assets/nivel-1-mobile.webp" type="image/webp">
+                  <source srcset="../assets/nivel-1.webp" type="image/webp">
+                  <img src="../assets/nivel-1.webp" alt="Nivel 1: Alumno con barrilete en la arena" class="level-panel-img" loading="lazy" width="900" height="720">
+                </picture>
                 <span class="level-media-badge">01</span>
                 <button type="button" class="level-close-btn" aria-label="Cerrar Nivel 01">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -502,7 +512,11 @@
 
             <div class="level-panel" id="levelPanel2" role="region" aria-labelledby="levelBtn2" aria-hidden="true">
               <div class="level-panel-media">
-                <img src="../assets/nivel-2.jpg" alt="Nivel 2: Body drag en el agua" class="level-panel-img" loading="lazy">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="../assets/nivel-2-mobile.webp" type="image/webp">
+                  <source srcset="../assets/nivel-2.webp" type="image/webp">
+                  <img src="../assets/nivel-2.webp" alt="Nivel 2: Body drag en el agua" class="level-panel-img" loading="lazy" width="900" height="720">
+                </picture>
                 <span class="level-media-badge">02</span>
                 <button type="button" class="level-close-btn" aria-label="Cerrar Nivel 02">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -568,7 +582,11 @@
 
             <div class="level-panel" id="levelPanel3" role="region" aria-labelledby="levelBtn3">
               <div class="level-panel-media">
-                <img src="../assets/nivel-3.jpg" alt="Nivel 3: Rider navegando solo" class="level-panel-img" loading="lazy">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="../assets/nivel-3-mobile.webp" type="image/webp">
+                  <source srcset="../assets/nivel-3.webp" type="image/webp">
+                  <img src="../assets/nivel-3.webp" alt="Nivel 3: Rider navegando solo" class="level-panel-img" loading="lazy" width="900" height="600">
+                </picture>
                 <span class="level-media-badge">03</span>
                 <button type="button" class="level-close-btn" aria-label="Cerrar Nivel 03">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -660,12 +678,12 @@
             <!-- Floating Preview Image Card (Sticky en mobile) -->
             <div class="gear-floating-preview" id="gearFloatingPreview" aria-hidden="true">
               <div class="gear-preview-card">
-                <img src="" alt="Equipamiento de Kitesurf" class="gear-preview-img" id="gearPreviewImg">
+                <img src="../assets/equipo_kite.webp" alt="Equipamiento de Kitesurf" class="gear-preview-img" id="gearPreviewImg">
               </div>
             </div>
 
             <ul class="gear-items-list" role="list">
-              <li class="gear-item-row" data-gear="kite" data-rotation="-3.5deg" data-img="../assets/equipo_kite.JPEG" data-alt="Kite de Kitesurf Escuela Ombú">
+              <li class="gear-item-row" data-gear="kite" data-rotation="-3.5deg" data-img="../assets/equipo_kite.webp" data-alt="Kite de Kitesurf Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Kite</span>
@@ -683,14 +701,14 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_kite.JPEG" alt="Kite de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_kite-mobile.webp" alt="Kite de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">El tamaño del mismo va a depender de tu peso y las condiciones del día.</div>
                 </div>
               </li>
 
               <!-- Equipamiento row barra -->
-              <li class="gear-item-row" data-gear="barra" data-rotation="2.4deg" data-img="../assets/equipo_barra.JPEG?v=3" data-alt="Barra de control y líneas de Kitesurf Escuela Ombú">
+              <li class="gear-item-row" data-gear="barra" data-rotation="2.4deg" data-img="../assets/equipo_barra.webp" data-alt="Barra de control y líneas de Kitesurf Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Barra</span>
@@ -708,13 +726,13 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_barra.JPEG?v=3" alt="Barra de control y líneas de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_barra-mobile.webp" alt="Barra de control y líneas de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">Barras de 4 lineas para facilidad de uso y armado.</div>
                 </div>
               </li>
 
-              <li class="gear-item-row" data-gear="tabla" data-rotation="-2.2deg" data-img="../assets/equipo_tablas.JPEG?v=2" data-alt="Tablas Twin-tip de Kitesurf Escuela Ombú">
+              <li class="gear-item-row" data-gear="tabla" data-rotation="-2.2deg" data-img="../assets/equipo_tablas.webp" data-alt="Tablas Twin-tip de Kitesurf Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Tabla</span>
@@ -732,13 +750,13 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_tablas.JPEG?v=2" alt="Tablas Twin-tip de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_tablas-mobile.webp" alt="Tablas Twin-tip de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">Elegida según tu estatura, peso y nivel de navegación.</div>
                 </div>
               </li>
 
-              <li class="gear-item-row" data-gear="arnes" data-rotation="3.2deg" data-img="../assets/equipo_arnes.JPEG" data-alt="Arnés ergonómico de Kitesurf Escuela Ombú">
+              <li class="gear-item-row" data-gear="arnes" data-rotation="3.2deg" data-img="../assets/equipo_arnes.webp" data-alt="Arnés ergonómico de Kitesurf Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Arnés</span>
@@ -756,13 +774,13 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_arnes.JPEG" alt="Arnés ergonómico de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_arnes-mobile.webp" alt="Arnés ergonómico de Kitesurf Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">Soporte lumbar ergonómico para navegar cómodo y relajado.</div>
                 </div>
               </li>
 
-              <li class="gear-item-row" data-gear="chaleco" data-rotation="-1.8deg" data-img="../assets/equipo_chaleco.JPEG" data-alt="Chaleco de flotación Escuela Ombú">
+              <li class="gear-item-row" data-gear="chaleco" data-rotation="-1.8deg" data-img="../assets/equipo_chaleco.webp" data-alt="Chaleco de flotación Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Chaleco</span>
@@ -780,13 +798,13 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_chaleco.JPEG" alt="Chaleco de flotación Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_chaleco-mobile.webp" alt="Chaleco de flotación Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">Flotación homologada y protección durante toda la sesión.</div>
                 </div>
               </li>
 
-              <li class="gear-item-row" data-gear="casco" data-rotation="2.8deg" data-img="../assets/equipo_casco.JPEG" data-alt="Casco náutico Escuela Ombú">
+              <li class="gear-item-row" data-gear="casco" data-rotation="2.8deg" data-img="../assets/equipo_casco.webp" data-alt="Casco náutico Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Casco</span>
@@ -804,13 +822,13 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_casco.JPEG" alt="Casco náutico Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_casco-mobile.webp" alt="Casco náutico Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">Protección en la cabeza y seguridad en el agua.</div>
                 </div>
               </li>
 
-              <li class="gear-item-row" data-gear="traje" data-rotation="-2.6deg" data-img="../assets/equipo_traje.JPEG" data-alt="Traje de neoprene Escuela Ombú">
+              <li class="gear-item-row" data-gear="traje" data-rotation="-2.6deg" data-img="../assets/equipo_traje.webp" data-alt="Traje de neoprene Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Traje de neoprene</span>
@@ -828,13 +846,13 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_traje.JPEG" alt="Traje de neoprene Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_traje-mobile.webp" alt="Traje de neoprene Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">Aporte térmico y confort durante toda la sesión.</div>
                 </div>
               </li>
 
-              <li class="gear-item-row" data-gear="botitas" data-rotation="2.2deg" data-img="../assets/equipo_botitas.JPEG" data-alt="Botitas náuticas Escuela Ombú">
+              <li class="gear-item-row" data-gear="botitas" data-rotation="2.2deg" data-img="../assets/equipo_botitas.webp" data-alt="Botitas náuticas Escuela Ombú">
                 <div class="gear-item-header">
                   <div class="gear-item-main">
                     <span class="gear-item-name">Botitas</span>
@@ -852,7 +870,7 @@
                 </div>
                 <div class="gear-item-mobile-content">
                   <div class="gear-item-mobile-media">
-                    <img src="../assets/equipo_botitas.JPEG" alt="Botitas náuticas Escuela Ombú" loading="lazy" width="600" height="375">
+                    <img src="../assets/equipo_botitas-mobile.webp" alt="Botitas náuticas Escuela Ombú" loading="lazy" width="600" height="375">
                   </div>
                   <div class="gear-item-pill gear-item-pill-mobile">Protección para los pies al pisar el fondo del río.</div>
                 </div>
@@ -885,25 +903,25 @@
           <div class="journey-scene" aria-hidden="true">
             <div class="journey-scene-frame">
               <div class="journey-scene-layer is-active" data-step="1">
-                <img src="../assets/paso-01-recibimiento.jpg" alt="Te recibimos en la escuela" width="1000" height="1333">
+                <img src="../assets/paso-01-recibimiento.webp" alt="Te recibimos en la escuela" width="800" height="1067">
               </div>
               <div class="journey-scene-layer" data-step="2">
-                <img src="../assets/paso-02-condiciones.jpg" alt="Chequeamos las condiciones" loading="lazy" width="1000" height="1333">
+                <img src="../assets/paso-02-condiciones.webp" alt="Chequeamos las condiciones" loading="lazy" width="800" height="1067">
               </div>
               <div class="journey-scene-layer" data-step="3">
-                <img src="../assets/paso-03-armamos.jpg" alt="Preparamos juntos el equipo" loading="lazy" width="1000" height="1333">
+                <img src="../assets/paso-03-armamos.webp" alt="Preparamos juntos el equipo" loading="lazy" width="800" height="1067">
               </div>
               <div class="journey-scene-layer" data-step="4">
-                <img src="../assets/paso-04-te-cambias.jpg" alt="Te cambiás" loading="lazy" width="1000" height="1333">
+                <img src="../assets/paso-04-te-cambias.webp" alt="Te cambiás" loading="lazy" width="800" height="1067">
               </div>
               <div class="journey-scene-layer" data-step="5">
-                <img src="../assets/paso-05-entramos-al-agua.jpg" alt="Entramos al agua" loading="lazy" width="1000" height="1333">
+                <img src="../assets/paso-05-entramos-al-agua.webp" alt="Entramos al agua" loading="lazy" width="800" height="1067">
               </div>
               <div class="journey-scene-layer" data-step="6">
-                <img src="../assets/paso-06-comienza-la-accion.jpg" alt="Desarrollo de la clase" loading="lazy" width="1000" height="1333">
+                <img src="../assets/paso-06-comienza-la-accion.webp" alt="Desarrollo de la clase" loading="lazy" width="800" height="1067">
               </div>
               <div class="journey-scene-layer" data-step="7">
-                <img src="../assets/paso-07-cierre.jpg" alt="Cierre" loading="lazy" width="1000" height="1333">
+                <img src="../assets/paso-07-cierre.webp" alt="Cierre" loading="lazy" width="800" height="1067">
               </div>
             </div>
           </div>
@@ -918,7 +936,7 @@
                   <p class="journey-step-text">Te damos la bienvenida al club, nos conocemos y te mostramos el lugar.</p>
                 </div>
                 <div class="journey-step-photo">
-                  <img src="../assets/paso-01-recibimiento.jpg" alt="Te recibimos en la escuela" width="1000" height="1333">
+                  <img src="../assets/paso-01-recibimiento-mobile.webp" alt="Te recibimos en la escuela" width="550" height="400">
                 </div>
               </li>
               <li class="journey-step" data-step="2" data-scene="EN TIERRA">
@@ -928,7 +946,7 @@
                   <p class="journey-step-text">Analizamos el viento, la marea y el pronóstico del día para planificar la sesión.</p>
                 </div>
                 <div class="journey-step-photo">
-                  <img src="../assets/paso-02-condiciones.jpg" alt="Chequeamos las condiciones" loading="lazy" width="1000" height="1333">
+                  <img src="../assets/paso-02-condiciones-mobile.webp" alt="Chequeamos las condiciones" loading="lazy" width="550" height="400">
                 </div>
               </li>
               <li class="journey-step" data-step="3" data-scene="EN TIERRA">
@@ -938,7 +956,7 @@
                   <p class="journey-step-text">Elegimos el kite adecuado, armamos las líneas y repasamos las medidas de seguridad.</p>
                 </div>
                 <div class="journey-step-photo">
-                  <img src="../assets/paso-03-armamos.jpg" alt="Preparamos juntos el equipo" loading="lazy" width="1000" height="1333">
+                  <img src="../assets/paso-03-armamos-mobile.webp" alt="Preparamos juntos el equipo" loading="lazy" width="550" height="400">
                 </div>
               </li>
               <li class="journey-step" data-step="4" data-scene="EN TIERRA">
@@ -948,7 +966,7 @@
                   <p class="journey-step-text">Te ponés el traje de neoprene y nos equipamos con chaleco de flotación, casco, botitas y arnés.</p>
                 </div>
                 <div class="journey-step-photo">
-                  <img src="../assets/paso-04-te-cambias.jpg" alt="Te cambiás" loading="lazy" width="1000" height="1333">
+                  <img src="../assets/paso-04-te-cambias-mobile.webp" alt="Te cambiás" loading="lazy" width="550" height="400">
                 </div>
               </li>
               <li class="journey-step journey-step--water" data-step="5" data-scene="EN EL AGUA">
@@ -958,7 +976,7 @@
                   <p class="journey-step-text">Levantás el kite junto con tu profe y buscamos un buen spot para aprender sin problemas.</p>
                 </div>
                 <div class="journey-step-photo">
-                  <img src="../assets/paso-05-entramos-al-agua.jpg" alt="Entramos al agua" loading="lazy" width="1000" height="1333">
+                  <img src="../assets/paso-05-entramos-al-agua-mobile.webp" alt="Entramos al agua" loading="lazy" width="550" height="400">
                 </div>
               </li>
               <li class="journey-step journey-step--water" data-step="6" data-scene="EN EL AGUA">
@@ -968,7 +986,7 @@
                   <p class="journey-step-text">Comienza la acción: el profe te pasa el equipo y vemos cómo lo manejás. A partir de ahí, es todo aprendizaje.</p>
                 </div>
                 <div class="journey-step-photo">
-                  <img src="../assets/paso-06-comienza-la-accion.jpg" alt="Desarrollo de la clase" loading="lazy" width="1000" height="1333">
+                  <img src="../assets/paso-06-comienza-la-accion-mobile.webp" alt="Desarrollo de la clase" loading="lazy" width="550" height="400">
                 </div>
               </li>
               <li class="journey-step" data-step="7" data-scene="EN TIERRA">
@@ -978,7 +996,7 @@
                   <p class="journey-step-text">Salimos del agua, guardamos el equipo y charlamos sobre tu progreso y avances para la próxima lección.</p>
                 </div>
                 <div class="journey-step-photo">
-                  <img src="../assets/paso-07-cierre.jpg" alt="Cierre" loading="lazy" width="1000" height="1333">
+                  <img src="../assets/paso-07-cierre-mobile.webp" alt="Cierre" loading="lazy" width="550" height="400">
                 </div>
               </li>
             </ol>
@@ -1010,7 +1028,11 @@
           </div>
           <div class="rescue-media-col">
             <div class="rescue-media-box">
-              <img src="../assets/boterio.png" alt="Bote de rescate preparado para emergencias en Escuela Ombú" loading="lazy" decoding="async" width="600" height="750">
+              <picture>
+                <source media="(max-width: 768px)" srcset="../assets/boterio-mobile.webp" type="image/webp">
+                <source srcset="../assets/boterio.webp" type="image/webp">
+                <img src="../assets/boterio.webp" alt="Bote de rescate preparado para emergencias en Escuela Ombú" loading="lazy" decoding="async" width="900" height="750">
+              </picture>
             </div>
           </div>
         </div>
@@ -1071,7 +1093,8 @@
           <article class="instructor-card instructor-card--kite instructor-card--adelino">
             <div class="instructor-photo">
               <picture>
-                <img src="../assets/instructor-adelino.jpg" alt="Adelino, instructor de kitesurf" loading="lazy" decoding="async" width="800" height="1067">
+                <source srcset="../assets/instructor-adelino.webp" type="image/webp">
+                <img src="../assets/instructor-adelino.webp" alt="Adelino, instructor de kitesurf" loading="lazy" decoding="async" width="600" height="750">
               </picture>
             </div>
             <div class="instructor-info-badge">
@@ -1307,7 +1330,10 @@
           <!-- Columna 1 (Izquierda): Foto de rider + Card Sponsor Oficial Hard Wind -->
           <div class="resenas-col resenas-col-side resenas-col-left">
             <div class="resenas-media-box">
-              <img src="../assets/saltomirandote.jpg" alt="Rider en salto de kitesurf con tabla North" loading="eager" decoding="async" width="600" height="480" style="object-position: center center;">
+              <picture>
+                <source srcset="../assets/saltomirandote.webp" type="image/webp">
+                <img src="../assets/saltomirandote.webp" alt="Rider en salto de kitesurf con tabla North" loading="eager" decoding="async" width="600" height="480" style="object-position: center center;">
+              </picture>
             </div>
             <div class="resenas-card-orange">
               <div class="resenas-sponsor-top">
@@ -1369,7 +1395,10 @@
           <!-- Columna 3 (Derecha): Foto alumnos e instructor celebrando + Card 200+ Alumnos -->
           <div class="resenas-col resenas-col-side resenas-col-right">
             <div class="resenas-media-box">
-              <img src="../assets/IMG_6171.JPG" alt="Instructor y alumno celebrando clase de kitesurf en Escuela Ombú" loading="eager" decoding="async" width="600" height="480" style="object-position: center 38%;">
+              <picture>
+                <source srcset="../assets/IMG_6171.webp" type="image/webp">
+                <img src="../assets/IMG_6171.webp" alt="Instructor y alumno celebrando clase de kitesurf en Escuela Ombú" loading="eager" decoding="async" width="600" height="480" style="object-position: center 38%;">
+              </picture>
             </div>
             <div class="resenas-card-dark">
               <span class="resenas-stat-number">200+</span>
@@ -1811,7 +1840,7 @@
 
   <!-- Scripts Oficiales de la Home y de Deportes -->
   <script src="../main.js?v=2"></script>
-  <script src="../sports.js?v=4.8"></script>
-  <!-- build v9.2.0-journey-crop-fix -->
+  <script src="../sports.js?v=9.3"></script>
+  <!-- build v9.3.0-image-optimization-webp -->
 </body>
 </html>

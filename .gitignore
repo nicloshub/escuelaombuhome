@@ -6,3 +6,5 @@ Thumbs.db
 *.MP4
 ftp-config.json
 .env*
+assets_backup_originals/
+

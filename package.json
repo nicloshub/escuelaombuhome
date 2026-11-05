@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "basic-ftp": "^5.0.5"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

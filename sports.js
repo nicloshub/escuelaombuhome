@@ -390,14 +390,16 @@ function initGearHoverList() {
   const list = container.querySelector('.gear-items-list');
   if (!items.length) return;
 
-  // Pre-cargar imágenes para que la apertura o hover sea instantáneo
-  items.forEach((item) => {
-    const src = item.dataset.img;
-    if (src) {
-      const img = new Image();
-      img.src = src;
-    }
-  });
+  // Pre-cargar imágenes para que la apertura o hover sea instantáneo (solo Desktop)
+  if (window.innerWidth > 768) {
+    items.forEach((item) => {
+      const src = item.dataset.img;
+      if (src) {
+        const img = new Image();
+        img.src = src;
+      }
+    });
+  }
 
   function updateAdjacentBorders() {
     items.forEach((it) => it.classList.remove('has-active-next'));

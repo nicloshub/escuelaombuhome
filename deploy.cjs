@@ -9,14 +9,17 @@ const IGNORE_PATTERNS = [
   /^[\\\/]?node_modules/,
   /^[\\\/]?\.git/,
   /^[\\\/]?\.agent/,
+  /^[\\\/]?assets_backup_originals/,
   /^[\\\/]?ftp-config\.json$/,
   /^[\\\/]?deploy\.cjs$/,
   /^[\\\/]?server\.cjs$/,
+  /^[\\\/]?scripts/,
   /^[\\\/]?iniciar-servidor\.bat$/,
   /^[\\\/]?package(-lock)?\.json$/,
   /\.md$/i,
   /\.log$/i,
-  /\.mp4$/i
+  /\.mp4$/i,
+  /\.ps1$/i
 ];
 
 function shouldIgnore(relPath) {
