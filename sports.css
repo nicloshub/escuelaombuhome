@@ -4897,6 +4897,10 @@ header.site-header:hover {
     display: block;
   }
 
+  #levelPanel1 .level-panel-img {
+    object-position: center 42% !important;
+  }
+
   #levelPanel2 .level-panel-img {
     object-position: center 68% !important;
   }
