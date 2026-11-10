@@ -570,18 +570,77 @@ function initJourneyScroller() {
   });
   updateProgress(activeStep);
 
-  const stepObserver = new IntersectionObserver((entries) => {
-    const candidates = entries.filter((entry) => entry.isIntersecting);
-    if (!candidates.length) return;
-    const viewportCenter = window.innerHeight / 2;
-    candidates.sort((a, b) => {
-      const aCenter = a.boundingClientRect.top + a.boundingClientRect.height / 2;
-      const bCenter = b.boundingClientRect.top + b.boundingClientRect.height / 2;
-      return Math.abs(aCenter - viewportCenter) - Math.abs(bCenter - viewportCenter);
-    });
-    activateStep(candidates[0].target);
-  }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
+  const isMobile = () => window.innerWidth <= 768;
+  const visibleSteps = new Set();
 
+  function getFocalY() {
+    // En mobile, el punto focal está debajo de la foto sticky (~46% del alto del viewport)
+    // En desktop, está en el centro de lectura (50% del viewport)
+    return window.innerHeight * (isMobile() ? 0.46 : 0.50);
+  }
+
+  function resolveActiveStep() {
+    const focalY = getFocalY();
+
+    // 1. Si hay pasos intersectando en visibleSteps, elegimos el más cercano a focalY
+    if (visibleSteps.size > 0) {
+      let closestStep = null;
+      let minDistance = Infinity;
+
+      visibleSteps.forEach((step) => {
+        const rect = step.getBoundingClientRect();
+        const stepCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(stepCenter - focalY);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestStep = step;
+        }
+      });
+
+      if (closestStep) {
+        activateStep(closestStep);
+        return;
+      }
+    }
+
+    // 2. Si ningún paso está en visibleSteps (ej. scroll hiper-rápido entre frames),
+    // tomamos el paso más próximo al punto focal entre todos los pasos
+    let closestStep = null;
+    let minDistance = Infinity;
+    steps.forEach((step) => {
+      const rect = step.getBoundingClientRect();
+      const stepCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(stepCenter - focalY);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestStep = step;
+      }
+    });
+
+    if (closestStep) {
+      activateStep(closestStep);
+    }
+  }
+
+  let currentMobile = isMobile();
+
+  function createStepObserver() {
+    return new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSteps.add(entry.target);
+        } else {
+          visibleSteps.delete(entry.target);
+        }
+      });
+      resolveActiveStep();
+    }, {
+      rootMargin: isMobile() ? '-36% 0px -20% 0px' : '-20% 0px -25% 0px',
+      threshold: [0, 0.25, 0.5, 0.75, 1.0]
+    });
+  }
+
+  let stepObserver = createStepObserver();
   steps.forEach((step) => stepObserver.observe(step));
 
   if (divider) {
@@ -594,12 +653,25 @@ function initJourneyScroller() {
     dividerObserver.observe(divider);
   }
 
+  function handleResize() {
+    const mobileNow = isMobile();
+    if (mobileNow !== currentMobile) {
+      currentMobile = mobileNow;
+      stepObserver.disconnect();
+      visibleSteps.clear();
+      stepObserver = createStepObserver();
+      steps.forEach((step) => stepObserver.observe(step));
+    }
+    resolveActiveStep();
+    updateProgress(activeStep);
+  }
+
   if ('ResizeObserver' in window) {
-    const layoutObserver = new ResizeObserver(() => updateProgress(activeStep));
+    const layoutObserver = new ResizeObserver(handleResize);
     layoutObserver.observe(stepsShell);
     steps.forEach((step) => layoutObserver.observe(step));
   } else {
-    window.addEventListener('resize', () => updateProgress(activeStep), { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
   }
 }
 
