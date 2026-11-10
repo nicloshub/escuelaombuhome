@@ -4902,7 +4902,7 @@ header.site-header:hover {
   }
 
   #levelPanel2 .level-panel-img {
-    object-position: center 68% !important;
+    object-position: center bottom !important;
   }
 
   .level-media-badge {
