@@ -77,9 +77,9 @@ async function run() {
     { destName: 'nivel-2.webp', width: 900, quality: 82, label: 'Desktop' },
     { destName: 'nivel-2-mobile.webp', width: 550, quality: 80, label: 'Mobile' }
   ]);
-  await processImage('nivel-3.jpg', [
-    { destName: 'nivel-3.webp', width: 900, quality: 82, label: 'Desktop' },
-    { destName: 'nivel-3-mobile.webp', width: 550, quality: 80, label: 'Mobile' }
+  await processImage('nivel-3.png', [
+    { destName: 'nivel-3.webp', width: 950, quality: 84, label: 'Desktop' },
+    { destName: 'nivel-3-mobile.webp', width: 650, quality: 82, label: 'Mobile' }
   ]);
 
   // 4. Hero Kitesurf
