@@ -84,8 +84,10 @@ async function run() {
 
   // 4. Hero Kitesurf
   await processImage('hero-kitesurf.jpg', [
-    { destName: 'hero-kitesurf.webp', width: 1600, quality: 82, label: 'Desktop' },
-    { destName: 'hero-kitesurf-mobile.webp', width: 800, quality: 80, label: 'Mobile' }
+    { destName: 'hero-kitesurf.webp', width: 1600, quality: 82, label: 'Desktop' }
+  ]);
+  await processImage('hero-kitesurf-mobile.jpg', [
+    { destName: 'hero-kitesurf-mobile.webp', width: 1080, quality: 82, label: 'Mobile' }
   ]);
 
   // 5. Journey (Paso a Paso 01-07)

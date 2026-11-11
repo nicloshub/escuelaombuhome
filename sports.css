@@ -7651,7 +7651,7 @@ button:focus-visible {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: right 36% !important; /* Alineada al margen derecho para destacar al rider */
+    object-position: center 38% !important; /* Centrado en el rider y el estallido de agua */
     display: block;
   }
 
